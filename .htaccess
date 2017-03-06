@@ -1,0 +1,94 @@
+#/kunden/homepages/27/d309616710/htdocs
+
+AddHandler x-mapp-php5 .php
+
+# permanently redirect from non-www domain to www domain
+#RewriteEngine on
+#Options +FollowSymLinks
+
+#RewriteCond %{HTTP_HOST} !^www\.
+#RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+
+# require SSL
+RewriteCond %{HTTPS} !=on [NC]
+RewriteRule ^.*$ https://%{SERVER_NAME}%{REQUEST_URI} [R,L]
+
+# prevent folder listing
+IndexIgnore *
+
+# disable directory browsing
+Options All -Indexes
+
+# prevent viewing of specific files
+<FilesMatch "(.htaccess)">
+Order Allow,Deny
+Deny from all
+</FilesMatch>
+
+# server custom error pages
+ErrorDocument 401 /401/
+ErrorDocument 403 /403/
+ErrorDocument 404 /404/
+
+# rewrite rules
+RewriteRule ^(401)$ /error.php?error=$1 [NC,QSA,L]
+RewriteRule ^(403)$ /error.php?error=$1 [NC,QSA,L]
+RewriteRule ^(404)$ /error.php?error=$1 [NC,QSA,L]
+
+RewriteRule ^(rental-villas)/([0-9a-z\_-]+)$ /destination.php?dest=$2 [NC,QSA,L]
+RewriteRule ^([0-9a-z\_-]+)-(rental-villas)/(villa-hotel)-([0-9a-z\_-]+)$ /property.php?prop=$4 [NC,QSA,L]
+RewriteRule ^([0-9a-z\_-]+)-(rental-villas)/(v-villa)-([0-9a-z\_-]+)$ /property.php?prop=$4 [NC,QSA,L]
+RewriteRule ^([0-9a-z\_-]+)-(rental-villas)/(villa)-([0-9a-z\_-]+)$ /property.php?prop=$4 [NC,QSA,L]
+RewriteRule ^([0-9a-z\_-]+)-(rental-villas)/([0-9a-z\_-]+)-([0-9a-z\_-]+)$ /property.php?prop=$4 [NC,QSA,L]
+
+
+
+
+
+ 
+
+
+RewriteRule ^(luxury-rental-property-vacation-destinations)$ /destinations.php [NC,QSA,L]
+
+RewriteRule ^(search)/$ /search.php [NC,QSA,L]
+#RewriteRule ^(search)/([0-9a-z\_-]+)/([0-9a-z\_-]+)/$ /search.php?dest=$2&keyword=$3 [NC,QSA,L]
+RewriteRule ^(search)/([0-9a-z\_-]+)/$ /search.php?keyword=$2 [NC,QSA,L]
+
+RewriteRule ^(login)$ /login.php [NC,QSA,L]
+
+#RewriteRule ^(reservations)/(destination)/([0-9a-z\_-]+)/$ /reservations/index.php?dest=$3 [NC,QSA,L]
+#RewriteRule ^(reservations)/(login)/$ /reservations/login.php?page=$2 [NC,QSA,L]
+#RewriteRule ^(reservations)/(services)/$ /reservations/services.php?page=$2 [NC,QSA,L]
+#RewriteRule ^(reservations)/(calendar)/$ /reservations/calendar.php?page=$2 [NC,QSA,L]
+#RewriteRule ^(reservations)/(checkout)/$ /reservations/checkout.php?page=$2 [NC,QSA,L]
+#RewriteRule ^(reservations)/(confirmation)/$ /reservations/confirmation.php?page=$2 [NC,QSA,L]
+#RewriteRule ^(reservations)/(confirmation)/(courtesy-hold)/$ /reservations/confirmation.php?page=$3 [NC,QSA,L]
+#RewriteRule ^(reservations)/(overview)/$ /reservations/overview.php?page=$2 [NC,QSA,L]
+#RewriteRule ^(reservations)/(overview)/(feedback)/([0-9a-z\_-]+)/$ /reservations/overview-feedback.php?page=$2&id=$4 [NC,QSA,L]
+#RewriteRule ^(reservations)/(property-calendar)/$ /reservations/property-calendar.php?page=$2 [NC,QSA,L]
+#RewriteRule ^(reservations)/(user)/$ /reservations/user.php?page=$2 [NC,QSA,L]
+#RewriteRule ^(reservations)/(user-add)/$ /reservations/user-add.php?page=$2 [NC,QSA,L]
+#RewriteRule ^(reservations)/(user-edit)/$ /reservations/user-edit.php?page=$2 [NC,QSA,L]
+#RewriteRule ^(reservations)/(user-profile)/$ /reservations/user-profile.php?page=$2 [NC,QSA,L]
+#RewriteRule ^(reservations)/(feedback)/([0-9a-z\_-]+)/$ /reservations/feedback.php?reservation=$3 [NC,QSA,L]
+
+# rewrite rule for includes
+RewriteRule ^([0-9a-z\+_-]+)/css/(.*)$ /css/$2 [NC,QSA,L]
+RewriteRule ^([0-9a-z\+_-]+)/media/(.*)$ /media/$2 [NC,QSA,L]
+RewriteRule ^([0-9a-z\+_-]+)/img/(.*)$ /img/$2 [NC,QSA,L]
+RewriteRule ^([0-9a-z\+_-]+)/js/(.*)$ /js/$2 [NC,QSA,L]
+
+RewriteRule ^([0-9a-z\+_-]+)/([0-9a-z\+_-]+)/css/(.*)$ /css/$3 [NC,QSA,L]
+RewriteRule ^([0-9a-z\+_-]+)/([0-9a-z\+_-]+)/media/(.*)$ /media/$3 [NC,QSA,L]
+RewriteRule ^([0-9a-z\+_-]+)/([0-9a-z\+_-]+)/img/(.*)$ /img/$3 [NC,QSA,L]
+RewriteRule ^([0-9a-z\+_-]+)/([0-9a-z\+_-]+)/js/(.*)$ /js/$3 [NC,QSA,L]
+
+RewriteRule ^([0-9a-z\+_-]+)/([0-9a-z\+_-]+)/([0-9a-z\+_-]+)/css/(.*)$ /css/$4 [NC,QSA,L]
+RewriteRule ^([0-9a-z\+_-]+)/([0-9a-z\+_-]+)/([0-9a-z\+_-]+)/media/(.*)$ /media/$4 [NC,QSA,L]
+RewriteRule ^([0-9a-z\+_-]+)/([0-9a-z\+_-]+)/([0-9a-z\+_-]+)/img/(.*)$ /img/$4 [NC,QSA,L]
+RewriteRule ^([0-9a-z\+_-]+)/([0-9a-z\+_-]+)/([0-9a-z\+_-]+)/js/(.*)$ /js/$4 [NC,QSA,L]
+
+RewriteRule ^([0-9a-z\+_-]+)/([0-9a-z\+_-]+)/([0-9a-z\+_-]+)/([0-9a-z\+_-]+)/css/(.*)$ /css/$5 [NC,QSA,L]
+RewriteRule ^([0-9a-z\+_-]+)/([0-9a-z\+_-]+)/([0-9a-z\+_-]+)/([0-9a-z\+_-]+)/media/(.*)$ /media/$5 [NC,QSA,L]
+RewriteRule ^([0-9a-z\+_-]+)/([0-9a-z\+_-]+)/([0-9a-z\+_-]+)/([0-9a-z\+_-]+)/img/(.*)$ /img/$5 [NC,QSA,L]
+RewriteRule ^([0-9a-z\+_-]+)/([0-9a-z\+_-]+)/([0-9a-z\+_-]+)/([0-9a-z\+_-]+)/js/(.*)$ /js/$5 [NC,QSA,L]

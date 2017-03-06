@@ -1,0 +1,19 @@
+AddHandler x-mapp-php5 .php
+
+RewriteEngine on
+RewriteOptions Inherit
+
+RewriteBase /reservations/
+
+RewriteRule ^(services)$ services.php [NC,QSA,L]
+RewriteRule ^(checkout)$ checkout.php [NC,QSA,L]
+RewriteRule ^(confirmation)$ confirmation.php [NC,QSA,L]
+
+RewriteRule ^(overview)$ manage-overview.php [NC,QSA,L]
+RewriteRule ^(overview)/(feedback)/([0-9a-z\_-]+)$ manage-feedback.php?id=$3 [NC,QSA,L]
+RewriteRule ^(feedback)/([0-9a-z\_-]+)/$ customer-feedback.php?reservation=$2 [NC,QSA,L]
+RewriteRule ^(user)$ manage-user.php [NC,QSA,L]
+RewriteRule ^(user)/add$ manage-user-add.php [NC,QSA,L]
+RewriteRule ^(user)/([0-9a-z\_-]+)$ manage-user-edit.php?id=$2 [NC,QSA,L]
+RewriteRule ^(profile)$ manage-user-profile.php [NC,QSA,L]
+RewriteRule ^(calendar)$ manage-calendar.php [NC,QSA,L]

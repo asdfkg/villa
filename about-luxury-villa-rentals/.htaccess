@@ -1,0 +1,31 @@
+AddHandler x-mapp-php5 .php
+
+RewriteEngine on
+RewriteOptions Inherit
+
+RewriteBase /about-luxury-villa-rentals/
+
+# rewrite rules
+RewriteRule ^(contact-villazzo)$ contact.php [NC,QSA,L]
+RewriteRule ^(how-to-book)$ how-to-book.php [NC,QSA,L]
+RewriteRule ^(faq)$ faq.php [NC,QSA,L]
+RewriteRule ^(press)$ press.php [NC,QSA,L]
+RewriteRule ^(offers)$ offers.php [NC,QSA,L]
+
+RewriteRule ^(founders-vision)$ founder-vision.php [NC,QSA,L]
+RewriteRule ^(villahotel-concept)$ villahotel-concept.php [NC,QSA,L]
+RewriteRule ^(villazzo-realty)$ villazzo-realty.php [NC,QSA,L]
+RewriteRule ^(villazzo-investments)$ villazzo-investments.php [NC,QSA,L]
+RewriteRule ^(testimonials)$ testimonials.php [NC,QSA,L]
+
+RewriteRule ^(founders-vision)$ /about-founder-vision.php [NC,QSA,L]
+RewriteRule ^(villahotel-concept)$ /about-villahotel-concept.php [NC,QSA,L]
+RewriteRule ^(v-villas)$ /about-vvillas.php [NC,QSA,L]
+RewriteRule ^(villazzo-living)$ /about-villazzo-living.php [NC,QSA,L]
+RewriteRule ^(villazzo-realty)$ /about-villazzo-realty.php [NC,QSA,L]
+RewriteRule ^(press)$ /about-press.php [NC,QSA,L]
+RewriteRule ^(press/archive)$ /about-press-archive.php [NC,QSA,L]
+RewriteRule ^(testimonials)$ /about-testimonials.php [NC,QSA,L]
+RewriteRule ^(villahotel-vvilla-comparison)$ /about-villahotel-concept.php [NC,QSA,L]
+
+RewriteRule ^(services-comparison)$ /about-services-comparison.php [NC,QSA,L]
