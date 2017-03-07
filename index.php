@@ -1,7 +1,8 @@
 <?php
-require_once '/kunden/homepages/27/d309616710/htdocs/private/config.php';
-require_once('/kunden/homepages/27/d309616710/htdocs/blog/wp-blog-header.php');
-
+//require_once '/kunden/homepages/27/d309616710/htdocs/private/config.php';
+//require_once('/kunden/homepages/27/d309616710/htdocs/blog/wp-blog-header.php');
+require_once 'private/config.php';
+require_once('blog/wp-blog-header.php');
 $postArray = array
 (
 	'https://www.villazzo.com//dev/img/home/home-blog_1.png',

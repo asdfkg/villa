@@ -5,9 +5,17 @@ ini_set('display_errors', 1);
 
 // set timezone
 date_default_timezone_set('America/New_York');
-define('SITE_ID',1);
+if($_SERVER['SERVER_NAME'] == 'villazzo.local') {
+    $site_id = 1;
+}
+if($_SERVER['SERVER_NAME'] == 'gvd.local')
+{
+    $site_id = 2;
+}
+define('SITE_ID',$site_id);
 // define constants
-define('HTTP_PATH', '/kunden/homepages/27/d309616710/htdocs');
+//define('HTTP_PATH', '/kunden/homepages/27/d309616710/htdocs');
+define('HTTP_PATH', '/villazzo_new/');
 define('EMAILS_PATH', HTTP_PATH.'/emails/');
 
 // class include
