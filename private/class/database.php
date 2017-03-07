@@ -2,10 +2,10 @@
 // database class
 class Database
 {
-	private $hostname = 'db544511394.db.1and1.com';
-	private $database = 'db544511394';
-	private $username = 'dbo544511394';
-	private $password = 'StaSE25e';
+	private $hostname = 'localhost';
+	private $database = 'villazzo';
+	private $username = 'root';
+	private $password = '';
 	//private $encryptKey = 'dAg8eL2h';
 	private $encryptKey = 'X8J6FBbs';
 	
