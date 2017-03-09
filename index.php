@@ -17,9 +17,9 @@ $totalRows_rs_reservation_feedback = $_SESSION['DB']->queryCount($rs_reservation
 $testimonials = NULL;
 if ($totalRows_rs_reservation_feedback)
 {
-	do {
-		 $testimonials .= '<div class="item"><p>'.$row_rs_reservation_feedback['reservationFeedbackComment'].'</p></div>';
-	} while ($row_rs_reservation_feedback = $_SESSION['DB']->queryResult($rs_reservation_feedback));
+    do {
+             $testimonials .= '<div class="item"><p>'.$row_rs_reservation_feedback['reservationFeedbackComment'].'</p></div>';
+    } while ($row_rs_reservation_feedback = $_SESSION['DB']->queryResult($rs_reservation_feedback));
 }
 ?>
 <!doctype html>
