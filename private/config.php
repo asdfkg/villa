@@ -7,10 +7,11 @@ ini_set('display_errors', 1);
 date_default_timezone_set('America/New_York');
 if($_SERVER['SERVER_NAME'] == 'villazzo.local') {
     $site_id = 1;
-}
-if($_SERVER['SERVER_NAME'] == 'gvd.local')
+    define('SITE_NAME','Villazzo'); 
+} else if($_SERVER['SERVER_NAME'] == 'gvd.local')
 {
     $site_id = 2;
+    define('SITE_NAME','GreatVillaDeals'); 
 }
 define('SITE_ID',$site_id);
 // define constants
