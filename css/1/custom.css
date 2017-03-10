@@ -1,7 +1,7 @@
-@import url(/css/1/foundation.css);
-@import url(/css/1/jquery.css);
-@import url(/css/1/font-awesome/css/font-awesome.min.css);
-@import url(/js/1/owlcarousel/assets/owl.carousel.css);
+@import url(/css/foundation.css);
+@import url(/css/jquery.css);
+@import url(/css/font-awesome/css/font-awesome.min.css);
+@import url(/js/owlcarousel/assets/owl.carousel.css);
 
 @font-face {
 	font-family: 'Trajan Pro Regular';

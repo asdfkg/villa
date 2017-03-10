@@ -11,7 +11,7 @@
         <script src="/js/vendor/modernizr.js"></script>
         <link rel="stylesheet" href="/css/<?php echo SITE_ID; ?>/custom.css">
         <?php include_once '../js/reactLibrary.php'; ?>
-        <script src="/js/react/<?php echo SITE_ID; ?>/jsx/contact.jsx" type="text/jsx"></script>
+        <script src="/js/react/jsx/contact.jsx" type="text/jsx"></script>
     </head>
     <body>
         <?php require_once '../inc-header.php'; ?>
@@ -50,7 +50,7 @@
         <?php } ?>  
         <script type="text/jsx">
             ReactDOM.render(
-                <ContactFormFields />,
+                <ContactFormFields siteid="<?php echo SITE_ID;?>" />,
                 document.getElementById('about-section')
             );
             ReactDOM.render(

@@ -1,0 +1,20 @@
+@font-face {
+	font-family: 'HelveticaNeue MediumCond';
+	src: url('HelveticaNeue-MediumCond.eot');
+	src: url('HelveticaNeue-MediumCond.eot?#iefix') format('embedded-opentype'),
+		url('HelveticaNeue-MediumCond.woff2') format('woff2'),
+		url('HelveticaNeue-MediumCond.woff') format('woff'),
+		url('HelveticaNeue-MediumCond.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Myriad Pro';
+	src: url('MyriadPro-Regular.eot');
+	src: url('MyriadPro-Regular.eot?#iefix') format('embedded-opentype'),
+		url('MyriadPro-Regular.woff2') format('woff2'),
+		url('MyriadPro-Regular.woff') format('woff'),
+		url('MyriadPro-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}

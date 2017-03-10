@@ -1,7 +1,7 @@
-@import url(/css/2/foundation.css);
-@import url(/css/2/jquery.css);
-@import url(/css/2/font-awesome/css/font-awesome.min.css);
-@import url(/js/2/owlcarousel/assets/owl.carousel.css);
+@import url(/css/foundation.css);
+@import url(/css/jquery.css);
+@import url(/css/font-awesome/css/font-awesome.min.css);
+@import url(/js/owlcarousel/assets/owl.carousel.css);
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
 @font-face {
 	font-family: 'Trajan Pro Regular';
