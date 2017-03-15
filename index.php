@@ -30,7 +30,7 @@ if ($totalRows_rs_reservation_feedback)
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="description" content="Our exclusive villa properties are spectacular private homes in Miami, Aspen and St Tropez that are converted into 5-star hotels with the finest attention to detail.">
     <title>VILLAZZO | Luxury Vacation & Villa Rentals in Miami, St Tropez and Aspen</title>
-    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="/css/<?php echo SITE_ID; ?>/custom.css">
     <script src="/js/vendor/modernizr.js"></script>
     <script data-cfasync="false">
   (function(r,e,E,m,b){E[r]=E[r]||{};E[r][b]=E[r][b]||function(){

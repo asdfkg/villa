@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Luxury Villa Rentals - Offers | Villazzo</title>
+    <title>Luxury Villa Rentals - Offers | <?php echo SITE_ID==1?"Villazzo":"Great Villa Deals";?></title>
 	<meta name="Description" content="Villazzo is the creator of two groundbreaking villa rental concepts: the VillaHotel & the V Villa. Contact Villazzo for more information." />
 	<meta name="Keywords" content="contact villazzo, villahotel, v villa, private luxury villa, luxury villa rentals, luxury villa, villa rental" />
     <link rel="stylesheet" href="/css/custom.css">

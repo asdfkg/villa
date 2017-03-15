@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<?php //getMeta('villazzo_living'); ?>
-	<title>Experience Villazzo Living - Luxury Villa Rentals | Villazzo</title>
+	<title>Experience Villazzo Living - Luxury Villa Rentals | <?php echo SITE_ID==1?"Villazzo":"Great Villa Deals";?></title>
 	<meta name="Description" content="Villazzo Living is an exclusive lifestyle solution designed to take the worries off you as we skilfully take care of everything in your home." />
 	<meta name="Keywords" content="luxury lifestyle solutions, private luxury villa, luxury villa rentals, luxury villa, villa rental, Villazzo Living, lifestyle solution" />
 	<link rel="stylesheet" href="/css/custom.css">
