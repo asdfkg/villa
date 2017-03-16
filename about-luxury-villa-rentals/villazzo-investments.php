@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<?php //getMeta('villazzo_living'); ?>
-	<title>Experience Villazzo Investments - Luxury Villa Rentals | Villazzo</title>
+	<title>Experience Villazzo Investments - Luxury Villa Rentals | <?php echo SITE_ID==1?"Villazzo":"Great Villa Deals";?></title>
 	<meta name="Description" content="Villazzo Investments is a partnership of elite investors that have taken advantage of the safe asset class of exclusive luxury residential real estate." />
 	<meta name="Keywords" content="luxury lifestyle solutions, private luxury villa, luxury villa rentals, luxury villa, villa rental, Villazzo Investments, lifestyle solution" />
 	<link rel="stylesheet" href="/css/custom.css">

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<?php //getMeta('faq'); ?>
-	<title>Luxury Villa Rentals - Frequently Asked Questions | Villazzo</title>
+	<title>Luxury Villa Rentals - Frequently Asked Questions | <?php echo SITE_ID==1?"Villazzo":"Great Villa Deals";?></title>
 	<meta name="Description" content="FREQUENTLY ASKED QUESTIONS ABOUT VILLAZZO'S VILLAHOTELS  AND "V" VILLAS PRODUCT LINES. Click here." />
 	<meta name="Keywords" content="private luxury villa, luxury villa rentals, luxury villa, villa rental, st. tropez villa, beach Miami villa, luxury villa definition, villahotel, villahotels, villahotel concept" />
     <link rel="stylesheet" href="/css/custom.css">

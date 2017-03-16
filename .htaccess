@@ -10,9 +10,8 @@ AddHandler x-mapp-php5 .php
 #RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
 
 # require SSL
-# TODO : Enable below two lines
-# RewriteCond %{HTTPS} !=on [NC]
-# RewriteRule ^.*$ https://%{SERVER_NAME}%{REQUEST_URI} [R,L]
+RewriteCond %{HTTPS} !=on [NC]
+#RewriteRule ^.*$ https://%{SERVER_NAME}%{REQUEST_URI}/ [R,L]
 
 # prevent folder listing
 IndexIgnore *
@@ -40,14 +39,8 @@ RewriteRule ^(rental-villas)/([0-9a-z\_-]+)$ /destination.php?dest=$2 [NC,QSA,L]
 RewriteRule ^([0-9a-z\_-]+)-(rental-villas)/(villa-hotel)-([0-9a-z\_-]+)$ /property.php?prop=$4 [NC,QSA,L]
 RewriteRule ^([0-9a-z\_-]+)-(rental-villas)/(v-villa)-([0-9a-z\_-]+)$ /property.php?prop=$4 [NC,QSA,L]
 RewriteRule ^([0-9a-z\_-]+)-(rental-villas)/(villa)-([0-9a-z\_-]+)$ /property.php?prop=$4 [NC,QSA,L]
+ RewriteRule ^([0-9\a-z\_-]+)-(rental-villas)/(villa)-([0-9a-z\_-]+)$ /property.php?prop=$4 [NC,QSA,L]
 RewriteRule ^([0-9a-z\_-]+)-(rental-villas)/([0-9a-z\_-]+)-([0-9a-z\_-]+)$ /property.php?prop=$4 [NC,QSA,L]
-
-
-
-
-
- 
-
 
 RewriteRule ^(luxury-rental-property-vacation-destinations)$ /destinations.php [NC,QSA,L]
 
@@ -77,6 +70,7 @@ RewriteRule ^(login)$ /login.php [NC,QSA,L]
 RewriteRule ^([0-9a-z\+_-]+)/css/(.*)$ /css/$2 [NC,QSA,L]
 RewriteRule ^([0-9a-z\+_-]+)/media/(.*)$ /media/$2 [NC,QSA,L]
 RewriteRule ^([0-9a-z\+_-]+)/img/(.*)$ /img/$2 [NC,QSA,L]
+RewriteRule ^([0-9\a-z\+_-]+)/img/(.*)$ /img/$2 [NC,QSA,L]
 RewriteRule ^([0-9a-z\+_-]+)/js/(.*)$ /js/$2 [NC,QSA,L]
 
 RewriteRule ^([0-9a-z\+_-]+)/([0-9a-z\+_-]+)/css/(.*)$ /css/$3 [NC,QSA,L]

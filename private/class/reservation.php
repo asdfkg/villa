@@ -1144,7 +1144,7 @@ class Reservation
 		$row_rs_property_bedrooms = $_SESSION['DB']->queryResult($rs_property_bedrooms);
 		$totalRows_rs_property_bedrooms = $_SESSION['DB']->queryCount($rs_property_bedrooms);
 		
-		$destCurrency = ($row_rs_reservation_property['reservationRateCurrency']=='&euro;'?'E':'$');
+		$destCurrency = ($row_rs_reservation_property['reservationRateCurrency']=='&euro;'?chr(128):'$');
 		$nightlyRate = ($row_rs_reservation_property['reservationRateValue'] - $row_rs_reservation_property['reservationRateDiscount']) / $row_rs_reservation_property['numberOfNights'];
 		$nightlyTotal = $row_rs_reservation_property['reservationRateValue'] - $row_rs_reservation_property['reservationRateDiscount'];
 		$taxRate = $row_rs_reservation_property['reservationRateTax'];

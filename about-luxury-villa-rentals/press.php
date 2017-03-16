@@ -9,7 +9,7 @@ require_once '/kunden/homepages/27/d309616710/htdocs/blog/wp-blog-header.php';
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<?php //getMeta('press'); ?>
-	<title>Luxury Villa Rentals - Press | Villazzo</title>
+	<title>Luxury Villa Rentals - Press | <?php echo SITE_ID==1?"Villazzo":"Great Villa Deals";?></title>
 	<meta name="Description" content="Click here to read articles and press releases related to Villazzo's revolutionary luxury villa rental services. " />
 	<meta name="Keywords" content="Villazzo, private luxury villa, luxury villa rentals, luxury villa, luxury villa rental, " />
 	<link rel="stylesheet" href="/css/custom.css">

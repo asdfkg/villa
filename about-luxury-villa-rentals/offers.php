@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Luxury Villa Rentals - Offers | Villazzo</title>
+    <title>Luxury Villa Rentals - Offers | <?php echo SITE_ID==1?"Villazzo":"Great Villa Deals";?></title>
 	<meta name="Villazzo VillaHotel properties are spectacular private homes in Miami, Aspen and St Tropez that are converted into 5-star hotels with the finest attention to detail." />
 	<meta name="Keywords" content="contact villazzo, villahotel, v villa, private luxury villa, luxury villa rentals, luxury villa, villa rental" />
     <link rel="stylesheet" href="/css/custom.css">

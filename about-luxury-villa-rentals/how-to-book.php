@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<?php //getMeta('how_to_book'); ?>
-	<title>Luxury Villa Rentals - Booking | Villazzo</title>
+	<title>Luxury Villa Rentals - Booking | <?php echo SITE_ID==1?"Villazzo":"Great Villa Deals";?></title>
 	<meta name="Description" content="If you need help finding the perfect VillaHotel or V Villa for your vacation, our sales team is standing by to answer your inquiries. " />
 	<meta name="Keywords" content="how to book, villazzo, villahotel, v villa, luxury villa rentals, luxury villa" />
 	<link rel="stylesheet" href="/css/custom.css">
