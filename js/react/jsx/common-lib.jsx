@@ -113,3 +113,29 @@ var Paragraph = React.createClass({
 
 
 /* Menus Component */
+var MobileHeaderTopBar = React.createClass({
+    render: function(){
+        return <nav className="tab-bar show-for-small-only">
+                    <section className="left-small">
+                        <a className="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+                    </section>
+                    <section className="middle tab-bar-section">
+                        <h1 className="title"><a href="/"><Image1 src={"/img/"+(this.props.siteid==1?"":"gvd-")+"logo.png"} style="height: 35px;" /></a></h1>
+                    </section>
+                    {this.props.siteid==1?
+                    <section className="right-small">
+                        <i className="fa fa-search" onclick="$('.off-canvas-wrap').foundation('offcanvas', 'show', 'move-right'); $('#search').focus();"></i>
+                        <i className="fa fa-user" onclick="location.href='/login';"></i>
+                    </section>:''}
+                </nav>
+    }
+});
+var MobileHeaderTopBarMenu = React.createClass({
+    render: function(){
+    return <div></div>
+}})
+
+var HeaderTopBarMenu = React.createClass({
+    render: function(){
+    return <div></div>
+}})

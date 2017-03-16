@@ -1286,7 +1286,7 @@ class Reservation
 	}
 
         function getMenus(){
-            return 
+             
             $menu = array(
                     array('label' => 'VILLAS & DESTINATIONS',
                         'href' => '/luxury-rental-property-vacation-destinations',
@@ -1302,6 +1302,50 @@ class Reservation
                     array('label' => 'ABOUT US', 'href' => '/about-luxury-villa-rentals/founders-vision'),
                     array('label' => 'CONTACT', 'href' => '/about-luxury-villa-rentals/contact'),
                 );
+             
+            if (SITE_ID == 1) {
+                
+                array_splice($menu, 1, 0,array( array('label'=>'SERVICES','href'=>'/about-luxury-villa-rentals/villahotel-concept')));
+                array_splice($menu, 3, 0,array( array('label'=>'SPECIAL OFFERS','href'=>'/about-luxury-villa-rentals/offers')));
+                array_splice($menu, 4, 1,array(
+                    array('label' => 'ABOUT US',
+                        'href' => '#',
+                        'child' => array(
+                            array('href' => "/about-luxury-villa-rentals/founders-vision", 'label' => "Founder's Vision"),
+                            array('href'=>'/about-luxury-villa-rentals/villahotel-concept','label'=>'Villazzo VillaHotels'),
+                            array('href'=>'/about-luxury-villa-rentals/villazzo-realty','label'=>'Villazzo Realty'),
+                            array('href'=>'/about-luxury-villa-rentals/villazzo-investments','label'=>'Villazzo Investments'),
+                            array('href'=>'/about-luxury-villa-rentals/press','label'=>'Press'),
+                            array('href'=>'http://www.villazzo.com/blog/','label'=>'Blog'),
+                            array('href'=>'/about-luxury-villa-rentals/faq','label'=>'FAQ'),
+                            array('href'=>'/about-luxury-villa-rentals/how-to-book','label'=>'How to Book'),
+                            array('href'=>'/about-luxury-villa-rentals/testimonials','label'=>'Testimonials')
+                        ))
+                    ));
+                if (!$_SESSION['USER']->getUserId()) {
+                    $menu2 = array('label' => 'MY ACCOUNT',
+                        'href' => '#',
+                        'child' => array(
+                            array('href' => "#", 'label' => "Back"),
+                            array('href' => "/reservations/", 'label' => "New Booking"),
+                        )
+                    );
+                    if ($_SESSION['USER']->getUserGroupId() == 1) {
+                        $temp = array(array('href'=>'/reservations/overview','label'=>'Booking Overview'),
+                                    array('href'=>'/reservations/user','label'=>'User Management'),
+                                    array('href'=>'/reservations/calendar','label'=>'Property Calendar'));
+                        $menu2['child'] = array_merge($menu2['child'], $temp);
+                    } else if ($_SESSION['USER']->getUserGroupId() == 2) {
+                        $temp = array(array('href'=>'/reservations/calendar','label'=>'Property Calendar'),
+                                    array('href'=>'/reservations/profile','label'=>'My Profile'),
+                                    array('href'=>'/reservations/overview','label'=>'My History'));
+                        $menu2['child'] = array_merge($menu2['child'], $temp);
+                    }
+                    array_push($menu2['child'], array('href' => "?logout", 'label' => "Log Out"));
+                    array_splice($menu, 6, 0,array($menu2));
+                }
+            }
+            return $menu;
         }
 }
 ?>
