@@ -71,10 +71,7 @@ var HeaderTopBar = React.createClass({
         $("#mainSearchForm").submit();
     },
     render: function(){
-        const styles = {
-            width: '25px',
-            position: 'absolute', top: '18px', right: '-55px', zIndex: '1000'
-          };
+        const styles = {width: '25px',position: 'absolute', top: '18px', right: '-55px', zIndex: '1000'};
         return <section id="top-bar-section" className="visible-for-medium-up">
                 <div className="row full-width">
                     <div className="medium-4 columns"><hr /></div>
@@ -82,10 +79,10 @@ var HeaderTopBar = React.createClass({
                     
                         <div id="top-bar-logo" className="text-center">
                             <a href="/"><Image1 src="/img/logo.png" /></a>
-                            <a href="/login"><Image1 src="/img/header-ic-myaccount.png" style={styles} /></a>
+                            <a href="/login"><Image1 src="/img/header-ic-myaccount.png" styles={styles} /></a>
 
                             <form action="/search/" id="mainSearchForm" method="post">
-                                <span class="fa fa-search" onClick={this.handleSearchClick}></span>
+                                <span className="fa fa-search" onClick={this.handleSearchClick}></span>
                                 <input type="search" name="keyword" id="top-bar-section-search" placeholder="Search"/>
 	                    </form>
                         </div>

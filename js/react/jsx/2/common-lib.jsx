@@ -69,78 +69,7 @@ var HeaderTopBar = React.createClass({
     }
 });
 
-var HeaderTopBarMenu = React.createClass({
-    render: function(){
-        var _data= this.props.menuItems;
-        return <section id="top-bar-navigation" className="top-bar-section visible-for-medium-up">
-                <nav className="top-bar" id="header-nav" data-topbar role="navigation">
-                <ul className="button-group">
-                       { _data.map(function(object,i){
-                            if(object.child!= undefined){
-                                return <li className="has-dropdown not-click">                        
-                                        <span className="hide-for-large-up">{object.label}</span>
-                                        <span className="show-for-large-up pd-10">{object.label}</span>                            
-                                        <ul className="dropdown">
-                                            {object.child.map(function(o,ii){
-                                                return <li className="text-left"><a href={o.href}>{o.label}</a></li>
-                                            })}
-                                        </ul>
-                                    </li>
-                            }
-                            else{
-                               return <li>
-                                        <a href={object.href}>
-                                            <span className="hide-for-large-up">{object.label}</span>
-                                            <span className="show-for-large-up">{object.label}</span>
-                                        </a>
-                                    </li>
-                            }
-                        })}
-                </ul>
-                </nav>
-            </section>
-    }
-});
-var MobileHeaderTopBarMenu = React.createClass({
-    render: function(){
-        var divStyle = {
-            padding: '2px 0 0 0 !important'
-          };
-    
-        return  <aside className="left-off-canvas-menu">
-                    <ul className="off-canvas-list">
-                        <li><label>GREATVILLADEALS</label></li>
-                        <li>
-                            <form action="/search/" method="post">
 
-                                <div className="row collapse">
-                                    <div className="columns" styles={divStyle}>
-                                        <input type="search" name="keyword" placeholder="Search"/>
-                                    </div>
-                                </div>
-                            </form>
-                        </li>
-
-                    { this.props.menuItems.map(function(object,i){
-                            if(object.child!= undefined){
-                                return <li className="has-submenu">
-                                        <a className="title">{object.label}</a>
-                                            <ul className="left-submenu">
-                                                <li className="back"><a href="#">Back</a></li>
-                                                {object.child.map(function(o,ii){
-                                                return <li className="text-left"><a href={o.href}>{o.label}</a></li>
-                                            })}
-                                        </ul>
-                                    </li>
-                            }
-                            else{
-                               return <li><a href={object.href}>{object.label}</a></li>
-                            }
-                        })}
-                    </ul>
-            </aside>
-    }
-});
 
 var DestinationText = React.createClass({
     render: function(){
