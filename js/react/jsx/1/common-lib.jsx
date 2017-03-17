@@ -91,4 +91,4 @@ var HeaderTopBar = React.createClass({
             </div>
             </section>
     }
-})
+});

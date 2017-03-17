@@ -43,11 +43,11 @@
 	background: transparent;
 }
 .slider-holder #bedroomsSlider .ui-slider-handle {
-	background: url(/img/reservations/filters-bed.png) no-repeat 1px 0;
+	background: url(/img/reservations/gvd-filters-bed.png) no-repeat 1px 0;
 	background-size: contain;
 }
 .slider-holder #budgetSlider .ui-slider-handle {
-	background: url(/img/reservations/filters-budget.png) no-repeat 1px 0;
+	background: url(/img/reservations/gvd-filters-budget.png) no-repeat 1px 0;
 	background-size: contain;
 }
 .ui-slider .ui-slider-range {
@@ -67,7 +67,7 @@
 
 .ui-slider-horizontal {
 	height:5px;
-	background: transparent url(/img/reservations/pixel_final.png) repeat-x;
+	background: transparent url(/img/reservations/gvd-pixel_final.png) repeat-x;
 }
 .ui-slider-horizontal .ui-slider-handle {
 	top: -15px;

@@ -29,25 +29,17 @@ if ($totalRows_rs_reservation_feedback)
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="description" content="Our exclusive villa properties are spectacular private homes in Miami, Aspen and St Tropez that are converted into 5-star hotels with the finest attention to detail.">
-    <title>VILLAZZO | Luxury Vacation & Villa Rentals in Miami, St Tropez and Aspen</title>
+    <title><?php echo SITE_ID==1?'VILLAZZO':'GREATVILLADEALS'; ?> | Luxury Vacation & Villa Rentals in Miami, St Tropez and Aspen</title>
     <link rel="stylesheet" href="/css/<?php echo SITE_ID; ?>/custom.css">
     <script src="/js/vendor/modernizr.js"></script>
+    <?php include_once 'js/reactLibrary.php'; ?>
     <script data-cfasync="false">
   (function(r,e,E,m,b){E[r]=E[r]||{};E[r][b]=E[r][b]||function(){
   (E[r].q=E[r].q||[]).push(arguments)};b=m.getElementsByTagName(e)[0];m=m.createElement(e);
   m.async=1;m.src=("file:"==location.protocol?"https:":"")+"//s.reembed.com/G-nvJ3Ln.js";
   b.parentNode.insertBefore(m,b)})("reEmbed","script",window,document,"api");
 </script>
-<script src="/js/vendor/jquery.js"></script>
-<script src="/js/vendor/jquery-ui-1.10.4.custom.min.js"></script>
-<script src="/js/vendor/jquery.ui.touch-punch.min.js"></script>
-<script src="/js/foundation.min.js"></script>
-<script src="/js/foundation/foundation.equalizer.js"></script>
-<script src="/js/owlcarousel/owl.carousel.min.js"></script>
-<script src="/js/query.js"></script>
-<script src="/js/helper.js"></script>
-<script src="/js/modal.js"></script>
-<script src="/js/google.js"></script>
+<?php require_once 'inc-js.php'; ?>
 </head>
 
 <body>
@@ -324,7 +316,6 @@ if ($totalRows_rs_reservation_feedback)
         <?php require_once 'modal/video.php'; ?>
         <?php //require_once 'inc-js.php'; ?>
         
-		<script>$(document).foundation();</script>
         <script>
 	    <!--
         $(document).ready(function()
