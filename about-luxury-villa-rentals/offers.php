@@ -1,4 +1,4 @@
-<?php require_once '/kunden/homepages/27/d309616710/htdocs/private/config.php'; ?>
+<?php require_once '../private/config.php'; ?>
 <!doctype html>
 <html class="no-js" lang="en">
 
