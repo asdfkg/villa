@@ -209,5 +209,305 @@ var VillaHotelConcept = React.createClass({
                   </div>		                    
         );
     }
-})
+});
 
+var RealityDescritionContent = React.createClass({
+    render:function(){
+        const styles = {
+            align: 'left', margin: '0px 20px 0px 0px'
+        };
+        return (
+            <div className="row">
+                <div className="large-centered columns">
+                    <h4>VILLAZZO REALTY GIVES YOU ACCESS<br />TO THE FINEST PROPERTIES IN THE WORLD</h4>
+                    <Image1 style={styles} src={villazzoRealityContentImage} width="200" />
+                    <p>
+                        Villazzo has over a decade long track record of success in the ultra-luxury vacation rental marketplace; 
+                        and we successfully leveraged our expertise and  relationships with homeowners and our clients to facilitate real estate transactions as well.
+                        <br /><Anchor href="mailto:lisa.blake@villazzo.com?Subject=Villazzo%20Realty" value="Contact" />
+                        Lisa Blake if you are interested in buying or selling a luxury villa.
+                    </p>
+                </div>
+            </div>         		                    
+        );
+    }
+});
+
+
+var InvestmentDescritionContent = React.createClass({
+    render:function(){
+        return (
+            <div className="row">
+                <div className="large-centered columns">
+                    <Heading4 value='VILLAZZO INVESTMENTS' />
+                    <a href="http://www.villazzo.com/investments/fact-sheet.pdf">
+                        <Image1 src={villazzoInvestmentsContentImage} width="200" />
+                    </a>
+                    <p>Villazzo Investments is a partnership of elite investors that have taken advantage of the safe asset class of exclusive luxury residential real estate – the most lucrative way of investing money that Christian has attained over 15 years as an investor himself. 
+                        <Anchor href="mailto:investments@villazzo.com?Subject=Villazzo%20Investments" value="Contact" /> Christian if you are interested to learn more about this opportunity.
+                    </p>
+                    <p><Anchor href="http://www.villazzo.com/video/villazzo-investments.php" value="View our Villazzo Investments video to find out more about our investment opportunities." /></p>
+                </div>
+            </div>
+        );
+    }
+});
+
+var PressDescritionContent = React.createClass({
+    render:function(){
+        var options = this.props.PressData.map(function(pdata,i) {
+            return (
+                <span>
+                    <h6 key={i+"t"} dangerouslySetInnerHTML={{__html:pdata.title}}></h6>
+                    <div key={i+"c"} dangerouslySetInnerHTML={{__html:pdata.content}}></div>
+                </span>
+            )
+        });
+        return (
+            <div className="row">
+                <div className="large-centered columns">
+                    {options}
+                </div>
+            </div>         		                    
+        );
+    }
+});
+
+
+var SpecialOfferDescritionContent = React.createClass({
+    render:function(){
+        return (
+            <div className="row">
+                <h1 className="text-center">SPECIAL OFFERS</h1>
+                <div className="row text-center">
+                    <hr className="visible-for-medium-up" />
+                    <div className="medium-12 columns so-content1" >
+                        <div className="row collapse" data-equalizer>
+                            <div className="medium-6 columns property-image" data-equalizer-watch>
+                                <Image1 src={specialOfferContentImage} />
+                            </div>
+                            <div className="medium-6 columns property-details" data-equalizer-watch>
+                                <div className="row text-left">
+                                    <div className="small-12 columns">
+                                        <Heading6 value='Mix it up! Last Minute WMC offer in Miami!' /><br />
+                                    </div>
+                                </div>
+                                <div className="row text-left">
+                                    <div className="small-12 columns so-content2" >
+                                        <p>Miami's Winter Music Conference is only 3 weeks away, but there is still time to book your escape! Winter Music Conference, in its 32nd consecutive year, is a pivotal platform for music enthusiasts, artists, DJs and industry delegates from over 70 countries that converge on Miami Beach for more than 400 events, parties, seminars and workshops. 
+                                            <br /><br />
+                                            Before you head out to the conference, kick off the night with Villazzo and enjoy a Complimentary Custom Cocktail with a Mixologist!
+                                            <br /><br />
+                                            <strong>Custom Concoctions:</strong>Enjoy a memorable and delicious experience with customized craft cocktails tailored to your tastes. Tell us about your preferred spirits, favorite memories, smells and tastes, and our mixologist will concoct three sample cocktails along with a recipe for you to take home.<br /><br />
+                                            Offer includes:
+                                        </p>
+                                        <ul>
+                                            <li className="stars">4 hours Mixologist and Private Chef</li>
+                                            <li className="stars">Cocktail selection complete with appetizer pairings</li>
+                                            <li className="stars">Complimentary Value of $1500</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div className="row text-left">
+                                    <div className="small-12 columns so-content3">
+                                        <Anchor href="mailto:villas@villazzo.com?subject=Mix%20it%20up!%20Last%20Minute%20WMC%20offer%20in%20Miami!" value="BOOK NOW" className="button tiny" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr className="visible-for-medium-up" />
+                </div>
+            </div>         		                    
+        );
+    }
+});
+
+
+var FaqDescritionContent = React.createClass({
+    render:function(){
+        return (
+            <div className="row">
+                <div className="large-centered columns">
+                    <Heading4 value="requently Asked Questions about Villazzo’s VillaHotels product lines" />
+                    <p>&nbsp;</p>
+                    <Heading4 value='What is a “VillaHotel”?' />
+
+                    <ul>
+                        <li className="stars"><p>Villazzo’s VillaHotel Concept is unlike any other in the industry; it is much more than just an off-site concierge service which is commonplace in the industry.</p></li>
+                        <li className="stars"><p>VillaHotel Concept literally transforms a luxury villa into a private, 5-star hotel experience. The transformation process enhances every fine detail of your villa vacation experience, ensuring that you receive only the finest services and amenities while enjoying your vacation.</p></li>
+                        <li className="stars"><p>VillaHotel offers a full team of service personnel, including a full-time butler, and luxury hotel amenities.</p></li>
+                    </ul>
+
+                    <Heading4 value='What is the difference between Villazzo and a traditional “Villa Rental”?' />
+                    <ul>
+                        <li className="stars"><p>What is missing in the traditional villa market is a “hotel manager/operator” that elevates a villa rental beyond a “real estate” experience to a “luxury hotel” experience. </p></li>
+                        <li className="stars"><p>To operate like a true hotel, a substantial investment is required to employ a team of industry professionals and products.  Villazzo is a hotel operator and has made this type of investment feasible by spreading the overhead cost across a number of properties.</p></li>
+                    </ul>
+
+                    <Heading4 value="Why are Villazzo VillaHotel rental rates higher than other rental rates like Homeaway and Airbnb?" />
+                    <ul>
+                        <li className="stars"><p>VillaHotel rates are consistent with world-class, 5-star hotels, with the added benefit that Villazzo offers privacy and a personalized touch of your very own exclusive villa.</p></li>
+                        <li className="stars"><p>Unlike other home rentals, with Villazzo your house will be well kept, the amenities will be replenished, the linens will be luxurious, the cooking utensils will be complete, electronics and appliances will be in good working order. This is a rarity in traditional rentals!</p></li>
+                        <li className="stars"><p>With Villazzo, you truly get what you pay for, whereas other online websites may charge less, but mostly fail to offer a product that is worth the rental investment.</p></li>
+                    </ul>
+
+                    <Heading4 value='Villazzo a “Destination Club?”' />
+                    <ul>
+                        <li className="stars"><p>Villazzo in not a Destination club, there are no annual membership fees – you only pay for the days you stay at Villazzo.</p></li>
+                        <li className="stars"><p>While a Destination Club may offer a wider range of destinations and properties, VillaHotels offer private ultra-luxury homes, estates, and villas with complete privacy.</p></li>
+                        <li className="stars"><p>Destination clubs promise up to 60 days of vacationing, however, the reality is that 15 to 20 club members share each property, making it virtually impossible to stay more than one or two weeks in a destination club property per year.</p></li>
+                    </ul>
+
+                    <Heading4 value="When renting a VillaHotel, do I rent the entire villa, or just as many rooms as I need?" />
+                    <ul>
+                        <li className="stars"><p>VillaHotels are your own personal hotel – you do not share them with other guests. Therefore, you must rent the entire VillaHotel and not on a per-room basis.</p></li>
+                        <li className="stars"><p>You can, however, rent VillaHotels per night – unlike other rental villas, which are only available by the week.</p></li>
+                    </ul>
+
+                    <Heading4 value="How many guests can stay at a VillaHotel?" />
+                    <ul>
+                        <li className="stars"><p>Villazzo properties range in size from 3 to 8 bedrooms.</p></li>
+                        <li className="stars"><p>As a rule, no more than 20 people may stay on the grounds during the day.</p></li>
+                    </ul>
+
+                    <Heading4 value="How many destinations are available for guests?" />
+                    <ul>
+                        <li className="stars"><p>Villazzo vacation experts begin by selecting only the most exclusive destinations throughout the world, that can be serviced and maintained at the high levels of the VillaHotel Standard.</p></li>
+                        <li className="stars"><p>VillaHotels are currently available in Miami Beach, St. Tropez and Aspen.</p></li>
+                    </ul>
+
+                    <Heading4 value="How many Properties does Villazzo have in each destination?" />
+                    <ul>
+                        <li className="stars"><p>To meet the highest standards of our discerning clientele, we hand-select only the finest ultra-luxury homes.</p></li>
+                        <li className="stars"><p>Villazzo only appoints the 10 most luxurious properties per destination as “VillaHotels”.  Villazzo offers a diverse range of properties that vary in size, amenities and architectural styles.</p></li>
+                        <li className="stars"><p>Properties are all centrally managed by a local office with full hotel staff. The staff is shared among the VillaHotels in that destination city</p></li>
+                        <li className="stars"><p>Villazzo consistently upgrades the portfolio of properties to include the newest, most beautiful villas, assuring our guests the absolute best properties per destination.</p></li>
+                    </ul>
+
+                    <Heading4 value="Can I view the Properties before I stay in them (pictures, Location, Video, Floor plans, etc.)?" />
+                    <ul>
+                        <li className="stars"><p>Visit the destinations page of this web site, and click on a location to view the VillaHotels for your choosing.</p></li>
+                    </ul>
+                    <Heading4 value="What are the Property Value and Rental Rates of a typical VillaHotel?" />
+                    <ul>
+                        <li className="stars"><p>VillaHotel property values range from 2.5 to 30 million USD, and have a daily rental rate between $1,200 and $26,000.</p></li>
+                        <li className="stars"><p>Rates vary by season, duration, destination, and service level.</p></li>
+                    </ul>
+
+                    <Heading4 value="What services can I expect from a VillaHotel?" />
+                    <ul>
+                        <li className="stars"><p>VillaHotels provide guests with the following services (all of which are included in the nightly rate): full-time dedicated personal butler/concierge, daily housekeeping and linen change, off-site laundry of linen and towels, in-suite dining menus, daily international newspapers, flower service, daily supply of fresh fruits and juices, fully stocked bar, humidor with choice of personally selected cigars, and well-stocked refrigerators and mini-bars.<br />
+                                <a href="/pdf/villazzo-service-levels.pdf" target="_blank">Download a list of all VillaHotel Services here.</a></p></li>
+                        <li className="stars"><p>VillaHotel guests have access to: exotic car rental, chauffeured limousines, “Restaurant at Home” services; a nanny; personal massage and spa treatments either on-site or at nearby, top-rated facility; personal trainers; helicopter and aircraft charter, yachts and watercraft rental; shopping and delivery services.</p></li>
+                    </ul>
+
+                    <Heading4 value="What technologies are VillaHotels equipped with?" />
+                    <ul>
+                        <li className="stars"><p>All VillaHotels come with the latest entertainment and business technology. This includes business-class hotel phone systems, teleconferencing capabilities; wireless network; pre-configured Villazzo laptops with network printer; ipads and extensive music selection linked to the home entertainment center.</p></li>
+                        <li className="stars"><p>All VillaHotels also feature flat screen TVs in large viewing rooms or home theatres; Dolby 5.1 home theater systems; and state-of-the-art security systems.</p></li>
+                    </ul>
+
+                    <Heading4 value="How do I reserve a VillaHotel?" />
+                    <ul>
+                        <li className="stars"><p>Call +1 305 777-0146 (1-877-VILLAZZO) or email <a href="mailto:villas@villazzo.com?Subject=Website%20Inquiry">villas@villazzo.com</a>. Or book through any one of our many authorized agents.</p></li>
+                        <li className="stars"><p>No cash payment accepted, credit card fees are non-refundable.</p></li>
+                        <li className="stars"><p>Applicable local VAT taxes will be assessed based on location of villa destination (Miami 13%, St Tropez 10%, Aspen 11.5%).</p></li>
+                        <li className="stars"><p>Cancellation of a booking may result in the partial loss of payments.</p></li>
+                        <li className="stars"><p>A security/damage deposit will be collected with the last portion of the payment.</p></li>
+                    </ul>
+                </div>
+            </div>
+        );
+    }
+});
+
+var HtbDescritionContent = React.createClass({
+    render:function(){
+        return (
+            <div className="row">
+                <div className="medium-8 medium-centered columns text-center">
+                    <Heading4 value="BOOK ONLINE" className="text-gold" />
+                    <Image1 src={bookComputerImage} />
+                    <p>Visit our <a href="/reservations/">Reservation</a> page on the website.<br /><br /></p>
+                    <Heading4 value="BOOK BY PHONE" className="text-gold" />
+                    <Image1 src={bookPhoneImage} />
+                    <p>Call us at +1 (305) 777 0146 <br />
+                        (from within the US also 1-877-VILLAZZO)<br /><br /></p>
+                    <Heading4 value="BOOK BY EMAIL" className="text-gold" />
+                    <Image1 src={bookEmailImage} />
+                    <p>Email us at <a href="mailto:villas@villazzo.com">villas@villazzo.com</a><br />
+                        Our sales team is standing by to answer your inquiries, which may include: <br />
+                        • Which property suits your party <br />
+                        • Special rates <br />
+                        • Number of guests <br />
+                        • Any special requirements you might have.<br /><br /></p>
+                    <Heading4 value="RESERVATION FORM" className="text-gold" />
+                    <p>Once you have selected your property, download our <a href="/pdf/guest-registration-form.pdf" target="_blank">Reservation Form</a>, read it carefully, sign it, and fax it to us at +1 (305) 777 0147. <br />
+                        The signed Reservation Form should be sent together with: <br />
+                        • A copy of your passport or national ID <br />
+                        • A copy of your credit card (showing both sides) </p>
+                    <p>A 25 percent deposit will be required if you’re booking more than eight weeks before arrival. Full payment is required if booking within eight weeks of arrival.<br /><br /></p>
+                    <Heading4 value="CONFIRMATION" className="text-gold" />
+                    <p>Upon receipt of the signed contract, copies of your ID and credit card, and the necessary payment, we will issue a confirmation invoice. Check the invoice and inform us within 10 days of receipt should any change need to be made.<br /><br /></p>
+                    <Heading4 value="PAYMENT" className="text-gold" />
+                    <p>Payment before check-in is accepted by bank check, bank transfer (net of charges) or credit card. We accept Visa, MasterCard, and American Express. All credit card payments incur a surcharge of 3 percent. Make cheques payable to Villazzo. Payment for incidental charges after check-out is accepted by credit card only. </p>
+                </div>
+            </div>
+        );
+    }
+});
+
+
+var TestimonialDescritionContent = React.createClass({
+    render:function(){
+        return(
+            <div className="row">
+                <div className="large-centered columns text-center testimonials">
+                    <h4><strong>Villazzo offers the most exclusive, private, and one-of-a-kind vacation experiences for the world's more famous, successful, and high-profile clientele.</strong></h4>                    <p>&nbsp;</p>
+                    <p>Satisfied Villazzo Clients include:</p>
+                    <p>Queen Latifah</p>
+                    <p>Beyonce,</p>
+                    <p>Jay-Z,</p>
+                    <p>Ernesto Bertarelli,</p>
+                    <p>Madonna,</p>
+                    <p>Wiz Khalifa (Rapper)</p>
+                    <p>Esquire Magazine</p>
+                    <p>Chris Samba (Pro Soccer player)</p>
+                    <p>Al-Saud family (Royal Family of Saudi-Arabia),</p>
+                    <p>Oscar-winner Jamie Foxx,</p>
+                    <p>Cisneros family,</p>
+                    <p>Manchester United Soccer Player Cristiano Ronaldo,</p>
+                    <p>Mittal family,</p>
+                    <p>MLB top player Derek Jeter from the New York Yankees,</p>
+                    <p>NFL top player Jamal Lewis from the Baltimore Ravens,</p>
+                    <p>World Cycling Champion Mario Cipollini,</p>
+                    <p>Family of the president of the Republic of the Congo,</p>
+                    <p>successful entrepreneurs</p>
+                    <p>... and many more.</p>
+                    <p>&nbsp;</p>
+                    <p>"Thanks Imane - everyone had a wonderful time&hellip;.<br />Thanks for everything - look forward to working with you again."</p><hr />
+                    <p>"Our stay was wonderful as usual.<br /> Thank you for asking."</p><hr />
+                    <p>"I'm very happy to see all of this <br />communication Sonia. I appreciate your level of professionalism and your company offers a top-notch service!"</p><hr />
+                    <p>"We really enjoyed our stay at villa helena and the perfect weather of miami.<br /> All the facilities were great, including the pool which was clean and beautiful.<br /> With the gorgeous interiors inside the villa, we could stay comfortable and pleasurable.<br /> I hope there's no problem after your property check."</p><hr />
+                    <p>"Everything was first class. I don't really have any  constructive feedback :)<br />I'll reach it to you in a few days to discuss Saint  Tropez."</p><hr />
+                    <p>"All was super at the villa. Hanna was great and Paul took wonderful care of us. <br />Will hopefully try your VillaHotels in St Tropez soon!"</p><hr />
+                    <p>"Everything was fantastic. As we are used to at Villazzo. We'll come back again later this year."</p><hr />
+                    <p>"The Villazzo chef was the best I have ever had in a vacation home.<br /> Thank you for all you did to make our stay so warm, comfortable, and happy!"</p><hr />
+                    <p>"I don't have words to express my gratitude.  Everything was beyond my wildest expectations! <br />Thank you again for all of your help, suggestions, attention to detail....you truly made our experience unforgettable.<br />Your kindness was above and beyond anything that I have ever experienced."</p><hr />
+                    <p>"The organization is second to none...<br /> I wished all the staff could go back with me to England.<br /> Perfection has a name "Villazzo"."</p><hr />
+                    <p>"I was personally very pleased with the experience.<br /> I thought the service and physical asset were both great... <br /> Everything was perfect."</p><hr />
+                    <p>"Everything was really great. The villa was spotless...<br /> the staff was very competent and professional.<br /> I would definitely do this again. Thanks to all the Villazzo staff."</p><hr />
+                    <p>"Everything was great. The staff was excellent and very helpful.<br /> The house was also excellent and we enjoyed ourselves very much.<br /> We look forward to staying in Villazzo homes again in the near future."</p><hr />
+                    <p>"My Sunset Island residence has been listed with Villazzo for over a year.<br /> I am extremely happy with every aspect of Villazzo <br /> from the way my home is managed, marketed and most importantly,<br /> the quality of guests my home is rented to. <br /> As far as I'm concerned Villazzo has a very big future and<br /> can become a brand as well known as Four Seasons that caters to luxury homes."</p><hr />
+                    <p>"I would like to thank for this fantastic vacation.<br /> I have very much appreciated your services.<br /> I can ensure you, that I will actively recommend Villazzo to everybody I know."</p><hr />
+                    <p>"The hotel service in the villa worked to a very high standard. <br /> The greeting when we arrived and the unpacking service was <br /> what one dreams of at the start of a holiday. <br /> Newspapers every morning, fruit and flowers, <br /> beautiful quality towels and dressing gowns, <br /> a phone button to press for a free concierge service, <br /> someone arriving within minutes if there was a problem <br /> - these were all unique and highly valued."</p><hr />
+                    <p>"Our experience was wonderful and Villazzo did a great job."</p><hr />
+                    <p>"I just wanted to thank you all for the wonderful assistance I received in preparation<br /> for the family dinner held at VillaHotel Gabrielle. We were extremely pleased.<br /> Everything ran very smoothly, was beautifully displayed and the food was wonderful.<br /> I appreciate all your hard work and I thank you all for<br /> putting up with all the calls and &ldquo;rush requests&rdquo;."</p><hr />
+                    <p>"You are an amazing help!!!<br /> I can not believe everything you are doing!!!<br /> Thank you soooooooooooooooo very much!!"</p><hr />
+                    <p>"I have spent a wonderful week in VillaHotel Village.<br /> I will definitely come back next year. Thanks a lot."</p>
+                </div>
+            </div>
+        );
+    }
+});

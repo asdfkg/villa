@@ -17,30 +17,28 @@
 </head>
 
 <body>
-	<?php require_once '../inc-header.php'; ?>
-            <!-- Header Image Section Start -->
-            <section id="header-section"></section>
-            <!-- Header Image Section End -->
-            <section id="about-section">
-            </section>
-            <!-- SubFooter Section End -->
-        <?php require_once '../inc-footer.php'; ?>
-		<?php require_once '../inc-js.php'; ?>
+    <?php require_once '../inc-header.php'; ?>
+    <!-- Header Image Section Start -->
+    <section id="header-section"></section>
+    <!-- Content Section Start -->
+    <section id="about-section"></section>
     
-        <script type="text/jsx">
-            /** @jsx React.DOM */
-            var founderVisionBannerImage = "<?php echo SITE_ID==1?"/img/about/banner-founders_vision.png": "/img/inner-bg1.png"?>";
-            var founderVisionSignatureImage = "/img/about/signature-christian.jpg";
-            ReactDOM.render(
-                <AboutUsBannerImage aboutUsBannerImage={founderVisionBannerImage}/>,
-                document.getElementById('header-section')
-            );  
-            ReactDOM.render(
-                <AboutDescritionContent founderVisionSignatureImage={founderVisionSignatureImage} />,
-                document.getElementById('about-section')
-            );
-        </script>
-    
+    <?php require_once '../inc-footer.php'; ?>
+    <?php require_once '../inc-js.php'; ?>
+
+    <script type="text/jsx">
+        /** @jsx React.DOM */
+        var founderVisionBannerImage = "<?php echo SITE_ID==1?"/img/about/banner-founders_vision.png": "/img/inner-bg1.png"?>";
+        var founderVisionSignatureImage = "/img/about/signature-christian.jpg";
+        ReactDOM.render(
+            <AboutUsBannerImage aboutUsBannerImage={founderVisionBannerImage}/>,
+            document.getElementById('header-section')
+        );  
+        ReactDOM.render(
+            <AboutDescritionContent founderVisionSignatureImage={founderVisionSignatureImage} />,
+            document.getElementById('about-section')
+        );
+    </script>  
 </body>
 
 </html>

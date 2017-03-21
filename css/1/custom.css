@@ -2079,8 +2079,6 @@ p.flip {
 
 /* min-width 1921px, xxlarge screens */
 
-
-
 .footerAspen{  
     position:absolute; top:28px; left:71px; width:21px; height:20px;
 }
@@ -2098,4 +2096,13 @@ p.flip {
 }
 .footerContactSpan a{ 
     color: #FFF !important; text-decoration: none;
+}
+.so-content1{
+    padding-left:0; padding-right:0; margin-left:0; margin-right:0;
+}
+.so-content2{
+    height: 100%; overflow: hidden;
+}
+.so-content3{
+    margin-top:10px;
 }

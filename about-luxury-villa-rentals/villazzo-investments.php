@@ -1,42 +1,38 @@
-<?php require_once '/kunden/homepages/27/d309616710/htdocs/private/config.php'; ?>
+<?php require_once '../private/config.php'; ?>
 <!doctype html>
 <html class="no-js" lang="en">
-
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<?php //getMeta('villazzo_living'); ?>
-	<title>Experience Villazzo Investments - Luxury Villa Rentals | <?php echo SITE_ID==1?"Villazzo":"Great Villa Deals";?></title>
-	<meta name="Description" content="Villazzo Investments is a partnership of elite investors that have taken advantage of the safe asset class of exclusive luxury residential real estate." />
-	<meta name="Keywords" content="luxury lifestyle solutions, private luxury villa, luxury villa rentals, luxury villa, villa rental, Villazzo Investments, lifestyle solution" />
-	<link rel="stylesheet" href="/css/custom.css">
-    <link rel="stylesheet" href="/css/custom.css">
-    <script src="/js/vendor/modernizr.js"></script>
-</head>
-
-<body>
-	<?php require_once '../inc-header.php'; ?>
-            <!-- Header Image Section Start -->
-            <section id="header-section">
-                <img src="/img/about/banner-villazzo_fund.png">
-            </section>
-            <!-- Header Image Section End -->
-            <section id="about-section">
-                <div class="row">
-                    <div class="large-centered columns">
-						<?php //getContent('villazzo_living'); ?>
-						<h4>VILLAZZO INVESTMENTS</h4>
-<a href="http://www.villazzo.com/investments/fact-sheet.pdf"><img src="/img/about/villazzo-fund-thumb.png" width="200" align="left" style="margin-right:20px"/></a><p>Villazzo Investments is a partnership of elite investors that have taken advantage of the safe asset class of exclusive luxury residential real estate – the most lucrative way of investing money that Christian has attained over 15 years as an investor himself. <a href="mailto:investments@villazzo.com?Subject=Villazzo%20Investments">Contact</a> Christian if you are interested to learn more about this opportunity.</p>
-<p><a href="http://www.villazzo.com/video/villazzo-investments.php">View our Villazzo Investments video to find out more about our investment opportunities.</a></p>
-
-                    </div>
-                </div>
-            </section>
-            <!-- SubFooter Section End -->
-        <?php require_once '../inc-footer.php'; ?>
-		
-		<?php require_once '../inc-js.php'; ?>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>Experience Villazzo Investments - Luxury Villa Rentals | <?php echo SITE_ID == 1 ? "Villazzo" : "Great Villa Deals"; ?></title>
+        <meta name="Description" content="Villazzo Investments is a partnership of elite investors that have taken advantage of the safe asset class of exclusive luxury residential real estate." />
+        <meta name="Keywords" content="luxury lifestyle solutions, private luxury villa, luxury villa rentals, luxury villa, villa rental, Villazzo Investments, lifestyle solution" />
+        <link rel="stylesheet" href="/css/<?php echo SITE_ID; ?>/custom.css">
+        <script src="/js/vendor/modernizr.js"></script>
+        <?php include_once '../js/reactLibrary.php'; ?>
+        <script src="/js/react/jsx/<?php echo SITE_ID; ?>/about-us.jsx" type="text/jsx"></script>
+    </head>
     
-</body>
-
+    <body>
+        <?php require_once '../inc-header.php'; ?>
+        <!-- Header Image Section Start -->
+        <section id="header-section"></section>
+        <!-- SubFooter Section End -->
+        <section id="about-section"></section>
+        <?php require_once '../inc-footer.php'; ?>
+        <?php require_once '../inc-js.php'; ?>
+        <script type="text/jsx">
+            /** @jsx React.DOM */
+            var villazzoInvestmentsBannerImage = "<?php echo SITE_ID==1?"/img/about/banner-villazzo_fund.png": "/img/inner-bg1.png"?>";
+            var villazzoInvestmentsContentImage = "/img/about/villazzo-fund-thumb.png";
+            ReactDOM.render(
+                <AboutUsBannerImage aboutUsBannerImage={villazzoInvestmentsBannerImage}/>,
+                document.getElementById('header-section')
+            );  
+            ReactDOM.render(
+                <InvestmentDescritionContent villazzoInvestmentsContentImage={villazzoInvestmentsContentImage} />,
+                document.getElementById('about-section')
+            ); 
+        </script>
+    </body>
 </html>
