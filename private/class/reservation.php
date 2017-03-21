@@ -1322,7 +1322,7 @@ class Reservation
                             array('href'=>'/about-luxury-villa-rentals/testimonials','label'=>'Testimonials')
                         ))
                     ));
-                if (!$_SESSION['USER']->getUserId()) {
+                if ($_SESSION['USER']->getUserId()) {
                     $menu2 = array('label' => 'MY ACCOUNT',
                         'href' => '#',
                         'child' => array(

@@ -7,6 +7,7 @@ RewriteBase /about-luxury-villa-rentals/
 
 # rewrite rules
 RewriteRule ^(contact-villazzo)$ contact.php [NC,QSA,L]
+RewriteRule ^(contact)$ contact.php [NC,QSA,L]
 RewriteRule ^(how-to-book)$ how-to-book.php [NC,QSA,L]
 RewriteRule ^(faq)$ faq.php [NC,QSA,L]
 RewriteRule ^(press)$ press.php [NC,QSA,L]

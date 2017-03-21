@@ -62,12 +62,12 @@ var VillaHotelConcept = React.createClass({
                                           <td width="60%" style={{verticalAlign:'top',textAlign:'left'}}>
                                               <strong>EXPERIENCED LUXURY HOTEL MANAGEMENT</strong><br /><br />
                                               <ul>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Expertly trained Butler to create a bespoke experience</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Personal welcome at check-in with Villazzo President</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Professional Hotel Director with local expertise</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Prompt and responsive Villa Technician on standby</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Pre-arrival equipment check, property maintenance and emergency repairs</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Daily Breakfast & Newspaper service.</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Expertly trained Butler to create a bespoke experience</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Personal welcome at check-in with Villazzo President</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Professional Hotel Director with local expertise</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Prompt and responsive Villa Technician on standby</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Pre-arrival equipment check, property maintenance and emergency repairs</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Daily Breakfast & Newspaper service.</p></li>
                                               </ul>
                                           </td>
                                       </tr>
@@ -76,9 +76,9 @@ var VillaHotelConcept = React.createClass({
                                           <td style={{verticalAlign:'top'}}>
                                               <strong>COURTEOUS AND EFFICIENT HOUSEKEEPING</strong><br /><br />
                                               <ul>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Discreet and reliable daily housekeeping by uniformed and trained Villazzo Housekeeping Team</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Daily linen change</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Nightly turndown service.</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Discreet and reliable daily housekeeping by uniformed and trained Villazzo Housekeeping Team</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Daily linen change</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Nightly turndown service.</p></li>
                                               </ul></td>
                                       </tr>
                                       <tr>
@@ -86,12 +86,12 @@ var VillaHotelConcept = React.createClass({
                                           <td style={{verticalAlign:'top'}}>
                                               <strong>YOUR OWN PERSONAL BUTLER TO PAMPER YOU</strong><br /><br />
                                               <ul>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Dedicated full-time in-villa butler and On-Site Property Manager</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Bespoke personal shopping service</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Dining recommendations and reservations</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Daily newspaper service</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Breakfast service</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Cocktail service</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Dedicated full-time in-villa butler and On-Site Property Manager</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Bespoke personal shopping service</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Dining recommendations and reservations</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Daily newspaper service</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Breakfast service</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Cocktail service</p></li>
                                               </ul></td>
                                       </tr>
                                       <tr>
@@ -99,11 +99,11 @@ var VillaHotelConcept = React.createClass({
                                           <td style={{verticalAlign:'top'}}>
                                               <strong>THE ULTIMATE BEDROOM</strong><br /><br />
                                               <ul>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Luxurious bedding with 600 thread count FRETTE linens and plush mattress pads</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Non-allergenic pillow assortment </p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>VOSS water bottles</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Villazzo  porcelain tissue boxes</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>GODIVA bedside chocolate treats</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Luxurious bedding with 600 thread count FRETTE linens and plush mattress pads</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Non-allergenic pillow assortment </p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>VOSS water bottles</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Villazzo  porcelain tissue boxes</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>GODIVA bedside chocolate treats</p></li>
                                               </ul></td>
                                       </tr>
                                       <tr>
@@ -111,11 +111,11 @@ var VillaHotelConcept = React.createClass({
                                           <td style={{verticalAlign:'top'}}>
                                               <strong>YOUR BATHROOM, A SANCTUARY OF CALM</strong><br /><br />
                                               <ul>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>BVLGARI bath and body products elegantly displayed on Villazzo Porcelain Collection</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Professional Hair Dryers</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Plush Villazzo embroidered FRETTE bath set including bath towel, hand towel, wash cloth, bath mat</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Plush Villazzo embroidered FRETTE bathrobe and slippers</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Fresh white rose arrangement</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>BVLGARI bath and body products elegantly displayed on Villazzo Porcelain Collection</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Professional Hair Dryers</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Plush Villazzo embroidered FRETTE bath set including bath towel, hand towel, wash cloth, bath mat</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Plush Villazzo embroidered FRETTE bathrobe and slippers</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Fresh white rose arrangement</p></li>
                                                </ul>
                                           </td>
                                       </tr>
@@ -124,10 +124,10 @@ var VillaHotelConcept = React.createClass({
                                           <td style={{verticalAlign:'top'}}>
                                               <strong>CLOSET RETREAT</strong><br /><br />
                                               <ul>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Amenities such as wooden Villazzo hangers and shoe horns</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Garment pressing and laundering</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Shoe polishing</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>High quality ELSAFE in-room safe</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Amenities such as wooden Villazzo hangers and shoe horns</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Garment pressing and laundering</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Shoe polishing</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>High quality ELSAFE in-room safe</p></li>
                                               </ul></td>
                                       </tr>
                                       <tr>
@@ -135,13 +135,13 @@ var VillaHotelConcept = React.createClass({
                                           <td style={{verticalAlign:'top'}}>
                                               <strong>FINE WINE &amp; DINING</strong><br /><br />
                                               <ul>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Arrive to a pre-stocked fridge</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Fresh Fruit Baskets</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Fresh Flower arrangements</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Mini Bars throughout the villa</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Temperature Controlled Wine Storage & Selection</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Cigar Humidor with finest Havana cigars</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Convenient Room Service</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Arrive to a pre-stocked fridge</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Fresh Fruit Baskets</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Fresh Flower arrangements</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Mini Bars throughout the villa</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Temperature Controlled Wine Storage & Selection</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Cigar Humidor with finest Havana cigars</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Convenient Room Service</p></li>
                                               </ul></td>
                                       </tr>
                                       <tr>
@@ -150,8 +150,8 @@ var VillaHotelConcept = React.createClass({
                                           <td style={{verticalAlign:'top'}}>
                                               <strong>COFFEE &amp; TEA</strong><br /><br />
                                               <ul>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Villazzo Loose Leaf Tea Selection with Kettle</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Villazzo Nespresso Coffee Station complete with Villazzo sugars</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Villazzo Loose Leaf Tea Selection with Kettle</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Villazzo Nespresso Coffee Station complete with Villazzo sugars</p></li>
                                               </ul></td>
                                       </tr>
                                       <tr>
@@ -160,9 +160,9 @@ var VillaHotelConcept = React.createClass({
                                           <td style={{verticalAlign:'top'}}>
                                               <strong>OUTDOOR  OASIS</strong><br /><br />
                                               <ul>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Gift shop with must-have essentials such as Aspirin, Sunscreen, Mosquito repellent…</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Thick cotton pool towels</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Refreshing Evian mineral water spray</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Gift shop with must-have essentials such as Aspirin, Sunscreen, Mosquito repellent…</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Thick cotton pool towels</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Refreshing Evian mineral water spray</p></li>
                                               </ul>
                                           </td>
                                       </tr>
@@ -172,12 +172,12 @@ var VillaHotelConcept = React.createClass({
                                           <td style={{verticalAlign:'top'}}>
                                               <strong>YOUR OFFICE AWAY FROM HOME</strong><br /><br />
                                               <ul>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Free high speed wi-fi and access iPad, printer</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Complete Stationery set with letterhead</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Convenient Villazzo VillaHotel one-touch phone with direct link to Villazzo Operations</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Villazzo DVD selection</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Quick Start Guides for all technical equipment</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>In-villa Newspaper & Magazine selection.</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Free high speed wi-fi and access iPad, printer</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Complete Stationery set with letterhead</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Convenient Villazzo VillaHotel one-touch phone with direct link to Villazzo Operations</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Villazzo DVD selection</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Quick Start Guides for all technical equipment</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>In-villa Newspaper & Magazine selection.</p></li>
                                               </ul></td>
                                       </tr>
                                       <tr>
@@ -186,13 +186,13 @@ var VillaHotelConcept = React.createClass({
                                           <td style={{verticalAlign:'top'}}>
                                               <strong>TAILOR-MADE KIDS PROGRAM</strong><br /><br />
                                               <ul>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Full range of bath products for children and babies</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Slumber party set up with play tent, flashlight + Villazzo lantern</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Villazzo Stuffed animal Teddy Bear for our little guests</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Kids Sized Slippers and Bathrobes</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Party Celebration (full service with entertainers, inflatable toys, food, beverage)</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Nightly turndown service (cookies and milk)</p></li>
-                                                  <li className="stars"><p style={{margin:'0', padding:'0'}}>Family Fun Cooking Class with Chef</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Full range of bath products for children and babies</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Slumber party set up with play tent, flashlight + Villazzo lantern</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Villazzo Stuffed animal Teddy Bear for our little guests</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Kids Sized Slippers and Bathrobes</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Party Celebration (full service with entertainers, inflatable toys, food, beverage)</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Nightly turndown service (cookies and milk)</p></li>
+                                                  <li className="stars"><p style={{margin:'0px', padding:'0px'}}>Family Fun Cooking Class with Chef</p></li>
                                               </ul></td>
                                       </tr>
                                   </tbody>

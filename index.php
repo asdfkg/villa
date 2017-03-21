@@ -28,9 +28,10 @@ if ($totalRows_rs_reservation_feedback) {
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta name="description" content="Our exclusive villa properties are spectacular private homes in Miami, Aspen and St Tropez that are converted into 5-star hotels with the finest attention to detail.">
-        <title>VILLAZZO | Luxury Vacation & Villa Rentals in Miami, St Tropez and Aspen</title>
+        <title><?php echo SITE_ID == 1 ? 'VILLAZZO' : 'GREATVILLADEALS'; ?> | Luxury Vacation & Villa Rentals in Miami, St Tropez and Aspen</title>
         <link rel="stylesheet" href="/css/<?php echo SITE_ID; ?>/custom.css">
         <script src="/js/vendor/modernizr.js"></script>
+        <?php include_once 'js/reactLibrary.php'; ?>
         <script data-cfasync="false">
             (function (r, e, E, m, b) {
                 E[r] = E[r] || {};
@@ -44,20 +45,11 @@ if ($totalRows_rs_reservation_feedback) {
                 b.parentNode.insertBefore(m, b)
             })("reEmbed", "script", window, document, "api");
         </script>
-        <script src="/js/vendor/jquery.js"></script>
-        <script src="/js/vendor/jquery-ui-1.10.4.custom.min.js"></script>
-        <script src="/js/vendor/jquery.ui.touch-punch.min.js"></script>
-        <script src="/js/foundation.min.js"></script>
-        <script src="/js/foundation/foundation.equalizer.js"></script>
-        <script src="/js/owlcarousel/owl.carousel.min.js"></script>
-        <script src="/js/query.js"></script>
-        <script src="/js/helper.js"></script>
-        <script src="/js/modal.js"></script>
-        <script src="/js/google.js"></script>
+<?php require_once 'inc-js.php'; ?>
     </head>
 
     <body>
-        <?php require_once 'inc-header.php'; ?>
+<?php require_once 'inc-header.php'; ?>
         <!-- Owl Carousel Desktop Start -->
         <section id="owl-carousel-section">
             <div class="owl-carousel-header">
@@ -124,7 +116,7 @@ if ($totalRows_rs_reservation_feedback) {
         </section>
         <!-- Destinations Mobile Section End -->
         <div class="show-for-medium-up">
-            <?php require_once 'inc-reservation.php'; ?>
+<?php require_once 'inc-reservation.php'; ?>
         </div>
         <!-- Your Private Hotel Has Arrived Start -->
         <section id="your-private-hotel-has-arrived">
@@ -210,7 +202,7 @@ if ($totalRows_rs_reservation_feedback) {
             <div class="row text-center hvisible-for-medium-up"><h3>Client Testimonials</h3>
                     <div class="medium-12 columns">
                         <div class="owl-carousel-testimonials visible-for-medium-up">
-        <?php echo $testimonials; ?>
+<?php echo $testimonials; ?>
                         </div>
                     </div>
                 </div>
@@ -220,16 +212,20 @@ if ($totalRows_rs_reservation_feedback) {
         <!--<section id="from-the-blog" class="visible-for-medium-up">
             <div class="row text-center">
                 <h3>From The Blog</h3>
-        <?php if (function_exists('iinclude_page')) query_posts('showposts=3');
+        <?php
+        if (function_exists('iinclude_page'))
+            query_posts('showposts=3');
         $postCounter = 0;
-        while (have_posts()): the_post(); ?>
-                                        <div class="small-4 columns">
-                                            <a href="<?php the_permalink(); ?>"><img src="<?php echo $postArray[$postCounter]; ?>"></a>
-                                            <h6><?php the_date('M Y'); ?>:<br><?php the_title(); ?></h6>
-                                            <span><a href="<?php the_permalink(); ?>">View&nbsp;<i class="fa fa-angle-right"></i></a></span>
-                                        </div>       
-            <?php $postCounter ++;
-        endwhile; ?>
+        while (have_posts()): the_post();
+            ?>
+                                            <div class="small-4 columns">
+                                                <a href="<?php the_permalink(); ?>"><img src="<?php echo $postArray[$postCounter]; ?>"></a>
+                                                <h6><?php the_date('M Y'); ?>:<br><?php the_title(); ?></h6>
+                                                <span><a href="<?php the_permalink(); ?>">View&nbsp;<i class="fa fa-angle-right"></i></a></span>
+                                            </div>       
+                        <?php $postCounter ++;
+                    endwhile;
+                    ?>
             </div>
         </section>-->
         <!-- From The Blog Section End -->
@@ -239,16 +235,20 @@ if ($totalRows_rs_reservation_feedback) {
             <div class="row text-center">
                 <div class="small-4 columns">
                     <h3>From The Blog</h3>
-                    <?php if (function_exists('iinclude_page')) query_posts('showposts=1');
-                    $postCounter = 0;
-                    while (have_posts()): the_post(); ?>
+<?php
+if (function_exists('iinclude_page'))
+    query_posts('showposts=1');
+$postCounter = 0;
+while (have_posts()): the_post();
+    ?>
 
                         <a href="<?php the_permalink(); ?>"><img src="<?php echo $postArray[$postCounter]; ?>"></a>
                         <h6 style="font-size: 12px;"><?php the_date('M Y'); ?>:<br><?php the_title(); ?></h6>
                         <span style="font-size: 12px;"><a href="<?php the_permalink(); ?>">View&nbsp;<i class="fa fa-angle-right"></i></a></span>
 
     <?php $postCounter ++;
-endwhile; ?>
+endwhile;
+?>
                 </div>
                 <div class="small-4 columns">
                     <h3>Client Testimonials</h3>
@@ -332,9 +332,8 @@ endwhile; ?>
         <!--  Mobile Sub Footer Section End -->
 <?php require_once 'inc-footer.php'; ?>
 <?php require_once 'modal/video.php'; ?>
-<?php //require_once 'inc-js.php';  ?>
+<?php //require_once 'inc-js.php';   ?>
 
-        <script>$(document).foundation();</script>
         <script>
             <!--
         $(document).ready(function ()
