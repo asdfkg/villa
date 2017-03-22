@@ -8,8 +8,10 @@
     <title>Luxury Villa Rentals - Offers | <?php echo SITE_ID==1?"Villazzo":"Great Villa Deals";?></title>
 	<meta name="Villazzo VillaHotel properties are spectacular private homes in Miami, Aspen and St Tropez that are converted into 5-star hotels with the finest attention to detail." />
 	<meta name="Keywords" content="contact villazzo, villahotel, v villa, private luxury villa, luxury villa rentals, luxury villa, villa rental" />
-    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="/css/<?php echo SITE_ID; ?>/custom.css">
     <script src="/js/vendor/modernizr.js"></script>
+    <?php include_once '../js/reactLibrary.php'; ?>
+    <script src="/js/react/jsx/<?php echo SITE_ID; ?>/about-us.jsx" type="text/jsx"></script>
     <style>
 		.stars {
     		background: url(/img/about/star.png) no-repeat 7px 0px transparent;

@@ -71,6 +71,7 @@ var SearchResult = React.createClass({
             checkInDt: checkInDt,
             checkOutDt: checkOutDt
         }; 
+        var siteId = this.props.siteid;
 	return <div>
                 <SearchTotal total={this.props.totalVillas} />
                 <PropertySummaryDatePopupForm data={dateDetail} />
@@ -92,16 +93,16 @@ var SearchResult = React.createClass({
                             }else{
                                 var propertyRate = '';
                             }
-
+                            var BookNowText = siteId=="1"?"Book Now":"Book now and Save 10%";
                             if (object.booked_till_dt){
                                 var propertyBook = (
                                     <Anchor classes="button book-btn radius tiny expand" href={"?dest="+object.dest_name+"&check_in="+getFormattedDate(object.booked_till_dt,1)+"&check_out="+getFormattedDate(object.booked_till_dt,4)} value={'AVAIL. '+getFormattedDate(object.booked_till_dt,1)}></Anchor>
                                 )
                             } else if(object.check_in_dt && object.check_out_dt){
-                                var propertyBook = <Anchor classes="button book-btn radius tiny expand" href={"/reservations/services?property="+object.property_name.toLowerCase().replace(' ','-')+'&check_in='+getFormattedDate(object.check_in_dt)+'&check_out='+getFormattedDate(object.check_out_dt)} value="Book now and Save 10%"></Anchor>
+                                var propertyBook = <Anchor classes="button book-btn radius tiny expand" href={"/reservations/services?property="+object.property_name.toLowerCase().replace(' ','-')+'&check_in='+getFormattedDate(object.check_in_dt)+'&check_out='+getFormattedDate(object.check_out_dt)} value={BookNowText}></Anchor>
                             }else{
                                 var propertyBook = (
-                                        <Anchor classes="button book-btn radius tiny expand" href={"/reservations/services?property="+object.property_name.toLowerCase().replace(' ','-')+'&check_in='+getFormattedDate(new Date())+'&check_out='+getFormattedDate(new Date(),3)} value="Book now and Save 10%"></Anchor>
+                                        <Anchor classes="button book-btn radius tiny expand" href={"/reservations/services?property="+object.property_name.toLowerCase().replace(' ','-')+'&check_in='+getFormattedDate(new Date())+'&check_out='+getFormattedDate(new Date(),3)} value={BookNowText}></Anchor>
                                 )
                             }
                             var propertyBook = object.bookable==false ? <button className="button book-btn radius tiny expand prop-interested" data-propertyname={object.property_name}>I'M INTERESTED</button>:propertyBook ;
@@ -139,7 +140,7 @@ var SearchResult = React.createClass({
                                                     <div className="small-4 small-offset-2 columns">
                                                             <Anchor href={"/"+object.dest_name+"-rental-villas/villa-"+object.property_name.toLowerCase().replace(' ','-')+(object.check_in_dt && object.check_out_dt?'?check_in='+getFormattedDate(object.check_in_dt)+'&check_out='+getFormattedDate(object.check_out_dt):'')} classes="button details-button radius tiny expand" value="DETAILS" />
                                                     </div>
-                                                    <div className="small-6 columns">{propertyBook}</div>
+                                                    <div className={"small-"+(siteId=="1"?"4":"6")+" columns"}>{propertyBook}</div>
                                                     <div className="small-4 columns"></div>
                                             </div>
                                         </div>  	

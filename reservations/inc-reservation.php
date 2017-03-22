@@ -32,7 +32,7 @@ echo json_encode(explode(',', (isset($_GET['amenities']) ? $_GET['amenities'] : 
 ?>;
 var getParams = <?php echo json_encode($_GET); ?>;
 ReactDOM.render(
-    <SearchBox data={data} SearchOptions={SearchOptions} innerpage="true" getParams={getParams} filters={featuresList} amenitiesList={amenitiesList} />,
+    <SearchBox data={data} SearchOptions={SearchOptions} siteid="<?php echo SITE_ID;?>" innerpage="true" getParams={getParams} filters={featuresList} amenitiesList={amenitiesList} />,
     document.getElementById('searchBoxForm')
 );
 </script>

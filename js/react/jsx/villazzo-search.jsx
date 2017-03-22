@@ -248,7 +248,7 @@ var SearchBox = React.createClass({
                 <div className="row" data-equalizer>
                     {(this.props.innerpage=='true')?
                     <div className="large-2 columns left-side show-for-large-up" data-equalizer-watch>
-                        <Heading6 value="Reserve Your Villa" />
+                        <Heading6 value={"Reserve Your Villa"+(this.props.siteid=="1"?"Hotel":'')} />
                     </div>:''}
 
                     <div className={(this.props.innerpage=='true'?'large-10':'large-12')+ ' medium-12 columns right-side text-center'} data-equalizer-watch>

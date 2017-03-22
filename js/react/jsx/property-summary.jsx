@@ -93,29 +93,39 @@ var PropertySummary = React.createClass({
         var d2 = new Date(this.props.dateDetail.checkOutDt);
         var totalNight = (d2-d1)/1000/60/60/24;
         var bookBtn = (this.props.dateDetail.checkInDt && this.props.dateDetail.checkOutDt && this.props.dateDetail.availability =="1" && (this.props.dateDetail.minBookDays==null || totalNight>=this.props.dateDetail.minBookDays))?<a className='button small expand radius book-btn tiny' href={this.props.dateDetail.bookNowURL}>RESERVE</a>:<a data-reveal-id='propertyAvailabilityModal' className="button small expand radius book-btn tiny">CHECK AVAILABILITY</a>;
+        var bookBtn = <button data-reveal-id='propertyAvailabilityModal' className="button small expand radius book-btn tiny">CHECK AVAILABILITY</button>;
         if(this.props.dateDetail.bookable==0){
             bookBtn ='';
         }
         return (
             <section id="property-summary-section">
                 <div className="row text-center" id="property-intro" data-equalizer>
-                  
-                    <div className="medium-12 columns right-side" data-equalizer-watch dangerouslySetInnerHTML={{__html:this.props.data.propertyTitle}}></div>
+                    {this.props.siteid=="1" && <div className="medium-2 columns left-side" data-equalizer-watch><Heading6 value={this.props.data.destName}  /></div>}
+                    <div className={"medium-"+(this.props.siteid=="1"?10:12)+" columns right-side"} data-equalizer-watch dangerouslySetInnerHTML={{__html:this.props.data.propertyTitle}}></div>
                 </div>
                 <div className="row" id="property-desc">
                     <div className="small-12 columns text-justify">
                         <Paragraph value={this.props.data.propertyDescription} />
                     </div>
                  </div>
-            
+                 {(this.props.siteid=="1")?
+                <div className="row">
+                    <div className="small-12 columns text-center" id="property-rate">
+                        <p>From  {this.props.dateDetail.nightTotal} <span className="text-grey">Per Night</span><br />+<br />Services + 18% VillaHotel Management + Tax</p>
+                    </div>
+                </div>
+:''}
                 <div className="row text-center visible-for-medium-up">
-                    <div className="medium-6 medium-centered columns">
+                    <div className="medium-9 medium-centered columns">
                         <div className="row text-center">
-                            <div className={"medium-6 columns"+(this.props.dateDetail.bookable==0?' medium-centered':'')}>
+                            <div className="medium-4 columns">
+                                {bookBtn}
+                            </div>
+                            <div className={"medium-4 columns"+(this.props.dateDetail.bookable==0?' medium-centered':'')}>
 	                        <button className="button small expand radius details-button" data-reveal-id="propertyInterestedModal">I'M INTERESTED</button>
                             </div>
-                            <div className="medium-6 columns">
-                                {bookBtn}
+                            <div className="medium-4 columns">
+                                <button className="button small expand radius details-button" data-reveal-id="propertyShareModal">SHARE</button>
                             </div>
                         </div>
                     </div>
@@ -145,7 +155,7 @@ var IfDatePicker = React.createClass({
         var unescapeHTML= function(data){
             return {__html:data};
         };
-        var selectedDates = '<a data-reveal-id="propertyShareModal">SHARE</a>';
+        var selectedDates = '';
         if(this.props.bookable==1){
             selectedDates = selectedDates+ "<span>Travel Dates: "+this.props.fromatedCheckInDt+" - "+this.props.fromatedCheckOutDt+
                                 "&nbsp;<a data-reveal-id='propertyAvailabilityModal'>Edit</a>"+
@@ -206,9 +216,11 @@ var PropertySummarySlider = React.createClass({
         });
         return (
             <section id="owl-carousel-section">
+                { this.props.siteid=="2" &&
                 <div className="inner-content-title">
-			<h1>{this.props.propertyName}  - {this.props.destName} </h1>
+                    <h1>{this.props.propertyName}  - {this.props.destName} </h1>
 		</div>
+                }
                 <div className="row">
                     <div className="columns">
                         <div id="sync1" className="owl-carousel" >

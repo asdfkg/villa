@@ -3,8 +3,8 @@
 AddHandler x-mapp-php5 .php
 
 # permanently redirect from non-www domain to www domain
-#RewriteEngine on
-#Options +FollowSymLinks
+RewriteEngine on
+Options +FollowSymLinks
 
 #RewriteCond %{HTTP_HOST} !^www\.
 #RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]

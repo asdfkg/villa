@@ -77,6 +77,7 @@ var ServiceStep = React.createClass({
     render: function(){
         var self = this;
         var step = this.props.step;
+        var step2Text = this.props.siteid=="1"?"Customize Your Service Experience":"Review your<br/>Discount";
         return (
             <div className="row" id="steps">
                 <div className="columns">
@@ -89,7 +90,7 @@ var ServiceStep = React.createClass({
                                 <div className="columns">
                                     <ul id="progressbar">
                                         <li className="active" onClick={self.redirectStep1}>Select Your<br />Villa</li>
-                                        <li className={step>=2?'active':''} onClick={self.redirectStep2} >Review your<br />Discount</li>
+                                        <li className={step>=2?'active':''} onClick={self.redirectStep2} dangerouslySetInnerHTML={{__html:step2Text}}></li>
                                         <li className={step>=3?'active':''}>Contact And<br />Payment Information</li>
                                     </ul>
                                 </div>

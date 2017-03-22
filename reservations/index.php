@@ -109,7 +109,7 @@ $villaCtr = count($propertyArray);
             var data =<?php echo json_encode($propertyArray);?>;
             var bookurl = '<?php echo ($_SESSION['USER']->getUserId())?'calendar':'services'; ?>';
             ReactDOM.render(
-              <SearchResult property={data} bookingDays="<?php echo $diff;?>" checkInDt="<?php echo $checkInDt;?>" checkOutDt="<?php echo $checkOutDt;?>" totalVillas="<?php echo number_format($villaCtr)?> VILLAS" bookurl={bookurl}/>,
+              <SearchResult siteid="<?php echo SITE_ID;?>" property={data} bookingDays="<?php echo $diff;?>" checkInDt="<?php echo $checkInDt;?>" checkOutDt="<?php echo $checkOutDt;?>" totalVillas="<?php echo number_format($villaCtr)?> VILLAS" bookurl={bookurl}/>,
               document.getElementById('destination-results')
             );
             var headerImg = "<?php echo SITE_ID ==1?"/img/destination-header_".str_replace('-', '_', $_GET['dest']).".png":"/img/inner-bg1.png";?>";
@@ -122,7 +122,7 @@ $villaCtr = count($propertyArray);
             var StepUrl1 = '<?php echo (isset($_GET['property']) ? 'location.href = "./services?property='.$_GET['property'].'&check_in='.$checkInDt.'&check_out='.$checkOutDt : ''); ?>';
             var StepUrl2 = '<?php //echo './services?property='.$_SESSION['RESERVATION']->get('propertyName').'&check_in='.date('m/d/Y', strtotime($_SESSION['RESERVATION']->get('checkInDt'))).'&check_out='.date('m/d/Y', strtotime($_SESSION['RESERVATION']->get('checkOutDt'))); ?>';
             ReactDOM.render(
-                <ServiceStep step="1"  stepUrl1={StepUrl1} stepUrl2={StepUrl2} />,
+                <ServiceStep step="1" siteid="<?php echo SITE_ID;?>" stepUrl1={StepUrl1} stepUrl2={StepUrl2} />,
                 document.getElementById('reservations-title-steps-section')
             );
         </script>

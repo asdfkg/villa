@@ -1,5 +1,5 @@
 <?php
-require_once '/kunden/homepages/27/d309616710/htdocs/private/config.php';
+require_once './private/config.php';
 
 //if ($_SERVER['REQUEST_METHOD'] == 'POST') header('Location: /search/'.$_POST['destination'].'/'.strtolower(trim(preg_replace('/\s/', '-', preg_replace(array('/[^A-Za-z0-9]/', '/\s\s+/'), ' ', $_POST['keyword'])), '-')).'/');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') header('Location: /search/'.strtolower(trim(preg_replace('/\s/', '-', preg_replace(array('/[^A-Za-z0-9]/', '/\s\s+/'), ' ', $_POST['keyword'])), '-')).'/');
