@@ -1,5 +1,5 @@
 <?php
-require_once '/kunden/homepages/27/d309616710/htdocs/private/config.php';
+require_once './private/config.php';
 
 // property info
 $rs_property = $_SESSION['DB']->querySelect('SELECT propertyId FROM property LEFT JOIN destination ON destination.destId=property.destId WHERE UPPER(propertyName) = ? AND property.site in ("3","'.SITE_ID.'") LIMIT 1', array(str_replace('-', ' ', strtoupper($_GET['prop']))));
@@ -82,7 +82,7 @@ $propertyGalleryArray = array();
 $path = 'img/property/'.$propertyGallery.'/';
 $propertySlideshowFull = NULL;
 $propertySlideshowThumb = NULL;
-
+$propertySlideshowArr=[];
 if (file_exists($path))
 {
 	$directory = opendir($path);
@@ -94,19 +94,27 @@ if (file_exists($path))
 	sort($propertyGalleryArray);
 	
 	$propertySlideshowCtr = 1;
+        $i= 0;
 	foreach ($propertyGalleryArray as $filename)
 	{
-		$title = NULL;
-		$titleArray = explode('_', trim($filename, '.jpg'));
-		foreach ($titleArray as $data) if (!is_numeric($data)) $title .= $data.' ';
-		$propertySlideshowFull .= '<div data-owlItem="'.$propertySlideshowCtr.'" class="item"><span class="img-property-title">'.$propertyName.'</span><img src="'.$path.''.$filename.'" alt="'.$title.'"></div>';
-		$propertySlideshowThumb .= '<div data-owlItem="'.$propertySlideshowCtr.'" class="item"><img src="'.$path.''.$filename.'" alt="'.$title.'"></div>';
-		$propertySlideshowCtr ++;
+            $title = NULL;
+            $titleArray = explode('_', trim($filename, '.jpg'));
+            foreach ($titleArray as $data) if (!is_numeric($data)) $title .= $data.' ';
+            $propertySlideshowArr[$i]['propertySlideshowCtr']   = $propertySlideshowCtr;
+            $propertySlideshowArr[$i]['propertyName']           = $propertyName;
+            $propertySlideshowArr[$i]['path']                   = 'https://www.villazzo.com/'.$path;
+            $propertySlideshowArr[$i]['filename']               = $filename;
+            $propertySlideshowArr[$i]['title']                  = $title;
+            $propertySlideshowCtr ++;
+            $i++;
 	}
 }
 
 // service levels
-$propertyServiceLevels = '';
+/* 
+ * TODO - CS Remove
+ * 
+ * $propertyServiceLevels = '';
 foreach ($serviceLevelsArray as $serviceLevels)
 {
 	$propertyServiceLevels .= '<div class="medium-'.(12/count($serviceLevelsArray)).' columns data-equalizer-watch">
@@ -141,7 +149,7 @@ foreach ($serviceLevelsArray as $serviceLevels)
 	        $propertyServiceLevels .= '
 	    </ul>
 	</div>';
-}
+} */
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -150,8 +158,15 @@ foreach ($serviceLevelsArray as $serviceLevels)
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title><?php echo ucwords('Villa '.$propertyName.' - '.$destName.' Villa Rental | VILLAZZO'); ?></title>
-    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="/css/<?php echo SITE_ID; ?>/custom.css">
     <script src="/js/vendor/modernizr.js"></script>
+    
+    <!-- Load React Library -->
+    <?php include_once 'js/reactLibrary.php'; ?>
+    <script src="/js/react/jsx/property-summary.jsx" type="text/jsx"></script>
+    <script src="/js/react/jsx/property-summary-popup.jsx" type="text/jsx"></script>
+    <!-- End Load React Library -->
+
     <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyAYpd2VEIF_n_fdZkFA3uYKRYKoYkiQIko&sensor=false"></script>
     <script type="text/javascript">
     <!--
@@ -178,137 +193,21 @@ foreach ($serviceLevelsArray as $serviceLevels)
 
 <body onload="initialize()" onunload="GUnload()">
 	<?php require_once 'inc-header.php'; ?>
-            <!-- Owl Carousel Desktop Start -->
-			<section id="owl-carousel-section">
-				<div class="row">
-					<div class="columns">
-						<div id="sync1" class="owl-carousel"><?php echo $propertySlideshowFull; ?></div>
-					</div>
-				</div>
-    		</section>
-			<section id="owl-thumbnails-section" class="visible-for-medium-up">
-				<div class="row">
-					<div class="columns">
-						<div id="sync2" class="owl-carousel"><?php echo $propertySlideshowThumb; ?></div>
-					</div>
-				</div>
-			</section>
-            <!-- Owl Carousel Desktop End -->
-            <!-- Property Summary Section Start -->
-            <section id="property-summary-section">
-	            <div class="row text-center" id="property-intro" data-equalizer>
-	                <div class="medium-2 columns left-side" data-equalizer-watch>
-	                    <h6><?php echo $propertyName.'<br>- '.$destName.' -'; ?></h6>
-	                </div>
-	                <div class="medium-10 columns right-side" data-equalizer-watch>
-	                    <?php echo $propertyTitle; ?>
-	                </div>
-	            </div>
-	            	            
-                <div class="row" id="property-desc">
-                    <div class="small-12 columns text-justify">
-	                    <p><?php echo $propertyDescLong; ?></p>
-                    </div>
-                </div>
-                
-                <div class="row">
-                    <div class="small-12 columns text-center" id="property-rate">
-						<p><?php echo 'From '.$nightTotal.' <span class="text-grey">Per Night</span>'; ?><br />+<br />Services + 18% VillaHotel Management + Tax</p>
-                	</div>
-                </div>
-                
-                <div class="row text-center visible-for-medium-up">
-                    <div class="medium-9 medium-centered columns">
-                        <div class="row text-center">
-	                        <div class="medium-4 columns">
-	                        	<button class="button small expand" data-reveal-id="propertyAvailabilityModal">CHECK AVAILABILITY</button>
-	                        </div>
-                            <div class="medium-4 columns">
-	                            <button class="button small expand" data-reveal-id="propertyInterestedModal">I'M INTERESTED</button>
-                            </div>
-                            <div class="medium-4 columns">
-                                <button class="button small expand" data-reveal-id="propertyShareModal">SHARE</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                                
-                <div class="row full-width text-center" id="property-details-trigger">
-                	<p class="flip"><span id="clickMe" class="clickText">click to </span> <i class="fa fa-angle-double-up"></i></p>
-                </div>
-                
-                <!-- View Specification Section Start -->
-                <div id="property-specifications">
-	                <div class="row" id="property-details">
-	                    <div class="columns text-left show-for-small-only">
-							<span>DETAILS</span>
-	                    </div>
-	                    <div class="medium-2 columns text-right show-for-medium-up">
-							<span>DETAILS</span>
-	                    </div>
-	                    <div class="medium-10 columns">
-	                        <ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-2">
-	                            <li><span>Location:</span>&nbsp;<?php echo $propertyLocationName; ?></li>
-		                        <li><span>Bedrooms:</span>&nbsp;<?php echo $propertyBedrooms; ?></li>
-	                            <?php if ($propertyLivingArea) echo '<li><span>Interior space:</span>&nbsp;'.$propertyLivingArea.'</li>'; ?>
-		                        <?php if ($propertyBathrooms) echo '<li><span>Bathrooms:</span>&nbsp;'.$propertyBathrooms.'</li>'; ?>
-	                            <?php if ($propertyTotalArea) echo '<li><span>Total Area:</span>&nbsp;'.$propertyTotalArea.'</li>'; ?>
-		                    </ul>
-	                    </div>
-	                </div>
-	                
-	                <?php if ($propertydriving) { ?>
-	                <div class="row full-width text-center" id="property-amenities-separator"></div>
-	                
-	                <div class="row" id="property-details">
-	                    <div class="columns text-left show-for-small-only">
-							<span>DRIVE TIMES</span>
-	                    </div>
-	                    <div class="medium-2 columns text-right show-for-medium-up">
-							<span>DRIVE TIMES</span>
-	                    </div>
-	                    <div class="medium-10 columns">
-							<?php echo $propertydriving; ?>
-	                    </div>
-	                </div>
-	                <?php } ?>
-	                
-	                <?php if ($propertyAmenities) { ?>
-	                <div class="row full-width text-center" id="property-amenities-separator"></div>
-	                    
-	                <div class="row" id="property-amenities">
-	                    <div class="columns text-left show-for-small-only">
-	                        <span>AMENITIES</span>
-	                    </div>
-	                    <div class="medium-2 columns text-right show-for-medium-up">
-							<span>AMENITIES</span>
-	                    </div>
-	                    <div class="medium-10 columns">
-							<?php echo $propertyAmenities; ?>
-	                    </div>
-	                </div>
-	                <?php } ?>
-	                
-                </div>
-                <!-- View Specification Section End -->
-            </section>
+        <section id="header-section" class="inner-bg"></section>
+        <!-- React Owl Carousel Desktop Start -->
+        <span id="property-slider-section-rc"></span>
+        <span id="property-slider-thump-section-rc"></span>
+
+
+        <!-- Owl Carousel Desktop End -->
+
+
+	<!-- React Property Summary Section Start -->
+        <span id="property-summary-section-rc"></span>
             <!-- Property Summary Section End -->
             
             <!-- Rates Section Start -->
-<!--
-            <section id="rate-section">
-	            <div class="row full-width text-center">
-		            <div class="columns">
-		            	Choose Your Level Of Service
-		            	<?php //if ($checkInDt && $checkOutDt) echo '<span>Travel Dates: '.date('m/d/Y', strtotime($checkInDt)).' - '.date('m/d/Y', strtotime($checkOutDt)).' <a data-reveal-id="propertyAvailabilityModal">Edit</a></span>'; ?>
-		            </div>
-	            </div>
-	            
-                <div class="row data-equalizer">
-					<?php //echo $propertyServiceLevels ?>
-                </div>
-            </section>
--->
+        <span id="property-summary-change-date"></span>
             <!-- Rates Section End -->
             
             <!-- Property Map Section Start -->
@@ -321,116 +220,94 @@ foreach ($serviceLevelsArray as $serviceLevels)
             </section>
             <!-- Property Map Section End -->
 			<?php require_once 'inc-footer.php'; ?>
-			<?php require_once 'modal/property-interested.php'; ?>
-			<?php require_once 'modal/property-availability.php'; ?>
-			<?php require_once 'modal/property-share.php'; ?>
-			<?php require_once 'modal/property-villa-only.php'; ?>
-			<?php require_once 'inc-js.php'; ?>
-    <script type="text/javascript">
-	    <!--
-    $(document).ready(function() {
-        var $sync1 = $('#sync1'), // select the main carousel
-            $sync2 = $('#sync2'), // select the thumbnail carousel
-            flag = true,
-            duration = 300;
-            
-        // gallery carousel main view
-        $sync1.owlCarousel({
-                items: 1,
-                slideSpeed: 1000,
-                nav: true,
-                navText: ['<img src="img/home/arrow-left.png" style="position: absolute; top: 47%; left: 0;" class="show-for-large-up">', '<img src="img/home/arrow-right.png" style="position: absolute; top: 47%; right: 0;" class="show-for-large-up">'],
-                loop: true,
-                responsiveRefreshRate: 200,
-                dots: false
-            })
-            .on('change.owl.carousel', function (e) {
-                if (e.namespace && e.property.name == 'items' && !flag ) {
-                    flag = true;
-                    $sync2.trigger('to.owl.carousel', [e.item.index, duration, true]);
-                    flag = false;
-                }
-            })
-            .on('click', '.owl-next', function() {
-				$sync2.trigger('next.owl.carousel')
-		    })
-		    .on('click', '.owl-prev', function() {
-		        $sync2.trigger('prev.owl.carousel')
-		    })
-/*
-	        .on('dragged.owl.carousel', function(e) {
-	            if (e.relatedTarget.state.direction == 'left') {
-	                $sync2.trigger('next.owl.carousel')
-	            } else {
-	                $sync2.trigger('prev.owl.carousel')
-	            }
-	        }
-	    )
-*/;
-        // gallery thumbnail carousel
-        $sync2.owlCarousel({
-                items: 5,
-                nav: false,
-                dots: false,
-                dotsEach: false,
-                margin: 0,
-                responsive: {
-                    0: {
-                        items: 4,
-                        margin: 0
-                    },
-                    767: {items: 6},
-                    1000: {items: 6}
-                },
-                responsiveRefreshRate: 100,
-                margin: 2
-            })
-            .on('click', '.owl-item', function () {
-                $sync1.trigger('to.owl.carousel', [$(this).index(), duration, true]);
-            })
-            .on('changed.owl.carousel', function (e) {
-                if (!flag) {
-                    flag = true;
-                    $sync1.trigger('to.owl.carousel', [e.item.idex, duration, true]);
-                    flag = false;
-                }
-            })
-/*
-            .on('click', '.owl-item', function() {
-	            var i = $(this).index() - (thumbs + 1);
-	            $sync2.trigger('to.owl.carousel', [i, duration, true]);
-	            $sync1.trigger('to.owl.carousel', [i, duration, true]);
-	        }
-	    )
-*/;
-            
-        $('#property-details-trigger .flip').click(function() {
-            $('i', this).toggleClass('a fa-angle-double-down fa-2x a fa-angle-double-up fa-2x');
-            $('span', this).toggleClass('clickText clickText2');
-            $('#property-specifications').slideToggle('slow');
-        });
         
-        $('#propertyAvailabilityModalCheckInDt').datepicker({
-			defaultDate: '+1d',
-			minDate: '+1d',
-			onClose: function(selectedDate)
-			{
-				if (selectedDate)
-				{
-					var nextDayDate = $(this).datepicker('getDate', '+3d');
-					nextDayDate.setDate(nextDayDate.getDate() + 3);
-					$('#propertyAvailabilityModalCheckOutDt').datepicker('option', 'minDate', nextDayDate);
-				}
-			}
-		});
+        <!-- End Property page popup's  -->
+        <?php // TODO - CS Remove 
+              //require_once 'modal/property-interested.php';
+              //require_once 'modal/property-availability.php'; 
+              //require_once 'modal/property-share.php';
+        ?>
+            <span id="property-interested-popup-form"></span>
+            <span id="change-date-popup-form"></span>
+            <span id="change-share-popup-form"></span>
+            <?php require_once 'modal/property-villa-only.php'; ?>
+			<?php require_once 'inc-js.php'; ?>
+            
+        <!-- React Script -->
+        <script type="text/jsx">
+            /** @jsx React.DOM */
+            var data = {
+                propertyTitle: "<?php echo $propertyTitle; ?>",
+                destName: "<?php echo $propertyName.'<br>- '.$destName.' -'; ?>",
+                propertyDescription: <?php echo str_replace('\n','<br />',json_encode($propertyDescLong)); ?>,
+                propertyDriving:    '<?php echo $propertydriving; ?>',
+                propertyAmenities: '<?php echo $propertyAmenities; ?>',
+            };
+            var details = [
+                {name: 'Location',value:'<?php echo $propertyLocationName ?>'},
+                {name: 'Bedrooms',value:'<?php echo $propertyBedrooms ; ?>'},
+                {name: 'Interior space',value:'<?php echo $propertyLivingArea ; ?>'},
+                {name: 'Bathrooms',value:'<?php echo $propertyBathrooms ; ?>'},
+                {name: 'Total Area',value:'<?php echo $propertyTotalArea ; ?>'},  
+            ]; 
+            
+            var dateDetail = { 
+                checkInDt: '<?php echo !empty($checkInDt)?date("m/d/Y",strtotime($checkInDt)):''; ?>',
+                checkOutDt: '<?php echo !empty($checkOutDt)?date("m/d/Y",strtotime($checkOutDt)):''; ?>',
+                fromatedCheckInDt: '<?php echo !empty($checkInDt)?date("m/d/Y", strtotime($checkInDt)):''; ?>',
+                fromatedCheckOutDt: '<?php echo !empty($checkOutDt)?date("m/d/Y", strtotime($checkOutDt)):''; ?>',
+                propertyId: '<?php echo $propertyArray['property_id']; ?>',
+                propertyName: '<?php echo $propertyArray['property_name']; ?>',
+                propertyShareLink: '<?php echo "http://".$_SERVER["HTTP_HOST"]."/".str_replace(" ", "-", $propertyArray["dest_name"])."-rental-villas/villa-".str_replace(" ", "-", $propertyArray["property_name"]).(isset($propertyArray["check_in_dt"])&&isset($propertyArray["check_out_dt"])?"?check_in=".date("m/d/Y", strtotime($propertyArray["check_in_dt"]))."&check_out=".date("m/d/Y", strtotime($propertyArray["check_out_dt"])):""); ?>',
+                propertyShareEmail: '<?php echo ($_SESSION["USER"]->getUserId()?$_SESSION["USER"]->getEmail():""); ?>',
+                bookNowURL:     '<?php echo "/reservations/services?property=".$propertyName."&check_in=".date("m/d/Y", strtotime($checkInDt))."&check_out=".date("m/d/Y", strtotime($checkOutDt)) ?>',
+                availability: '<?php echo $_SESSION['RESERVATION']->checkPropertyAvailability( date('Y-m-d',strtotime($checkInDt)), date('Y-m-d',strtotime($checkOutDt)), $propertyArray['property_id'])?"1":"2" ?>',
+                bookable: '<?php echo $propertyArray['bookable']; ?>',
+                minBookDays: <?php echo $propertyArray['min_book_days']==null?'null':$propertyArray['min_book_days']; ?>,
+                nightTotal: "<?php echo $nightTotal;?>"
+            }; 
+        
+            var propertySlideshowFull   = '<?php echo $propertySlideshowFull ?>';
+            var propertySlideshowThumb  = '<?php echo $propertySlideshowThumb ?>'; 
+            var sliderImages            = <?php echo json_encode($propertySlideshowArr) ?>;
 		
-		$('#propertyAvailabilityModalCheckOutDt').datepicker({
-			defaultDate: '+1d',
-			minDate: '+1d'
-		});
-    });
-    -->
+            ReactDOM.render(
+                <PropertySummary siteid="<?php echo SITE_ID;?>" data={data}  propertyDetails={details} dateDetail={dateDetail} />,
+                document.getElementById('property-summary-section-rc')
+            );
+            /*ReactDOM.render(
+                <PropertySummaryDate data={dateDetail} />,
+                document.getElementById('property-summary-change-date')
+            );*/
+            ReactDOM.render(
+                <PropertySummaryDatePopupForm data={dateDetail} />,
+                document.getElementById('change-date-popup-form')
+            );
+            ReactDOM.render(
+                <PropertySummaryInterestedPopupForm data={dateDetail} />,
+                document.getElementById('property-interested-popup-form')
+            );
+            ReactDOM.render(
+                <PropertySummarySharePopupForm data={dateDetail} />,
+                document.getElementById('change-share-popup-form')
+            );
+            ReactDOM.render(
+                <PropertySummarySlider  sliderImages={sliderImages} siteid="<?php echo SITE_ID;?>" propertyName="<?php echo $propertyName;?>" destName="<?php echo $destName;?>"/>,
+                document.getElementById('property-slider-section-rc')
+            );
+            ReactDOM.render(
+                <PropertySummaryThumbSlider sliderImages={sliderImages}/>,
+                document.getElementById('property-slider-thump-section-rc')
+            );  
+            <?php if(SITE_ID==2){ ?>
+            var serviceBannerImage = "/img/inner-bg1.png"  ;
+            ReactDOM.render(
+                <Image1 src={serviceBannerImage}/>,
+                document.getElementById('header-section')
+            );
+            <?php } ?>
     </script>
+        <!-- End React Script -->            
 </body>
 
 </html>

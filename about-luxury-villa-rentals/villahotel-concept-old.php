@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<?php //getMeta('the_villahotel_concept'); ?>
-	<title>VillaHotel Concept: Luxury Villa Rentals with the Best of Both Worlds | Villazzo</title>
+	<title>VillaHotel Concept: Luxury Villa Rentals with the Best of Both Worlds | <?php echo SITE_ID==1?"Villazzo":"Great Villa Deals";?></title>
 	<meta name="Description" content="The Villazzo VillaHotel experience includes a lifestyle organized by your own private Hotel manager and his expert team of hand-picked and uniformed staff whom we train in-house to pamper you. " />
 	<meta name="Keywords" content="VillaHotel, private luxury villa, luxury villa rentals, luxury villa, villa rental, villahotel, villahotel concept" />
 	<link rel="stylesheet" href="/css/custom.css">

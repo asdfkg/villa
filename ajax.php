@@ -1,5 +1,5 @@
 <?php
-require_once '/kunden/homepages/27/d309616710/htdocs/private/config.php';
+require_once './private/config.php';
 
 $outputArray = NULL;
 $feedback = NULL;

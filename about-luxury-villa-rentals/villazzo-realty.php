@@ -1,41 +1,38 @@
-<?php require_once '/kunden/homepages/27/d309616710/htdocs/private/config.php'; ?>
+<?php require_once '../private/config.php'; ?>
 <!doctype html>
 <html class="no-js" lang="en">
-
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<?php //getMeta('villazzo_living'); ?>
-	<title>Experience Villazzo Living - Luxury Villa Rentals | Villazzo</title>
-	<meta name="Description" content="Villazzo Living is an exclusive lifestyle solution designed to take the worries off you as we skilfully take care of everything in your home." />
-	<meta name="Keywords" content="luxury lifestyle solutions, private luxury villa, luxury villa rentals, luxury villa, villa rental, Villazzo Living, lifestyle solution" />
-	<link rel="stylesheet" href="/css/custom.css">
-    <link rel="stylesheet" href="/css/custom.css">
-    <script src="/js/vendor/modernizr.js"></script>
-</head>
-
-<body>
-	<?php require_once '../inc-header.php'; ?>
-            <!-- Header Image Section Start -->
-            <section id="header-section">
-                <img src="/img/about/banner-villazzo_realty.png">
-            </section>
-            <!-- Header Image Section End -->
-            <section id="about-section">
-                <div class="row">
-                    <div class="large-centered columns">
-						<?php //getContent('villazzo_realty'); ?>
-						<h4>VILLAZZO REALTY GIVES YOU ACCESS<br />TO THE FINEST PROPERTIES IN THE WORLD</h4>
-						<img src="/img/about/lisa.png" width="200" align="left" style="margin-right:20px"/><p>Villazzo has over a decade long track record of success in the ultra-luxury vacation rental marketplace; and we successfully leveraged our expertise and  relationships with homeowners and our clients to facilitate real estate transactions as well.<br /><a href="mailto:lisa.blake@villazzo.com?Subject=Villazzo%20Realty">Contact</a> Lisa Blake if you are interested in buying or selling a luxury villa.</p>
-						
-                    </div>
-                </div>
-            </section>
-            <!-- SubFooter Section End -->
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <?php //getMeta('villazzo_living'); ?>
+        <title>Experience Villazzo Living - Luxury Villa Rentals | <?php echo SITE_ID == 1 ? "Villazzo" : "Great Villa Deals"; ?></title>
+        <meta name="Description" content="Villazzo Living is an exclusive lifestyle solution designed to take the worries off you as we skilfully take care of everything in your home." />
+        <meta name="Keywords" content="luxury lifestyle solutions, private luxury villa, luxury villa rentals, luxury villa, villa rental, Villazzo Living, lifestyle solution" />
+        <link rel="stylesheet" href="/css/<?php echo SITE_ID; ?>/custom.css">
+        <script src="/js/vendor/modernizr.js"></script>
+        <?php include_once '../js/reactLibrary.php'; ?>
+        <script src="/js/react/jsx/<?php echo SITE_ID; ?>/about-us.jsx" type="text/jsx"></script>
+    </head>  
+    <body>
+        <?php require_once '../inc-header.php'; ?>
+        <!-- Header Image Section Start -->
+        <section id="header-section"></section>
+        <!-- SubFooter Section End -->
+        <section id="about-section"></section>
         <?php require_once '../inc-footer.php'; ?>
-		
-		<?php require_once '../inc-js.php'; ?>
-    
-</body>
-
+        <?php require_once '../inc-js.php'; ?>
+        <script type="text/jsx">
+            /** @jsx React.DOM */
+            var villazzoRealityBannerImage = "<?php echo SITE_ID==1?"/img/about/banner-villazzo_realty.png": "/img/inner-bg1.png"?>";
+            var villazzoRealityContentImage = "/img/about/lisa.png";
+            ReactDOM.render(
+                <AboutUsBannerImage aboutUsBannerImage={villazzoRealityBannerImage}/>,
+                document.getElementById('header-section')
+            );  
+            ReactDOM.render(
+                <RealityDescritionContent villazzoRealityContentImage={villazzoRealityContentImage} />,
+                document.getElementById('about-section')
+            ); 
+        </script>
+    </body>
 </html>
