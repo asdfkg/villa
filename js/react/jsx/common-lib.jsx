@@ -39,6 +39,11 @@ var Heading6 = React.createClass({
         return <h6 dangerouslySetInnerHTML={{__html:this.props.value}} className={this.props.className}></h6>
     }
 });
+var Heading3 = React.createClass({
+    render: function () {
+        return <h3 dangerouslySetInnerHTML={{__html:this.props.value}} className={this.props.classes}></h3>
+    }
+});
 
 
 
@@ -108,7 +113,7 @@ var Paragraph = React.createClass({
         var unescapeHTML= function(data){
             return {__html:data}
         };
-        return <p dangerouslySetInnerHTML={unescapeHTML(this.props.value)} className={this.props.className}></p>
+        return <p dangerouslySetInnerHTML={unescapeHTML(this.props.value)} className={this.props.className} ></p>
     }
 });
 
