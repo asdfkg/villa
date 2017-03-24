@@ -34,11 +34,32 @@ var ReservationServiceSection  = React.createClass({
                         <MedCol desc="Destination" value={this.props.data.property_name.toUpperCase()} />
                         <MedCol desc="Check-In Date" value={this.props.checkIn} />
                         <MedCol desc="Check-Out Date" value={this.props.checkOut} />
-                        <MedCol desc="Length Of Stay" value={this.props.data.night_total} />
+                        <MedCol desc="Length Of Stay" value={this.props.data.night_total+" Nights"} />
                     </div>
                 </div>
             </div>
         );
+    }
+});
+var CheckoutStep2ServiceLevels = React.createClass({
+    reactServiceLevelToSubmit: function(level){
+        serviceLevelToSubmit(level)
+    },
+    render: function(){
+        return <div className="row">
+                    <div className="columns">
+                        <ul className="tabs" data-tab>
+                            <li className="tab-title active" style={{width:'100%'}}>
+                                <a href={"#service-level-"+this.props.data.level} onClick={this.reactServiceLevelToSubmit(this.props.data.level)}>
+                                {[...Array(this.props.data.level)].map((x, i) =>
+                                    <i className="fa fa-star hide-for-small" key={i + 1}></i>
+                                )}
+                                {this.props.data.name}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
     }
 });
 var CheckoutStep2 = React.createClass({
@@ -53,7 +74,7 @@ var CheckoutStep2 = React.createClass({
                 <div className="row">
                     <div className="columns">
                          <div className="services">
-                            {this.props.serviceInfo.services.map(function(service,i){
+                            {this.props.siteid==2 && this.props.serviceInfo.services.map(function(service,i){
                                return <BookingRow key={i} desc={service.desc_long.toUpperCase()} value={(property.dest_currency+''+numberWithCommas((service.rate).toFixed()))}/> 
                             })}
                             <BookingRow desc="LENGTH OF STAY" value={property.night_total+' Nights'}/> 

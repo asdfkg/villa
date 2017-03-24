@@ -1,5 +1,5 @@
 <?php
-require_once '/kunden/homepages/27/d309616710/htdocs/private/config.php';
+require_once '../private/config.php';
 
 if ($_SESSION['RESERVATION']->get('step') == 4) die(header('Location: /reservations'));
 
@@ -9,7 +9,7 @@ if ($_SESSION['RESERVATION']->get('step') == 1) $_SESSION['RESERVATION']->set('s
 
 if (!isset($_GET['property'])) header('Location: /reservations');
 
-$rs_property = $_SESSION['DB']->querySelect('SELECT propertyId FROM property LEFT JOIN destination ON destination.destId=property.destId WHERE UPPER(propertyName) = ? LIMIT 1', array(str_replace('-', ' ', strtoupper($_GET['property']))));
+$rs_property = $_SESSION['DB']->querySelect('SELECT propertyId FROM property LEFT JOIN destination ON destination.destId=property.destId WHERE UPPER(propertyName) = ?  AND property.site in ("3","'.SITE_ID.'") LIMIT 1', array(str_replace('-', ' ', strtoupper($_GET['property']))));
 $row_rs_property = $_SESSION['DB']->queryResult($rs_property);
 $totalRows_rs_property = $_SESSION['DB']->queryCount($rs_property);
 
@@ -141,10 +141,7 @@ $additionalServices = array(
 );
 
 // service levels
-$propertyServiceLevelsTab = '
-<div class="row">
-	<div class="columns">
-		<ul class="tabs" data-tab>';
+$propertyServiceLevelsTab = '';
 		
 $propertyServiceLevelsContent = '
 <div class="row">
@@ -152,15 +149,20 @@ $propertyServiceLevelsContent = '
 		<div class="tabs-content">';
 		
 $propertyServiceLevelsOptions = '';
-
+$services=[];
 foreach ($serviceLevelsArray as $serviceLevels)
 {
+        if(SITE_ID==1 && $serviceLevels['level'] == 5){
+            $propertyServiceLevelsTab = ['level'=>5,'name'=>$serviceLevels['name']];
+            $services[]="";
+        }elseif(SITE_ID==2 && $serviceLevels['level'] == 0) {
+            foreach($serviceLevels['services'] as $s){
+                $services[]=$s;
+            }
+        }
+        continue;
 	if ($serviceLevels['level'] == 5) {
-// 		$propertyServiceLevelsTab .= '<li class="tab-title'.($serviceLevels['level']==($level?$level:3)?' active':'').($serviceLevels['level']==0?' hide-for-small':'').'"><a href="#service-level-'.$serviceLevels['level'].'" onclick="serviceLevelToSubmit('.$serviceLevels['level'].');">';
-		$propertyServiceLevelsTab .= '<li class="tab-title'.($serviceLevels['level']==($level?$level:5)?' active':'').'" style="width:100%;"><a href="#service-level-'.$serviceLevels['level'].'" onclick="serviceLevelToSubmit('.$serviceLevels['level'].');">';
-	    for ($i = 0; $i < $serviceLevels['level']; $i ++) $propertyServiceLevelsTab .= '<i class="fa fa-star hide-for-small"></i>';
-		$propertyServiceLevelsTab .= strtoupper($serviceLevels['name']).'</a></li>';
-		        
+
 	    if (!empty($serviceLevels['services']))
 	    {
 	        $propertyServiceLevelsContent .= '
@@ -257,16 +259,12 @@ foreach ($serviceLevelsArray as $serviceLevels)
 		}
 	}
 }
-
+$serviceLevels['services']=$services;
 $propertyServiceLevelsContent .= '
 					</div>
 				</div>
 			</div>';
 
-$propertyServiceLevelsTab .= '
-		</ul>
-	</div>
-</div>';
 /*
 if (isset($_POST['action']) && $_POST['action'] == 'book')
 {
@@ -288,74 +286,28 @@ if (isset($_POST['action']) && $_POST['action'] == 'book')
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Services - VILLAZZO</title>
-    <link rel="stylesheet" href="/css/custom.css">
+    <title>Services - <?php echo SITE_ID==1?"VILLAZZO":"GREATVILLADEALS"; ?></title>
+    <link rel="stylesheet" href="/css/<?php echo SITE_ID;?>/custom.css">
     <script src="/js/vendor/modernizr.js"></script>
+    <?php include_once '../js/reactLibrary.php'; ?>
+    <script src="/js/react/jsx/checkout.jsx" type="text/jsx"></script>
 </head>
 
 <body onload="applyServices()">
 	<?php require_once '../inc-header.php'; ?>
+    
     <!-- Reservations Services Header Image Section Start -->
-    <section id="header-section">
-        <img src="/img/destination-header_<?php echo str_replace('-', '_', $propertyArray['dest_name']); ?>.png">
-    </section>
+    <section id="header-section" class="inner-bg"></section>
     <!-- Reservations Title and Steps Section Start -->
-    <section id="reservations-title-steps-section">
-        <div class="row" id="steps">
-            <div class="columns">
-                <div class="row">
-                    <div class="medium-5 columns">
-                        <h1>RESERVATIONS</h1>
-                    </div>
-                    <div class="medium-7 columns">
-                        <div class="row text-center">
-                            <div class="columns">
-                                <ul id="progressbar">
-                                	<li class="active" onclick="$('.backToStep1').val(1); submitServiceLevelForm();">Select Your<br>Villa</li>
-                                    <li class="active">Customize Your<br>Service Experience</li>
-                                    <li <?php echo ($_SESSION['RESERVATION']->get('step') > 2 ? 'class="active" onclick="submitServiceLevelForm();"' : ''); ?>>Contact And<br>Payment Information</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <section id="reservations-title-steps-section"></section>
     <!-- Reservations Title and Steps Section End -->
-        
+      
     <!-- Reservations Services Header Image Section Start -->
     <section id="reservations-services-section">
-        <div class="row" id="your-selection" data-equalizer>
-            <div class="large-2 columns left-side show-for-large-up text-center" data-equalizer-watch>
-                <h6>Your<br>Selection</h6>
-            </div>
-            <div class="medium-10 columns right-side text-center" data-equalizer-watch>
-                <div class="row">
-                    <div class="medium-3 columns">
-                        Destination
-                        <br><span><?php echo $propertyArray['property_name']; ?></span>
-                    </div>
-                    <div class="medium-3 columns">
-                        Check-In Date
-                        <br><span><?php echo date('F jS, Y', strtotime($propertyArray['check_in_dt'])); ?></span>
-                    </div>
-                    <div class="medium-3 columns">
-                        Check-Out Date
-                        <br><span><?php echo date('F jS, Y', strtotime($propertyArray['check_out_dt'])); ?></span>
-                    </div>
-                    <div class="medium-3 columns">
-                        Length Of Stay
-                        <br><span><?php echo $propertyArray['night_total']; ?> Nights</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="row" id="your-selection" data-equalizer></div>
         
         <!-- Show Rate Details Start -->
-        <div id="service-levels">
-			<?php echo $propertyServiceLevelsTab; ?>
-        </div>	
+        <div id="service-levels"></div>	
         <div id="rate-details">
             <?php echo $propertyServiceLevelsContent; ?>
         </div>
@@ -363,8 +315,42 @@ if (isset($_POST['action']) && $_POST['action'] == 'book')
     </section>
     <?php require_once '../inc-footer.php'; ?>
 	
-	<?php require_once '../inc-js.php'; ?>
-	<script>
+    <?php require_once '../inc-js.php'; ?>
+    
+    <script type="text/jsx">
+        /** @jsx React.DOM */
+        var serviceBannerImage = "<?php echo SITE_ID==1? "/img/destination-header_".str_replace('-', '_', $propertyArray['dest_name']).".png":"/img/inner-bg1.png";?>";
+        var propertyInfo = <?php echo json_encode($propertyArray); ?>;
+        var services = <?php echo json_encode($serviceLevels); ?>;
+        var selectedServiceLevel = 3;
+        var siteid = <?php echo SITE_ID;?>;
+        ReactDOM.render(
+            <CheckoutStep2 property={propertyInfo} siteid={siteid} serviceInfo={services} selectedServiceLevel={selectedServiceLevel} totalNights="<?php echo $_SESSION['RESERVATION']->get('nightTotal');?>" />,
+            document.getElementById('rate-details')
+        );
+        if(siteid==1){
+            ReactDOM.render(
+                    <CheckoutStep2ServiceLevels data={<?php echo json_encode($propertyServiceLevelsTab);?>} />,
+                    document.getElementById('service-levels')
+            );
+        }
+        ReactDOM.render(
+            <Image1 src={serviceBannerImage}/>,
+            document.getElementById('header-section')
+        );
+        ReactDOM.render(
+            <ServiceStep step="2" stepUrl1="" siteid="<?php echo SITE_ID;?>" stepUrl2=""/>,
+            document.getElementById('reservations-title-steps-section')
+        );
+        ReactDOM.render(
+            <ReservationServiceSection data={propertyInfo} checkOut="<?php echo date('F jS, Y', strtotime($propertyArray['check_out_dt'])); ?>" 
+                checkIn="<?php echo date('F jS, Y', strtotime($propertyArray['check_in_dt'])); ?>" step={2} />,
+            document.getElementById('your-selection')
+        );
+
+    </script>
+        
+    <script>
 	// disable equalization for mobile
 	$(window).on('load resize', function(e)	{
 		var equalize = true;
@@ -429,7 +415,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'book')
 			}
 		});
 	}
-	</script>
+    </script>
 
 </body>
 
