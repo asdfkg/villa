@@ -60,22 +60,22 @@ if (isset($_GET['logout'])) $_SESSION['USER']->logout('/');
 
 function getMeta($name)
 {
-	$rs_meta = $_SESSION['DB']->querySelect('SELECT PAGE_META_TITLE, PAGE_META_DESC, PAGE_META_KEYWORDS FROM PAGE_META WHERE PAGE_META_NAME = ? LIMIT 1', array($name));
-	$row_rs_meta = $_SESSION['DB']->queryResult($rs_meta);
-	$totalRows_rs_meta = $_SESSION['DB']->queryCount($rs_meta);
-	
-	echo '<title>'.$row_rs_meta['PAGE_META_TITLE'].'</title>
-	<meta name="Description" content="'.$row_rs_meta['PAGE_META_DESC'].'" />
-	<meta name="Keywords" content="'.$row_rs_meta['PAGE_META_KEYWORDS'].'" />';
+    $rs_meta = $_SESSION['DB']->querySelect('SELECT PAGE_META_TITLE, PAGE_META_DESC, PAGE_META_KEYWORDS FROM PAGE_META WHERE PAGE_META_NAME = ? LIMIT 1', array($name));
+    $row_rs_meta = $_SESSION['DB']->queryResult($rs_meta);
+    $totalRows_rs_meta = $_SESSION['DB']->queryCount($rs_meta);
+
+    echo '<title>'.$row_rs_meta['PAGE_META_TITLE'].'</title>
+    <meta name="Description" content="'.$row_rs_meta['PAGE_META_DESC'].'" />
+    <meta name="Keywords" content="'.$row_rs_meta['PAGE_META_KEYWORDS'].'" />';
 }
 
 function getContent($name)
 {
-	$rs_content = $_SESSION['DB']->querySelect('SELECT PAGE_TEXT_ID, PAGE_TEXT_NAME, PAGE_TEXT_VALUE FROM PAGE_TEXT WHERE PAGE_TEXT_NAME = ? AND PAGE_TEXT_DT = (SELECT MAX(PAGE_TEXT_DT) FROM PAGE_TEXT WHERE PAGE_TEXT_NAME = ? LIMIT 1)', array($name, $name));
-	$row_rs_content = $_SESSION['DB']->queryResult($rs_content);
-	$totalRows_rs_content = $_SESSION['DB']->queryCount($rs_content);
-	//if($_SESSION['USER']->getUserId()) echo "<a class=\"cmsContent\" href=\"/cms/content/modal-content.php?id=".$row_rs_content['PAGE_TEXT_ID']."\" style=\"color:#000; text-decoration:none;\" title=\"Click to edit\">".$row_rs_content['PAGE_TEXT_VALUE']."</a>";
-	//else 
-	echo $row_rs_content['PAGE_TEXT_VALUE'];
+    $rs_content = $_SESSION['DB']->querySelect('SELECT PAGE_TEXT_ID, PAGE_TEXT_NAME, PAGE_TEXT_VALUE FROM PAGE_TEXT WHERE PAGE_TEXT_NAME = ? AND PAGE_TEXT_DT = (SELECT MAX(PAGE_TEXT_DT) FROM PAGE_TEXT WHERE PAGE_TEXT_NAME = ? LIMIT 1)', array($name, $name));
+    $row_rs_content = $_SESSION['DB']->queryResult($rs_content);
+    $totalRows_rs_content = $_SESSION['DB']->queryCount($rs_content);
+    //if($_SESSION['USER']->getUserId()) echo "<a class=\"cmsContent\" href=\"/cms/content/modal-content.php?id=".$row_rs_content['PAGE_TEXT_ID']."\" style=\"color:#000; text-decoration:none;\" title=\"Click to edit\">".$row_rs_content['PAGE_TEXT_VALUE']."</a>";
+    //else 
+    echo $row_rs_content['PAGE_TEXT_VALUE'];
 }
 ?>

@@ -12,6 +12,10 @@ $rs_reservation_feedback = $_SESSION['DB']->querySelect('SELECT reservationFeedb
 $row_rs_reservation_feedback = $_SESSION['DB']->queryResult($rs_reservation_feedback);
 $totalRows_rs_reservation_feedback = $_SESSION['DB']->queryCount($rs_reservation_feedback);
 
+/* $query = $_SESSION['DB']->querySelect('SELECT USER_PASSWORD FROM user WHERE USER_FIRSTNAME = "Christian"');
+$password = $_SESSION['DB']->queryResult($query);
+echo "<pre>"; print_R($password); die;  */
+
 $testimonials = NULL;
 if ($totalRows_rs_reservation_feedback) {
     do {
