@@ -140,145 +140,21 @@ $additionalServices = array(
 	)
 );
 
-// service levels
-$propertyServiceLevelsTab = '';
-		
-$propertyServiceLevelsContent = '
-<div class="row">
-	<div class="columns">
-		<div class="tabs-content">';
-		
-$propertyServiceLevelsOptions = '';
 $services=[];
-foreach ($serviceLevelsArray as $serviceLevels)
-{
-        if(SITE_ID==1 && $serviceLevels['level'] == 5){
-            $propertyServiceLevelsTab = ['level'=>5,'name'=>$serviceLevels['name']];
-            $services[]="";
-        }elseif(SITE_ID==2 && $serviceLevels['level'] == 0) {
-            foreach($serviceLevels['services'] as $s){
-                $services[]=$s;
-            }
-        }
-        continue;
-	if ($serviceLevels['level'] == 5) {
-
-	    if (!empty($serviceLevels['services']))
-	    {
-	        $propertyServiceLevelsContent .= '
-	        <div class="content'.($serviceLevels['level']==($level?$level:5)?' active':'').'" id="service-level-'.$serviceLevels['level'].'">
-				<div class="services">';
-			
-/*
-	        foreach ($serviceLevels['services'] as $servicelevel)
-			{
-				$propertyServiceLevelsContent .= '
-							<div class="row service">
-			                    <div class="small-6 columns">
-			                        <p class="text-left">'.$servicelevel['desc_long'].'</p>
-			                    </div>
-			                    <div class="small-6 columns">
-			                        <p class="text-right">'.$propertyArray['dest_currency'].number_format($servicelevel['rate']).'</p>
-			                    </div>
-			                </div>';
-			}
-*/
-			
-			$propertyServiceLevelsContent .= '
-					<div class="row service">
-	                    <div class="small-10 columns">
-	                        <p class="text-left">'.$serviceLevels['services']['villa_only']['desc_long'].' + '.$serviceLevels['services']['management']['desc_long'].' + Villa Hotel Transformation</p>
-	                    </div>
-	                    <div class="small-2 columns">
-	                        <p class="text-right">'.$propertyArray['dest_currency'].'<span id="rateNightDisp1">'.number_format($serviceLevels['base_night']).'</span></p>
-	                    </div>
-	                </div>';
-			                
-/*
-			$propertyServiceLevelsContent .= '
-					<div class="row total">
-		                <div class="columns">
-		                    <p class="text-right">'.($serviceLevels['level']>0?'As '.$serviceLevels['level'].' Star VillaHotel<br>':'').'Nightly Rate: '.$propertyArray['dest_currency'].number_format($serviceLevels['night']).'</p>
-		                </div>
-		            </div>';
-*/
-			$propertyServiceLevelsContent .= '</div>';
-			
-			if ($serviceLevels['level'] > 0) $propertyServiceLevelsContent .= '
-			<div class="options">
-				<form id="serviceLevel'.$serviceLevels['level'].'Form" method="post" action="./checkout.php">
-					<input type="hidden" name="action" value="checkout">
-					<input type="hidden" name="backToStep1" class="backToStep1" value="">
-					<input type="hidden" name="propertyId" id="propertyId" value="'.$propertyArray['property_id'].'">
-					<input type="hidden" name="propertyName" value="'.$propertyArray['property_name'].'">
-					<input type="hidden" name="destName" value="'.$propertyArray['dest_name'].'">
-					<input type="hidden" name="checkInDt" id="checkInDt" value="'.$propertyArray['check_in_dt'].'">
-					<input type="hidden" name="checkOutDt" id="checkOutDt" value="'.$propertyArray['check_out_dt'].'">
-					<input type="hidden" name="nightTotal" value="'.$propertyArray['night_total'].'">
-					<input type="hidden" name="serviceLevel" value="'.$serviceLevels['level'].'">
-					<input type="hidden" name="destCurrency" value="'.$propertyArray['dest_currency'].'">
-					<input type="hidden" name="destTax" value="'.$propertyArray['dest_tax'].'">
-					<input type="hidden" name="rateNight" id="rateNight" value="'.$serviceLevels['night'].'">
-					<input type="hidden" name="managementPercentage" id="managementPercentage" value="'.$serviceLevels['services']['management']['percentage'].'">
-					<input type="hidden" name="rateNightBase" id="rateNightBase" value="'.($serviceLevels['night']/(1+$serviceLevels['services']['management']['percentage']/100)).'">
-					<input type="hidden" name="checkoutCleaning" id="checkoutCleaning" value="'.$serviceLevels['services']['checkout_cleaning']['rate'].'">
-					<!--div class="row text-center header">
-			            <div class="columns">
-			                <h5>Customize Your Experience</h5>
-			            </div>
-			        </div-->';
-			        
-			        foreach ($additionalServices as $additionalService) {
-						$propertyServiceLevelsContent .= '<div class="row option">
-					        <div class="columns">
-					            <div class="row collapse">
-					                <div class="medium-12 columns">
-					                    <div class="row">
-					                        <label>
-					                            <div class="small-3 medium-1 columns" style="margin-right:10px;"><input type="number" name="'.$additionalService['name'].'" id="'.$additionalService['name'].'" placeholder="'.$additionalService['placeholder'].'" value="'.$additionalService['value'].'" style="margin-top:-10px;" min="'.$additionalService['min'].'" max="'.$additionalService['max'].'" onchange="applyServices();"><input type="hidden" name="'.$additionalService['name'].'Desc" id="'.$additionalService['desc'].'Desc" value="'.$additionalService['desc'].'"><input type="hidden" name="'.$additionalService['name'].'Rate" id="'.$additionalService['name'].'Rate" value="'.$additionalService['rate'].'"></div>
-					                            <div class="small-6 medium-1 columns">'.$additionalService['frequency'].'</div>
-					                            <div class="small-12 medium-9 columns">'.$additionalService['desc'].'</div>
-					                        </label>
-					                    </div>
-					                </div>
-					            </div>
-					        </div>
-					    </div>';
-					}
-					
-					$propertyServiceLevelsContent .= '<div class="row total">
-			            <div class="columns">
-			                <p class="text-right">'.($serviceLevels['level']>0?'As '.$serviceLevels['level'].' Star VillaHotel<br>':'').'Nightly Rate: '.$propertyArray['dest_currency'].'<span id="rateNightDisp2">'.number_format($serviceLevels['night']).'</span>
-							<br><br><button class="tiny" id="checkoutBtn" onclick="submitServiceLevelForm();">CHECKOUT</button></p>
-			        	</div>
-			    	</div>
-			    </form>
-		    </div>';
-	    	
-	    	$propertyServiceLevelsContent .= '</div>';
-		}
-	}
+if(SITE_ID==1){
+    $serviceLevels = $propertyArray['service_levels']['five_star'];
+    $propertyServiceLevelsTab = ['level'=>5,'name'=>$serviceLevels['name']];
+    $services[]=array('desc_long'=>$serviceLevels['services']['villa_only']['desc_long'].' + '.$serviceLevels['services']['management']['desc_long'].' + Villa Hotel Transformation','rate'=>$serviceLevels['base_night']);
+    $serviceLevels['checkout_cleaning']=$serviceLevels['services']['checkout_cleaning']['rate'];
+    $serviceLevels['management']=$serviceLevels['services']['management']['percentage'];
+    $serviceLevels['services']=$services;
+}else{
+    $serviceLevels = $propertyArray['service_levels']['villa_only'];
+    foreach($serviceLevels['services'] as $s){
+        $services[]=$s;
+    }
+    $serviceLevels['services']=$services;
 }
-$serviceLevels['services']=$services;
-$propertyServiceLevelsContent .= '
-					</div>
-				</div>
-			</div>';
-
-/*
-if (isset($_POST['action']) && $_POST['action'] == 'book')
-{
-	$_SESSION['RESERVATION']->set('destName', $_POST['destName']);
-	$_SESSION['RESERVATION']->set('checkInDt', date('Y-m-d', strtotime($_POST['checkInDt'])));
-	$_SESSION['RESERVATION']->set('checkOutDt', date('Y-m-d', strtotime($_POST['checkOutDt'])));
-	$_SESSION['RESERVATION']->set('totalNights', $_POST['totalNights']);
-	$_SESSION['RESERVATION']->set('destCurrency', $_POST['destCurrency']);
-	$_SESSION['RESERVATION']->set('rateNight', $_POST['rateNight']);
-	$_SESSION['RESERVATION']->set('rateTotal', $_POST['rateTotal']);
-	
-	header('Location: services');
-}
-*/
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -293,7 +169,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'book')
     <script src="/js/react/jsx/checkout.jsx" type="text/jsx"></script>
 </head>
 
-<body onload="applyServices()">
+<body <?php echo SITE_ID==1?'onload="applyServices()"':'';?>>
 	<?php require_once '../inc-header.php'; ?>
     
     <!-- Reservations Services Header Image Section Start -->
@@ -308,9 +184,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'book')
         
         <!-- Show Rate Details Start -->
         <div id="service-levels"></div>	
-        <div id="rate-details">
-            <?php echo $propertyServiceLevelsContent; ?>
-        </div>
+        <div id="rate-details"></div>
         <!-- Show Rate Details End -->
     </section>
     <?php require_once '../inc-footer.php'; ?>
@@ -322,18 +196,19 @@ if (isset($_POST['action']) && $_POST['action'] == 'book')
         var serviceBannerImage = "<?php echo SITE_ID==1? "/img/destination-header_".str_replace('-', '_', $propertyArray['dest_name']).".png":"/img/inner-bg1.png";?>";
         var propertyInfo = <?php echo json_encode($propertyArray); ?>;
         var services = <?php echo json_encode($serviceLevels); ?>;
-        var selectedServiceLevel = 3;
+        var selectedServiceLevel = <?php echo SITE_ID==1?$serviceLevels['level']:3;?>;
         var siteid = <?php echo SITE_ID;?>;
         ReactDOM.render(
-            <CheckoutStep2 property={propertyInfo} siteid={siteid} serviceInfo={services} selectedServiceLevel={selectedServiceLevel} totalNights="<?php echo $_SESSION['RESERVATION']->get('nightTotal');?>" />,
+            <CheckoutStep2 property={propertyInfo} siteid={siteid} serviceInfo={services} additionalServicesInfo={<?php echo json_encode($additionalServices);?>} selectedServiceLevel={selectedServiceLevel} totalNights="<?php echo $_SESSION['RESERVATION']->get('nightTotal');?>" />,
             document.getElementById('rate-details')
         );
-        if(siteid==1){
+        <?php
+            if(SITE_ID==1): ?>
             ReactDOM.render(
                     <CheckoutStep2ServiceLevels data={<?php echo json_encode($propertyServiceLevelsTab);?>} />,
                     document.getElementById('service-levels')
             );
-        }
+        <?php endif; ?>
         ReactDOM.render(
             <Image1 src={serviceBannerImage}/>,
             document.getElementById('header-section')
@@ -366,8 +241,9 @@ if (isset($_POST['action']) && $_POST['action'] == 'book')
 	function submitServiceLevelForm() {
 		$('#serviceLevel' + selectedServiceLevel + 'Form').submit();
 	}
-	
-	function applyServices() {		
+	<?php 
+        if(SITE_ID==1):?>
+	function applyServices() {
 		var rateNight = 0;
 		var servicesTotal = 0;
 		
@@ -415,6 +291,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'book')
 			}
 		});
 	}
+        <?php endif;?>
     </script>
 
 </body>
