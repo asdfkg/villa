@@ -12,10 +12,10 @@ var BookingRow  = React.createClass({
   render:function(){
       return (
             <div className="row service">
-                <div className="small-6 columns">
+                <div className={"small-"+(this.props.siteid=="1"?'10':6)+" columns"}>
                    <p className="text-left" dangerouslySetInnerHTML={{__html:this.props.desc}}></p>
                 </div>
-                <div className="small-6 columns">
+                <div className={"small-"+(this.props.siteid=="1"?'2':6)+" columns"}>
                    <p className="text-right" dangerouslySetInnerHTML={{__html: this.props.value}}></p>
                 </div>
             </div>   
@@ -34,59 +34,145 @@ var ReservationServiceSection  = React.createClass({
                         <MedCol desc="Destination" value={this.props.data.property_name.toUpperCase()} />
                         <MedCol desc="Check-In Date" value={this.props.checkIn} />
                         <MedCol desc="Check-Out Date" value={this.props.checkOut} />
-                        <MedCol desc="Length Of Stay" value={this.props.data.night_total} />
+                        <MedCol desc="Length Of Stay" value={this.props.data.night_total+" Nights"} />
                     </div>
                 </div>
             </div>
         );
     }
 });
-var CheckoutStep2 = React.createClass({
+var CheckoutStep2ServiceLevels = React.createClass({
+    reactServiceLevelToSubmit: function(level){
+        serviceLevelToSubmit(level)
+    },
+    render: function(){
+        return <div className="row">
+                    <div className="columns">
+                        <ul className="tabs" data-tab>
+                            <li className="tab-title active" style={{width:'100%'}}>
+                                <a href={"#service-level-"+this.props.data.level} onClick={this.reactServiceLevelToSubmit(this.props.data.level)}>
+                                {[...Array(this.props.data.level)].map((x, i) =>
+                                    <i className="fa fa-star hide-for-small" key={i + 1}></i>
+                                )}
+                                {this.props.data.name}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+    }
+});
+
+var CheckoutStep2AdditionalServiceLevels = React.createClass({
+    componentDidMount: function(){
+        $('.checkoutAdditionalService').on('change',function(){applyServices()});
+    },
+    render: function(){
+        return <div> {this.props.data.map(function(srv,i){
+                return <div key={i} className="row option">
+                    <div className="columns">
+                        <div className="row collapse">
+                            <div className="medium-12 columns">
+                                <div className="row">
+                                    <label>
+                                        <div className="small-3 medium-1 columns" style={{marginRight:'10px'}}>
+                                            <input type="number" className="checkoutAdditionalService" name={srv.name} id={srv.name} placeholder={srv.placeholder} value={srv.value} 
+style={{marginTop:'-10px'}} min={srv.min} max={srv.max} onChange={this.reactApplyServices} />
+                                            <input type="hidden" name={srv.name+"Desc"} id={srv.desc+"Desc"} value={srv.desc} />
+                                            <input type="hidden" name={srv.name+"Rate"} id={srv.name+"Rate"} value={srv.rate} />
+                                        </div>
+                                        <div className="small-6 medium-1 columns">{srv.frequency}</div>
+                                        <div className="small-12 medium-9 columns">{srv.desc}</div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                })}</div>
+}});
+CheckoutStep2ServiceContent = React.createClass({
     reactSubmitServiceLevelForm: function(){
         submitServiceLevelForm();
     },
-    render: function(){
+    render:function(){
         var property = this.props.property;
+console.log(this.props.serviceInfo);
         var nightRate = this.props.serviceInfo.night;
-        var newNightRate = nightRate - (nightRate*10/100);
+        var siteId = this.props.siteid;
+        var newNightRate = siteId=="1"?(nightRate):(nightRate - (nightRate*10/100));
+        var rateNightBase = nightRate/(1+this.props.serviceInfo.management/100);
+        var thead = siteId=="1"?<span>As {this.props.serviceInfo.level} Star VillaHotel<br /></span>:"";
+        
+        return (
+            <div>
+                <div className="services">
+                    {this.props.serviceInfo.services.map(function(service,i){
+                       return <BookingRow key={i} siteid={siteId} desc={service.desc_long.toUpperCase()} value={(property.dest_currency+''+numberWithCommas((service.rate).toFixed()))}/> 
+                    })}
+                    {this.props.siteid=="2" &&
+                        <BookingRow desc="LENGTH OF STAY" value={property.night_total+' Nights'}/>  }
+                    {this.props.siteid=="2" &&
+                        <BookingRow desc={("10% off your rate for online booking").toUpperCase()} value={'-'+property.dest_currency+''+numberWithCommas((this.props.serviceInfo.night*10/100).toFixed())}/> 
+                    }
+                 </div>
+                 <div className="options">
+                    <form method="post" id={"serviceLevel"+this.props.selectedServiceLevel+"Form"}  action="./checkout" onsubmit="return false;">
+                       <input type="hidden" name="action" value="checkout"/>
+                        <input type="hidden" name="backToStep1" className="backToStep1" value="" />
+                        <input type="hidden" name="propertyId" id="propertyId" value={property.property_id} />
+                        <input type="hidden" name="propertyName" value={property.property_name} />
+                        <input type="hidden" name="destName" value={property.dest_name} />
+                        <input type="hidden" name="checkInDt" id="checkInDt" value={property.check_in_dt} />
+                        <input type="hidden" name="checkOutDt" id="checkOutDt" value={property.check_out_dt} />
+                        <input type="hidden" name="nightTotal" value={property.night_total} />
+                        <input type="hidden" name="serviceLevel" value={this.props.serviceInfo.level} />
+                        <input type="hidden" name="destCurrency" value={property.dest_currency} />
+                        <input type="hidden" name="destTax" value={property.dest_tax} />
+                        <input type="hidden" name="cleaning" value={property.cleaning} />
+                        <input type="hidden" name="additionalPerStay" value={property.additional_per_stay} />
+                        <input type="hidden" name="rateNight" id="rateNight" value={newNightRate} />
+                        <input type="hidden" name="managementPercentage" id="managementPercentage" value={this.props.serviceInfo.management} />
+                        <input type="hidden" name="rateNightBase" id="rateNightBase" value={rateNightBase} />
+                        <input type="hidden" name="checkoutCleaning" id="checkoutCleaning" value={this.props.serviceInfo.checkout_cleaning} />
+                        {this.props.siteid=="1" &&
+                            <CheckoutStep2AdditionalServiceLevels data={this.props.additionalServicesInfo}/>
+                        }
+                       <div className="row total">
+                       <br />
+                          <div className="columns">
+                                    {/* <p className="text-right" dangerouslySetInnerHTML={{__html: ('Nightly Rate: ' +property.dest_currency+''+numberWithCommas((newNightRate).toFixed()))}}></p>*/}
+                            <p className="text-right">
+                                {thead}
+                                <span dangerouslySetInnerHTML={{__html: ('Nightly Rate: ' +property.dest_currency)}}/>
+                                <span id="rateNightDisp2">{numberWithCommas((newNightRate).toFixed())}</span></p>
+                            <p className="text-right">
+                                <br />
+                                <button className="book-btn tiny radius" onClick={this.reactSubmitServiceLevelForm}>BOOK NOW</button>
+                            </p>
+                          </div>
+                       </div>
+                    </form>
+                 </div>
+            </div>
+         )
+    }
+});
+var CheckoutStep2 = React.createClass({
+    render: function(){
         return (
                 <div className="row">
                     <div className="columns">
-                         <div className="services">
-                            {this.props.serviceInfo.services.map(function(service,i){
-                               return <BookingRow key={i} desc={service.desc_long.toUpperCase()} value={(property.dest_currency+''+numberWithCommas((service.rate).toFixed()))}/> 
-                            })}
-                            <BookingRow desc="LENGTH OF STAY" value={property.night_total+' Nights'}/> 
-                            <BookingRow desc={("10% off your rate for online booking").toUpperCase()} value={'-'+property.dest_currency+''+numberWithCommas((this.props.serviceInfo.night*10/100).toFixed())}/> 
-                         </div>
-                         <div className="options">
-                            <form method="post" id={"serviceLevel"+this.props.selectedServiceLevel+"Form"}  action="./checkout" onsubmit="return false;">
-                               <input type="hidden" name="action" value="checkout"/>
-                                <input type="hidden" name="backToStep1" className="backToStep1" value="" />
-				<input type="hidden" name="propertyId" value={property.property_id} />
-				<input type="hidden" name="propertyName" value={property.property_name} />
-				<input type="hidden" name="destName" value={property.dest_name} />
-				<input type="hidden" name="checkInDt" value={property.check_in_dt} />
-				<input type="hidden" name="checkOutDt" value={property.check_out_dt} />
-				<input type="hidden" name="nightTotal" value={property.night_total} />
-				<input type="hidden" name="serviceLevel" value={this.props.serviceInfo.level} />
-				<input type="hidden" name="destCurrency" value={property.dest_currency} />
-				<input type="hidden" name="destTax" value={property.dest_tax} />
-				<input type="hidden" name="cleaning" value={property.cleaning} />
-				<input type="hidden" name="additionalPerStay" value={property.additional_per_stay} />
-				<input type="hidden" name="rateNight" value={newNightRate} />
-                               <div className="row total">
-                               <br />
-                                  <div className="columns">
-                                    <p className="text-right" dangerouslySetInnerHTML={{__html: ('Nightly Rate: ' +property.dest_currency+''+numberWithCommas((newNightRate).toFixed()))}}></p>
-                                    <p className="text-right">
-                                        <br />
-                                        <button className="book-btn tiny radius" onClick={this.reactSubmitServiceLevelForm}>BOOK NOW</button>
-                                    </p>
-                                  </div>
+                        {this.props.siteid=="1" && 
+                            <div className='tab-content'>
+                                <div className='content active' id='service-level-5'>
+                                    <CheckoutStep2ServiceContent additionalServicesInfo={this.props.additionalServicesInfo} property={this.props.property} siteid={this.props.siteid} serviceInfo={this.props.serviceInfo} selectedServiceLevel={this.props.selectedServiceLevel} totalNights={this.props.totalNights}/>
                                </div>
-                            </form>
-                         </div>      
+                           </div>
+                        }
+                        {this.props.siteid!="1" && 
+                            <CheckoutStep2ServiceContent property={this.props.property} siteid={this.props.siteid} serviceInfo={this.props.serviceInfo} selectedServiceLevel={this.props.selectedServiceLevel} totalNights={this.props.totalNights}/>
+                        }
                     </div>
                  </div>
         );

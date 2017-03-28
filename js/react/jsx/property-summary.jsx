@@ -92,7 +92,7 @@ var PropertySummary = React.createClass({
         var d1 = new Date(this.props.dateDetail.checkInDt);
         var d2 = new Date(this.props.dateDetail.checkOutDt);
         var totalNight = (d2-d1)/1000/60/60/24;
-        var bookBtn = (this.props.dateDetail.checkInDt && this.props.dateDetail.checkOutDt && this.props.dateDetail.availability =="1" && (this.props.dateDetail.minBookDays==null || totalNight>=this.props.dateDetail.minBookDays))?<a className='button small expand radius book-btn tiny' href={this.props.dateDetail.bookNowURL}>RESERVE</a>:<a data-reveal-id='propertyAvailabilityModal' className="button small expand radius book-btn tiny">CHECK AVAILABILITY</a>;
+        //var bookBtn = (this.props.dateDetail.checkInDt && this.props.dateDetail.checkOutDt && this.props.dateDetail.availability =="1" && (this.props.dateDetail.minBookDays==null || totalNight>=this.props.dateDetail.minBookDays))?<a className='button small expand radius book-btn tiny' href={this.props.dateDetail.bookNowURL}>RESERVE</a>:<a data-reveal-id='propertyAvailabilityModal' className="button small expand radius book-btn tiny">CHECK AVAILABILITY</a>;
         var bookBtn = <button data-reveal-id='propertyAvailabilityModal' className="button small expand radius book-btn tiny">CHECK AVAILABILITY</button>;
         if(this.props.dateDetail.bookable==0){
             bookBtn ='';
@@ -118,10 +118,12 @@ var PropertySummary = React.createClass({
                 <div className="row text-center visible-for-medium-up">
                     <div className="medium-9 medium-centered columns">
                         <div className="row text-center">
+                            {this.props.dateDetail.bookable!=0 && 
                             <div className="medium-4 columns">
                                 {bookBtn}
                             </div>
-                            <div className={"medium-4 columns"+(this.props.dateDetail.bookable==0?' medium-centered':'')}>
+                            }
+                            <div className={"medium-4 columns"}>
 	                        <button className="button small expand radius details-button" data-reveal-id="propertyInterestedModal">I'M INTERESTED</button>
                             </div>
                             <div className="medium-4 columns">
