@@ -8,10 +8,12 @@ date_default_timezone_set('America/New_York');
 if($_SERVER['SERVER_NAME'] == 'villazzo.local') {
     $site_id = 1;
     define('SITE_NAME','Villazzo'); 
+    define('SITE_TAX',0); 
 } else if($_SERVER['SERVER_NAME'] == 'gvd.local')
 {
     $site_id = 2;
     define('SITE_NAME','GreatVillaDeals'); 
+    define('SITE_TAX',1); 
 }
 define('SITE_ID',$site_id);
 // define constants
