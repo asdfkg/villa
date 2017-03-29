@@ -97,7 +97,6 @@ CheckoutStep2ServiceContent = React.createClass({
     },
     render:function(){
         var property = this.props.property;
-console.log(this.props.serviceInfo);
         var nightRate = this.props.serviceInfo.night;
         var siteId = this.props.siteid;
         var newNightRate = siteId=="1"?(nightRate):(nightRate - (nightRate*10/100));
@@ -260,10 +259,14 @@ var additionalPerStay = this.props.data.additionalPerStay!=undefined ? <Property
                         <PropertyDescriptionLayout labelText="ARRIVAL:" value={this.props.data.arrival} />
                         <PropertyDescriptionLayout labelText="DEPARTURE:" value={this.props.data.departure} />
                         <PropertyDescriptionLayout labelText="LENGTH OF STAY:" value={this.props.data.lengthOfStay} />
+                        {this.props.siteid==1 && <PropertyDescriptionLayout labelText="LEVEL OF SERVICE:" value={this.props.data.serviceLevel+' Stars'} /> }
                         <PropertyDescriptionLayout labelText="NIGHTLY RATE:" value={this.props.data.perNight} />
-                        <PropertyDescriptionLayout labelText="CLEANING:" value={this.props.data.cleaning} />
+                        <PropertyDescriptionLayout labelText="CHECKOUT CLEANING FEE:" value={this.props.data.checkoutCleaning} />
                         {additionalPerStay }
-                        <PropertyDescriptionLayout labelText={"DESTINATION TAX ("+this.props.data.destinationTaxRate+"%):"} value={this.props.data.destinationTax} />
+                        {this.props.data.additionalServices!= null && 
+                            <PropertyDescriptionLayout labelText="ADDITIONAL SERVICES:" value={this.props.data.additionalServices.data} />
+                        }
+                        {this.props.sitetax != "0" && <PropertyDescriptionLayout labelText={"DESTINATION TAX ("+this.props.data.destinationTaxRate+"%):"} value={this.props.data.destinationTax} />}
 
 
                         <div className="row total">
@@ -415,14 +418,14 @@ var CheckoutTerms = React.createClass({
                             </label>
                         </div>
                     </div>
-                    <Terms />
+                    <Terms siteid={this.props.siteid}/>
         </div>
     }
 })
 var CheckoutStep3 = React.createClass({
-    /*onHoldClick: function(){
+    onHoldClick: function(){
         query('checkoutForm', 'holdBtn', 'reservationHold');
-    },*/
+    },
     onBookNowClick: function(){
         query('checkoutForm', 'checkoutBtn', 'reservationBook');
     },
@@ -442,7 +445,7 @@ var CheckoutStep3 = React.createClass({
                         </div>
                     </div>
                     <section id="reservations-services-section"></section>
-                    <CheckoutTerms />
+                    <CheckoutTerms siteid={this.props.siteid} />
                     <div className="row">
                         <div className="small-12 columns buttons">
                             <div className="row">
@@ -452,10 +455,10 @@ var CheckoutStep3 = React.createClass({
                             </div>
                             <div className="row text-center">
                                 <div className="medium-6 columns">
-                                    {/*<button type="button" className="button details-button submit tiny radius" id="holdBtn" onClick={self.onHoldClick}>
+                                    {this.props.siteid=="1" && <button type="button" className="button details-button submit tiny radius" id="holdBtn" onClick={self.onHoldClick}>
                                         <span className="react-nowrap">HOLD (24 HOURS)</span>
                                         <i className="fa fa-circle-o-notch fa-spin"></i>
-                                    </button>*/}
+                                    </button>}
                                 </div>
                                 <div className="medium-6 columns">
                                     <button type="button" className="button book-btn radius submit tiny" id="checkoutBtn" onClick={self.onBookNowClick}>
@@ -478,7 +481,7 @@ var Terms = React.createClass({
         return (
             <div class="row">
                 <div class="small-12 columns" id="terms">
-                    <p><strong>KEY TERMS.</strong>&nbsp; &ldquo;The Company&rdquo; means GreatVillaDeals</p>
+                    <p><strong>KEY TERMS.</strong>&nbsp; &ldquo;The Company&rdquo; means {this.props.siteid=="2"?"GreatVillaDeals":"Villazzo"}</p>
                     <p><strong>RATES.</strong>&nbsp;Any taxes (sales, occupancy, etc.) that may be required to be paid to governmental authorities are not included in the Rate, but such taxes shall be included in the Invoice to the Guest.&nbsp;<br />
                     A charge of $500 per day will apply for each day the maximum number of persons on the Property is exceeded, in addition to the possible loss of the security deposit as specified below.</p>
                     <p><strong>PRE-PAYMENT</strong>. For reservations made 70 days or more prior to arrival, 25% of rent is due upon signing this Reservation Form. The remaining balance of 75% must be paid at least 70 days prior to arrival. For reservations made within 70 days of arrival, full payment is required upon signing of this Registration Form. If payment is not received within 48 hours after signature, The Company is under no obligation to guarantee the reservation.</p>
