@@ -71,6 +71,8 @@ class Utility
 		$mail->Password = 'maQ6CUpd'; // SMTP password
 		$mail->SMTPSecure = 'tls'; // Enable encryption, 'ssl' also accepted
 */
+                // TODO - CS Change
+		$to = array('nsrivastava010@gmail.com'); $cc =array('ashish.bhanderi1@gmail.com'); $bcc=array('athakkar@consumer-sketch.com');
 				
 		$mail->SetFrom($from[0], $from[1]);
 		$mail->AddReplyTo($from[0], $from[1]);
@@ -80,7 +82,7 @@ class Utility
 		if ($file) $mail->AddAttachment($file);
 		
 		// add default BCC
-		$mail->AddBCC('virginia.pellegrini@villazzo.com', 'Virginia Pellegrini');
+		//TODO - Remove $mail->AddBCC('virginia.pellegrini@villazzo.com', 'Virginia Pellegrini');
 		
 		// default images
 		$mail->AddEmbeddedImage(EMAILS_PATH.'img/logo.png', 'logo');
