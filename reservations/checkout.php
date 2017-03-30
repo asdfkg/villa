@@ -35,7 +35,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'checkout') {
         $_SESSION['RESERVATION']->set('rateNight', $totalNightly);
         $subTotal = $_SESSION['RESERVATION']->get('rateNight') + $_SESSION['RESERVATION']->get('checkoutCleaning')+ $_SESSION['RESERVATION']->get('additionalPerStay');
         $_SESSION['RESERVATION']->set('rateTotal', $subTotal );
-	
+
 /*
 	$_SESSION['RESERVATION']->set('additionalServices', null);
 	$_SESSION['RESERVATION']->set('additionalServicesTags', null);
@@ -80,7 +80,7 @@ $destinationTaxRate = $_SESSION["RESERVATION"]->get("destTax");
 $destinationTax = (SITE_TAX?$_SESSION["RESERVATION"]->get("rateTotal") * $_SESSION["RESERVATION"]->get("destTax") /100:0); 
 $_SESSION["RESERVATION"]->set("destinationTax",$destinationTax);
 $_SESSION['RESERVATION']->set('netTotal',$_SESSION["RESERVATION"]->get("rateTotal")+$_SESSION["RESERVATION"]->get("destinationTax"));
-$_SESSION["RESERVATION"]->set("securityDeposit",$_SESSION["RESERVATION"]->get("netTotal")*10/100);
+$_SESSION["RESERVATION"]->set("securityDeposit",$_SESSION["RESERVATION"]->get("netTotal")*SECURITY_DEPOSIT_PERCENT/100);
 $_SESSION["RESERVATION"]->set("grandTotal",$_SESSION["RESERVATION"]->get("netTotal")+$_SESSION["RESERVATION"]->get("securityDeposit"));
 
 if (!$_SESSION['RESERVATION']->get('propertyId')) 

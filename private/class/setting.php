@@ -5,7 +5,8 @@ class Setting
 	// get company name
 	public function getCompanyName()
 	{ 
-		return 'Villazzo';
+		//return 'Villazzo';
+		return SITE_NAME;
 	}
 	
 	// get company phone
@@ -17,7 +18,10 @@ class Setting
 	// get company email
 	public function getCompanyEmail()
 	{ 
+            if(SITE_ID==1)
 		return array('villas@villazzo.com', $this->getCompanyName());
+            else
+                return array('villas@greatvilladeals.com', $this->getCompanyName());
 	}
 	
 	// get company address

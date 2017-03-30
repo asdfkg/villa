@@ -71,8 +71,18 @@ switch ($_POST['action'])
 				$subject = 'Contact Request';
 				$message = '<p><span style="font-weight:bold;">Name</span><br>'.$_POST['firstName'].' '.$_POST['lastName'].'</p>';
 				$message .= '<p><span style="font-weight:bold;">Email</span><br>'.$_POST['email'].'</p>';
+				$message .= '<p><span style="font-weight:bold;">Phone</span><br>'.$_POST['phone'].'</p>';
 				$message .= '<p><span style="font-weight:bold;">Message</span><br>'.$_POST['message'].'</p>';
-				$message .= '<p><span style="font-weight:bold;">Send me your VillaHotel brochure: </span>'.(isset($_POST['brochure'])?'yes':'no').'</p>';
+                                
+                                if(!empty($_POST['address'])) $message .= '<p><span style="font-weight:bold;">Address</span><br>'.$_POST['address'].'</p>';
+                                if(!empty($_POST['city'])) $message .= '<p><span style="font-weight:bold;">City</span><br>'.$_POST['city'].'</p>';
+                                if(!empty($_POST['state'])) $message .= '<p><span style="font-weight:bold;">State</span><br>'.$_POST['state'].'</p>';
+                                if(!empty($_POST['zipCode'])) $message .= '<p><span style="font-weight:bold;">ZipCode</span><br>'.$_POST['zipCode'].'</p>';
+                                if(!empty($_POST['country'])) $message .= '<p><span style="font-weight:bold;">Country</span><br>'.$_POST['country'].'</p>';
+                                
+                                if(SITE_ID==1){
+                                    $message .= '<p><span style="font-weight:bold;">Send me your VillaHotel brochure: </span>'.(isset($_POST['brochure'])?'yes':'no').'</p>';
+                                }
 				$message .= '<p><span style="font-weight:bold;">Email me your monthly newsletter: </span>'.(isset($_POST['newsletter'])?'yes':'no').'</p>';
 				$body = file_get_contents(EMAILS_PATH.'main.html');
 				$body = str_replace('#MESSAGE#', $message, $body);
@@ -138,7 +148,15 @@ switch ($_POST['action'])
 	case 'propertyAvailability':
 // 		$redirectArray = explode('?', $_POST['redirect']);
 // 		$outputArray = array('result' => 1, 'redirect' => $redirectArray[0].'?check_in='.date('m/d/Y', strtotime($_POST['checkInDt'])).'&check_out='.date('m/d/Y', strtotime($_POST['checkOutDt'])));
+            $checkInDt = date('Y-m-d',strtotime($_POST['checkInDt']));
+            $checkOutDt = date('Y-m-d',strtotime($_POST['checkOutDt']));
+            $diff = (strtotime($_POST['checkOutDt'])-strtotime($_POST['checkInDt']))/60/60/24;
+            if(isset($_POST['minBookingDays']) && $_POST['minBookingDays']>0 && $diff<$_POST['minBookingDays']){
+                $outputArray = array('result' => 0, 'feedback'=>'Minimum stay '.$_POST['minBookingDays'].' nights requried.');
+            }elseif($_SESSION['RESERVATION']->checkPropertyAvailability($checkInDt,$checkOutDt, $_POST['propertyAvailabilityModalPropertyId']))
 		$outputArray = array('result' => 1, 'redirect' => $_POST['redirect'].'&check_in='.date('m/d/Y', strtotime($_POST['checkInDt'])).'&check_out='.date('m/d/Y', strtotime($_POST['checkOutDt'])));
+            else
+                $outputArray = array('result' => 0, 'feedback'=>'This property is already booked for selected dates.');
 	break;
 	
 	// getPropertyLocations
@@ -194,9 +212,8 @@ switch ($_POST['action'])
 	break;
 	
 	case 'reservationHold':
-		$destCurrencyRate = $_SESSION['RESERVATION']->getConversionRate();
-	
-		if ($_SESSION['RESERVATION']->get('destCurrency') == '€')
+                $destCurrencyRate = $_SESSION['RESERVATION']->getConversionRate();
+		if (  $_SESSION['RESERVATION']->get('destCurrency') == '€' || $_SESSION['RESERVATION']->get('destCurrency') =='&euro;')
 		{
 			$destCurrency = '&euro;';
 			$tax = $_SESSION['RESERVATION']->get('destTax');
@@ -211,8 +228,8 @@ switch ($_POST['action'])
 		
 		if ($_SESSION['RESERVATION']->get('nightTotal') > 45) $prePayment = ($total / 2) / .97;
 		else $prePayment = $total / .97;
-						
-		$reservationId = $_SESSION['DB']->queryInsert('INSERT INTO reservationProperty (propertyId, user_id, reservationLevel, reservationStartDt, reservationEndDt, reservationAdditionalServices, reservationTitle, reservationFirstname, reservationLastname, reservationCompany, reservationEmail, reservationPhone, reservationRateCurrency, reservationRateValue, reservationRateDiscount, reservationRateTax, reservationRatePrePayment, reservationRateTotal, reservationStatusId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+
+		$reservationId = $_SESSION['DB']->queryInsert('INSERT INTO reservationProperty (propertyId, user_id, reservationLevel, reservationStartDt, reservationEndDt, reservationAdditionalServices, reservationTitle, reservationFirstname, reservationLastname, reservationCompany, reservationEmail, reservationPhone, reservationRateCurrency, reservationRateValue, reservationRateDiscount, reservationRateTax, reservationRatePrePayment, reservationRateTotal, reservationSecurityDeposit, reservationStatusId,site) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
 		array
 		(
 			$_SESSION['RESERVATION']->get('propertyId'),
@@ -229,25 +246,27 @@ switch ($_POST['action'])
 			$_SESSION['UTILITY']->formatPhone($_POST['phone']),
 			$destCurrency,
 			$_SESSION['RESERVATION']->get('rateTotal'),
-			$_SESSION['RESERVATION']->get('rateDiscount'),
+			($_SESSION['RESERVATION']->get('rateDiscount')==null?0:$_SESSION['RESERVATION']->get('rateDiscount')),
 			$tax,
 			$prePayment,
 			$total,
-			5
+                        $_SESSION["RESERVATION"]->get("securityDeposit"),
+			5,
+                        SITE_ID
 		));
 		
-		if ($reservationId)
+                if ($reservationId)
 		{
 			$_SESSION['RESERVATION']->set('reservationId', $reservationId);
 			
 			// email confirmation
 			$from = $_SESSION['SETTING']->getCompanyEmail();
 			$to = array(array($_POST['email'], $_POST['firstName'].' '.$_POST['lastName']));
-			$subject = 'Villazzo Reservation Confirmation '.$_SESSION['RESERVATION']->formatOrderNbr($reservationId);
+			$subject = SITE_NAME.' Reservation Confirmation '.$_SESSION['RESERVATION']->formatOrderNbr($reservationId);
 			$message = $_SESSION['RESERVATION']->createReceipt($reservationId);
 			$body = file_get_contents(EMAILS_PATH.'main.html');
 			$body = str_replace('#MESSAGE#', $message, $body);
-			
+
 			$file = $_SESSION['RESERVATION']->createPdf($reservationId);
 			$_SESSION['UTILITY']->sendEmail($from, $to, $subject, $body, ($file?$file:''));
 			
@@ -265,8 +284,7 @@ switch ($_POST['action'])
 		$authorizationCode = NULL;
 		
 		$destCurrencyRate = $_SESSION['RESERVATION']->getConversionRate();
-	
-		if ($_SESSION['RESERVATION']->get('destCurrency') == '€')
+                if ($_SESSION['RESERVATION']->get('destCurrency') == '€' || $_SESSION['RESERVATION']->get('destCurrency') =='&euro;')
 		{
 			$destCurrency = '&euro;';
 			$tax = $_SESSION['RESERVATION']->get('destTax');
@@ -331,7 +349,7 @@ switch ($_POST['action'])
 
 		if ($paymentStatus)
 		{
-			$reservationId = $_SESSION['DB']->queryInsert('INSERT INTO reservationProperty (propertyId, user_id, reservationLevel, reservationStartDt, reservationEndDt, reservationAdditionalServices, reservationTitle, reservationFirstname, reservationLastname, reservationCompany, reservationEmail, reservationEmailConfirmation, reservationPhone, reservationStreet1, reservationStreet2, reservationCity, reservationState, reservationPostcode, reservationCountry, reservationCreditCardType, reservationCreditCardName, reservationCreditCardNumber, reservationCreditCardExpMonth, reservationCreditCardExpYear, reservationCreditCardCVV, reservationRateCurrency, reservationRateValue, reservationRateDiscount, reservationRateCounterOffer, reservationRateTax, reservationRatePrePayment, reservationRateTotal, reservationPaymentAuthCode, reservationStatusId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, AES_ENCRYPT(?, \''.$_SESSION['DB']->getEncryptKey().'\'), AES_ENCRYPT(?, \''.$_SESSION['DB']->getEncryptKey().'\'), AES_ENCRYPT(?, \''.$_SESSION['DB']->getEncryptKey().'\'), AES_ENCRYPT(?, \''.$_SESSION['DB']->getEncryptKey().'\'), AES_ENCRYPT(?, \''.$_SESSION['DB']->getEncryptKey().'\'), AES_ENCRYPT(?, \''.$_SESSION['DB']->getEncryptKey().'\'), ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+			$reservationId = $_SESSION['DB']->queryInsert('INSERT INTO reservationProperty (propertyId, user_id, reservationLevel, reservationStartDt, reservationEndDt, reservationAdditionalServices, reservationTitle, reservationFirstname, reservationLastname, reservationCompany, reservationEmail, reservationEmailConfirmation, reservationPhone, reservationStreet1, reservationStreet2, reservationCity, reservationState, reservationPostcode, reservationCountry, reservationCreditCardType, reservationCreditCardName, reservationCreditCardNumber, reservationCreditCardExpMonth, reservationCreditCardExpYear, reservationCreditCardCVV, reservationRateCurrency, reservationRateValue, reservationRateDiscount, reservationRateCounterOffer, reservationRateTax, reservationRatePrePayment, reservationRateTotal, reservationSecurityDeposit, reservationPaymentAuthCode, reservationStatusId, site) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, AES_ENCRYPT(?, \''.$_SESSION['DB']->getEncryptKey().'\'), AES_ENCRYPT(?, \''.$_SESSION['DB']->getEncryptKey().'\'), AES_ENCRYPT(?, \''.$_SESSION['DB']->getEncryptKey().'\'), AES_ENCRYPT(?, \''.$_SESSION['DB']->getEncryptKey().'\'), AES_ENCRYPT(?, \''.$_SESSION['DB']->getEncryptKey().'\'), AES_ENCRYPT(?, \''.$_SESSION['DB']->getEncryptKey().'\'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
 			array
 			(
 				$_SESSION['RESERVATION']->get('propertyId'),
@@ -361,13 +379,15 @@ switch ($_POST['action'])
 				$_POST['ccCVV'],
 				$destCurrency,
 				$_SESSION['RESERVATION']->get('rateTotal'),
-				$_SESSION['RESERVATION']->get('rateDiscount'),
+                                ($_SESSION['RESERVATION']->get('rateDiscount')==null?0:$_SESSION['RESERVATION']->get('rateDiscount')),
 				$_SESSION['RESERVATION']->get('rateCounterOffer'),
 				$tax,
 				$prePayment,
 				$total,
+                                $_SESSION['RESERVATION']->get('securityDeposit'),
 				$authorizationCode,
-				($_SESSION['USER']->getUserGroupId()==3?3:1) // if owner booking
+				($_SESSION['USER']->getUserGroupId()==3?3:1), // if owner booking
+                                SITE_ID
 			));
 			
 			if ($reservationId)
@@ -381,7 +401,7 @@ switch ($_POST['action'])
 				{
 					$from = $_SESSION['SETTING']->getCompanyEmail();
 					$to = array(array($_POST['email'], $_POST['firstName'].' '.$_POST['lastName']));
-					$subject = 'Villazzo Reservation Confirmation '.$_SESSION['RESERVATION']->formatOrderNbr($reservationId);
+					$subject = SITE_NAME.' Reservation Confirmation '.$_SESSION['RESERVATION']->formatOrderNbr($reservationId);
 					$message = $_SESSION['RESERVATION']->createReceipt($reservationId);
 					$body = file_get_contents(EMAILS_PATH.'main.html');
 					$body = str_replace('#MESSAGE#', $message, $body);

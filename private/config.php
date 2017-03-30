@@ -8,18 +8,23 @@ date_default_timezone_set('America/New_York');
 if($_SERVER['SERVER_NAME'] == 'villazzo.local') {
     $site_id = 1;
     define('SITE_NAME','Villazzo'); 
-    define('SITE_TAX',0); 
+    define('SITE_TAX',1); 
+    define('SECURITY_DEPOSIT_PERCENT',0); 
+    define('HTTP_PATH', './');
 } else if($_SERVER['SERVER_NAME'] == 'gvd.local')
 {
     $site_id = 2;
     define('SITE_NAME','GreatVillaDeals'); 
     define('SITE_TAX',1); 
+    define('SECURITY_DEPOSIT_PERCENT',10); 
+    define('HTTP_PATH', './');
+}else{
+    define('HTTP_PATH', '/kunden/homepages/27/d309616710/htdocs');
 }
 define('SITE_ID',$site_id);
 // define constants
-//define('HTTP_PATH', '/kunden/homepages/27/d309616710/htdocs');
-define('HTTP_PATH', '/villazzo_new/');
-define('EMAILS_PATH', HTTP_PATH.'/emails/');
+define('EMAILS_PATH', HTTP_PATH.'/emails/'.SITE_ID.'/');
+define('PDF_PATH', HTTP_PATH.'pdf/'.SITE_ID);
 
 // class include
 require_once 'class/database.php';
