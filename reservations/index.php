@@ -29,6 +29,8 @@ if(!isset($_GET['dest'])){
         $dest = 'saint-tropez';
     }
 }
+$_GET['check_in'] = (isset($_GET['check_in']) && !empty($_GET['check_in'])?$_GET['check_in']:date('m/d/Y'));
+$_GET['check_out'] = (isset($_GET['check_out']) && !empty($_GET['check_out'])?$_GET['check_out']:date('m/d/Y', strtotime('+3 days')));
 //if (!isset($_GET['dest'])) header('Location: ?dest='.($_SESSION['RESERVATION']->get('destName')?$_SESSION['RESERVATION']->get('destName'):'all').'&check_in='.($_SESSION['RESERVATION']->get('checkInDt')?date('m/d/Y', strtotime($_SESSION['RESERVATION']->get('checkInDt'))):date('m/d/Y')).'&check_out='.($_SESSION['RESERVATION']->get('checkOutDt')?date('m/d/Y', strtotime($_SESSION['RESERVATION']->get('checkOutDt'))):date('m/d/Y', strtotime('+3 days'))));
 
 if (!isset($_GET['dest'])) die(header('Location: ?dest='.$dest.'&property='.(isset($_GET['property'])?$_GET['property']:'').'&check_in='.(isset($_GET['check_in'])?$_GET['check_in']:date('m/d/Y')).'&check_out='.(isset($_GET['check_out'])?$_GET['check_out']:date('m/d/Y', strtotime('+3 days')))));

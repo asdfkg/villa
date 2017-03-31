@@ -14,7 +14,11 @@ $totalRows_rs_destination = $_SESSION['DB']->queryCount($rs_destination);
 
 //if (!$totalRows_rs_destination) header('Location: /luxury-rental-property-vacation-destinations');
 $_GET['keyword'] = empty($_GET['keyword'])?'':$_GET['keyword'];
-$propertyArray = $_SESSION['RESERVATION']->getProperty($destination=='all'?'':$destination, '', '', 0, 0, 0, 0, 0, $_GET['keyword'], '', 1);
+$_GET['check_in'] = (isset($_GET['check_in']) && !empty($_GET['check_in'])?$_GET['check_in']:date('m/d/Y'));
+$_GET['check_out'] = (isset($_GET['check_out']) && !empty($_GET['check_out'])?$_GET['check_out']:date('m/d/Y', strtotime('+3 days')));
+$checkInDt = $_GET['check_in'];
+$checkOutDt = $_GET['check_out'];
+$propertyArray = $_SESSION['RESERVATION']->getProperty($destination=='all'?'':$destination, $checkInDt, $checkOutDt, 0, 0, 0, 0, 0, $_GET['keyword'], '', 1);
 $villaCtr = 0;
 $villaCtr = count($propertyArray);
 //$villas = NULL;

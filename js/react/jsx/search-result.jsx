@@ -78,20 +78,26 @@ var SearchResult = React.createClass({
                     <div className="row text-center">
                         {_data.map(function (object,i) {
                             {var currency = <span dangerouslySetInnerHTML={unescapeHTML(object.dest_currency)}></span> }
-                            if (object.service_levels.villa_only.night && object.service_levels.villa_only.night>0) {
+                            if(siteId =="1"){
                                 var propertyRate = (
-                                    <div>{currency} {numberWithCommas((object.service_levels.villa_only.night).toFixed())} <br /><span className="text-grey">per night</span></div>
-                                    )
-                            }else if (object.service_levels.three_star.night && object.service_levels.three_star.night>0) {
-                                    var propertyRate = (
-                                    <div>{currency} {numberWithCommas((object.service_levels.three_star.night).toFixed())} <br /><span className="text-grey">per night</span></div>
-                                    )
-                            }else if(object.service_levels.three_star.min > 0 && object.service_levels.three_star.max>0){
-                                    var propertyRate = (
-                                    <div>{currency} {numberWithCommas((object.service_levels.three_star.min).toFixed())} - {currency} {numberWithCommas((object.service_levels.three_star.max).toFixed())} <br /><span className="text-grey">per night</span></div>
-                                    )
+                                        <div>{currency} {numberWithCommas((object.service_levels.five_star.night).toFixed())} <br /><span className="text-grey">per night</span></div>
+                                )
                             }else{
-                                var propertyRate = '';
+                                if (object.service_levels.villa_only.night && object.service_levels.villa_only.night>0) {
+                                    var propertyRate = (
+                                        <div>{currency} {numberWithCommas((object.service_levels.villa_only.night).toFixed())} <br /><span className="text-grey">per night</span></div>
+                                        )
+                                }else if (object.service_levels.three_star.night && object.service_levels.three_star.night>0) {
+                                        var propertyRate = (
+                                        <div>{currency} {numberWithCommas((object.service_levels.three_star.night).toFixed())} <br /><span className="text-grey">per night</span></div>
+                                        )
+                                }else if(object.service_levels.three_star.min > 0 && object.service_levels.three_star.max>0){
+                                        var propertyRate = (
+                                        <div>{currency} {numberWithCommas((object.service_levels.three_star.min).toFixed())} - {currency} {numberWithCommas((object.service_levels.three_star.max).toFixed())} <br /><span className="text-grey">per night</span></div>
+                                        )
+                                }else{
+                                    var propertyRate = '';
+                                }
                             }
                             var BookNowText = siteId=="1"?"Book Now":"Book now and Save 10%";
                             if (object.booked_till_dt){
