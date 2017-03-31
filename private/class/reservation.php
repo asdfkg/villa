@@ -174,7 +174,6 @@ class Reservation
 				$propertyLocLat = $row_rs_query['propertyMapLat'];
 				$propertyLocLong = $row_rs_query['propertyMapLong'];
 				$propertyLocation = $row_rs_query['propertyLocationName'];
-				$destTax = (SITE_ID==1?$row_rs_query['destTaxVillaHotel']:$row_rs_query['destTaxVVilla']);
                                 $bookable = $row_rs_query['bookable'];
 				$minBookDays = $row_rs_query['minBookDays'];
 				/*
@@ -182,6 +181,7 @@ class Reservation
                                  * We have updated field for calculating taxes
                                  * $destTax = $row_rs_query['destTaxVillaHotel'];
                                  */
+                                $destTax = (SITE_ID==1?$row_rs_query['destTaxVillaHotel']:$row_rs_query['destTaxVVilla']);
 				$propertyAlreadyBookedDt = $row_rs_query['reservationEndDt'];
                                 $cleaning = $row_rs_query['cleaning'];
                                 $additionalPerStay = $row_rs_query['additional_perstay']; 
@@ -679,10 +679,10 @@ class Reservation
 		
 		$commissionVillaHotel = $_SESSION['USER']->getCommissionVillaHotel();
 		if ($commissionVillaHotel > 10) $ownerCom = ($ownerCom * 100 + ($commissionVillaHotel - 10))/100;
-		
-		if ($totalNights >= 7 && $totalNights < 30) { $ownerRent = $ownerRent / 7; $ownerReserve = $ownerReserve / 7; }
-		else if ($totalNights >= 30) { $ownerRent = $ownerRent / 30; $ownerReserve = $ownerReserve / 30; }
-		
+		if(SITE_ID==1){
+                    if ($totalNights >= 7 && $totalNights < 30) { $ownerRent = $ownerRent / 7; $ownerReserve = $ownerReserve / 7; }
+                    else if ($totalNights >= 30) { $ownerRent = $ownerRent / 30; $ownerReserve = $ownerReserve / 30; }
+                }
 		// villa only
                 $precision = SITE_ID==2?10:100;
 		$villaOnlyRate = $this->formatRate((($ownerRent + $ownerReserve) / $multiplierArray[$multiplierField]['5_star'] / (1 - $ownerCom)) / $totalNights,$precision);
@@ -785,9 +785,9 @@ class Reservation
 		
 		return array
 		(
-			'rate' => $this->formatRate($totalRate / $totalNights),
-			'rate_base' => $this->formatRate($brim / $totalNights),
-			'management' => $this->formatRate($managementRate),
+			'rate' => SITE_ID==2?$totalRate:$this->formatRate($totalRate / $totalNights,$precision),
+			'rate_base' => $this->formatRate($brim / $totalNights,$precision),
+			'management' => $this->formatRate($managementRate,$precision),
 			
 			'villa_preparation' => $villaPreparationTotal,
 			'checkout_cleaning' => $checkoutCleaningTotal,
