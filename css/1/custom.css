@@ -2106,3 +2106,34 @@ p.flip {
 .so-content3{
     margin-top:10px;
 }
+
+
+.overview-para{
+	text-transform:uppercase; 
+	font-size:18px;
+}
+.overview-table{
+	border:1px solid #dac172; 
+	margin-bottom:50px;
+}
+.overview-white-space{
+	white-space: nowrap;
+}
+.overview-status-td{
+	min-width: 180px;
+}
+.overview-blank-td{
+	background-color:#dac172; height:10px; padding:0px;"
+}
+.user-info-table{
+	border:1px solid #d7c5a4;
+}
+.display-false{
+	display:none;
+}
+.overview-margin-img-right{
+	margin-right:5px;
+}
+.overview-success{
+	color:green;
+}

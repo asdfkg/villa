@@ -1,5 +1,5 @@
 <?php
-require_once '/kunden/homepages/27/d309616710/htdocs/private/config.php';
+require_once 'private/config.php';
 
 if ($_SESSION['USER']->getUserId()) header('Location: /reservations/');
 ?>
@@ -10,7 +10,7 @@ if ($_SESSION['USER']->getUserId()) header('Location: /reservations/');
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Login - VILLAZZO</title>
-    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="/css/1/custom.css">
     <script src="/js/vendor/modernizr.js"></script>
 </head>
 

@@ -1,11 +1,12 @@
 <?php
-require_once '/kunden/homepages/27/d309616710/htdocs/private/config.php';
+require_once '../private/config.php';
 
 // restrict user access
 $_SESSION['USER']->restrict('1,2,3,4');
 
 if (isset($_POST['action']) && $_POST['action'] == 'update' && $_POST['firstName'] != '' && $_POST['lastName'] != '' && $_POST['userEmail'] != '' && $_POST['userPassword'] != '')
 {
+    echo "HERE"; die; 
 	if (strpos($_POST['userPassword'], '*') === false)
 	{
 		$_SESSION['DB']->queryUpdate('UPDATE USER SET USER_PASSWORD = AES_ENCRYPT(?, \''.$_SESSION['DB']->getEncryptKey().'\') WHERE USER_ID = ? LIMIT 1', array($_POST['userPassword'], $_POST['userId']));
@@ -45,86 +46,52 @@ $totalRows_rs_property = $_SESSION['DB']->queryCount($rs_property);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Reservations - VILLAZZO</title>
-    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="/css/<?php echo SITE_ID; ?>/custom.css">
     <script src="/js/vendor/modernizr.js"></script>
+    <?php include_once '../js/reactLibrary.php'; ?>
+    <script src="/js/react/jsx/<?php echo SITE_ID; ?>/user-profile.jsx" type="text/jsx"></script>    
 </head>
 
 <body>
-	<?php require_once '../inc-header.php'; ?>
-
-        <section id="header-section">
-            <img src="/img/destination-header_all.png">
-        </section>
-
-
-        <section id="reservations-title-steps-section">
-            <div class="row">
-                <div class="columns">
-                    <h1>USER EDIT</h1>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="row">
-                <div class="columns">
-	                
-	                
-			      <form action="" method="post" name="userEditForm" id="userEditForm">
-			        <input name="userId" id="userId" type="hidden" value="<?php echo $row_rs_user['USER_ID']; ?>" />
-			        <input type="hidden" name="action" value="update" />
-			        <table border="0" cellspacing="0" cellpadding="2">
-			          <?php if($row_rs_user['USERGROUP_ID'] == 3) { ?>
-			          <tr>
-			            <td valign="top">Property</td>
-			            <td valign="top"><?php do { echo $row_rs_property['propertyName']." | "; } while ($row_rs_property = $_SESSION['DB']->queryResult($rs_property)); ?></td>
-			          </tr>
-			          <?php } ?>
-			          <tr>
-			            <td valign="top">First Name</td>
-			            <td valign="top"><input name="firstName" id="firstName" type="text" value="<?php echo $row_rs_user['USER_FIRSTNAME']; ?>" class="textField" /></td>
-			          </tr>
-			          <tr>
-			            <td valign="top">Last Name</td>
-			            <td valign="top"><input name="lastName" id="lastName" type="text" value="<?php echo $row_rs_user['USER_LASTNAME']; ?>" class="textField" /></td>
-			          </tr>
-			          <tr>
-			            <td valign="top">Company</td>
-			            <td valign="top"><input name="userCompany" id="userCompany" type="text" value="<?php echo $row_rs_user['USER_COMPANY']; ?>" class="textField" /></td>
-			          </tr>
-			          <tr>
-			            <td valign="top">Email</td>
-			            <td valign="top"><input name="userEmail" id="userEmail" type="text" value="<?php echo $row_rs_user['USER_EMAIL']; ?>" class="textField" /></td>
-			          </tr>
-			          <tr>
-			            <td valign="top">Password</td>
-			            <td valign="top"><input name="userPassword" id="userPassword" value="<?php echo $_SESSION['UTILITY']->formatPassword($row_rs_user['unencrypted']); ?>" class="textField" /></td>
-			          </tr>
-			          <tr>
-			            <td valign="top">Commission Villa (%)</td>
-			            <td valign="top"><input name="userCommissionVillaHotel" id="userCommissionVillaHotel" type="text" value="<?php echo $row_rs_user['USER_COMMISSION_VH']; ?>" class="textField" disabled="disabled" /></td>
-			          </tr>
-			          <tr>
-			            <td valign="top">Commission Service (%)</td>
-			            <td valign="top"><input name="userCommissionBasicLinen" id="userCommissionBasicLinen" type="text" value="<?php echo $row_rs_user['USER_COMMISSION_BL']; ?>" class="textField" disabled="disabled" /></td>
-			          </tr>
-			          <tr>
-			            <td valign="top">&nbsp;</td>
-			            <td valign="top"><input type="submit" class="button" name="userEditBtn" id="userEditBtn" value="Save" /></td>
-			          </tr>
-			        </table>
-			      </form>
-
-
-
-
-                </div>
-            </div>
-        </section>
-
+    <?php require_once '../inc-header.php'; ?>
+    <section id="header-section"></section>
+    <section id="reservations-title-steps-section"></section>
+    <?php /* 
+     * First Row of below form 
+     * if($row_rs_user['USERGROUP_ID'] == 3) { ?>
+    <tr>
+        <td valign="top">Property</td>
+        <td valign="top"><?php do { echo $row_rs_property['propertyName']." | "; } while ($row_rs_property = $_SESSION['DB']->queryResult($rs_property)); ?></td>
+    </tr>
+    <?php } */?> 
+    
+    <section id="user-profile-form"></section>
+    <?php 
+        $profileData = [];
+        $profileData[] = array('firstName'=>$row_rs_user['USER_FIRSTNAME'], 'lastName'=>$row_rs_user['USER_LASTNAME'], 
+            'userCompany'=>$row_rs_user['USER_COMPANY'],'userEmail'=>$row_rs_user['USER_EMAIL'], 'userPassword' => $_SESSION['UTILITY']->formatPassword($row_rs_user['unencrypted']), 
+            'userCommissionVillaHotel' => $row_rs_user['USER_COMMISSION_VH'] , 'userCommissionBasicLinen' => $row_rs_user['USER_COMMISSION_BL'], 
+            'userId' => $row_rs_user['USER_ID']
+        );
+    ?>
     <?php require_once '../inc-footer.php'; ?>
-	
-	<?php require_once '../inc-js.php'; ?>
+    <?php require_once '../inc-js.php'; ?>   
+    <script type="text/jsx">
+        /** @jsx React.DOM */
+        var profileBannerImage = "<?php echo SITE_ID==1?"/img/destination-header_all.png": "/img/inner-bg1.png"?>";
+        var profileData = <?php echo json_encode($profileData); ?>;
+        ReactDOM.render(
+            <ProfileBannerImage profileBannerImage={profileBannerImage} />,
+            document.getElementById('header-section')
+        );  
+        ReactDOM.render(
+            <ProfileHeading />,
+            document.getElementById('reservations-title-steps-section')
+        );
+        ReactDOM.render(
+            <ProfileForm ProfileData={profileData} />,
+            document.getElementById('user-profile-form')
+        );
+    </script>
 </body>
-
 </html>
