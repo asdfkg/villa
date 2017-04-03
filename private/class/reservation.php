@@ -48,7 +48,7 @@ class Reservation
 		return $this->$variable;
 	}
 	public function checkPropertyAvailability($checkInDt,$checkOutDt,$propertyId){
-            $query = 'select reservationEndDt from reservationproperty WHERE ((STR_TO_DATE(\''.$checkInDt.'\', \'%Y-%m-%d\') between reservationStartDt AND reservationEndDt) 
+            $query = 'select reservationEndDt from reservationProperty WHERE ((STR_TO_DATE(\''.$checkInDt.'\', \'%Y-%m-%d\') between reservationStartDt AND reservationEndDt) 
 			OR (STR_TO_DATE(\''.$checkOutDt.'\', \'%Y-%m-%d\') between reservationStartDt AND reservationEndDt) 
 			OR (reservationStartDt >= STR_TO_DATE(\''.$checkInDt.'\', \'%Y-%m-%d\') AND reservationEndDt <= STR_TO_DATE(\''.$checkOutDt.'\', \'%Y-%m-%d\')) 
 		) AND reservationStatusId != 4 AND propertyId = '.$propertyId.' LIMIT 1';
@@ -131,7 +131,7 @@ class Reservation
 		if ($sortByWhere != '') $sortByWhere .= ' AND';
         $sortByWhere .= ' property.site in ("3","'.SITE_ID.'")';
                         
-		$query = 'SELECT *, property.propertyId AS myPropertyId, (select reservationEndDt from reservationproperty WHERE
+		$query = 'SELECT *, property.propertyId AS myPropertyId, (select reservationEndDt from reservationProperty WHERE
 		(
 			(STR_TO_DATE(\''.$checkInDt.'\', \'%Y-%m-%d\') between reservationStartDt AND reservationEndDt) 
 			OR 
@@ -922,7 +922,7 @@ class Reservation
 	// create receipt
 	public function createReceipt($id, $status = '', $fontColor = '#666666', $lineColor = '#C2C2C2', $titleColor = '#666666')
 	{ 
-                $rs_reservation_property = $_SESSION['DB']->querySelect('SELECT *, DATEDIFF(reservationEndDt, reservationStartDt) AS numberOfNights, AES_DECRYPT(reservationCreditCardName, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardName, AES_DECRYPT(reservationCreditCardType, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardType, AES_DECRYPT(reservationCreditCardNumber, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardNumber, AES_DECRYPT(reservationCreditCardExpMonth, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardExpMonth, AES_DECRYPT(reservationCreditCardExpYear, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardExpYear, AES_DECRYPT(reservationCreditCardCVV, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardCVV FROM reservationproperty LEFT JOIN property ON property.propertyId = reservationproperty.propertyId LEFT JOIN destination ON destination.destId = property.destId LEFT JOIN propertyType ON propertyType.propertyTypeId = property.propertyTypeId WHERE reservationId = ? LIMIT 1', array($id));
+                $rs_reservation_property = $_SESSION['DB']->querySelect('SELECT *, DATEDIFF(reservationEndDt, reservationStartDt) AS numberOfNights, AES_DECRYPT(reservationCreditCardName, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardName, AES_DECRYPT(reservationCreditCardType, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardType, AES_DECRYPT(reservationCreditCardNumber, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardNumber, AES_DECRYPT(reservationCreditCardExpMonth, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardExpMonth, AES_DECRYPT(reservationCreditCardExpYear, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardExpYear, AES_DECRYPT(reservationCreditCardCVV, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardCVV FROM reservationProperty LEFT JOIN property ON property.propertyId = reservationProperty.propertyId LEFT JOIN destination ON destination.destId = property.destId LEFT JOIN propertyType ON propertyType.propertyTypeId = property.propertyTypeId WHERE reservationId = ? LIMIT 1', array($id));
 		$row_rs_reservation_property = $_SESSION['DB']->queryResult($rs_reservation_property);
 		$totalRows_rs_reservation_property = $_SESSION['DB']->queryCount($rs_reservation_property);
 
@@ -1128,7 +1128,7 @@ class Reservation
 	
 	function createPdf($id)
 	{
-		$rs_reservation_property = $_SESSION['DB']->querySelect('SELECT *, DATEDIFF(reservationEndDt, reservationStartDt) AS numberOfNights, AES_DECRYPT(reservationCreditCardName, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardName, AES_DECRYPT(reservationCreditCardType, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardType, AES_DECRYPT(reservationCreditCardNumber, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardNumber, AES_DECRYPT(reservationCreditCardExpMonth, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardExpMonth, AES_DECRYPT(reservationCreditCardExpYear, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardExpYear, AES_DECRYPT(reservationCreditCardCVV, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardCVV FROM reservationproperty  LEFT JOIN property ON property.propertyId = reservationproperty.propertyId LEFT JOIN destination ON destination.destId = property.destId LEFT JOIN propertyType ON propertyType.propertyTypeId = property.propertyTypeId WHERE reservationId = ? LIMIT 1', array($id));
+		$rs_reservation_property = $_SESSION['DB']->querySelect('SELECT *, DATEDIFF(reservationEndDt, reservationStartDt) AS numberOfNights, AES_DECRYPT(reservationCreditCardName, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardName, AES_DECRYPT(reservationCreditCardType, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardType, AES_DECRYPT(reservationCreditCardNumber, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardNumber, AES_DECRYPT(reservationCreditCardExpMonth, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardExpMonth, AES_DECRYPT(reservationCreditCardExpYear, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardExpYear, AES_DECRYPT(reservationCreditCardCVV, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardCVV FROM reservationProperty  LEFT JOIN property ON property.propertyId = reservationProperty.propertyId LEFT JOIN destination ON destination.destId = property.destId LEFT JOIN propertyType ON propertyType.propertyTypeId = property.propertyTypeId WHERE reservationId = ? LIMIT 1', array($id));
 		$row_rs_reservation_property = $_SESSION['DB']->queryResult($rs_reservation_property);
 		$totalRows_rs_reservation_property = $_SESSION['DB']->queryCount($rs_reservation_property);
 						
@@ -1283,7 +1283,7 @@ class Reservation
 					
 			if ($pdf->Output(PDF_PATH.'/guest-registration-forms/'.$pdfName, 'F') !== FALSE)
 			{
-				$_SESSION['DB']->queryUpdate('UPDATE reservationproperty SET reservationCreditCardType = NULL, reservationCreditCardName = NULL, reservationCreditCardNumber = NULL, reservationCreditCardExpMonth = NULL, reservationCreditCardExpYear = NULL, reservationCreditCardCVV = NULL WHERE reservationId = ? LIMIT 1', array($row_rs_reservation_property['reservationId']));
+				$_SESSION['DB']->queryUpdate('UPDATE reservationProperty SET reservationCreditCardType = NULL, reservationCreditCardName = NULL, reservationCreditCardNumber = NULL, reservationCreditCardExpMonth = NULL, reservationCreditCardExpYear = NULL, reservationCreditCardCVV = NULL WHERE reservationId = ? LIMIT 1', array($row_rs_reservation_property['reservationId']));
 			}
 			return PDF_PATH.'/guest-registration-forms/'.$pdfName;
 		}
@@ -1300,13 +1300,17 @@ class Reservation
                             array('href' => "/reservations/?dest=miami&check_in=&check_out=", 'label' => "Miami"),
                             array('href' => "/reservations/?dest=saint-tropez&check_in=&check_out=", 'label' => "Saint-Tropez"),
                             array('href' => "/reservations/?dest=st-barth&check_in=&check_out=", 'label' => "St-Barth"),
-                            array('href' => "/reservations/?dest=turks%20%26%20caicos&check_in=&check_out=", 'label' => "Turks & Caicos"),
+                            array('href' => "/reservations/?dest=ibiza&check_in=&check_out=", 'label' => "Ibiza"),                            
                         )),
                     array('label' => 'BOOK YOUR VILLA', 'href' => '/reservations/'),
                     array('label' => 'ABOUT US', 'href' => '/about-luxury-villa-rentals/founders-vision'),
                     array('label' => 'CONTACT', 'href' => '/about-luxury-villa-rentals/contact'),
                 );
              
+            if (SITE_ID == 2) {
+                array_splice($menu[0]['child'], 6, 0,array( array('href' => "/reservations/?dest=turks%20%26%20caicos&check_in=&check_out=", 'label' => "Turks & Caicos")));
+                array_splice($menu[0]['child'], 7, 0,array( array('href' => "/reservations/?dest=palm%20beach&check_in=&check_out=", 'label' => "Palm Beach")));
+            }
             if (SITE_ID == 1) {
                 
                 array_splice($menu, 1, 0,array( array('label'=>'SERVICES','href'=>'/about-luxury-villa-rentals/villahotel-concept')));

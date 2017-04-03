@@ -7,7 +7,7 @@ var FooterFirst = React.createClass({
                         <div className="clr"></div><br />
                         <span className="contact-box">
                             LUXURY VILLA RENTALS WITH BEST PRICE GUARANTEE.  <br />
-                            +1 (305) 777 0146 <br />
+                            +1 (305) 424 1300 <br />
                             <Anchor href="mailto:villas@greatvilladeals.com " classes="mail-hover" value="villas@greatvilladeals.com" /><br />
                         </span>
                     </div>
