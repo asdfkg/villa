@@ -157,7 +157,7 @@ foreach ($serviceLevelsArray as $serviceLevels)
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title><?php echo ucwords('Villa '.$propertyName.' - '.$destName.' Villa Rental | VILLAZZO'); ?></title>
+    <title><?php echo ucwords('Villa '.$propertyName.' - '.$destName.' Villa Rental | '.(SITE_ID==1?"VILLAZZO":"GREATVILLADEALS")); ?></title>
     <link rel="stylesheet" href="/css/<?php echo SITE_ID; ?>/custom.css">
     <script src="/js/vendor/modernizr.js"></script>
     

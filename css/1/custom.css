@@ -2107,7 +2107,6 @@ p.flip {
     margin-top:10px;
 }
 
-
 .overview-para{
 	text-transform:uppercase; 
 	font-size:18px;
@@ -2136,4 +2135,31 @@ p.flip {
 }
 .overview-success{
 	color:green;
+
+.sliderBannertext{
+    font-size:25px; color: #FFFFFF;
+}
+.special-offer-title{
+    font-size:12px !important; 
+    background-color: #dac172; 
+    color: #666666 !important; 
+    background-size: contain;
+}
+.special-offer-all-offer{
+    float:right; 
+    margin-top: 100px; 
+    margin-right: 0; 
+    font-size: 12px;
+}
+.special-offer-margin-left-zero{
+    margin-left:0;
+}
+.special-offer-main{
+    background: url(/img/home/home-special_offer.png) no-repeat bottom center; background-size: 100%;
+}
+.home-blog{
+    padding-bottom: 20px !important;
+}
+.home-blog-font{
+    font-size: 12px;
 }

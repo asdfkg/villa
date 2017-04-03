@@ -1,5 +1,5 @@
 <?php
-require_once '/kunden/homepages/27/d309616710/htdocs/private/config.php';
+require_once '../private/config.php';
 
 if (!$_SESSION['RESERVATION']->get('reservationId')) die(header('Location: /reservations'));
 
@@ -11,7 +11,7 @@ if ($_SESSION['RESERVATION']->get('reservationId'))
 	{
 		$body = '
 		<div style="padding:15px; border:solid 1px #DBDBDB;">
-		<p style="font-weight:bold;">Villazzo Reservation: '.$row_rs_reservation_property['propertyName'].', '.$row_rs_reservation_property['destName'].'</p>
+		<p style="font-weight:bold;">'.SITE_NAME.' Reservation: '.$row_rs_reservation_property['propertyName'].', '.$row_rs_reservation_property['destName'].'</p>
 			<table width="100%" border="0" cellpadding="2" cellspacing="0">
 	          <tr>
 	            <td style="width:150px;"><strong>Booked by</strong></td>
@@ -48,53 +48,50 @@ else $body = 'An error occurred, please try again.';
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Confirmation - VILLAZZO</title>
-    <link rel="stylesheet" href="/css/custom.css">
+    <title>Confirmation - <?php echo SITE_NAME;?></title>
+    <link rel="stylesheet" href="/css/<?php echo SITE_ID;?>/custom.css">
     <script src="/js/vendor/modernizr.js"></script>
+    <?php include_once '../js/reactLibrary.php'; ?>
+    <script src="/js/react/jsx/confirmation.jsx" type="text/jsx"></script>
 </head>
 
 <body>
 	<?php require_once '../inc-header.php'; ?>
     <!-- Reservations Services Header Image Section Start -->
-    <section id="header-section">
-        <img src="/img/destination-header_<?php echo str_replace('-', '_', $_SESSION['RESERVATION']->get('destName')); ?>.png">
-    </section>
+    <section id="header-section"></section>
     <!-- Reservations Title and Steps Section Start -->
-    <section id="reservations-title-steps-section">
-        <div class="row">
-            <div class="small-12 columns white-background">
-                <div class="row">
-                    <div class="medium-5 columns">
-                        <h1>RESERVATIONS</h1>
-                    </div>
-                    <div class="medium-7 columns">
-                        <div class="row text-center">
-                            <div class="small-12 columns">
-                                <ul id="progressbar">
-                                    <li class="active">Select Your<br>Villa</li>
-                                    <li class="active">Customize Your<br>Service Experience</li>
-                                    <li class="active">Contact And<br>Payment Information</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <section id="reservations-title-steps-section"></section>
     
-    <section>
-	    <div class="row">
-	        <div class="columns">
-				<?php echo $body; ?>
-	        </div>
-	    </div>
-    </section>
+    <section id="confirmation-section"></section>
     
 <?php require_once '../inc-footer.php'; ?>
 
 <?php require_once '../inc-js.php'; ?>
+    <script type="text/jsx">
+        /** @jsx React.DOM */
+        var StepUrl1 = '';
+        var StepUrl2 = '';
 		
+        ReactDOM.render(
+        <ServiceStep step="3" stepUrl1={StepUrl1} stepUrl2={StepUrl2} />,
+        document.getElementById('reservations-title-steps-section')
+        );
+        var data = <?php echo json_encode(@$row_rs_reservation_property);?>;
+        var body = <?php echo json_encode($body);?>;
+        ReactDOM.render(
+        <Confirmation body="body" data={data} reservationId="<?php echo $_SESSION['RESERVATION']->get('reservationId');?>" userGroupId="<?php echo $_SESSION['USER']->getUserGroupId();?>"/>,
+        document.getElementById('confirmation-section')
+        );
+        var imgurl = "<?php echo SITE_ID==1?"/img/destination-header_".str_replace('-', '_', $_SESSION['RESERVATION']->get('destName')).".png":"/img/inner-bg1.png"; ?>";
+        ReactDOM.render(
+        /*<Image1 src="/img/destination-header_<?php echo str_replace('-', '_', $_SESSION['RESERVATION']->get('destName')); ?>.png"/>,*/
+        <Image1 src={imgurl}/>,
+        document.getElementById('header-section')
+        );
+        
+
+
+    </script>
 </body>
 
 </html>

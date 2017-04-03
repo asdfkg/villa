@@ -37,8 +37,7 @@ class Reservation
 	var $lastName;
 	var $email;
 	var $phone;
-        // @TODO - CS modified reservationProperty flow
-        VAR $reservationTable = 'vvilasReservationProperty';
+        
 	public function set($variable, $value)
 	{
 		$this->$variable = $value;
@@ -49,7 +48,7 @@ class Reservation
 		return $this->$variable;
 	}
 	public function checkPropertyAvailability($checkInDt,$checkOutDt,$propertyId){
-            $query = 'select reservationEndDt from '.$this->reservationTable.' WHERE ((STR_TO_DATE(\''.$checkInDt.'\', \'%Y-%m-%d\') between reservationStartDt AND reservationEndDt) 
+            $query = 'select reservationEndDt from reservationproperty WHERE ((STR_TO_DATE(\''.$checkInDt.'\', \'%Y-%m-%d\') between reservationStartDt AND reservationEndDt) 
 			OR (STR_TO_DATE(\''.$checkOutDt.'\', \'%Y-%m-%d\') between reservationStartDt AND reservationEndDt) 
 			OR (reservationStartDt >= STR_TO_DATE(\''.$checkInDt.'\', \'%Y-%m-%d\') AND reservationEndDt <= STR_TO_DATE(\''.$checkOutDt.'\', \'%Y-%m-%d\')) 
 		) AND reservationStatusId != 4 AND propertyId = '.$propertyId.' LIMIT 1';
@@ -132,7 +131,7 @@ class Reservation
 		if ($sortByWhere != '') $sortByWhere .= ' AND';
         $sortByWhere .= ' property.site in ("3","'.SITE_ID.'")';
                         
-		$query = 'SELECT *, property.propertyId AS myPropertyId, (select reservationEndDt from '.$this->reservationTable.' WHERE
+		$query = 'SELECT *, property.propertyId AS myPropertyId, (select reservationEndDt from reservationproperty WHERE
 		(
 			(STR_TO_DATE(\''.$checkInDt.'\', \'%Y-%m-%d\') between reservationStartDt AND reservationEndDt) 
 			OR 
@@ -175,7 +174,6 @@ class Reservation
 				$propertyLocLat = $row_rs_query['propertyMapLat'];
 				$propertyLocLong = $row_rs_query['propertyMapLong'];
 				$propertyLocation = $row_rs_query['propertyLocationName'];
-				$destTax = $row_rs_query['destTaxVillaHotel'];
                                 $bookable = $row_rs_query['bookable'];
 				$minBookDays = $row_rs_query['minBookDays'];
 				/*
@@ -183,6 +181,7 @@ class Reservation
                                  * We have updated field for calculating taxes
                                  * $destTax = $row_rs_query['destTaxVillaHotel'];
                                  */
+                                $destTax = (SITE_ID==1?$row_rs_query['destTaxVillaHotel']:$row_rs_query['destTaxVVilla']);
 				$propertyAlreadyBookedDt = $row_rs_query['reservationEndDt'];
                                 $cleaning = $row_rs_query['cleaning'];
                                 $additionalPerStay = $row_rs_query['additional_perstay']; 
@@ -680,10 +679,10 @@ class Reservation
 		
 		$commissionVillaHotel = $_SESSION['USER']->getCommissionVillaHotel();
 		if ($commissionVillaHotel > 10) $ownerCom = ($ownerCom * 100 + ($commissionVillaHotel - 10))/100;
-		
-		if ($totalNights >= 7 && $totalNights < 30) { $ownerRent = $ownerRent / 7; $ownerReserve = $ownerReserve / 7; }
-		else if ($totalNights >= 30) { $ownerRent = $ownerRent / 30; $ownerReserve = $ownerReserve / 30; }
-		
+		if(SITE_ID==1){
+                    if ($totalNights >= 7 && $totalNights < 30) { $ownerRent = $ownerRent / 7; $ownerReserve = $ownerReserve / 7; }
+                    else if ($totalNights >= 30) { $ownerRent = $ownerRent / 30; $ownerReserve = $ownerReserve / 30; }
+                }
 		// villa only
                 $precision = SITE_ID==2?10:100;
 		$villaOnlyRate = $this->formatRate((($ownerRent + $ownerReserve) / $multiplierArray[$multiplierField]['5_star'] / (1 - $ownerCom)) / $totalNights,$precision);
@@ -786,9 +785,9 @@ class Reservation
 		
 		return array
 		(
-			'rate' => $this->formatRate($totalRate / $totalNights),
-			'rate_base' => $this->formatRate($brim / $totalNights),
-			'management' => $this->formatRate($managementRate),
+			'rate' => SITE_ID==2?$totalRate:$this->formatRate($totalRate / $totalNights,$precision),
+			'rate_base' => $this->formatRate($brim / $totalNights,$precision),
+			'management' => $this->formatRate($managementRate,$precision),
 			
 			'villa_preparation' => $villaPreparationTotal,
 			'checkout_cleaning' => $checkoutCleaningTotal,
@@ -922,11 +921,11 @@ class Reservation
 		
 	// create receipt
 	public function createReceipt($id, $status = '', $fontColor = '#666666', $lineColor = '#C2C2C2', $titleColor = '#666666')
-	{
-		$rs_reservation_property = $_SESSION['DB']->querySelect('SELECT *, DATEDIFF(reservationEndDt, reservationStartDt) AS numberOfNights, AES_DECRYPT(reservationCreditCardName, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardName, AES_DECRYPT(reservationCreditCardType, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardType, AES_DECRYPT(reservationCreditCardNumber, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardNumber, AES_DECRYPT(reservationCreditCardExpMonth, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardExpMonth, AES_DECRYPT(reservationCreditCardExpYear, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardExpYear, AES_DECRYPT(reservationCreditCardCVV, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardCVV FROM '.$this->reservationTable.' LEFT JOIN property ON property.propertyId = '.$this->reservationTable.'.propertyId LEFT JOIN destination ON destination.destId = property.destId LEFT JOIN propertyType ON propertyType.propertyTypeId = property.propertyTypeId WHERE reservationId = ? LIMIT 1', array($id));
+	{ 
+                $rs_reservation_property = $_SESSION['DB']->querySelect('SELECT *, DATEDIFF(reservationEndDt, reservationStartDt) AS numberOfNights, AES_DECRYPT(reservationCreditCardName, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardName, AES_DECRYPT(reservationCreditCardType, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardType, AES_DECRYPT(reservationCreditCardNumber, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardNumber, AES_DECRYPT(reservationCreditCardExpMonth, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardExpMonth, AES_DECRYPT(reservationCreditCardExpYear, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardExpYear, AES_DECRYPT(reservationCreditCardCVV, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardCVV FROM reservationproperty LEFT JOIN property ON property.propertyId = reservationproperty.propertyId LEFT JOIN destination ON destination.destId = property.destId LEFT JOIN propertyType ON propertyType.propertyTypeId = property.propertyTypeId WHERE reservationId = ? LIMIT 1', array($id));
 		$row_rs_reservation_property = $_SESSION['DB']->queryResult($rs_reservation_property);
 		$totalRows_rs_reservation_property = $_SESSION['DB']->queryCount($rs_reservation_property);
-					
+
 		$rs_property_type = $_SESSION['DB']->querySelect('SELECT propertyTypeName FROM property LEFT JOIN propertyType ON propertyType.propertyTypeId = property.propertyTypeId WHERE propertyId = ? LIMIT 1', array($row_rs_reservation_property['propertyId']));
 		$row_rs_property_type = $_SESSION['DB']->queryResult($rs_property_type);
 						
@@ -984,8 +983,8 @@ class Reservation
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tr>
 							<td>';							
-			if ($row_rs_reservation_property['reservationStatusId'] == 4) $output .= 'We are pleased to hold your selection for 24 hours. To complete your reservation please contact us directly to speak to a sales representative at +1 (305) 777 0146.<br /><br />Thank you for choosing Villazzo for your upcoming trip!<br /><br />Below is your booking confirmation with the details of your selection. You can print this receipt for future reference.';
-            else $output .= 'Your reservation has been received. Thank you for choosing Villazzo for your upcoming trip!<br><br>Below is your booking confirmation, which has also been emailed to you. You can print this receipt for future reference.<br><br>Please note: We still require a signed registration form - it has been pre-filled with all your information and emailed to you as attachment of your confirmation. Please sign it and fax back to us at +1 (305) 777 0147 or email it to <a href="mailto:villas@villazzo.com">villas@villazzo.com</a>. Please return the signed reservation form within 24 hours so your booking can be confirmed.';
+			if ($row_rs_reservation_property['reservationStatusId'] == 4) $output .= 'We are pleased to hold your selection for 24 hours. To complete your reservation please contact us directly to speak to a sales representative at +1 (305) 777 0146.<br /><br />Thank you for choosing '.SITE_NAME.' for your upcoming trip!<br /><br />Below is your booking confirmation with the details of your selection. You can print this receipt for future reference.';
+            else $output .= 'Your reservation has been received. Thank you for choosing '.SITE_NAME.' for your upcoming trip!<br><br>Below is your booking confirmation. You can print this receipt for future reference.<br><br>Please note: We still require a signed registration form - it has been pre-filled with all your information and emailed to you as attachment of your confirmation. Please sign it and fax back to us at +1 (305) 777 0147 or email it to <a href="mailto:villas@'.SITE_NAME.'.com">villas@'.SITE_NAME.'.com</a>. Please return the signed reservation form within 24 hours so your booking can be confirmed.';
 			$output .= '
 							</td>
 						</tr>
@@ -1103,13 +1102,18 @@ class Reservation
 						</tr>
 						<tr>
 							<td colspan="2" style="background-color:#fff;">&nbsp;</td>
-							<td style="background-color:#fff; padding:0 20px 0 0; text-align:right;">Tax</td>
+							<td style="background-color:#fff; padding:0 20px 0 0; text-align:right;">Tax ('.number_format($taxRate,2).'%)</td>
 							<td style="background-color:#fff; padding:0 0 0 10px;">'.$row_rs_reservation_property['reservationRateCurrency'].number_format($row_rs_reservation_property['reservationRateTax'] * $row_rs_reservation_property['reservationRateValue'] / 100).'</td>
-						</tr>
-						<tr style="font-weight:bold;">
+						</tr>'.
+                                                ($row_rs_reservation_property['reservationSecurityDeposit']>0?'<tr style="font-weight:bold;">
 							<td colspan="2" style="background-color:#fff;">&nbsp;</td>
-							<td style="background-color:#fff; padding:0 20px 0 0; text-align:right;">Total</td>
-							<td style="background-color:#fff; padding:0 0 0 10px;">'.$row_rs_reservation_property['reservationRateCurrency'].number_format($row_rs_reservation_property['reservationRateTotal']).'</td>
+							<td style="background-color:#fff; padding:0 20px 0 0; text-align:right;">Security Deposit</td>
+							<td style="background-color:#fff; padding:0 0 0 10px;">'.$row_rs_reservation_property['reservationRateCurrency'].number_format($row_rs_reservation_property['reservationSecurityDeposit']).'</td>
+						</tr>':'')
+                                                .'<tr style="font-weight:bold;">
+							<td colspan="2" style="background-color:#fff;">&nbsp;</td>
+							<td style="background-color:#fff; padding:0 20px 0 0; text-align:right;">Grand Total</td>
+							<td style="background-color:#fff; padding:0 0 0 10px;">'.$row_rs_reservation_property['reservationRateCurrency'].number_format($row_rs_reservation_property['reservationRateTotal']+$row_rs_reservation_property['reservationSecurityDeposit']).'</td>
 						</tr>
 					</table>
 				</td>
@@ -1124,7 +1128,7 @@ class Reservation
 	
 	function createPdf($id)
 	{
-		$rs_reservation_property = $_SESSION['DB']->querySelect('SELECT *, DATEDIFF(reservationEndDt, reservationStartDt) AS numberOfNights, AES_DECRYPT(reservationCreditCardName, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardName, AES_DECRYPT(reservationCreditCardType, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardType, AES_DECRYPT(reservationCreditCardNumber, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardNumber, AES_DECRYPT(reservationCreditCardExpMonth, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardExpMonth, AES_DECRYPT(reservationCreditCardExpYear, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardExpYear, AES_DECRYPT(reservationCreditCardCVV, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardCVV FROM '.$this->reservationTable.'  LEFT JOIN property ON property.propertyId = '.$this->reservationTable.'.propertyId LEFT JOIN destination ON destination.destId = property.destId LEFT JOIN propertyType ON propertyType.propertyTypeId = property.propertyTypeId WHERE reservationId = ? LIMIT 1', array($id));
+		$rs_reservation_property = $_SESSION['DB']->querySelect('SELECT *, DATEDIFF(reservationEndDt, reservationStartDt) AS numberOfNights, AES_DECRYPT(reservationCreditCardName, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardName, AES_DECRYPT(reservationCreditCardType, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardType, AES_DECRYPT(reservationCreditCardNumber, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardNumber, AES_DECRYPT(reservationCreditCardExpMonth, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardExpMonth, AES_DECRYPT(reservationCreditCardExpYear, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardExpYear, AES_DECRYPT(reservationCreditCardCVV, \''.$_SESSION['DB']->getEncryptKey().'\') AS creditCardCVV FROM reservationproperty  LEFT JOIN property ON property.propertyId = reservationproperty.propertyId LEFT JOIN destination ON destination.destId = property.destId LEFT JOIN propertyType ON propertyType.propertyTypeId = property.propertyTypeId WHERE reservationId = ? LIMIT 1', array($id));
 		$row_rs_reservation_property = $_SESSION['DB']->queryResult($rs_reservation_property);
 		$totalRows_rs_reservation_property = $_SESSION['DB']->queryCount($rs_reservation_property);
 						
@@ -1159,7 +1163,7 @@ class Reservation
 			//$pdf =& new FPDI();
 			$pdf = new FPDI();
 			$pdf->AddPage();
-			$pdf->setSourceFile(HTTP_PATH.'/pdf/guest-registration-form-1.pdf');
+			$pdf->setSourceFile(PDF_PATH.'/guest-registration-form-1.pdf');
 			$tplIdx = $pdf->importPage(1);
 			$pdf->useTemplate($tplIdx, 5, 5, 200);
 			
@@ -1198,22 +1202,22 @@ class Reservation
 			$pdf->Write(0, 'X');
 			
 			$pdf->AddPage();
-			$pdf->setSourceFile(HTTP_PATH.'/pdf/guest-registration-form-2.pdf');
+			$pdf->setSourceFile(PDF_PATH.'/guest-registration-form-2.pdf');
 			$tplIdx = $pdf->importPage(1);
 			$pdf->useTemplate($tplIdx, 5, 5, 200);
 			
 			$pdf->AddPage();
-			$pdf->setSourceFile(HTTP_PATH.'/pdf/guest-registration-form-3.pdf');
+			$pdf->setSourceFile(PDF_PATH.'/guest-registration-form-3.pdf');
 			$tplIdx = $pdf->importPage(1);
 			$pdf->useTemplate($tplIdx, 5, 5, 200);
 			
 			$pdf->AddPage();
-			$pdf->setSourceFile(HTTP_PATH.'/pdf/guest-registration-form-4.pdf');
+			$pdf->setSourceFile(PDF_PATH.'/guest-registration-form-4.pdf');
 			$tplIdx = $pdf->importPage(1);
 			$pdf->useTemplate($tplIdx, 5, 5, 200);
 			
 			$pdf->AddPage();
-			$pdf->setSourceFile(HTTP_PATH.'/pdf/guest-registration-form-5.pdf');
+			$pdf->setSourceFile(PDF_PATH.'/guest-registration-form-5.pdf');
 			$tplIdx = $pdf->importPage(1);
 			$pdf->useTemplate($tplIdx, 5, 5, 200);
 			$pdf->SetXY(55, 53);
@@ -1277,11 +1281,11 @@ class Reservation
 				$pdf->Write(0, $destCurrency.number_format($checkoutTotal));
 			}
 					
-			if ($pdf->Output(HTTP_PATH.'/pdf/guest-registration-forms/'.$pdfName, 'F') !== FALSE)
+			if ($pdf->Output(PDF_PATH.'/guest-registration-forms/'.$pdfName, 'F') !== FALSE)
 			{
-				$_SESSION['DB']->queryUpdate('UPDATE '.$this->reservationTable.' SET reservationCreditCardType = NULL, reservationCreditCardName = NULL, reservationCreditCardNumber = NULL, reservationCreditCardExpMonth = NULL, reservationCreditCardExpYear = NULL, reservationCreditCardCVV = NULL WHERE reservationId = ? LIMIT 1', array($row_rs_reservation_property['reservationId']));
+				$_SESSION['DB']->queryUpdate('UPDATE reservationproperty SET reservationCreditCardType = NULL, reservationCreditCardName = NULL, reservationCreditCardNumber = NULL, reservationCreditCardExpMonth = NULL, reservationCreditCardExpYear = NULL, reservationCreditCardCVV = NULL WHERE reservationId = ? LIMIT 1', array($row_rs_reservation_property['reservationId']));
 			}
-			return HTTP_PATH.'/pdf/guest-registration-forms/'.$pdfName;
+			return PDF_PATH.'/guest-registration-forms/'.$pdfName;
 		}
 	}
 

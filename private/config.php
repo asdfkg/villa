@@ -8,16 +8,23 @@ date_default_timezone_set('America/New_York');
 if($_SERVER['SERVER_NAME'] == 'villazzo.local') {
     $site_id = 1;
     define('SITE_NAME','Villazzo'); 
+    define('SITE_TAX',1); 
+    define('SECURITY_DEPOSIT_PERCENT',0); 
+    define('HTTP_PATH', './');
 } else if($_SERVER['SERVER_NAME'] == 'gvd.local')
 {
     $site_id = 2;
     define('SITE_NAME','GreatVillaDeals'); 
+    define('SITE_TAX',1); 
+    define('SECURITY_DEPOSIT_PERCENT',10); 
+    define('HTTP_PATH', './');
+}else{
+    define('HTTP_PATH', '/kunden/homepages/27/d309616710/htdocs');
 }
 define('SITE_ID',$site_id);
 // define constants
-//define('HTTP_PATH', '/kunden/homepages/27/d309616710/htdocs');
-define('HTTP_PATH', '/villazzo_new/');
-define('EMAILS_PATH', HTTP_PATH.'/emails/');
+define('EMAILS_PATH', HTTP_PATH.'/emails/'.SITE_ID.'/');
+define('PDF_PATH', HTTP_PATH.'pdf/'.SITE_ID);
 
 // class include
 require_once 'class/database.php';
@@ -60,22 +67,22 @@ if (isset($_GET['logout'])) $_SESSION['USER']->logout('/');
 
 function getMeta($name)
 {
-	$rs_meta = $_SESSION['DB']->querySelect('SELECT PAGE_META_TITLE, PAGE_META_DESC, PAGE_META_KEYWORDS FROM PAGE_META WHERE PAGE_META_NAME = ? LIMIT 1', array($name));
-	$row_rs_meta = $_SESSION['DB']->queryResult($rs_meta);
-	$totalRows_rs_meta = $_SESSION['DB']->queryCount($rs_meta);
-	
-	echo '<title>'.$row_rs_meta['PAGE_META_TITLE'].'</title>
-	<meta name="Description" content="'.$row_rs_meta['PAGE_META_DESC'].'" />
-	<meta name="Keywords" content="'.$row_rs_meta['PAGE_META_KEYWORDS'].'" />';
+    $rs_meta = $_SESSION['DB']->querySelect('SELECT PAGE_META_TITLE, PAGE_META_DESC, PAGE_META_KEYWORDS FROM PAGE_META WHERE PAGE_META_NAME = ? LIMIT 1', array($name));
+    $row_rs_meta = $_SESSION['DB']->queryResult($rs_meta);
+    $totalRows_rs_meta = $_SESSION['DB']->queryCount($rs_meta);
+
+    echo '<title>'.$row_rs_meta['PAGE_META_TITLE'].'</title>
+    <meta name="Description" content="'.$row_rs_meta['PAGE_META_DESC'].'" />
+    <meta name="Keywords" content="'.$row_rs_meta['PAGE_META_KEYWORDS'].'" />';
 }
 
 function getContent($name)
 {
-	$rs_content = $_SESSION['DB']->querySelect('SELECT PAGE_TEXT_ID, PAGE_TEXT_NAME, PAGE_TEXT_VALUE FROM PAGE_TEXT WHERE PAGE_TEXT_NAME = ? AND PAGE_TEXT_DT = (SELECT MAX(PAGE_TEXT_DT) FROM PAGE_TEXT WHERE PAGE_TEXT_NAME = ? LIMIT 1)', array($name, $name));
-	$row_rs_content = $_SESSION['DB']->queryResult($rs_content);
-	$totalRows_rs_content = $_SESSION['DB']->queryCount($rs_content);
-	//if($_SESSION['USER']->getUserId()) echo "<a class=\"cmsContent\" href=\"/cms/content/modal-content.php?id=".$row_rs_content['PAGE_TEXT_ID']."\" style=\"color:#000; text-decoration:none;\" title=\"Click to edit\">".$row_rs_content['PAGE_TEXT_VALUE']."</a>";
-	//else 
-	echo $row_rs_content['PAGE_TEXT_VALUE'];
+    $rs_content = $_SESSION['DB']->querySelect('SELECT PAGE_TEXT_ID, PAGE_TEXT_NAME, PAGE_TEXT_VALUE FROM PAGE_TEXT WHERE PAGE_TEXT_NAME = ? AND PAGE_TEXT_DT = (SELECT MAX(PAGE_TEXT_DT) FROM PAGE_TEXT WHERE PAGE_TEXT_NAME = ? LIMIT 1)', array($name, $name));
+    $row_rs_content = $_SESSION['DB']->queryResult($rs_content);
+    $totalRows_rs_content = $_SESSION['DB']->queryCount($rs_content);
+    //if($_SESSION['USER']->getUserId()) echo "<a class=\"cmsContent\" href=\"/cms/content/modal-content.php?id=".$row_rs_content['PAGE_TEXT_ID']."\" style=\"color:#000; text-decoration:none;\" title=\"Click to edit\">".$row_rs_content['PAGE_TEXT_VALUE']."</a>";
+    //else 
+    echo $row_rs_content['PAGE_TEXT_VALUE'];
 }
 ?>

@@ -464,7 +464,7 @@ Consecutive Car Service
                       </table>
                       <div align="center">
                       
-                      	<p style="font-size:24px;"><a href="/pdf/services.pdf" style="font-size:24px;">Download Full Price List</a></p>
+                      	<p style="font-size:24px;"><a href="/pdf/<?php echo SITE_ID;?>/services.pdf" style="font-size:24px;">Download Full Price List</a></p>
                         <p style="text-align:justify">
                               We have built our company on our signature 5-Star service level – if you book a 5-star property, you should have the amenities and services that go with it. We recommend our guests to reserve this premier service level to enjoy the ultimate luxury vacation experience which you won’t find elsewhere.</p>
                         <p style="font-size:24px;"><a href="http://www.villazzo.com/reservations" style="font-size:24px;">Customize Your Villa Stay</a></p>
