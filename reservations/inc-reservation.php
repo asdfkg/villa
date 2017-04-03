@@ -23,7 +23,12 @@ var SearchOptions = [{description: 'All',code: 'all'},
                {description: 'Miami',code: 'miami'},
                {description: 'Saint-Tropez',code: 'saint-tropez'},
                {description: 'St-Barth',code: 'st-barth'},
-               {description: 'Turks & Caicos',code: 'turks%20%26%20caicos'}];
+               {description: 'Ibiza',code: 'ibiza'}
+               <?php if(SITE_ID==2){
+                   echo ",
+               {description: 'Turks & Caicos',code: 'turks%20%26%20caicos'},
+               {description: 'Palm Beach',code: 'palm%20beach'},
+               ";} ?>];
 var featuresList = <?php echo json_encode($featuresList); ?>;
 var amenitiesList = 
 <?php
@@ -32,7 +37,7 @@ echo json_encode(explode(',', (isset($_GET['amenities']) ? $_GET['amenities'] : 
 ?>;
 var getParams = <?php echo json_encode($_GET); ?>;
 ReactDOM.render(
-    <SearchBox data={data} SearchOptions={SearchOptions} siteid="<?php echo SITE_ID;?>" innerpage="true" getParams={getParams} filters={featuresList} amenitiesList={amenitiesList} />,
+    <SearchBox data={data} SearchOptions={SearchOptions} siteid="<?php echo SITE_ID;?>" innerpage="<?php echo isset($innerPage)?$innerPage:"true";?>" getParams={getParams} filters={featuresList} amenitiesList={amenitiesList} />,
     document.getElementById('searchBoxForm')
 );
 </script>
