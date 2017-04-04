@@ -20,7 +20,7 @@ var FooterSecond = React.createClass({
         return <div className="orange-bg-footer" >
                 <div className="row"  data-equalizer="">
                     <div className="medium-6 columns">
-                        <p className="footer-copyright">&copy; {curYear.getFullYear()} <VillLink /></p>
+                        <p className="footer-copyright">&copy; {curYear.getFullYear()} <GVDLink /></p>
                     </div>
                     <div className="medium-6 columns hide">
                         <div className="footer-media">

@@ -1,5 +1,6 @@
 var DesktopFooter = React.createClass({
     render:function(){
+        var curYear = new Date();
         return <div>
             <div className="row"  data-equalizer>
                 <div className="medium-4 columns" data-equalizer-watch>
@@ -11,7 +12,7 @@ var DesktopFooter = React.createClass({
                     <a href="https://www.youtube.com/user/VillazzoVideos" target="_blank"><i className="fa fa-youtube"></i></a>
                     <a href="https://www.pinterest.com/villazzo/" target="_blank"><i className="fa fa-pinterest-p"></i></a>
 
-                    <p className="footer-copyright">&copy; 2016 <VillLink /></p>
+                    <p className="footer-copyright">&copy; {curYear.getFullYear()} <VillLink /></p>
                     <p className="text-grey">PRIVATE LUXURY VILLA RENTALS WITH 5-STAR HOTEL SERVICE. MIAMI-ASPEN-ST. TROPEZ</p>
                     <p><i className="fa fa-mobile"></i>&nbsp;<a href="tel:+1-877-845-5299">+1 (877) VILLAZZO</a></p>
                     <p><i className="fa fa-globe"></i>&nbsp;<a href="mailto:villas@villazzo.com">villas@villazzo.com</a></p>
