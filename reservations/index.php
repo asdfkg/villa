@@ -9,11 +9,11 @@ if ($_SESSION['RESERVATION']->get('reservationId')) {
 if (isset($_POST['action']) && $_POST['action'] == 'reservation'){
     $lastSearch = json_encode($_POST);    
     setcookie("lastSearch",$lastSearch,time()+(60*60*24*20));
-    die(header('Location: ?dest='.$_POST['dest'].'&check_in='.date('m/d/Y', strtotime($_POST['checkInDt'])).'&check_out='.date('m/d/Y', strtotime($_POST['checkOutDt'])).'&bed_min='.$_POST['bedMin'].'&bed_max='.$_POST['bedMax'].'&budget_min='.$_POST['budgetMin'].'&budget_max='.$_POST['budgetMax'].'&amenities='.$_POST['amenities']));
+    die(header('Location: ?dest='.$_POST['dest'].'&check_in='.date('m/d/Y', strtotime($_POST['checkInDt'])).'&check_out='.date('m/d/Y', strtotime($_POST['checkOutDt'])).'&bed_min='.(@$_POST['bedMin']).'&bed_max='.(@$_POST['bedMax']).'&budget_min='.(@$_POST['budgetMin']).'&budget_max='.(@$_POST['budgetMax']).'&amenities='.(@$_POST['amenities'])));
 }
 $dest = '';
 if(!isset($_GET['dest'])){
-    $get = json_decode($_COOKIE['lastSearch'],2);
+    $get = json_decode(@$_COOKIE['lastSearch'],2);
     if(!empty($get)){
         $_GET['check_in'] = $get['checkInDt'];
         $_GET['check_out'] = $get['checkOutDt'];

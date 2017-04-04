@@ -1,14 +1,14 @@
 var Checkin = React.createClass({
     render: function(){
-        return  <div className={this.props.innerpage=='true'?'large-3 medium-2 small-6 columns':"large-3 medium-3 small-4 columns"}>
-                    <label>{(this.props.innerpage=='true')?'Check-In':''} <input type="text" name="checkInDt" class="hasDatepicker" id="checkInDt" placeholder="MM/DD/YYYY" onChange={function() {}} value={this.props.value1} /></label>
+        return  <div className={this.props.innerpage=='true' || this.props.siteid=="1"?'large-3 medium-2 small-6 columns':"large-3 medium-3 small-4 columns"}>
+                    <label>{(this.props.innerpage=='true' || this.props.siteid=="1")?'Check-In':''} <input type="text" name="checkInDt" class="hasDatepicker" id="checkInDt" placeholder="MM/DD/YYYY" onChange={function() {}} value={this.props.value1} /></label>
                 </div>
     }
 });
 var Checkout = React.createClass({
     render: function(){
-        return <div className={this.props.innerpage=='true'?'large-3 medium-3 small-6 columns':"large-3 medium-3 small-4 columns"}>
-                    <label>{(this.props.innerpage=='true')?'Check-Out':''} <input type="text" name="checkOutDt" class="hasDatepicker" id="checkOutDt" placeholder="MM/DD/YYYY" onChange={function() {}}  value={this.props.value1} /></label>
+        return <div className={this.props.innerpage=='true' || this.props.siteid=="1"?'large-3 medium-3 small-6 columns':"large-3 medium-3 small-4 columns"}>
+                    <label>{(this.props.innerpage=='true' || this.props.siteid=="1")?'Check-Out':''} <input type="text" name="checkOutDt" class="hasDatepicker" id="checkOutDt" placeholder="MM/DD/YYYY" onChange={function() {}}  value={this.props.value1} /></label>
                 </div>
     }
 });
@@ -246,25 +246,25 @@ var SearchBox = React.createClass({
         return (
             <section id="reserve-your-villahotel-section">
                 <div className="row" data-equalizer>
-                    {(this.props.innerpage=='true')?
-                    <div className="large-2 columns left-side show-for-large-up" data-equalizer-watch>
+                    {(this.props.innerpage=='true' || this.props.siteid=="1")?
+                    <div className="large-2 columns left-side show-for-large-up" data-equalizer-watch style={this.props.siteid=="1"?{height: '85px'}:{}}>
                         <Heading6 value={"Reserve Your Villa"+(this.props.siteid=="1"?"Hotel":'')} />
                     </div>:''}
 
-                    <div className={(this.props.innerpage=='true'?'large-10':'large-12')+ ' medium-12 columns right-side text-center'} data-equalizer-watch>
+                    <div className={(this.props.innerpage=='true' || this.props.siteid=="1"?'large-10':'large-12')+ ' medium-12 columns right-side text-center'} data-equalizer-watch>
                         <form method="post" action="/reservations/" onsubmit="return false;">
                             <input type="hidden" name="action"      value="reservation" />
                             {SearchHiddenField}
                             <div className="row">
                                 <div className={this.props.innerpage=='true'?'large-3 medium-2 columns':'large-4 medium-3 small-3 columns'}>
-                                    <label>{(this.props.innerpage=='true')?'Destination':''}
+                                    <label>{(this.props.innerpage=='true' || this.props.siteid=="1")?'Destination':''}
                                         <select id={this.props.id} name="dest" className='form-control' value={this.state.selected} onChange={this.handleChange}>
                                             {options}
                                         </select>
                                     </label>
                                 </div>
-                                <Checkin value1={this.props.data.checkin}   innerpage={this.props.innerpage} />
-                                <Checkout value1={this.props.data.checkout} innerpage={this.props.innerpage} />
+                                <Checkin value1={this.props.data.checkin}   innerpage={this.props.innerpage} siteid={this.props.siteid} />
+                                <Checkout value1={this.props.data.checkout} innerpage={this.props.innerpage} siteid={this.props.siteid} />
                                 {filterbutton}
                                 <SearchButton innerpage={this.props.innerpage} />
                             </div>
