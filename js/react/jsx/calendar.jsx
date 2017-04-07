@@ -45,7 +45,7 @@ var BookingCalendar = React.createClass({
         var villaBooking = this.props.villaBooking;
         return <div>{(this.props.data.userGroup==1 || this.props.data.userGroup==2) && this.props.data.property.map(function(property,i){
                return <div key={'prop-cal-'+i} style={{float:'left',width:'1005px',margin:'0px 0px 20px 0px'}}>
-                        <div style={{float:'left',width:'1005px',margin:'0px 0px 20px 0px'}}>
+                        <div style={{float:'left',width:'1005px',margin:'20px 0px 10px 0px'}}>
                             <Heading3 value={property.propertyName} />
                             <input type="hidden" id={"slide"+property.propertyId} value={17 - tmonth} />
                             <span style={{float:'left',margin:'127px 10px 0px 0px',cursor:'pointer',fontSize:'1.5rem'}}>
@@ -74,7 +74,7 @@ var BookingCalendar = React.createClass({
                         </div>
 
                         {data.propertyName ? <BookingPropertyDetail propertyName={data.propertyName} checkInDt={data.checkInDt} checkOutDt={data.checkOutDt} totalNights={data.totalNights} />:
-                            <BookingOverview bookingInfo={totalBooking[property.propertyId]} property={property} userGroup={data.userGroup} />}
+                            <BookingOverview bookingInfo={totalBooking[property.propertyId]!=undefined?totalBooking[property.propertyId]:{}} property={property} userGroup={data.userGroup} />}
                         <BookingRowButtons />
                 </div>                
             })}</div>
@@ -228,7 +228,7 @@ var Calendar = React.createClass({
         villaBooking = this.props.villaBooking;
         propertyName = this.props.propertyName;
         checkInDt = this.props.checkInDt;
-        checkOutDt = this.props.checkOutDt ;
+        checkOutDt = this.props.checkOutDt=='null'?'':this.props.checkOutDt;
     	weeks = state.calendar.map(function (week) {
             weekCount++;
             dayList = []
@@ -269,14 +269,14 @@ var Calendar = React.createClass({
                     checkoutStr = '&check_in='+(day.format('MM/DD/YYYY'));
                 if (checkInDt && !checkOutDt) 
                     checkoutStr  = '&check_in='+checkInDt+'&check_out='+(day.format('MM/DD/YYYY'));
-                color={color:'#fff !important', textDecoration:'underline'};
+                colorClass='white';
                 if(checkInDt==(day.format('MM/DD/YYYY')) || checkOutDt==(day.format('MM/DD/YYYY')))
-                    color = {color: '#000 !important',textDecoration:'underline'};
+                    colorClass='black';
                 return <td key={day.format('D-MM-Y')} className={dayClasses} style={styles}>
                         <div className="day-number">
                         
                         {propertyName ?
-                            <a href={'?property='+propertyname+checkoutStr} style={color}>{day.format('D')}</a>                            
+                            <a href={'?property='+propertyName+checkoutStr} className={colorClass}>{day.format('D')}</a>                            
                         :( !isCurrentMonth?' ':day.format('D')) }
                         </div>
                     </td>

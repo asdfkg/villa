@@ -29,7 +29,7 @@ if ($propertyName)
 	$propertyQuery = ' AND property.propertyId = '.$row_rs_property['propertyId'];
 }
 
-$rs_reservationProperty = $_SESSION['DB']->querySelect('SELECT reservationProperty.propertyId, propertyName, destName FROM property LEFT JOIN reservationProperty ON reservationProperty.propertyId = property.propertyId LEFT JOIN destination on destination.destId = property.destId WHERE propertyActive = 1 AND property.site in ("3","'.SITE_ID.'") AND reservationProperty.site = '.SITE_ID.' AND property.destId = '.$destId.$propertyQuery.' GROUP BY property.propertyId ORDER BY propertyValue DESC');
+$rs_reservationProperty = $_SESSION['DB']->querySelect('SELECT property.propertyId, propertyName, destName FROM property LEFT JOIN reservationProperty ON reservationProperty.propertyId = property.propertyId LEFT JOIN destination on destination.destId = property.destId WHERE propertyActive = 1 AND property.site in ("3","'.SITE_ID.'")  AND property.destId = '.$destId.$propertyQuery.' GROUP BY property.propertyId ORDER BY propertyValue DESC');
 $row_rs_reservationProperty = $_SESSION['DB']->queryAllResult($rs_reservationProperty);
 $totalRows_rs_reservationProperty = $_SESSION['DB']->queryCount($rs_reservationProperty);
 
