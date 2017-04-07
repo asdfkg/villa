@@ -110,5 +110,10 @@ class Database
 		//echo '<p style="text-align:center; font-weight:bold;">An error occured and we have been informed about it - please come back later.</p>';		
 		mail('virginia.pellegrini@villazzo.com', 'Database Error: '.$_SERVER['HTTP_HOST'], $error.' @ '.$_SERVER['REQUEST_URI'], "From: virginia.pellegrini@villazzo.com\nContent-Type: text/html; charset=iso-8859-1");
 	}
+        public function queryAllResult($query) 
+        {
+            return $query->fetchAll(PDO::FETCH_ASSOC);
+        }
+
 }
 ?>
