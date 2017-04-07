@@ -104,7 +104,7 @@ var BookingOverview = React.createClass({
                 {this.props.userGroup== 1 &&
                 <tr>
                         <th>Total Villa Revenue {tdate.getFullYear()}:</th>
-                        <td>{this.props.bookingInfo.reservationRateCurrency}{(this.props.bookingInfo.reservationRateValueTotal).toFixed()}</td>
+                        <td>{this.props.bookingInfo.reservationRateCurrency} {parseFloat(this.props.bookingInfo.reservationRateValueTotal==null?0:this.props.bookingInfo.reservationRateValueTotal).toFixed(2)}</td>
                 </tr>
                 }
             </tbody>
