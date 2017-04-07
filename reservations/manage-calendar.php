@@ -44,7 +44,9 @@ function prepareVilla($calendarStartDt,$destId,$propertyQuery){
     $villaList = [];
     foreach($allReservationProperty as $data){
         $begin = new DateTime( $data['reservationStartDt'] );
+        $begin->modify( '-1 day' );
         $end = new DateTime( $data['reservationEndDt'] );
+        $end->modify( '+1 day' );
         $interval = DateInterval::createFromDateString('1 day');
         $period = new DatePeriod($begin, $interval, $end);
         if(!isset($villaList[$data['propertyId']])){
@@ -56,7 +58,6 @@ function prepareVilla($calendarStartDt,$destId,$propertyQuery){
                 $villBooking[$data['propertyId']][$dt]=$data['reservationStatusId'];
             }
         }
-        $villBooking[$data['propertyId']];
     }
     return $villBooking;
 }

@@ -60,8 +60,8 @@ var BookingCalendar = React.createClass({
                                     </span>
 
                                 {Array.apply(0, Array(36)).map(function(i,months){
-                                    return <span key={'cal'+moment(data.calendarStartDt,"MM/DD/YYYY").add(months,'month').format('MM/YY')} style={{float:'left',marginLeft:'12px'}}>
-                                            <Calendar destId={data.destId} propertyId={property.propertyId} ddate={moment(data.calendarStartDt,"MM/DD/YYYY").add(months,'month')} nav=''
+                                    return <span key={'cal'+moment(data.calendarStartDt,"MM/DD/YYYY").add(months+1,'month').format('MM/YY')} style={{float:'left',marginLeft:'12px'}}>
+                                            <Calendar destId={data.destId} propertyId={property.propertyId} ddate={moment(data.calendarStartDt,"MM/DD/YYYY").add(months+1,'month')} nav=''
                                             propertyName={data.propertyName} checkInDt={data.checkInDt} checkOutDt={data.checkOutDt} villaBooking={villaBooking[property.propertyId]==undefined?[]: villaBooking[property.propertyId]}/>
                                         </span>
                                 })}
@@ -74,8 +74,7 @@ var BookingCalendar = React.createClass({
                         </div>
 
                         {data.propertyName ? <BookingPropertyDetail propertyName={data.propertyName} checkInDt={data.checkInDt} checkOutDt={data.checkOutDt} totalNights={data.totalNights} />:
-                        
-<BookingOverview bookingInfo={totalBooking[property.propertyId]} property={property} userGroup={data.userGroup} />}
+                            <BookingOverview bookingInfo={totalBooking[property.propertyId]} property={property} userGroup={data.userGroup} />}
                         <BookingRowButtons />
                 </div>                
             })}</div>
@@ -153,12 +152,12 @@ function get_calendar(year, month) {
         if (i > 0 && week < weeks[i - 1]) {
             // We have switched to the next year
 
-            firstWeekDay = moment([year, month]).add(1, "year").week(week).day(1);
-            lastWeekDay = moment([year, month]).add(1, "year").week(week).day(7);
+            firstWeekDay = moment([year, month]).add(1, "year").week(week).day(0);
+            lastWeekDay = moment([year, month]).add(1, "year").week(week).day(6);
         }
         else {
-            firstWeekDay = moment([year, month]).week(week).day(1);
-            lastWeekDay = moment([year, month]).week(week).day(7);
+            firstWeekDay = moment([year, month]).week(week).day(0);
+            lastWeekDay = moment([year, month]).week(week).day(6);
         }
         weekRange = moment.range(firstWeekDay, lastWeekDay);
         calendar.push(weekRange);
