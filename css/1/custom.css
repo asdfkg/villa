@@ -1,5 +1,5 @@
 @import url(/css/foundation.css);
-@import url(/css/jquery.css);
+@import url(/css/1/jquery.css);
 @import url(/css/font-awesome/css/font-awesome.min.css);
 @import url(/js/owlcarousel/assets/owl.carousel.css);
 
@@ -59,6 +59,10 @@ meta.foundation-data-attribute-namespace {
     -webkit-border-radius: 30px;
     -moz-border-radius: 30px;
     border-radius: 30px;
+}
+
+.footer-icon-margin{
+    margin-right: 5px;
 }
 
 p {
@@ -336,6 +340,13 @@ form button.submit .fa-spin {
 
 .reveal-modal form .columns {
 	padding: 5px !important;
+}
+
+#about-section .reality-para {
+    text-align: justify !important;
+}
+.inherit-initial{
+    box-sizing: initial !important; 
 }
 
 .img-property-title {
@@ -1210,7 +1221,7 @@ nav .tab-bar {
     font-family: 'Open Sans Light', Arial, sans-serif !important;
 }
 
-#property-summary-section span.clickText {
+#property-summary-section span.clickText, #clickMe {
 	cursor: pointer;
 }
 
@@ -1218,7 +1229,7 @@ nav .tab-bar {
     content: "show less";
 }
 
-#property-summary-section span.clickText2 {
+#property-summary-section span.clickText2, #clickMe {
 	cursor: pointer;
 }
 
@@ -2091,6 +2102,47 @@ p.flip {
 .dispayNone{
     display:none; 
 }
+.dispayBlock{
+    display:block; 
+}
+.feedback-textarea{
+    width:100%; height:400px;
+}
+.feedbackMarFive{
+    margin-right: 5px; 
+}
+.color-green{
+    color:green;
+}
+.feedback-textarea-table{
+    padding-left: 10px; padding-right: 10px;
+}
+.feedback-textarea-table-td{
+    border-bottom: solid 1px #dac172;
+}
+.feedback-textarea-center{
+    text-align:center;
+}
+.feedback-anchor-color{
+    color:#dac172;
+}
+.feedback-textarea-img{
+    text-align:center; padding-top: 10px;
+}
+.feedback-textarea-para{
+    font-family:\'Palatino Linotype\', \'Book Antiqua\', Palatino, serif; font-size:12px; text-align: justify;
+}
+.feedback-textarea-para-img{
+    text-align:center; padding-top: 10px;
+}
+.feedback-textarea-td-second
+{
+    background-color: #ffffff !important; padding-top: 10px;
+}
+.feedback-textarea-td-second table
+{
+    background-color: #ffffff !important; width: 300px;
+}
 .footerContactSpan{
     color: #FFF !important; text-decoration: none;
 }
@@ -2122,7 +2174,7 @@ p.flip {
 	min-width: 180px;
 }
 .overview-blank-td{
-	background-color:#dac172; height:10px; padding:0px;"
+	background-color:#dac172; height:10px; padding:0px;
 }
 .user-info-table{
 	border:1px solid #d7c5a4;

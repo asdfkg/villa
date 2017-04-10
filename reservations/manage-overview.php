@@ -74,7 +74,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete') {
                                $overviewData = [];
                                $name = ucwords($row_rs_reservationProperty['reservationFirstname'] . ' ' . $row_rs_reservationProperty['reservationLastname']); 
                                         $overviewData[] =  array('name'=>$name,'phone'=>$row_rs_reservationProperty["reservationPhone"],'email'=>$row_rs_reservationProperty["reservationEmail"]  );
-                                       $overviewData['reservationFirstname'] = $row_rs_reservationProperty['reservationFirstname'];
+                                        $overviewData['reservationFirstname'] = $row_rs_reservationProperty['reservationFirstname'];
                                         $overviewData['reservationLastname'] =$row_rs_reservationProperty['reservationLastname'];
                                         $overviewData['reservedDate'] = $_SESSION['UTILITY']->dateInvoice($row_rs_reservationProperty['reservationCreateDt']);
                                         $overviewData['propertyName'] = $row_rs_reservationProperty['propertyName'];

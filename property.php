@@ -25,8 +25,8 @@ $propertyDescLong = $propertyArray['property_desc_long'];
 $propertyLocationName = $propertyArray['property_location_name'];
 $propertyLocationLat = $propertyArray['property_location_lat'];
 $propertyLocationLong = $propertyArray['property_location_long'];
-$propertyTotalArea = ($propertyArray['property_area_sq']&&$propertyArray['property_area_mt']?number_format($propertyArray['property_area_sq']).' sq ft ('.number_format($propertyArray['property_area_mt']).' m&sup2;)':'');
-$propertyLivingArea = ($propertyArray['property_interior_sq']&&$propertyArray['property_interior_mt']?number_format($propertyArray['property_interior_sq']).' sq ft ('.number_format($propertyArray['property_interior_mt']).' m&sup2;)':'');
+$propertyTotalArea = ($propertyArray['property_area_sq']&&$propertyArray['property_area_mt']?number_format((float)$propertyArray['property_area_sq']).' sq ft ('.number_format((float)$propertyArray['property_area_mt']).' m&sup2;)':'');
+$propertyLivingArea = ($propertyArray['property_interior_sq']&&$propertyArray['property_interior_mt']?number_format((float)$propertyArray['property_interior_sq']).' sq ft ('.number_format((float)$propertyArray['property_interior_mt']).' m&sup2;)':'');
 $propertyYearBuilt = $propertyArray['property_year_built'];
 $propertyYearRemodeled = $propertyArray['property_year_remodeled'];
 $propertyMaxPeople = $propertyArray['property_max_people'];
@@ -83,12 +83,12 @@ $path = 'img/property/'.$propertyGallery.'/';
 $propertySlideshowFull = NULL;
 $propertySlideshowThumb = NULL;
 $propertySlideshowArr=[];
-if (file_exists($path))
+if (file_exists('../'.$path))
 {
-	$directory = opendir($path);
+	$directory = opendir('../'.$path);
 	while (FALSE !== ($filename = readdir($directory)))
 	{
-		if (is_dir($path.$filename) || $filename[0] == '.' || $filename[1] == 'jpg' || strpos($filename, '@2x') !== FALSE || strpos($filename, '@3x') !== FALSE) continue; // skip sub directories, hidden files, & non-pngs
+		if (is_dir('../'.$path.$filename) || $filename[0] == '.' || $filename[1] == 'jpg' || strpos($filename, '@2x') !== FALSE || strpos($filename, '@3x') !== FALSE) continue; // skip sub directories, hidden files, & non-pngs
 		$propertyGalleryArray[] = $filename;
 	}
 	sort($propertyGalleryArray);
@@ -270,6 +270,8 @@ foreach ($serviceLevelsArray as $serviceLevels)
             var propertySlideshowFull   = '<?php echo $propertySlideshowFull ?>';
             var propertySlideshowThumb  = '<?php echo $propertySlideshowThumb ?>'; 
             var sliderImages            = <?php echo json_encode($propertySlideshowArr) ?>;
+            var sliderArrowLeft         = "img/home/<?php echo SITE_ID;?>/arrow-left.png";
+            var sliderArrowRight        = "img/home/<?php echo SITE_ID;?>/arrow-right.png";
 		
             ReactDOM.render(
                 <PropertySummary siteid="<?php echo SITE_ID;?>" data={data}  propertyDetails={details} dateDetail={dateDetail} />,
@@ -296,7 +298,7 @@ foreach ($serviceLevelsArray as $serviceLevels)
                 document.getElementById('property-slider-section-rc')
             );
             ReactDOM.render(
-                <PropertySummaryThumbSlider sliderImages={sliderImages}/>,
+                <PropertySummaryThumbSlider sliderImages={sliderImages} sliderArrowLeft={sliderArrowLeft} sliderArrowRight={sliderArrowRight} />,
                 document.getElementById('property-slider-thump-section-rc')
             );  
             <?php if(SITE_ID==2){ ?>

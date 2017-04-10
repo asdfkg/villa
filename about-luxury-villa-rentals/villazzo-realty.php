@@ -24,7 +24,7 @@
         <script type="text/jsx">
             /** @jsx React.DOM */
             var villazzoRealityBannerImage = "<?php echo SITE_ID==1?"/img/about/banner-villazzo_realty.png": "/img/inner-bg1.png"?>";
-            var villazzoRealityContentImage = "/img/about/lisa.png";
+            var villazzoRealityContentImage = "/img/about/thumb-villazzo-realty.png";
             ReactDOM.render(
                 <AboutUsBannerImage aboutUsBannerImage={villazzoRealityBannerImage}/>,
                 document.getElementById('header-section')

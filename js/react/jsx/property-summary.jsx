@@ -93,7 +93,7 @@ var PropertySummary = React.createClass({
         var d2 = new Date(this.props.dateDetail.checkOutDt);
         var totalNight = (d2-d1)/1000/60/60/24;
         //var bookBtn = (this.props.dateDetail.checkInDt && this.props.dateDetail.checkOutDt && this.props.dateDetail.availability =="1" && (this.props.dateDetail.minBookDays==null || totalNight>=this.props.dateDetail.minBookDays))?<a className='button small expand radius book-btn tiny' href={this.props.dateDetail.bookNowURL}>RESERVE</a>:<a data-reveal-id='propertyAvailabilityModal' className="button small expand radius book-btn tiny">CHECK AVAILABILITY</a>;
-        var bookBtn = <button data-reveal-id='propertyAvailabilityModal' className="button small expand radius book-btn tiny">CHECK AVAILABILITY</button>;
+        var bookBtn = <button data-reveal-id='propertyAvailabilityModal' className="button small expand radius book-btn">CHECK AVAILABILITY</button>;
         if(this.props.dateDetail.bookable==0){
             bookBtn ='';
         }
@@ -111,7 +111,7 @@ var PropertySummary = React.createClass({
                  {(this.props.siteid=="1")?
                 <div className="row">
                     <div className="small-12 columns text-center" id="property-rate">
-                        <p>From  {this.props.dateDetail.nightTotal} <span className="text-grey">Per Night</span><br />+<br />Services + 18% VillaHotel Management + Tax</p>
+                        <p>From  <span dangerouslySetInnerHTML={{__html:this.props.dateDetail.nightTotal}}></span> <span className="text-grey">Per Night</span><br />+<br />Services + 18% VillaHotel Management + Tax</p>
                     </div>
                 </div>
 :''}
@@ -247,7 +247,7 @@ var PropertySummaryThumbSlider = React.createClass({
                 items: 1,
                 slideSpeed: 1000,
                 nav: true,
-                navText: ['<img src="img/home/arrow-left.png" style="position: absolute; top: 47%; left: 0;" className="show-for-large-up">', '<img src="img/home/arrow-right.png" style="position: absolute; top: 47%; right: 0;" className="show-for-large-up">'],
+                navText: ['<img src='+this.props.sliderArrowLeft+' style="position: absolute; top: 47%; left: 0;" className="show-for-large-up">', '<img src='+this.props.sliderArrowRight+' style="position: absolute; top: 47%; right: 0;" className="show-for-large-up">'],
                 loop: true,
                 responsiveRefreshRate: 200,
                 dots: false

@@ -14,6 +14,11 @@ var Heading4 = React.createClass({
         return <h4>{this.props.value}</h4>
     }
 });
+var Heading5 = React.createClass({
+    render: function(){
+        return <h5>{this.props.value}</h5>
+    }
+});
 var VillLink = React.createClass({
     render: function(){
         return <Anchor href="https://www.villazzo.com" value="Villazzo" />

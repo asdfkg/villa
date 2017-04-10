@@ -44,12 +44,9 @@ var VillaHotelConcept = React.createClass({
                               <table width="100%" border="0" cellpadding="5" cellspacing="0">
                                   <tbody>
                                       <tr>
-                                          <td>
-                                              <p align="justify"><br/>
-
-
-                                                  Our signature 5-Star VillaHotel Experience includes a lifestyle organized by your own private Hotel Manager and his expert team of hand-picked and uniformed staff whom we train in-house to pamper you. Your personal in-villa butler/concierge, private chef, on-call Villazzo limousine service are all included.
-                                              </p></td>
+                                        <td>
+                                              <p className="inherit-initial"><br/>Our signature 5-Star VillaHotel Experience includes a lifestyle organized by your own private Hotel Manager and his expert team of hand-picked and uniformed staff whom we train in-house to pamper you. Your personal in-villa butler/concierge, private chef, on-call Villazzo limousine service are all included.</p>
+                                        </td>
                                       </tr>
                                   </tbody>
                               </table>
@@ -214,21 +211,25 @@ var VillaHotelConcept = React.createClass({
 var RealityDescritionContent = React.createClass({
     render:function(){
         const styles = {
-            align: 'left', margin: '0px 20px 0px 0px'
+            align: 'left', margin: '0px 20px 0px 0px',float:"left"
         };
         return (
             <div className="row">
-                <div className="large-centered columns">
-                    <h4>VILLAZZO REALTY GIVES YOU ACCESS<br />TO THE FINEST PROPERTIES IN THE WORLD</h4>
-                    <Image1 style={styles} src={villazzoRealityContentImage} width="200" />
-                    <p>
-                        Villazzo has over a decade long track record of success in the ultra-luxury vacation rental marketplace; 
-                        and we successfully leveraged our expertise and  relationships with homeowners and our clients to facilitate real estate transactions as well.
-                        <br /><Anchor href="mailto:lisa.blake@villazzo.com?Subject=Villazzo%20Realty" value="Contact" />
-                        Lisa Blake if you are interested in buying or selling a luxury villa.
+                <div className="large-centered columns realityImage">
+                    <Heading5 value="VILLAZZO REALTY GIVES YOU ACCESS TO THE FINEST PROPERTIES IN THE WORLD" />
+                    <a href="http://www.villazzorealty.com">
+                        <Image1 src={villazzoRealityContentImage} width="400" align="left" styles={styles} />
+                    </a>
+                    <p className="reality-para">
+                        Villazzo has over a decade long track record of success in the ultra-luxury vacation rental marketplace; and we successfully leveraged our 
+                        expertise and relationships with homeowners and our clients to also facilitate real estate transactions.<br /><br />
+                        <Anchor href="mailto:lisa.blake@villazzo.com?Subject=Villazzo%20Realty" value="Contact" />&nbsp;Lisa Blake, Villazzo's leading Real Estate Agent, if you are interested in buying or selling a luxury villa. You may also&nbsp; 
+                        <Anchor href="http://www.villazzorealty.com" value="Visit" /> our website for more information, to view the Top Luxury Deals in Miami or 
+                        to conduct your own property search using our MLS integrated search engines.
                     </p>
                 </div>
-            </div>         		                    
+            </div>
+     		                    
         );
     }
 });
@@ -236,17 +237,20 @@ var RealityDescritionContent = React.createClass({
 
 var InvestmentDescritionContent = React.createClass({
     render:function(){
+        const styles = {
+           margin: '0px 20px 0px 0px',float:"left"
+        };
         return (
             <div className="row">
                 <div className="large-centered columns">
                     <Heading4 value='VILLAZZO INVESTMENTS' />
                     <a href="http://www.villazzo.com/investments/fact-sheet.pdf">
-                        <Image1 src={villazzoInvestmentsContentImage} width="200" />
+                        <Image1 src={villazzoInvestmentsContentImage} width="200" align="left" styles={styles} />
                     </a>
-                    <p>Villazzo Investments is a partnership of elite investors that have taken advantage of the safe asset class of exclusive luxury residential real estate – the most lucrative way of investing money that Christian has attained over 15 years as an investor himself. 
-                        <Anchor href="mailto:investments@villazzo.com?Subject=Villazzo%20Investments" value="Contact" /> Christian if you are interested to learn more about this opportunity.
+                    <p className="reality-para">Villazzo Investments is a partnership of elite investors that have taken advantage of the safe asset class of exclusive luxury residential real estate – the most lucrative way of investing money that Christian has attained over 15 years as an investor himself. 
+                        &nbsp; <Anchor href="mailto:investments@villazzo.com?Subject=Villazzo%20Investments" value="Contact" /> Christian if you are interested to learn more about this opportunity.
                     </p>
-                    <p><Anchor href="http://www.villazzo.com/video/villazzo-investments.php" value="View our Villazzo Investments video to find out more about our investment opportunities." /></p>
+                    <p className="reality-para"><Anchor href="http://www.villazzo.com/video/villazzo-investments.php" value="View our Villazzo Investments video to find out more about our investment opportunities." /></p>
                 </div>
             </div>
         );
@@ -310,7 +314,7 @@ var SpecialOfferDescritionContent = React.createClass({
                                 </div>
                                 <div className="row text-left">
                                     <div className="small-12 columns so-content3">
-                                        <Anchor href="mailto:villas@villazzo.com?subject=Mix%20it%20up!%20Last%20Minute%20WMC%20offer%20in%20Miami!" value="BOOK NOW" className="button tiny" />
+                                        <Anchor classes="button tiny" href="mailto:villas@villazzo.com?subject=Mix%20it%20up!%20Last%20Minute%20WMC%20offer%20in%20Miami!" value="BOOK NOW"  />
                                     </div>
                                 </div>
                             </div>

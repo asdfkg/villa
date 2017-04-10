@@ -1,177 +1,53 @@
-var OverviewBannerImage = React.createClass({
-    render: function(){
-        return (
-            <Image1 src={this.props.overviewBannerImage} alt="" className="" />
-        );
-    }
-});
-
-var OverviewHeading = React.createClass({
+var FeedbackHeading = React.createClass({
     render: function(){
         return (
             <div className="row">
                 <div className="columns">
-                    <Heading1 value="RESERVATIONS" />
+                    <Heading1 value="FEEDBACK REQUEST" />
                 </div>
             </div>
         );
     }
 });
 
+var FeedbackContent = React.createClass({
+    componentDidMount: function(){
+        $('#test').html({this.props.body}); 
 
-var reservationOverview = React.createClass({
-    render: function(){
-        return (
-            <tr>
-                <td valign="top">{this.props.overviewData.reservedDate}</td>
-                <td valign="top">{this.props.overviewData.propertyName}</td>
-                <td valign="top">
-                    <span className="fakeLink" onclick="modalAlert('userInfo{this.props.overviewData.reservationId}', {this.props.overviewData.name}, '');">
-                        {this.props.overviewData.name}
-                    </span>
-                </td>
-                
-            </tr>
-        )
-}});
-
-var StatusForm = React.createClass({
-    render: function(){
-        var reservationStatusId = this.props.reservationStatusId; 
-        return (
-            <form action="" method="post" name="statusForm">
-                <input name="action" type="hidden" value="update" />
-                <input name="reservationId" type="hidden" value={this.props.reservationId} />
-                <select name="status" onChange="submit();" >
-                    {this.props.overviewReservationStatus.map(function(option,i) {
-                       
-                        return <option key={i} value={option.reservationStatusId} selected={option.reservationStatusId==reservationStatusId }  >
-                                {option.reservationStatusName}
-                        </option>
-                    })}
-                </select>
-            </form>
-        )
-    }
-});
-
-
-var DeletePropertyRow = React.createClass({
-    deleteProperty:function(reservationId){
-        $('#delete'+reservationId).css('display', 'none');
-        $('#deleteConfimation'+reservationId).css('display','block'); 
-    },
-    propertyStyle:function(a,b){
-         alert(a); 
-        alert(b); 
+        tinymce.init({
+            selector: '#test',
+            height: 500,
+            plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table contextmenu paste code'
+            ],
+            toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+            content_css: [
+                '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
+                '//www.tinymce.com/css/codepen.min.css'
+            ]
+        });
     },
     render: function(){
         return (
-            <td valign="top">
-                <span id={"delete"+this.props.reservationId} onClick={()=>this.deleteProperty(this.props.reservationId)} className="fakeLink">
-                        <i className="fa fa-trash-o" title="Delete Reservation"></i>
-                </span>
-                <span id={"deleteConfimation"+this.props.reservationId} className="display-false">
-                    Delete Reservation?<br />
-                    <a href={"?action=delete&reservationId="+this.props.reservationId}>yes</a> | 
-                    <span onClick={()=>this.propertyStyle('nishant','sri')} className="fakeLink">
-                        no
-                    </span>
-                </span>
-            </td>
-        )
-    }
-});
-
-var RateImage = React.createClass({
-    render: function(){
-        return (
-            <img src={this.props.src} width="15" height="15" alt="rating" id="rating1" className="overview-margin-img-right" />
-        )
-    }
-});
-
-var PropertyFeedbackRow = React.createClass({
-    render: function(){
-        return (
-            <span>
-                test
-            </span>
-        )
-    }
-});
-
-
-
-
-
-var OverviewList = React.createClass({
-    
-    render: function(){
-        var allReservations = this.props.allReservations;
-        var getView = this.props.getView;
-        var overviewReservationStatus = this.props.overviewReservationStatus; 
-        return (
-            
             <div className="row">
                 <div className="columns">
-                    {this.props.overviewDestinations.map(function(destination,i) {
-                        return <div key={i}>
-                            <p className="overview-para">{destination.destName}</p>
-                            <table width="100%" border="0" cellspacing="0" cellpadding="0" className="overview-table">
-                                <tbody>
-                                <tr>
-                                    <th valign="top">Reserved</th>
-                                    <th valign="top">Property</th>
-                                    <th valign="top">Full Name</th>
-                                    <th valign="top" className="overview-white-space">Check-in</th>
-                                    <th valign="top">Days</th>
-                                    <th valign="top">Total</th>
-                                    <th valign="top">C/O</th>
-                                    <th valign="top">Comm</th>
-                                    <th valign="top" className="overview-status-td" >Status</th>
-                                    <th valign="top">&nbsp;</th>
-                                    <th valign="top" >&nbsp;</th>
-                                </tr>
-                                <tr>
-                                    <td valign="top" colSpan={11} className="overview-blank-td">&nbsp;</td>
-                                </tr>
-
-                                {allReservations[destination.destId].map(function(property,ii) { 
-                                    return <tr>
-                                            <td valign="top">{property.reservedDate}</td>
-                                            <td valign="top">{property.propertyName}</td>
-                                            <td valign="top">
-                                                <span className="fakeLink" onclick="modalAlert('userInfo{property.reservationId}', {property.fullname}, '');" /> 
-                                                {property.fullname}
-                                            </td>
-                                            <td valign="top">
-                                                {property.checkIn}
-                                            </td>
-                                            <td> {property.days} </td>
-                                            <td> {property.total} </td>
-                                            <td> {property.co} </td>
-                                            <td> {property.comm} </td>
-                                            <td> 
-                                                <StatusForm  overviewReservationStatus = {overviewReservationStatus} reservationId={property.reservationId} reservationStatusId={property.reservationStatusId} />
-                                            </td>
-                                            <td> 
-                                                <DeletePropertyRow  reservationId={property.reservationId}  />
-                                            </td>
-                                            <td> <PropertyFeedbackRow  />
-                                            </td>
-                                        </tr>
-                                })}
-                                <tr>
-                                    <td colSpan={10}>{getView=='all'?<a href="">View Less</a>:<a href="?view=all">View All</a>}</td>
-                                </tr>
-                            </tbody>
-                            </table>
-                        </div>
-                    })}
+                    <form id="feedbackRequestForm" onsubmit="return false;">
+                        <input type="hidden" name="reservationId" id="reservationId" value={this.props.reservationId} />
+                        <input type="hidden" name="reservationName" id="reservationName" value={this.props.reservationName} />
+                        <input type="hidden" name="reservationEmail" id="reservationEmail" value={this.props.reservationEmail} />
+                        <input type="hidden" name="messageText" id="messageText" />
+                        <textarea id="test"></textarea>
+                        <textarea name="messageHtml" id="messageHtml" className="feedback-textarea">
+                            
+                        </textarea>
+                        <button className="button" id="feedbackRequestBtn" onclick="$('#messageText').val(tinymce.get('messageHtml').getContent());
+                                                                                            query(form.id, id, 'feedbackRequest');"><span id="feedbackRequestBtnHtml">Send</span></button>
+                        <div className="feedback"></div>
+                    </form>
                 </div>
             </div>
-
         );
     }
 });

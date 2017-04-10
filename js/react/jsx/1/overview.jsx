@@ -61,9 +61,9 @@ var DeletePropertyRow = React.createClass({
         $('#delete'+reservationId).css('display', 'none');
         $('#deleteConfimation'+reservationId).css('display','block'); 
     },
-    propertyStyle:function(a,b){
-         alert(a); 
-        alert(b); 
+    propertyStyle:function(reservationId){
+        $('#delete'+reservationId).css('display','block');
+        $('#deleteConfimation'+reservationId).css('display','none');
     },
     render: function(){
         return (
@@ -74,7 +74,7 @@ var DeletePropertyRow = React.createClass({
                 <span id={"deleteConfimation"+this.props.reservationId} className="display-false">
                     Delete Reservation?<br />
                     <a href={"?action=delete&reservationId="+this.props.reservationId}>yes</a> | 
-                    <span onClick={()=>this.propertyStyle('nishant','sri')} className="fakeLink">
+                    <span onClick={()=>this.propertyStyle(this.props.reservationId)} className="fakeLink">
                         no
                     </span>
                 </span>
@@ -91,12 +91,59 @@ var RateImage = React.createClass({
     }
 });
 
-var PropertyFeedbackRow = React.createClass({
-    render: function(){
+var FeedbackInfo = React.createClass({
+    render: function(reservationId,reservationFirstname, reservationLastname, reservationFeedbackRating, reservationFeedbackComment){
         return (
-            <span>
-                test
-            </span>
+            <table width="400" border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr>
+                        <td valign="top">Rating:</td>
+                        <td valign="top">
+                            <img src={"media/image/ratings/star-"+reservationFeedbackRating>=1 ? 'on' : 'off'+".png"} width="15" height="15" alt="rating" id="rating1" className="feedbackMarFive" />
+                            <img src={"media/image/ratings/star-"+reservationFeedbackRating>=2 ? 'on' : 'off'+".png"} width="15" height="15" alt="rating" id="rating1" className="feedbackMarFive" />
+                            <img src={"media/image/ratings/star-"+reservationFeedbackRating>=3 ? 'on' : 'off'+".png"} width="15" height="15" alt="rating" id="rating1" className="feedbackMarFive" />
+                            <img src={"media/image/ratings/star-"+reservationFeedbackRating>=4 ? 'on' : 'off'+".png"} width="15" height="15" alt="rating" id="rating1" className="feedbackMarFive" />
+                            <img src={"media/image/ratings/star-"+reservationFeedbackRating>=5 ? 'on' : 'off'+".png"} width="15" height="15" alt="rating" id="rating1" className="feedbackMarFive" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top">Comment:</td>
+                        <td valign="top">' . $row_rs_reservationProperty['reservationFeedbackComment'] . '</td>
+                    </tr>
+                </tbody>
+            </table>
+        )
+    }
+});
+
+var PropertyFeedbackRow = React.createClass({
+    
+    
+    propertyFeedbackModelAlert:function(reservationId,reservationFirstname, reservationLastname,reservationFeedbackRating,reservationFeedbackComment, type){
+        modalAlert('feedbackInfo'+reservationId, reservationFirstname+' '+reservationLastname,
+                    function()
+                    {type=='feedbackinfo'?<FeedbackInfo reservationId={reservationId} reservationFirstname={reservationFirstname} reservationLastname={reservationLastname} 
+                            reservationFeedbackRating={reservationFeedbackRating} reservationFeedbackComment={reservationFeedbackComment} />:<UserInfo />} 
+        )
+    },
+    render: function(){
+        var feedbackData='';
+        if(this.props.reservationFeedbackCreateDt){
+            var feedbackData = <span className="fakeLink" onClick={()=>this.propertyFeedbackModelAlert(this.props.reservationId,this.props.reservationFirstname, this.props.reservationLastname,this.props.reservationFeedbackRating,reservationFeedbackComment,feedbackinfo )} >
+                    </span>
+        }else{
+            if(this.props.reservationFeedback){
+                var feedbackData = <a href={"/reservations/overview/feedback/"+this.props.reservationId}>
+                            <i className="fa fa-comment" title="Request Feedback"></i>
+                        </a>
+            }else{
+                var feedbackData = <i className="fa fa-check color-green" title="Feedback Requested"></i>
+            }
+        }
+        return (
+            <td valign="top">
+            {feedbackData}
+            </td>
         )
     }
 });
@@ -158,7 +205,17 @@ var OverviewList = React.createClass({
                                             <td> 
                                                 <DeletePropertyRow  reservationId={property.reservationId}  />
                                             </td>
-                                            <td> <PropertyFeedbackRow  />
+                                            <td> 
+                                                <PropertyFeedbackRow  
+                                                    reservationFeedback         ={property.reservationFeedback} 
+                                                    reservationFeedbackComment  ={property.reservationFeedbackComment}
+                                                    reservationFeedbackCreateDt ={property.reservationFeedbackCreateDt} 
+                                                    reservationFeedbackRating   ={property.reservationFeedbackRating} 
+                                                    reservationTitle            ={property.reservationTitle} 
+                                                    reservationLastname         ={property.reservationLastname}
+                                                    reservationFirstname        ={property.reservationFirstname} 
+                                                    reservationId               ={property.reservationId}
+                                                />
                                             </td>
                                         </tr>
                                 })}

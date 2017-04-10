@@ -190,17 +190,17 @@ var HomeMobileRoundSubFooter = React.createClass({
             <span>
                 <div class="reveal-modal medium homepage-modal" id="homepageRound1Modal" data-reveal>
                     <Heading6 value="Spectacular Private Villas" />
-                    <Paragraph class="visible-for-medium-up" value="Every villa meets Villazzo's 5-star standards for size, architectural excellence, outstanding features, quality furnishings and finishes." />
+                    <Paragraph className="visible-for-medium-up" value="Every villa meets Villazzo's 5-star standards for size, architectural excellence, outstanding features, quality furnishings and finishes." />
                     <p><Anchor href="/luxury-rental-property-vacation-destinations" value="Learn More" /></p>
                 </div>
                 <div class="reveal-modal medium homepage-modal" id="homepageRound2Modal" data-reveal>
                     <Heading6 value="Five Star Hotel Transformation" />
-                    <Paragraph class="visible-for-medium-up" value="Once the property is selected, Villazzo transforms the residence into a 5-star hotel by adding tens of thousands of dollars worth of amenities and features." />                
+                    <Paragraph className="visible-for-medium-up" value="Once the property is selected, Villazzo transforms the residence into a 5-star hotel by adding tens of thousands of dollars worth of amenities and features." />                
                     <p><Anchor href="/video/transformation.mp4" value="Learn More" /></p>
                 </div>
                 <div class="reveal-modal medium homepage-modal" id="homepageRound3Modal" data-reveal>
                     <Heading6 value="Expert Staff" /><br />
-                    <Paragraph class="visible-for-medium-up" value="At your service is your own private Hotel Manager and his expert team of hand-picked butlers, concierges, private chefs, housekeepers and chauffeurs." />
+                    <Paragraph className="visible-for-medium-up" value="At your service is your own private Hotel Manager and his expert team of hand-picked butlers, concierges, private chefs, housekeepers and chauffeurs." />
                     <p><Anchor href="/about-luxury-villa-rentals/villahotel-concept" value="Learn More" /></p>
                 </div>
             </span>
