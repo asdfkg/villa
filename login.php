@@ -31,7 +31,7 @@ if ($_SESSION['USER']->getUserId())
             /** @jsx React.DOM */
             var loginBannerImage = "<?php echo SITE_ID == 1 ? "/img/destination-header_all.png" : "/img/inner-bg1.png" ?>";
             ReactDOM.render(
-                <LoginBannerImage loginBannerImage={loginBannerImage}/>,
+                <Image1 src={loginBannerImage}/>,
                 document.getElementById('header-section')
             );             
             ReactDOM.render(

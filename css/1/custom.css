@@ -2215,3 +2215,5 @@ p.flip {
 .home-blog-font{
     font-size: 12px;
 }
+.calendar-day .white{color: #FFF !important;text-decoration:underline;}
+.calendar-day .black{color: #000 !important;text-decoration:underline}

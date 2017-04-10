@@ -1,11 +1,3 @@
-var LoginBannerImage = React.createClass({
-    render: function(){
-        return (
-            <Image1 src={this.props.loginBannerImage} alt="" className="" />
-        );
-    }
-});
-
 var LoginFormHeading = React.createClass({
     render: function(){
         return (
