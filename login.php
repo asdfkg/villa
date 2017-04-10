@@ -16,6 +16,7 @@ if ($_SESSION['USER']->getUserId())
         <?php include_once 'js/reactLibrary.php'; ?>
         <script src="/js/react/jsx/<?php echo SITE_ID; ?>/login.jsx" type="text/jsx"></script>
     </head>
+
     
     <body>
         <?php require_once 'inc-header.php'; ?>

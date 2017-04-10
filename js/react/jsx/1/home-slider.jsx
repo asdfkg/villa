@@ -29,7 +29,7 @@ var HomeSlider = React.createClass({
             loop: true,
             dots: false,
             nav: true,
-            navText: ['<img src="img/home/arrow-left.png" className="show-for-large-up">', '<img src="img/home/arrow-right.png" className="show-for-large-up">']
+            navText: ['<img src="img/home/1/arrow-left.png" className="show-for-large-up">', '<img src="img/home/1/arrow-right.png" className="show-for-large-up">']
         });
     }, 
     render: function() {

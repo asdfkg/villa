@@ -99,7 +99,7 @@ var SearchResult = React.createClass({
                                     var propertyRate = '';
                                 }
                             }
-                            var BookNowText = siteId=="1"?"Book Now":"Book now and Save 10%";
+                            var BookNowText = siteId=="1"?"BOOK NOW":"BOOK NOW AND SAVE 10%";
                             if (object.booked_till_dt){
                                 var propertyBook = (
                                     <Anchor classes="button book-btn radius tiny expand" href={"?dest="+object.dest_name+"&check_in="+getFormattedDate(object.booked_till_dt,1)+"&check_out="+getFormattedDate(object.booked_till_dt,4)} value={'AVAIL. '+getFormattedDate(object.booked_till_dt,1)}></Anchor>
