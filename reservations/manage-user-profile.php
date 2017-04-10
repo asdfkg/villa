@@ -6,8 +6,7 @@ $_SESSION['USER']->restrict('1,2,3,4');
 
 if (isset($_POST['action']) && $_POST['action'] == 'update' && $_POST['firstName'] != '' && $_POST['lastName'] != '' && $_POST['userEmail'] != '' && $_POST['userPassword'] != '')
 {
-    echo "HERE"; die; 
-	if (strpos($_POST['userPassword'], '*') === false)
+    	if (strpos($_POST['userPassword'], '*') === false)
 	{
 		$_SESSION['DB']->queryUpdate('UPDATE USER SET USER_PASSWORD = AES_ENCRYPT(?, \''.$_SESSION['DB']->getEncryptKey().'\') WHERE USER_ID = ? LIMIT 1', array($_POST['userPassword'], $_POST['userId']));
 	}
@@ -69,7 +68,7 @@ $totalRows_rs_property = $_SESSION['DB']->queryCount($rs_property);
     <?php 
         $profileData = [];
         $profileData[] = array('firstName'=>$row_rs_user['USER_FIRSTNAME'], 'lastName'=>$row_rs_user['USER_LASTNAME'], 
-            'userCompany'=>$row_rs_user['USER_COMPANY'],'userEmail'=>$row_rs_user['USER_EMAIL'], 'userPassword' => $_SESSION['UTILITY']->formatPassword($row_rs_user['unencrypted']), 
+            'userCompany'=>$row_rs_user['USER_COMPANY'],'userEmail'=>$row_rs_user['USER_EMAIL'], 'userPassword' => $row_rs_user['unencrypted'], 
             'userCommissionVillaHotel' => $row_rs_user['USER_COMMISSION_VH'] , 'userCommissionBasicLinen' => $row_rs_user['USER_COMMISSION_BL'], 
             'userId' => $row_rs_user['USER_ID']
         );

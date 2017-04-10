@@ -104,7 +104,7 @@ else
                     </tr>
                 </table>
                 </div>';
-            echo $body;
+            //echo $body;
         
             $reservationName =  $row_rs_reservationProperty['reservationFirstname'] . ' ' . $row_rs_reservationProperty['reservationLastname'];
             $modifiedReservationId = str_replace('=', '', strtr(base64_encode($row_rs_reservationProperty['reservationId']), '+/', '-_'));
@@ -112,26 +112,7 @@ else
             $feedbackData[] = array('reservationId'=>$row_rs_reservationProperty['reservationId'], 'reservationName' => $reservationName, 'reservationEmail' => $row_rs_reservationProperty['reservationEmail'], '$modifiedReservationId'=> $modifiedReservationId, 'body' => $body);
         ?>
 
-        
-        <section>
-            <div class="row">
-                <div class="columns">
-                    <form id="feedbackRequestForm" onsubmit="return false;">
-                        <input type="hidden" name="reservationId" id="reservationId" value="<?php echo $row_rs_reservationProperty['reservationId']; ?>" />
-                        <input type="hidden" name="reservationName" id="reservationName" value="<?php echo $row_rs_reservationProperty['reservationFirstname'] . ' ' . $row_rs_reservationProperty['reservationLastname']; ?>" />
-                        <input type="hidden" name="reservationEmail" id="reservationEmail" value="<?php echo $row_rs_reservationProperty['reservationEmail']; ?>" />
-                        <input type="hidden" name="messageText" id="messageText" />
-                        <textarea name="messageHtml" id="messageHtml" style="width:100%; height:400px;">
-                            
-                        </textarea>
-                        <button class="button" id="feedbackRequestBtn" onclick="$('#messageText').val(tinymce.get('messageHtml').getContent());
-                                                        query(form.id, id, 'feedbackRequest');"><span id="feedbackRequestBtnHtml">Send</span></button>
-                        <div class="feedback"></div>
-                    </form>
-                </div>
-            </div>
-        </section>
-        
+   
         <section id="feedback-content"></section>
         
         <?php require_once '../inc-footer.php'; ?>

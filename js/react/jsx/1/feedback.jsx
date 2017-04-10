@@ -11,11 +11,10 @@ var FeedbackHeading = React.createClass({
 });
 
 var FeedbackContent = React.createClass({
-    componentDidMount: function(){
-        $('#test').html({this.props.body}); 
-
+    componentDidMount: function(){ 
+        setTimeout(function(){
         tinymce.init({
-            selector: '#test',
+            selector: '#messageHtml',
             height: 500,
             plugins: [
                 'advlist autolink lists link image charmap print preview anchor',
@@ -27,7 +26,7 @@ var FeedbackContent = React.createClass({
                 '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
                 '//www.tinymce.com/css/codepen.min.css'
             ]
-        });
+        });},2000);
     },
     render: function(){
         return (
@@ -38,10 +37,7 @@ var FeedbackContent = React.createClass({
                         <input type="hidden" name="reservationName" id="reservationName" value={this.props.reservationName} />
                         <input type="hidden" name="reservationEmail" id="reservationEmail" value={this.props.reservationEmail} />
                         <input type="hidden" name="messageText" id="messageText" />
-                        <textarea id="test"></textarea>
-                        <textarea name="messageHtml" id="messageHtml" className="feedback-textarea">
-                            
-                        </textarea>
+                       <textarea name="messageHtml" id="messageHtml" className="feedback-textarea" defaultValue={this.props.feedbackData[0].body}></textarea>
                         <button className="button" id="feedbackRequestBtn" onclick="$('#messageText').val(tinymce.get('messageHtml').getContent());
                                                                                             query(form.id, id, 'feedbackRequest');"><span id="feedbackRequestBtnHtml">Send</span></button>
                         <div className="feedback"></div>
