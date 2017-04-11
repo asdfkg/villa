@@ -55,3 +55,50 @@ var LoginForm = React.createClass({
     }
 });
 
+var RecoverPasswordModal = React.createClass({
+    closepopup:function(e){ 
+        e.preventDefault();
+        $('#recoverPasswordModal').foundation('reveal', 'close');
+    },
+    submitpopup:function(e){
+        e.preventDefault();
+        query('recoverPasswordModalForm', 'recoverPasswordModalFormBtn', 'recoverPassword');
+        return false;
+    },
+    render:function(){
+        return  <form id="recoverPasswordModalForm" onsubmit="return false;">
+                    <fieldset>
+                        <legend>Recover Password</legend>
+                        <div className="row collapse prefix-radius">
+                            <div className="small-1 medium-2 large-1 columns"><span className="prefix"><i className="fa fa-envelope"></i></span></div>
+                            <div className="small-11 medium-10 large-11 columns">
+                                <input type="text" name="recoverPasswordModalEmail" id="recoverPasswordModalEmail" className="required" placeholder="Enter your email" />
+                            </div>
+                        </div>
+                        <div className="row collapse feedback"></div>
+                        <div className="row collapse">
+                            <div className="right">
+                                <button className="button secondary tiny radius" onClick={this.closepopup}>Cancel</button>&nbsp;
+                                <button className="button submit tiny radius" id="recoverPasswordModalFormBtn" onClick={this.submitpopup}>
+                                    <span>Recover</span><i className="fa fa-circle-o-notch fa-spin"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+    }
+});
+var RecoverPasswordModalFeedback = React.createClass({
+    render:function(){
+        return <form>
+                    <fieldset>
+                        <legend>Recover Password</legend>
+                        <div className="row">
+                            <div className="columns"></div>
+                        </div>
+                    </fieldset>
+                    <a className="close-reveal-modal" aria-label="Close">&#215;</a>
+                </form>
+        
+    }
+})
