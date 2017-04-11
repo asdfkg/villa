@@ -24,7 +24,8 @@ if ($_SESSION['USER']->getUserId())
         <section id="reservations-title-steps-section"></section>
         <section id="destination-results"></section>       
         <?php require_once 'inc-footer.php'; ?>
-        <?php require_once 'modal/password.php'; ?>
+        <div class="reveal-modal medium" id="recoverPasswordModal" data-reveal></div>
+        <div class="reveal-modal medium" id="recoverPasswordModalFeedback" data-reveal></div>
         <?php require_once 'inc-js.php'; ?>
         
         <script type="text/jsx">
@@ -41,6 +42,14 @@ if ($_SESSION['USER']->getUserId())
             ReactDOM.render(
                 <LoginForm />,
                 document.getElementById('destination-results')
+            );
+            ReactDOM.render(
+                <RecoverPasswordModal />,
+                document.getElementById('recoverPasswordModal')
+            );
+            ReactDOM.render(
+                <RecoverPasswordModalFeedback />,
+                document.getElementById('recoverPasswordModalFeedback')
             );
         </script>
     </body>

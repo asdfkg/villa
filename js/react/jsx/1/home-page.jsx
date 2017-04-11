@@ -57,7 +57,7 @@ var HomePrivateSection = React.createClass({
                     <div className="small-12 columns home-round-box">
                         <div className="row text-center">
                             <div className="small-12 medium-4 columns content-box">
-                                <a href="" data-reveal-id="homepageRound1Modal">
+                                <a href="javascript:void(0)" data-reveal-id="homepageRound1Modal">
                                     <Image1 src={homeArrivingImage1} /></a>
                                 <Heading6 value='Spectacular<br />Private Villas' />     
                             </div>
@@ -164,7 +164,7 @@ var HomeMobileSubFooter = React.createClass({
     render: function() {
         return (
             <div>
-                <div class="row text-center small-collapsed">
+                <div className="row text-center small-collapsed">
                     <MobileSubFootContent href='/reservations/' src='img/home/home-subfooter_book.png' heading='Book Online' />
                     <MobileSubFootContent href='/about-luxury-villa-rentals/villahotel-concept' src='img/home/home-subfooter_villa_hotel.png' heading='VillaHotel' />
                 </div>
@@ -188,17 +188,17 @@ var HomeMobileRoundSubFooter = React.createClass({
     render: function() {
         return (
             <span>
-                <div class="reveal-modal medium homepage-modal" id="homepageRound1Modal" data-reveal>
+                <div className="reveal-modal medium homepage-modal" id="homepageRound1Modal" data-reveal>
                     <Heading6 value="Spectacular Private Villas" />
                     <Paragraph className="visible-for-medium-up" value="Every villa meets Villazzo's 5-star standards for size, architectural excellence, outstanding features, quality furnishings and finishes." />
                     <p><Anchor href="/luxury-rental-property-vacation-destinations" value="Learn More" /></p>
                 </div>
-                <div class="reveal-modal medium homepage-modal" id="homepageRound2Modal" data-reveal>
+                <div className="reveal-modal medium homepage-modal" id="homepageRound2Modal" data-reveal>
                     <Heading6 value="Five Star Hotel Transformation" />
                     <Paragraph className="visible-for-medium-up" value="Once the property is selected, Villazzo transforms the residence into a 5-star hotel by adding tens of thousands of dollars worth of amenities and features." />                
                     <p><Anchor href="/video/transformation.mp4" value="Learn More" /></p>
                 </div>
-                <div class="reveal-modal medium homepage-modal" id="homepageRound3Modal" data-reveal>
+                <div className="reveal-modal medium homepage-modal" id="homepageRound3Modal" data-reveal>
                     <Heading6 value="Expert Staff" /><br />
                     <Paragraph className="visible-for-medium-up" value="At your service is your own private Hotel Manager and his expert team of hand-picked butlers, concierges, private chefs, housekeepers and chauffeurs." />
                     <p><Anchor href="/about-luxury-villa-rentals/villahotel-concept" value="Learn More" /></p>

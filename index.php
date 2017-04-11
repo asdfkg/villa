@@ -78,7 +78,7 @@ if ($totalRows_rs_reservation_feedback) {
             <!-- Mobile Sub Footer Section Start -->
             <section id="sub-footer-mobile-border"></section>
             <section id="sub-footer-mobile" class="visible-for-small-only"></section>
-            <section id="sub-footer-round-mobile" class="visible-for-small-only"></section>
+            <section id="model-list"></section>
             <!--  Mobile Sub Footer Section End -->
             <?php require_once 'inc-footer.php'; ?>
             <?php require_once 'modal/video.php'; ?>
@@ -96,7 +96,7 @@ if ($totalRows_rs_reservation_feedback) {
         <?php require_once 'reservations/inc-reservation.php'; ?>
         
         
-
+<script>$(document).foundation();</script>
 
     <!-- React Script -->
     <script type="text/jsx">
@@ -162,7 +162,7 @@ if ($totalRows_rs_reservation_feedback) {
             );
              ReactDOM.render(
                  <HomeMobileRoundSubFooter  />,
-                 document.getElementById('sub-footer-round-mobile')
+                 document.getElementById('model-list')
             );
        <?php } if(SITE_ID == 2){ ?>
             var sliders = [
