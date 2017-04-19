@@ -44,7 +44,7 @@ $totalRows_rs_property = $_SESSION['DB']->queryCount($rs_property);
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Reservations - VILLAZZO</title>
+    <title>Reservations - <?php echo SITE_NAME;?></title>
     <link rel="stylesheet" href="/css/<?php echo SITE_ID; ?>/custom.css">
     <script src="/js/vendor/modernizr.js"></script>
     <?php include_once '../js/reactLibrary.php'; ?>
@@ -80,7 +80,7 @@ $totalRows_rs_property = $_SESSION['DB']->queryCount($rs_property);
         var profileBannerImage = "<?php echo SITE_ID==1?"/img/destination-header_all.png": "/img/inner-bg1.png"?>";
         var profileData = <?php echo json_encode($profileData); ?>;
         ReactDOM.render(
-            <ProfileBannerImage profileBannerImage={profileBannerImage} />,
+            <Image1 src={profileBannerImage} />,
             document.getElementById('header-section')
         );  
         ReactDOM.render(

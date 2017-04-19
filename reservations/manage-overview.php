@@ -40,7 +40,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete') {
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <title>Reservations - VILLAZZO</title>
+        <title>Reservations - <?php echo SITE_NAME;?></title>
         <link rel="stylesheet" href="/css/<?php echo SITE_ID; ?>/custom.css">
         <script src="/js/vendor/modernizr.js"></script>
         <?php include_once '../js/reactLibrary.php'; ?>
@@ -248,7 +248,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete') {
             
             
             ReactDOM.render(
-                <OverviewBannerImage overviewBannerImage={overviewBannerImage} />,
+                <Image1 src={overviewBannerImage} alt="" className="" />,
                 document.getElementById('header-section')
             );  
             ReactDOM.render(

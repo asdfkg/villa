@@ -91,7 +91,7 @@ var HeaderTopBar = React.createClass({
 
                             <form action="/search/" id="mainSearchForm" method="post">
                                 <span className="fa fa-search" onClick={this.handleSearchClick}></span>
-                                <input type="search" name="keyword" id="top-bar-section-search" placeholder="Search"/>
+                                <input type="search" name="keyword" id="top-bar-section-search" placeholder={this.props.siteid==1?"":"Search"}/>
 	                    </form>
                         </div>
                     </div>

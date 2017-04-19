@@ -539,7 +539,7 @@ class Reservation
 						(
 							'type' => 'management',
 							'desc_short' => 'VillaHotel Management & Supervision',
-							'desc_long' => 'VillaHotel Management & Supervision ('.$fiveStarVillaHotelManagement.'%)',
+							'desc_long' => 'VillaHotel Management & Supervision',
 							'rate' => $villaFiveStarRateArray['management'],
 							'percentage' => $fiveStarVillaHotelManagement
 						),
@@ -1334,7 +1334,6 @@ class Reservation
                     $menu2 = array('label' => 'MY ACCOUNT',
                         'href' => '#',
                         'child' => array(
-                            array('href' => "#", 'label' => "Back"),
                             array('href' => "/reservations/", 'label' => "New Booking"),
                         )
                     );

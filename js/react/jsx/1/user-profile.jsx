@@ -1,11 +1,3 @@
-var ProfileBannerImage = React.createClass({
-    render: function(){
-        return (
-            <Image1 src={this.props.profileBannerImage} alt="" className="" />
-        );
-    }
-});
-
 var ProfileHeading = React.createClass({
     render: function(){
         return (
