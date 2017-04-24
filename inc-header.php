@@ -10,7 +10,7 @@
                     <MobileHeaderTopBar siteid={siteId}/>
                     <MobileHeaderTopBarMenu menuItems={menuItems} siteid={siteId} />
                     <header>
-                        <HeaderTopBar />
+                        <HeaderTopBar siteid={siteId} />
                         <HeaderTopBarMenu menuItems={menuItems} />
                     </header>
                 </div>,

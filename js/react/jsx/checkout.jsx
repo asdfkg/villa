@@ -163,7 +163,7 @@ var CheckoutStep2 = React.createClass({
                 <div className="row">
                     <div className="columns">
                         {this.props.siteid=="1" && 
-                            <div className='tab-content'>
+                            <div className='tabs-content'>
                                 <div className='content active' id='service-level-5'>
                                     <CheckoutStep2ServiceContent additionalServicesInfo={this.props.additionalServicesInfo} property={this.props.property} siteid={this.props.siteid} serviceInfo={this.props.serviceInfo} selectedServiceLevel={this.props.selectedServiceLevel} totalNights={this.props.totalNights}/>
                                </div>

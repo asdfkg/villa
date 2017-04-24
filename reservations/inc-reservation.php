@@ -13,7 +13,7 @@ if ($totalRows_rs_feature) {
 ?>
 <script type="text/jsx" charset="utf-8">
 var data = {
-    destination: "<?php echo ($_GET['dest']) ?>",
+destination: "<?php echo urlencode($_GET['dest']) ?>",
     checkin: "<?php echo ($_GET['check_in'] ? date('m/d/Y', strtotime($_GET['check_in'])) : date('m/d/Y', strtotime('+7 days'))); ?>",
     checkout: "<?php echo ($_GET['check_out'] ? date('m/d/Y', strtotime($_GET['check_out'])) : date('m/d/Y', strtotime('+14 days'))); ?>",
 };
@@ -26,8 +26,8 @@ var SearchOptions = [{description: 'All',code: 'all'},
                {description: 'Ibiza',code: 'ibiza'}
                <?php if(SITE_ID==2){
                    echo ",
-               {description: 'Turks & Caicos',code: 'turks%20%26%20caicos'},
-               {description: 'Palm Beach',code: 'palm%20beach'},
+               {description: 'Turks & Caicos',code: 'turks+%26+caicos'},
+               {description: 'Palm Beach',code: 'palm+beach'},
                ";} ?>];
 var featuresList = <?php echo json_encode($featuresList); ?>;
 var amenitiesList = 

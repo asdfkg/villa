@@ -21,7 +21,7 @@ var Heading5 = React.createClass({
 });
 var VillLink = React.createClass({
     render: function(){
-        return <Anchor href="https://www.villazzo.com" value="Villazzo" />
+        return <Anchor href="https://www.villazzo.com" value="VILLAZZO" />
     }
 });
 var GVDLink = React.createClass({

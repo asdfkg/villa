@@ -59,7 +59,7 @@ var SearchResult = React.createClass({
                                 :'')
                         +
                         (object.property_interior_sq && object.property_interior_mt?
-                            '<br />Interior Space: <span class="text-grey">'+numberWithCommas(parseInt(object.property_interior_sq).toFixed())+' sq ft ('+numberWithCommas(parseInt(object.property_interior_mt).toFixed())+'m&sup2;)</span>'
+                            '<br />Interior Space: <span class="text-grey">'+numberWithCommas(parseInt(object.property_interior_sq).toFixed())+' sq ft ('+numberWithCommas(parseInt(object.property_interior_mt).toFixed())+' m&sup2;)</span>'
                                 :'')
                     );
         };
@@ -72,13 +72,16 @@ var SearchResult = React.createClass({
             checkOutDt: checkOutDt
         }; 
         var siteId = this.props.siteid;
+        var destinationPage = this.props.destinationPage;
 	return <div>
-                <SearchTotal total={this.props.totalVillas} />
+                {destinationPage=="1"?"":<SearchTotal total={this.props.totalVillas} />}
                 <PropertySummaryDatePopupForm data={dateDetail} />
                     <div className="row text-center">
                         {_data.map(function (object,i) {
                             {var currency = <span dangerouslySetInnerHTML={unescapeHTML(object.dest_currency)}></span> }
-                            if(siteId =="1"){
+                            if(destinationPage == "1"){
+                               var propertyRate = <div> Property Value: <span className="text-grey">{currency}{numberWithCommas((object.property_value).toFixed())}</span></div>
+                            }else if(siteId =="1"){
                                 var propertyRate = (
                                         <div>{currency} {numberWithCommas((object.service_levels.five_star.night).toFixed())} <br /><span className="text-grey">per night</span></div>
                                 )
@@ -114,7 +117,7 @@ var SearchResult = React.createClass({
                             var propertyBook = object.bookable==false ? <button className="button book-btn radius tiny expand prop-interested" data-propertyname={object.property_name}>I'M INTERESTED</button>:propertyBook ;
                             if( object.min_book_days != null && object.min_book_days>0 && bookingDays < object.min_book_days ){
                                 var propertyBook = <button className="button book-btn radius tiny expand prop-min-booking" 
-                                    data-propertyname={object.property_name} data-propertyid={object.id}
+                                    data-propertyname={object.property_name} data-propertyid={object.property_id}
                                     data-minbookdays={object.min_book_days}>CHECK AVAILABILITY</button>;
                             }
 

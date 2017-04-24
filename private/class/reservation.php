@@ -106,7 +106,7 @@ class Reservation
 			foreach($keywordArray as $keyword)
 			{
 				if ($sortByWhere != '') $sortByWhere .= ' AND';
-				$sortByWhere .= ' property.propertyId IN (SELECT propertyId FROM property WHERE '.(($destName)?'destName = \''.$destName.'\' AND':'').' (propertyDescTitle LIKE \'%'.$keyword.'%\' OR propertyDescLong LIKE \'%'.$keyword.'%\' OR propertyDescLong LIKE \'%'.$keyword.'%\' OR propertyDescLong LIKE \'%'.$keyword.'%\' OR propertyDescLong LIKE \'%'.$keyword.'%\' OR propertyBedrDesc LIKE \'%'.$keyword.'%\') OR property.propertyId IN (SELECT propertyId FROM propertyFeature LEFT JOIN feature ON feature.featureId = propertyFeature.featureId WHERE propertyActive = 1'.(($destName)?' AND destName = \''.$destName.'\'':'').' AND featureName LIKE \'%'.$keyword.'%\'))';
+				$sortByWhere .= ' property.propertyId IN (SELECT propertyId FROM property WHERE '.(($destName)?'destName = \''.$destName.'\' AND':'').' (propertyDescTitle LIKE \'%'.$keyword.'%\' OR propertyDescLong LIKE \'%'.$keyword.'%\' OR propertyBedrDesc LIKE \'%'.$keyword.'%\' OR propertyLocationName LIKE \'%'.$keyword.'%\') OR property.propertyId IN (SELECT propertyId FROM propertyFeature LEFT JOIN feature ON feature.featureId = propertyFeature.featureId WHERE propertyActive = 1'.(($destName)?' AND destName = \''.$destName.'\'':'').' AND featureName LIKE \'%'.$keyword.'%\'))';
 			}
 		}
 		
@@ -539,7 +539,7 @@ class Reservation
 						(
 							'type' => 'management',
 							'desc_short' => 'VillaHotel Management & Supervision',
-							'desc_long' => 'VillaHotel Management & Supervision ('.$fiveStarVillaHotelManagement.'%)',
+							'desc_long' => 'VillaHotel Management & Supervision',
 							'rate' => $villaFiveStarRateArray['management'],
 							'percentage' => $fiveStarVillaHotelManagement
 						),
@@ -1308,8 +1308,8 @@ class Reservation
                 );
              
             if (SITE_ID == 2) {
-                array_splice($menu[0]['child'], 6, 0,array( array('href' => "/reservations/?dest=turks%20%26%20caicos&check_in=&check_out=", 'label' => "Turks & Caicos")));
-                array_splice($menu[0]['child'], 7, 0,array( array('href' => "/reservations/?dest=palm%20beach&check_in=&check_out=", 'label' => "Palm Beach")));
+                array_splice($menu[0]['child'], 6, 0,array( array('href' => "/reservations/?dest=turks+%26+caicos&check_in=&check_out=", 'label' => "Turks & Caicos")));
+                array_splice($menu[0]['child'], 7, 0,array( array('href' => "/reservations/?dest=palm+beach&check_in=&check_out=", 'label' => "Palm Beach")));
             }
             if (SITE_ID == 1) {
                 
@@ -1334,7 +1334,6 @@ class Reservation
                     $menu2 = array('label' => 'MY ACCOUNT',
                         'href' => '#',
                         'child' => array(
-                            array('href' => "#", 'label' => "Back"),
                             array('href' => "/reservations/", 'label' => "New Booking"),
                         )
                     );

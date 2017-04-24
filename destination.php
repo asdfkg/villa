@@ -1,5 +1,5 @@
 <?php
-require_once '/kunden/homepages/27/d309616710/htdocs/private/config.php';
+require_once './private/config.php';
 
 // get the destination information
 $destination = $_GET['dest'];
@@ -16,8 +16,6 @@ else if ($destination == 'saint-tropez') $destinationDesc = 'Out of over 100 vac
 else if ($destination == 'st-barth') $destinationDesc = 'Out of over 100 vacation villas, Villazzo President Christian Jagodzinski has personally hand-selected only the finest 10 properties St Barth. His strict selection is based on his own demanding criteria for privacy, amenities, décor, ambience, and design. Most properties simply do not qualify - they are either antiquated, poorly maintained or poorly furnished. Below are the most exclusive luxury villas for rent in St Barth worthy of the Villazzo label.';
 
 $propertyArray = $_SESSION['RESERVATION']->getProperty($destination=='all'?'':$destination, '', '', 0, 0, 0, 0, 0, '', '', 1);
-$villas = NULL;
-$villas = $_SESSION['RESERVATION']->formatProperty($propertyArray, 'destination');
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -26,27 +24,22 @@ $villas = $_SESSION['RESERVATION']->formatProperty($propertyArray, 'destination'
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title><?php echo $row_rs_destination['destMetaTitle']; ?></title>
-	<meta name="Description" content="<?php echo $row_rs_destination['destMetaDesc']; ?>" />
-	<meta name="Keywords" content="<?php echo $row_rs_destination['destMetaKeywords']; ?>" />
-    <link rel="stylesheet" href="/css/custom.css">
+    <meta name="Description" content="<?php echo $row_rs_destination['destMetaDesc']; ?>" />
+    <meta name="Keywords" content="<?php echo $row_rs_destination['destMetaKeywords']; ?>" />
+    <link rel="stylesheet" href="/css/<?php echo SITE_ID;?>/custom.css">
     <script src="/js/vendor/modernizr.js"></script>
+    <?php include_once '/js/reactLibrary.php'; ?>
+    <script src="/js/react/jsx/<?php echo SITE_ID; ?>/user-profile.jsx" type="text/jsx"></script>
+    <script src="/js/react/jsx/search-result.jsx"  type="text/jsx"></script>
 </head>
 
 <body>
 	<?php require_once 'inc-header.php'; ?>
     <!-- Destination Start -->
-    <section id="destination-header-image">
-        <img alt="Villa Rentals" src="img/destination-header_<?php echo str_replace('-', '_', $destination); ?>.png">
-        <div class="row">
-            <div class="small-12 columns">
-                <h1><?php echo 'LUXURY '.strtoupper($destination).' VILLA & HOME VACATION RENTALS'; ?></h1>
-                <p><?php echo $destinationDesc; ?></p>
-            </div>
-        </div>
-    </section>
+    <section id="destination-header-image"></section>
     <!-- Start Destination Results Start-->
     <section id="destination-results">
-        <div class="row text-center"><?php echo $villas; ?></div>
+        <div class="row text-center"><?php //echo $villas; ?></div>
     </section>
     <!-- Start Destination Results End-->
     <!-- Destination End -->
@@ -90,6 +83,32 @@ $villas = $_SESSION['RESERVATION']->formatProperty($propertyArray, 'destination'
 		minDate: '+1d'
 	});
 	</script>
+        <script type="text/jsx">
+            /** @jsx React.DOM */
+            var bannerImage = "<?php echo SITE_ID==1?"/img/destination-header_".str_replace('-', '_', $destination).".png": "/img/inner-bg1.png"?>";
+            
+            ReactDOM.render(
+                <div>
+                    <Image1 alt="Villa Rentals" src={bannerImage} />
+                    <div className="row">
+                        <div className="small-12 columns">
+                            <Heading1 value="<?php echo 'LUXURY '.strtoupper($destination).' VILLA & HOME VACATION RENTALS'; ?>"/>
+                            <p><?php echo $destinationDesc; ?></p>
+                        </div>
+                    </div>
+                </div>,
+                document.getElementById('destination-header-image')
+            );
+    
+            var data =<?php echo json_encode($propertyArray);?>;
+            var bookurl = '<?php echo ($_SESSION['USER']->getUserId())?'calendar':'services'; ?>';
+            ReactDOM.render(
+              <SearchResult siteid="<?php echo SITE_ID;?>" destinationPage="1" property={data} totalVillas="" bookurl={bookurl}/>,
+              document.getElementById('destination-results')
+            );
+        </script>
+        
+        
 </body>
 
 </html>

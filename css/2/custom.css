@@ -2,7 +2,7 @@
 @import url(/css/2/jquery.css);
 @import url(/css/font-awesome/css/font-awesome.min.css);
 @import url(/js/owlcarousel/assets/owl.carousel.css);
-@import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans:400,600,700');
 @font-face {
 	font-family: 'Trajan Pro Regular';
 	font-style: normal;
@@ -2854,4 +2854,6 @@ p.footer-copyright a:hover {
     padding-top: 10px;
 }
 
+}div#footer-home-img img {
+    width: 100%;
 }

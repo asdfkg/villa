@@ -111,7 +111,7 @@ var PropertySummary = React.createClass({
                  {(this.props.siteid=="1")?
                 <div className="row">
                     <div className="small-12 columns text-center" id="property-rate">
-                        <p>From  <span dangerouslySetInnerHTML={{__html:this.props.dateDetail.nightTotal}}></span> <span className="text-grey">Per Night</span><br />+<br />Services + 18% VillaHotel Management + Tax</p>
+                        <p>From  <span dangerouslySetInnerHTML={{__html:this.props.dateDetail.nightTotal}}></span> <span className="text-grey">Per Night</span><br />+<br />Services + VillaHotel Management + Tax</p>
                     </div>
                 </div>
 :''}

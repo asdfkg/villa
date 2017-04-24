@@ -1,11 +1,3 @@
-var OverviewBannerImage = React.createClass({
-    render: function(){
-        return (
-            <Image1 src={this.props.overviewBannerImage} alt="" className="" />
-        );
-    }
-});
-
 var OverviewHeading = React.createClass({
     render: function(){
         return (
