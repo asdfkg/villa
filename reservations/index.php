@@ -7,7 +7,9 @@ if ($_SESSION['RESERVATION']->get('reservationId')) {
 }
 
 if (isset($_POST['action']) && $_POST['action'] == 'reservation'){
-    $lastSearch = json_encode($_POST);    
+    $post = $_POST;
+    $post['dest'] = urldecode($post['dest']);
+    $lastSearch = json_encode($post);
     setcookie("lastSearch",$lastSearch,time()+(60*60*24*20));
     die(header('Location: ?dest='.$_POST['dest'].'&check_in='.date('m/d/Y', strtotime($_POST['checkInDt'])).'&check_out='.date('m/d/Y', strtotime($_POST['checkOutDt'])).'&bed_min='.(@$_POST['bedMin']).'&bed_max='.(@$_POST['bedMax']).'&budget_min='.(@$_POST['budgetMin']).'&budget_max='.(@$_POST['budgetMax']).'&amenities='.(@$_POST['amenities'])));
 }
