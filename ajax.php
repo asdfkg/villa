@@ -62,37 +62,72 @@ switch ($_POST['action'])
 			
 	// contact
 	case 'contact':
-		if (trim($_POST['firstName']) != '' && trim($_POST['lastName']) != '' && trim($_POST['email']) != '' && trim($_POST['message']) != '')
-		{
-			if ($_POST['code'] == 4) 
-			{
-				$from = array($_POST['email'], $_POST['firstName'].' '.$_POST['lastName']);
-				$to = array($_SESSION['SETTING']->getCompanyEmail());
-				$subject = 'Contact Request';
-				$message = '<p><span style="font-weight:bold;">Name</span><br>'.$_POST['firstName'].' '.$_POST['lastName'].'</p>';
-				$message .= '<p><span style="font-weight:bold;">Email</span><br>'.$_POST['email'].'</p>';
-				$message .= '<p><span style="font-weight:bold;">Phone</span><br>'.$_POST['phone'].'</p>';
-				$message .= '<p><span style="font-weight:bold;">Message</span><br>'.$_POST['message'].'</p>';
-                                
-                                if(!empty($_POST['address'])) $message .= '<p><span style="font-weight:bold;">Address</span><br>'.$_POST['address'].'</p>';
-                                if(!empty($_POST['city'])) $message .= '<p><span style="font-weight:bold;">City</span><br>'.$_POST['city'].'</p>';
-                                if(!empty($_POST['state'])) $message .= '<p><span style="font-weight:bold;">State</span><br>'.$_POST['state'].'</p>';
-                                if(!empty($_POST['zipCode'])) $message .= '<p><span style="font-weight:bold;">ZipCode</span><br>'.$_POST['zipCode'].'</p>';
-                                if(!empty($_POST['country'])) $message .= '<p><span style="font-weight:bold;">Country</span><br>'.$_POST['country'].'</p>';
-                                
-                                if(SITE_ID==1){
-                                    $message .= '<p><span style="font-weight:bold;">Send me your VillaHotel brochure: </span>'.(isset($_POST['brochure'])?'yes':'no').'</p>';
-                                }
-				$message .= '<p><span style="font-weight:bold;">Email me your monthly newsletter: </span>'.(isset($_POST['newsletter'])?'yes':'no').'</p>';
-				$body = file_get_contents(EMAILS_PATH.'main.html');
-				$body = str_replace('#MESSAGE#', $message, $body);
-				
-				if ($_SESSION['UTILITY']->sendEmail($from, $to, $subject, $body)) $outputArray = array('result' => 1, 'feedback' => 'Your message has been sent', 'redirect' => '/');
-				else $outputArray = array('result' => 0, 'feedback' => 'An error occurred, please try again');
-			}
-			else $outputArray = array('result' => 0, 'feedback' => 'The security code is invalid - the answer is 4');
-		}
-		else $outputArray = array('result' => 0, 'feedback' => 'Please fill in all required fields');
+                if(SITE_ID==1){
+                    if (trim($_POST['firstName']) != '' && trim($_POST['lastName']) != '' && trim($_POST['email']) != '' && trim($_POST['phone']) != '' &&  trim($_POST['address']) != '' && trim($_POST['city']) != '' && trim($_POST['state']) != '' && trim($_POST['zipCode']) != '' && trim($_POST['country']) != '')
+                    {
+                            if ($_POST['code'] == 4) 
+                            {
+                                    $from = array($_POST['email'], $_POST['firstName'].' '.$_POST['lastName']);
+                                    $to = array($_SESSION['SETTING']->getCompanyEmail());
+                                    $subject = 'Contact Request';
+                                    $message = '<p><span style="font-weight:bold;">Name</span><br>'.$_POST['firstName'].' '.$_POST['lastName'].'</p>';
+                                    $message .= '<p><span style="font-weight:bold;">Email</span><br>'.$_POST['email'].'</p>';
+                                    $message .= '<p><span style="font-weight:bold;">Phone</span><br>'.$_POST['phone'].'</p>';
+                                    $message .= '<p><span style="font-weight:bold;">Message</span><br>'.$_POST['message'].'</p>';
+
+                                    if(!empty($_POST['address'])) $message .= '<p><span style="font-weight:bold;">Address</span><br>'.$_POST['address'].'</p>';
+                                    if(!empty($_POST['city'])) $message .= '<p><span style="font-weight:bold;">City</span><br>'.$_POST['city'].'</p>';
+                                    if(!empty($_POST['state'])) $message .= '<p><span style="font-weight:bold;">State</span><br>'.$_POST['state'].'</p>';
+                                    if(!empty($_POST['zipCode'])) $message .= '<p><span style="font-weight:bold;">ZipCode</span><br>'.$_POST['zipCode'].'</p>';
+                                    if(!empty($_POST['country'])) $message .= '<p><span style="font-weight:bold;">Country</span><br>'.$_POST['country'].'</p>';
+
+                                    if(SITE_ID==1){
+                                        $message .= '<p><span style="font-weight:bold;">Send me your VillaHotel brochure: </span>'.(isset($_POST['brochure'])?'yes':'no').'</p>';
+                                    }
+                                    $message .= '<p><span style="font-weight:bold;">Email me your monthly newsletter: </span>'.(isset($_POST['newsletter'])?'yes':'no').'</p>';
+                                    $body = file_get_contents(EMAILS_PATH.'main.html');
+                                    $body = str_replace('#MESSAGE#', $message, $body);
+
+                                    if ($_SESSION['UTILITY']->sendEmail($from, $to, $subject, $body)) $outputArray = array('result' => 1, 'feedback' => 'Your message has been sent', 'redirect' => '/');
+                                    else $outputArray = array('result' => 0, 'feedback' => 'An error occurred, please try again');
+                            }
+                            else $outputArray = array('result' => 0, 'feedback' => 'The security code is invalid - the answer is 4');
+                    }
+                    else $outputArray = array('result' => 0, 'feedback' => 'Please fill in all required fields');
+                }
+                if(SITE_ID==2){
+                    if (trim($_POST['firstName']) != '' && trim($_POST['lastName']) != '' && trim($_POST['email']) != '' && trim($_POST['phone']) != '' && trim($_POST['message']) != '')
+                    {
+                            if ($_POST['code'] == 4) 
+                            {
+                                    $from = array($_POST['email'], $_POST['firstName'].' '.$_POST['lastName']);
+                                    $to = array($_SESSION['SETTING']->getCompanyEmail());
+                                    $subject = 'Contact Request';
+                                    $message = '<p><span style="font-weight:bold;">Name</span><br>'.$_POST['firstName'].' '.$_POST['lastName'].'</p>';
+                                    $message .= '<p><span style="font-weight:bold;">Email</span><br>'.$_POST['email'].'</p>';
+                                    $message .= '<p><span style="font-weight:bold;">Phone</span><br>'.$_POST['phone'].'</p>';
+                                    $message .= '<p><span style="font-weight:bold;">Message</span><br>'.$_POST['message'].'</p>';
+
+                                    if(!empty($_POST['address'])) $message .= '<p><span style="font-weight:bold;">Address</span><br>'.$_POST['address'].'</p>';
+                                    if(!empty($_POST['city'])) $message .= '<p><span style="font-weight:bold;">City</span><br>'.$_POST['city'].'</p>';
+                                    if(!empty($_POST['state'])) $message .= '<p><span style="font-weight:bold;">State</span><br>'.$_POST['state'].'</p>';
+                                    if(!empty($_POST['zipCode'])) $message .= '<p><span style="font-weight:bold;">ZipCode</span><br>'.$_POST['zipCode'].'</p>';
+                                    if(!empty($_POST['country'])) $message .= '<p><span style="font-weight:bold;">Country</span><br>'.$_POST['country'].'</p>';
+
+                                    if(SITE_ID==1){
+                                        $message .= '<p><span style="font-weight:bold;">Send me your VillaHotel brochure: </span>'.(isset($_POST['brochure'])?'yes':'no').'</p>';
+                                    }
+                                    $message .= '<p><span style="font-weight:bold;">Email me your monthly newsletter: </span>'.(isset($_POST['newsletter'])?'yes':'no').'</p>';
+                                    $body = file_get_contents(EMAILS_PATH.'main.html');
+                                    $body = str_replace('#MESSAGE#', $message, $body);
+
+                                    if ($_SESSION['UTILITY']->sendEmail($from, $to, $subject, $body)) $outputArray = array('result' => 1, 'feedback' => 'Your message has been sent', 'redirect' => '/');
+                                    else $outputArray = array('result' => 0, 'feedback' => 'An error occurred, please try again');
+                            }
+                            else $outputArray = array('result' => 0, 'feedback' => 'The security code is invalid - the answer is 4');
+                    }
+                    else $outputArray = array('result' => 0, 'feedback' => 'Please fill in all required fields');
+                }
 	break;
 	
 	// property interested

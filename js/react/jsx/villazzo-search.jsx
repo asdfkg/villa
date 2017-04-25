@@ -80,6 +80,7 @@ var SearchFilter = React.createClass({
         var amenitiesList = this.state.amenitiesList;
         var marginRightStyle = {marginRight:0};
         var handleAmenityChange = this.handleAmenityChange;
+        var siteid  = this.props.siteid;
         return (
             <div className="row">
                 <div className="columns">
@@ -105,7 +106,7 @@ var SearchFilter = React.createClass({
                         </div>
                         <div className="row">
                             <div className="columns">
-                                <Heading6 value="PER NIGHT" />
+                                <Heading6 value={ (siteid==1)?"PRICE RANGE":"PER NIGHT" } />
                             </div>
                         </div>
                         <div className="row">
@@ -241,7 +242,7 @@ var SearchBox = React.createClass({
             )
         });
         var filterbutton = (this.props.innerpage=='true'?<FilterButton/>:'');
-        var searchFilter = (this.props.innerpage=='true'?<SearchFilter filters={this.props.filters} amenitiesList={this.props.amenitiesList} />:'');
+        var searchFilter = (this.props.innerpage=='true'?<SearchFilter filters={this.props.filters} amenitiesList={this.props.amenitiesList} siteid={this.props.siteid}/>:'');
         var SearchHiddenField = (this.props.innerpage=='true'?<SearchHidden getParams={this.props.getParams} />:'');
         return (
             <section id="reserve-your-villahotel-section">
