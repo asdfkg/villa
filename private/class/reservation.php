@@ -984,7 +984,7 @@ class Reservation
 						<tr>
 							<td>';							
 			if ($row_rs_reservation_property['reservationStatusId'] == 4) $output .= 'We are pleased to hold your selection for 24 hours. To complete your reservation please contact us directly to speak to a sales representative at +1 (305) 777 0146.<br /><br />Thank you for choosing '.SITE_NAME.' for your upcoming trip!<br /><br />Below is your booking confirmation with the details of your selection. You can print this receipt for future reference.';
-            else $output .= 'Your reservation has been received. Thank you for choosing '.SITE_NAME.' for your upcoming trip!<br><br>Below is your booking confirmation. You can print this receipt for future reference.<br><br>Please note: We still require a signed registration form - it has been pre-filled with all your information and emailed to you as attachment of your confirmation. Please sign it and fax back to us at +1 (305) 777 0147 or email it to <a href="mailto:villas@'.SITE_NAME.'.com">villas@'.SITE_NAME.'.com</a>. Please return the signed reservation form within 24 hours so your booking can be confirmed.';
+            else $output .= 'Your reservation has been received. Thank you for choosing '.SITE_NAME.' for your upcoming trip!<br><br>Below is your booking confirmation. which has also been emailed to you. You can print this receipt for future reference.<br><br>Please note: We still require a signed registration form - it has been pre-filled with all your information and emailed to you as attachment of your confirmation. Please sign it and fax back to us at +1 (305) 777 0147 or email it to <a href="mailto:villas@'.SITE_NAME.'.com">villas@'.SITE_NAME.'.com</a>. Please return the signed reservation form within 24 hours so your booking can be confirmed.';
 			$output .= '
 							</td>
 						</tr>
@@ -1290,9 +1290,21 @@ class Reservation
 	}
 
         function getMenus(){
-             
-            $menu = array(
-                    array('label' => 'VILLAS & DESTINATIONS',
+            
+            if(SITE_ID == 1){
+                $dest_menu = array('label' => 'VILLAS & DESTINATIONS',
+                        'href' => '/luxury-rental-property-vacation-destinations',
+                        'child' => array(
+                            array('href' => "/luxury-rental-property-vacation-destinations", 'label' => "All Destinations"),
+                            array('href' => "/rental-villas/aspen", 'label' => "Aspen"),
+                            array('href' => "/rental-villas/miami", 'label' => "Miami"),
+                            array('href' => "/rental-villas/saint-tropez", 'label' => "Saint-Tropez"),
+                            array('href' => "/rental-villas/st-barth", 'label' => "St-Barth"),
+                            array('href' => "/rental-villas/ibiza", 'label' => "Ibiza"),                            
+                        ));
+            }
+            if(SITE_ID == 2){
+                $dest_menu = array('label' => 'VILLAS & DESTINATIONS',
                         'href' => '/luxury-rental-property-vacation-destinations',
                         'child' => array(
                             array('href' => "/luxury-rental-property-vacation-destinations", 'label' => "All Destinations"),
@@ -1301,7 +1313,10 @@ class Reservation
                             array('href' => "/reservations/?dest=saint-tropez&check_in=&check_out=", 'label' => "Saint-Tropez"),
                             array('href' => "/reservations/?dest=st-barth&check_in=&check_out=", 'label' => "St-Barth"),
                             array('href' => "/reservations/?dest=ibiza&check_in=&check_out=", 'label' => "Ibiza"),                            
-                        )),
+                        ));
+            }
+            $menu = array(
+                    $dest_menu, 
                     array('label' => 'BOOK YOUR VILLA', 'href' => '/reservations/'),
                     array('label' => 'ABOUT US', 'href' => '/about-luxury-villa-rentals/founders-vision'),
                     array('label' => 'CONTACT', 'href' => '/about-luxury-villa-rentals/contact'),

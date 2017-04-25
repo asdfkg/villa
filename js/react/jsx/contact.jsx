@@ -58,17 +58,19 @@ var ContactFormFields = React.createClass({
                                     <InputBox type="text" name="email" id="email" placeholder="Email*" className="required" />
                                     <InputBox type="text" name="phone" id="phone" placeholder="Phone*" className="required" />
                                 </div>
+                                
                                 <div className="medium-5 columns text-right">
-                                    <InputBox type="text" name="address" id="address" placeholder="Address" className="" />
-                                    <InputBox type="text" name="city" id="city" placeholder="City" className="" />
-                                    <InputBox type="text" name="state" id="state" placeholder="State" className="" />
-                                    <InputBox type="text" name="zipCode" id="zipCode" placeholder="Zip Code" className="" />
-                                    <InputBox type="text" name="country" id="country" placeholder="Country" className="" />
+                                    <InputBox type="text" name="address" id="address" placeholder={"Address"+(this.props.siteid ==1?'*':'')} className="" />
+                                    <InputBox type="text" name="city" id="city" placeholder={"City"+(this.props.siteid ==1?'*':'')} className="" />
+                                    <InputBox type="text" name="state" id="state" placeholder={"State"+(this.props.siteid ==1?'*':'')} className="" />
+                                    <InputBox type="text" name="zipCode" id="zipCode" placeholder={"Zip Code"+(this.props.siteid ==1?'*':'')} className="" />
+                                    <InputBox type="text" name="country" id="country" placeholder={"Country"+(this.props.siteid ==1?'*':'')} className="" />
                                 </div>
+                                
                             </div>
                             <div className="row">
                                 <div className="medium-12 medium-centered columns">
-                                    <TextArea name="message" id="message" rows="10" placeholder="Comments*" className="react-contact-textarea" />
+                                    <TextArea name="message" id="message" rows="10" placeholder={"Comments"+(this.props.siteid ==2?'*':'')} className="react-contact-textarea" />
                                 </div>
                             </div>
                             {sendbrochure}
