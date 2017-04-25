@@ -138,16 +138,15 @@ CheckoutStep2ServiceContent = React.createClass({
                             <CheckoutStep2AdditionalServiceLevels data={this.props.additionalServicesInfo}/>
                         }
                        <div className="row total">
-                       <br />
                           <div className="columns">
                                     {/* <p className="text-right" dangerouslySetInnerHTML={{__html: ('Nightly Rate: ' +property.dest_currency+''+numberWithCommas((newNightRate).toFixed()))}}></p>*/}
                             <p className="text-right">
                                 {thead}
                                 <span dangerouslySetInnerHTML={{__html: ('Nightly Rate: ' +property.dest_currency)}}/>
-                                <span id="rateNightDisp2">{numberWithCommas((newNightRate).toFixed())}</span></p>
-                            <p className="text-right">
+                                <span id="rateNightDisp2">{numberWithCommas((newNightRate).toFixed())}</span>
                                 <br />
-                                <button className="book-btn tiny radius" onClick={this.reactSubmitServiceLevelForm}>BOOK NOW</button>
+                                <br />
+                                <button className="book-btn tiny radius" onClick={this.reactSubmitServiceLevelForm}>{siteId==1?"CHECKOUT":"BOOK NOW"}</button>
                             </p>
                           </div>
                        </div>
@@ -266,7 +265,7 @@ var additionalPerStay = this.props.data.additionalPerStay!=undefined ? <Property
                         {this.props.data.additionalServices!= null && 
                             <PropertyDescriptionLayout labelText="ADDITIONAL SERVICES:" value={this.props.data.additionalServices.data} />
                         }
-                        {this.props.sitetax != "0" && <PropertyDescriptionLayout labelText={"DESTINATION TAX ("+this.props.data.destinationTaxRate+"%):"} value={this.props.data.destinationTax} />}
+                        {this.props.siteid==2 && this.props.sitetax != "0" && <PropertyDescriptionLayout labelText={"DESTINATION TAX ("+this.props.data.destinationTaxRate+"%):"} value={this.props.data.destinationTax} />}
 
 
                         <div className="row total">
@@ -275,8 +274,8 @@ var additionalPerStay = this.props.data.additionalPerStay!=undefined ? <Property
                             </div>
                             <div className="small-9 columns">
                                 <p className="text-right"dangerouslySetInnerHTML={{__html:'TOTAL: '+this.props.data.netTotal}}></p>
-                                <p className="text-right" dangerouslySetInnerHTML={{__html:'Security Deposit: '+this.props.data.securityDeposit}}></p>
-                                <p className="text-right" dangerouslySetInnerHTML={{__html:'Grand Total: '+this.props.data.grandTotal}}></p>
+                                {this.props.siteid==2 && <p className="text-right" dangerouslySetInnerHTML={{__html:'Security Deposit: '+this.props.data.securityDeposit}}></p>}
+                                {this.props.siteid==2 && <p className="text-right" dangerouslySetInnerHTML={{__html:'Grand Total: '+this.props.data.grandTotal}}></p>}
                             </div>
                         </div>
 
@@ -378,7 +377,7 @@ var CheckoutPayment = React.createClass({
                                     <label for="" className="left inline">State / Zip Code</label>
                                 </div>
                                 <div className="medium-4 small-4 columns">
-                                    <input type="text" name="ccStateOther" id="ccStateOther" placeholder="" />
+                                    <input type="text" name="ccStateOther" id="ccStateOther" placeholder="" style={{display:'none'}} />
                                     <span dangerouslySetInnerHTML={unescapeHTML(this.props.data.createStateDropDown)}></span>
                                 </div>
                                 <div className="medium-4 small-4 columns">
@@ -439,12 +438,12 @@ var CheckoutStep3 = React.createClass({
                 <form id="checkoutForm" onsubmit="return false;">
                     <CheckoutContact data={this.props.data}/>
                     <CheckoutPayment data={this.props.data}/>
-                    <div className="row">
+                    {this.props.siteid==2?<div className="row">
                         <div className="small-12 columns title">
                             <Heading6 value="RESERVATION SUMMARY"></Heading6>
                         </div>
-                    </div>
-                    <section id="reservations-services-section"></section>
+                    </div>:""}
+                    {this.props.siteid==2?<section id="reservations-services-section"></section>:''}
                     <CheckoutTerms siteid={this.props.siteid} />
                     <div className="row">
                         <div className="small-12 columns buttons">

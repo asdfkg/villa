@@ -77,7 +77,11 @@ if (isset($_POST['discount'])) {
 	header('Location: '.$_SERVER['REQUEST_URI']);
 }
 $destinationTaxRate = $_SESSION["RESERVATION"]->get("destTax");
-$destinationTax = (SITE_TAX?$_SESSION["RESERVATION"]->get("rateTotal") * $_SESSION["RESERVATION"]->get("destTax") /100:0); 
+if(SITE_ID==2){
+    $destinationTax = (SITE_TAX?$_SESSION["RESERVATION"]->get("rateTotal") * $_SESSION["RESERVATION"]->get("destTax") /100:0); 
+}else{
+    $destinationTax = 0;
+}
 $_SESSION["RESERVATION"]->set("destinationTax",$destinationTax);
 $_SESSION['RESERVATION']->set('netTotal',$_SESSION["RESERVATION"]->get("rateTotal")+$_SESSION["RESERVATION"]->get("destinationTax"));
 $_SESSION["RESERVATION"]->set("securityDeposit",$_SESSION["RESERVATION"]->get("netTotal")*SECURITY_DEPOSIT_PERCENT/100);
@@ -113,7 +117,9 @@ if (!$_SESSION['RESERVATION']->get('propertyId'))
             <!-- Reservations Services Header Image Section Start -->
 	            
             <!-- Reservations Title and Steps Section Start -->
-        
+            <?php if(SITE_ID==1){
+                echo '<section id="reservations-services-section"></section>';
+            } ?>
             <!-- Checkout Form Start-->
             <section id="checkout-form-section">
             </section>
@@ -126,7 +132,7 @@ if (!$_SESSION['RESERVATION']->get('propertyId'))
 		<!--
 		$(function()
 		{
-			$('#ccCountry').change(function() { 
+			$('body').on('change','#ccCountry',function() { 
                             switchStateField('ccCountry', 'ccStateUS', 'ccStateOther'); 
                         });
 		});
@@ -185,7 +191,7 @@ if (!$_SESSION['RESERVATION']->get('propertyId'))
             };
             
             ReactDOM.render(
-            <ServiceStep step="3" stepUrl1={StepUrl1} stepUrl2={StepUrl2} />,
+            <ServiceStep step="3" stepUrl1={StepUrl1} stepUrl2={StepUrl2} siteid="<?php echo SITE_ID;?>" />,
             document.getElementById('reservations-title-steps-section')
             );
             ReactDOM.render(
