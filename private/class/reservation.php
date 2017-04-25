@@ -1102,7 +1102,7 @@ class Reservation
 						</tr>
 						<tr>
 							<td colspan="2" style="background-color:#fff;">&nbsp;</td>
-							<td style="background-color:#fff; padding:0 20px 0 0; text-align:right;">Tax ('.number_format($taxRate,2).'%)</td>
+							<td style="background-color:#fff; padding:0 20px 0 0; text-align:right;">Tax'.(SITE_ID==2?' ('.number_format($taxRate,2).'%)':'').'</td>
 							<td style="background-color:#fff; padding:0 0 0 10px;">'.$row_rs_reservation_property['reservationRateCurrency'].number_format($row_rs_reservation_property['reservationRateTax'] * $row_rs_reservation_property['reservationRateValue'] / 100).'</td>
 						</tr>'.
                                                 ($row_rs_reservation_property['reservationSecurityDeposit']>0?'<tr style="font-weight:bold;">
@@ -1112,7 +1112,7 @@ class Reservation
 						</tr>':'')
                                                 .'<tr style="font-weight:bold;">
 							<td colspan="2" style="background-color:#fff;">&nbsp;</td>
-							<td style="background-color:#fff; padding:0 20px 0 0; text-align:right;">Grand Total</td>
+							<td style="background-color:#fff; padding:0 20px 0 0; text-align:right;">'.(SITE_ID==2?'Grand Total':'Total').'</td>
 							<td style="background-color:#fff; padding:0 0 0 10px;">'.$row_rs_reservation_property['reservationRateCurrency'].number_format($row_rs_reservation_property['reservationRateTotal']+$row_rs_reservation_property['reservationSecurityDeposit']).'</td>
 						</tr>
 					</table>

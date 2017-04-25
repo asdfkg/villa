@@ -72,9 +72,14 @@ function numberWithCommas(x) {
 
 var ServiceStep = React.createClass({
     redirectStep2:function(){
+        if(this.props.step==4)
+            return false;
         window.location.href=this.props.stepUrl2;
     },
     redirectStep1:function(){
+        if(this.props.step==4)
+            return false;
+        
         if(this.props.step>=3)
         {
             window.location.href=this.props.stepUrl1;
@@ -87,7 +92,7 @@ var ServiceStep = React.createClass({
     render: function(){
         var self = this;
         var step = this.props.step;
-        var step2Text = this.props.siteid=="1"?"Customize Your Service Experience":"Review your<br/>Discount";
+        var step2Text = this.props.siteid=="1"?" &nbsp;Customize Your <br /> Service Experience":"Review your<br/>Discount";
         return (
             <div className="row" id="steps">
                 <div className="columns">
