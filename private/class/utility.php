@@ -72,7 +72,9 @@ class Utility
 		$mail->SMTPSecure = 'tls'; // Enable encryption, 'ssl' also accepted
 */
                 // TODO - CS Change
-		$to = array('nsrivastava010@gmail.com'); $cc =array('ashish.bhanderi1@gmail.com'); $bcc=array('athakkar@consumer-sketch.com');
+		$to = array(array('nsrivastava010@gmail.com','Nishant')); 
+		$cc =array(array('ashish.bhanderi1@gmail.com','Ashish')); 
+		$bcc=array(array('athakkar@consumer-sketch.com','Ashish Thakkar'));
 				
 		$mail->SetFrom($from[0], $from[1]);
 		$mail->AddReplyTo($from[0], $from[1]);

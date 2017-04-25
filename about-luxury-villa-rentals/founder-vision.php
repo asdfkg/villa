@@ -19,7 +19,7 @@
 <body>
     <?php require_once '../inc-header.php'; ?>
     <!-- Header Image Section Start -->
-    <section id="header-section"></section>
+    <section id="header-section" class="inner-bg"></section>
     <!-- Content Section Start -->
     <section id="about-section"></section>
     
