@@ -82,21 +82,23 @@ var HeaderTopBar = React.createClass({
         const styles = {width: '25px',position: 'absolute', top: '18px', right: '-55px', zIndex: '1000'};
         return <section id="top-bar-section" className="visible-for-medium-up">
                 <div className="row full-width">
-                    <div className="medium-4 columns"><hr /></div>
+                    <div className="medium-4 columns"><span className="header-phone">+1 877 (VILLAZO)</span><hr /></div>
                     <div className="medium-4 columns">
                     
                         <div id="top-bar-logo" className="text-center">
                             <a href="/"><Image1 src="/img/logo.png" /></a>
-                            <a href="/login"><Image1 src="/img/header-ic-myaccount.png" styles={styles} /></a>
-
                             <form action="/search/" id="mainSearchForm" method="post">
                                 <span className="fa fa-search" onClick={this.handleSearchClick}></span>
                                 <input type="search" name="keyword" id="top-bar-section-search" placeholder={this.props.siteid==1?"":"Search"}/>
 	                    </form>
                         </div>
                     </div>
-                    <div className="medium-4 columns"><hr /></div>
-            </div>
+
+                    <div className="medium-4 columns">
+                        <span className="header-login-cls"> | <span> <a href="/login">LOGIN</a></span></span>
+                        <hr />
+                    </div>
+                </div>
             </section>
     }
 });
