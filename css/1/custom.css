@@ -221,7 +221,7 @@ table {
 	width: 200px;
 	z-index: 1000;
 	top: 15px;
-	right: -280px;
+	right: -348px;
 }
 
 #top-bar-section form input {
@@ -235,8 +235,8 @@ table {
 
 #top-bar-section form .fa-search { 
   position: absolute;
-  top: 3px;
-  left: 0px;
+  top: 1px;
+  right: -22px;
   font-size: 1.5rem;
 }
 
@@ -352,7 +352,15 @@ form button.submit .fa-spin {
 .inherit-initial{
     box-sizing: initial !important; 
 }
-
+span.header-phone {
+    position: absolute;
+    bottom: 25px;
+}
+span.header-login-cls {
+    position: absolute;
+    right: 24px;
+    top: 19px;
+}
 .img-property-title {
 	position: absolute;
 	top: 40px;
@@ -2219,3 +2227,12 @@ p.flip {
     
 .calendar-day .white{color: #FFF !important;text-decoration:underline;}
 .calendar-day .black{color: #000 !important;text-decoration:underline}
+span.header-phone {
+    position: absolute;
+    bottom: 25px;
+}
+span.header-login-cls {
+    position: absolute;
+    right: 24px;
+    top: 19px;
+}
