@@ -213,11 +213,12 @@ table {
 }
 
 #top-bar-section form {
-	position: absolute;
-	width: 200px;
-	z-index: 1000;
-	top: 15px;
-	right: -348px;
+	position: relative;
+        width: auto;
+        z-index: 1000;
+        top: 19px;
+        LEFT: 0;
+        right: 0;
 }
 
 #top-bar-section form input {
@@ -227,12 +228,13 @@ table {
 	outline: none;
 	outline-offset: 0;
 	box-shadow: none;
+        width: 95%;
 }
 
 #top-bar-section form .fa-search { 
   position: absolute;
   top: 1px;
-  right: -22px;
+  right: 0;
   font-size: 1.5rem;
 }
 
@@ -352,11 +354,34 @@ span.header-phone {
     position: absolute;
     bottom: 25px;
 }
-span.header-login-cls {
-    position: absolute;
-    right: 24px;
-    top: 19px;
+
+.s2{
+  position: relative;
+    top: -8px;
 }
+.w1{
+    width: 75%;
+   display: block;
+   overflow: hidden;
+   float: left;
+}
+.w2{width: 25%;
+    overflow: hidden;
+    display: block;
+    position: absolute;
+    top: 23px;
+    right: 0;
+}
+
+@media(max-width:991px)
+{.w1{width:70%;} 
+ .w2{width:30%;}	
+}
+@media(max-width:767px)
+{.w1{width:64%;} 
+ .w2{width:36%;}	
+}
+
 .img-property-title {
 	position: absolute;
 	top: 40px;
@@ -381,7 +406,7 @@ span.header-login-cls {
     /* IE 10+ */
     background: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0) 100%);
     /* W3C */
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#ffffff', GradientType=1);
+    /*filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#ffffff', GradientType=1);*/
     /* IE6-9 */
 }
 
@@ -448,7 +473,7 @@ span.header-login-cls {
     /* IE 10+ */
     background: linear-gradient(to left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0) 100%);
     /* W3C */
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#ffffff', GradientType=1);
+    /*filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#ffffff', GradientType=1);*/
     /* IE6-9 */
 }
 
@@ -2228,9 +2253,4 @@ p.flip {
 span.header-phone {
     position: absolute;
     bottom: 25px;
-}
-span.header-login-cls {
-    position: absolute;
-    right: 24px;
-    top: 19px;
 }

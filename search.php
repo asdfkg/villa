@@ -38,6 +38,7 @@ $villaCtr = count($propertyArray);
     <?php include_once 'js/reactLibrary.php'; ?>
     <script src="/js/react/jsx/search-result.jsx"  type="text/jsx"></script>
     <script src="/js/react/jsx/villazzo-search.jsx"  type="text/jsx"></script>
+    <script src="/js/moment.min.js" ></script>
 </head>
 
 <body>
