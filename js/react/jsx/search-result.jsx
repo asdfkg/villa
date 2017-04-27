@@ -33,15 +33,15 @@ var SearchResult = React.createClass({
   	var _data= this.props.property;
         var getFormattedDate = function(dt){
             var numberOfDaysToAdd = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-
-            var dt = new Date(dt);
+            if(dt!= Object)
+                var dt = moment(dt,'MM/DD/YYYY');
+            else
+                var dt = moment();
             if(numberOfDaysToAdd != 0){
-                dt.setDate(dt.getDate() + numberOfDaysToAdd);
+                dt.add(numberOfDaysToAdd,'day');
             }
-            var dd = dt.getDate();
-            var mm = dt.getMonth()+1;
-            var y = dt.getFullYear();
-            return mm+'/'+ dd + '/'+ y;
+            return dt.format('MM/DD/YYYY');
+            
         };
         var searchItemLeft = function(object){
             return (<div className="medium-6 columns property-image" data-equalizer-watch>
@@ -103,7 +103,10 @@ var SearchResult = React.createClass({
                                 }
                             }
                             var BookNowText = siteId=="1"?"BOOK NOW":"BOOK NOW AND SAVE 10%";
+                            if(object.check_in_dt) object.check_in_dt = moment(object.check_in_dt,'YYYY-MM-DD').format('MM/DD/YYYY');
+                            if(object.check_out_dt) object.check_out_dt = moment(object.check_out_dt,'YYYY-MM-DD').format('MM/DD/YYYY');
                             if (object.booked_till_dt){
+                                object.booked_till_dt = moment(object.booked_till_dt,'YYYY-MM-DD').format('MM/DD/YYYY');
                                 var propertyBook = (
                                     <Anchor classes="button book-btn radius tiny expand" href={"?dest="+object.dest_name+"&check_in="+getFormattedDate(object.booked_till_dt,1)+"&check_out="+getFormattedDate(object.booked_till_dt,4)} value={'AVAIL. '+getFormattedDate(object.booked_till_dt,1)}></Anchor>
                                 )
@@ -111,7 +114,7 @@ var SearchResult = React.createClass({
                                 var propertyBook = <Anchor classes="button book-btn radius tiny expand" href={"/reservations/services?property="+object.property_name.toLowerCase().replace(' ','-')+'&check_in='+getFormattedDate(object.check_in_dt)+'&check_out='+getFormattedDate(object.check_out_dt)} value={BookNowText}></Anchor>
                             }else{
                                 var propertyBook = (
-                                        <Anchor classes="button book-btn radius tiny expand" href={"/reservations/services?property="+object.property_name.toLowerCase().replace(' ','-')+'&check_in='+getFormattedDate(new Date())+'&check_out='+getFormattedDate(new Date(),3)} value={BookNowText}></Anchor>
+                                        <Anchor classes="button book-btn radius tiny expand" href={"/reservations/services?property="+object.property_name.toLowerCase().replace(' ','-')+'&check_in='+getFormattedDate(moment().format('MM/DD/YYYY'))+'&check_out='+getFormattedDate(moment().format('MM/DD/YYYY'),3)} value={BookNowText}></Anchor>
                                 )
                             }
                             var propertyBook = object.bookable==false ? <button className="button book-btn radius tiny expand prop-interested" data-propertyname={object.property_name}>I'M INTERESTED</button>:propertyBook ;

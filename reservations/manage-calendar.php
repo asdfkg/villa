@@ -110,8 +110,8 @@ $villBooking = prepareVilla($calendarStartDt,$destId,$propertyQuery);
     <?php require_once '../inc-footer.php'; ?>
 	
 	<?php require_once '../inc-js.php'; ?>
-        <script src="https://momentjs.com/downloads/moment.min.js" ></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-range/2.0.3/moment-range.min.js" ></script>
+        <script src="/js/moment.min.js" ></script>
+        <script src="/js/moment-range.min.js" ></script>
     <script type="text/jsx">
             /** @jsx React.DOM */
             var bannerImage = "<?php echo SITE_ID == 1 ? "/img/destination-header_all.png" : "/img/inner-bg1.png" ?>";

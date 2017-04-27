@@ -87,15 +87,20 @@ var HeaderTopBar = React.createClass({
                     
                         <div id="top-bar-logo" className="text-center">
                             <a href="/"><Image1 src="/img/logo.png" /></a>
-                            <form action="/search/" id="mainSearchForm" method="post">
-                                <span className="fa fa-search" onClick={this.handleSearchClick}></span>
-                                <input type="search" name="keyword" id="top-bar-section-search" placeholder={this.props.siteid==1?"":"Search"}/>
-	                    </form>
+                            
                         </div>
                     </div>
 
-                    <div className="medium-4 columns">
-                        <span className="header-login-cls"> | <span> <a href="/login">LOGIN</a></span></span>
+                    <div className="medium-4 columns s2">
+                        <div className="w1">
+                            <form action="/search/" id="mainSearchForm" method="post">
+                                <span className="fa fa-search" onClick={this.handleSearchClick}></span>
+                                <input type="search" name="keyword" id="top-bar-section-search" placeholder={this.props.siteid==1?"":"Search"}/>
+                            </form>
+                        </div>
+                        <div className="w2">
+                            <span className="header-login-cls"> | <span> <a href="/login">LOGIN</a></span></span>
+                        </div>
                         <hr />
                     </div>
                 </div>
