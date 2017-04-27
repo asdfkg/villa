@@ -402,7 +402,7 @@ var FaqDescritionContent = React.createClass({
                     <Heading4 value="What services can I expect from a VillaHotel?" />
                     <ul>
                         <li className="stars"><p>VillaHotels provide guests with the following services (all of which are included in the nightly rate): full-time dedicated personal butler/concierge, daily housekeeping and linen change, off-site laundry of linen and towels, in-suite dining menus, daily international newspapers, flower service, daily supply of fresh fruits and juices, fully stocked bar, humidor with choice of personally selected cigars, and well-stocked refrigerators and mini-bars.<br />
-                                <a href="/pdf/villazzo-service-levels.pdf" target="_blank">Download a list of all VillaHotel Services here.</a></p></li>
+                                <a href={"/pdf/"+this.props.siteid+"/villazzo-service-levels.pdf"} target="_blank">Download a list of all VillaHotel Services here.</a></p></li>
                         <li className="stars"><p>VillaHotel guests have access to: exotic car rental, chauffeured limousines, “Restaurant at Home” services; a nanny; personal massage and spa treatments either on-site or at nearby, top-rated facility; personal trainers; helicopter and aircraft charter, yachts and watercraft rental; shopping and delivery services.</p></li>
                     </ul>
 
@@ -447,7 +447,7 @@ var HtbDescritionContent = React.createClass({
                         • Number of guests <br />
                         • Any special requirements you might have.<br /><br /></p>
                     <Heading4 value="RESERVATION FORM" className="text-gold" />
-                    <p>Once you have selected your property, download our <a href="/pdf/guest-registration-form.pdf" target="_blank">Reservation Form</a>, read it carefully, sign it, and fax it to us at +1 (305) 777 0147. <br />
+                    <p>Once you have selected your property, download our <a href={"/pdf/"+this.props.siteid+"/guest-registration-form.pdf"} target="_blank">Reservation Form</a>, read it carefully, sign it, and fax it to us at +1 (305) 777 0147. <br />
                         The signed Reservation Form should be sent together with: <br />
                         • A copy of your passport or national ID <br />
                         • A copy of your credit card (showing both sides) </p>
