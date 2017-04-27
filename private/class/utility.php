@@ -271,7 +271,7 @@ class Utility
 			<option value="CG"'.($selected=='CG'?' selected="selected"':'').'>Congo</option>
 			<option value="CK"'.($selected=='CK'?' selected="selected"':'').'>Cook Islands</option>
 			<option value="CR"'.($selected=='CR'?' selected="selected"':'').'>Costa Rica</option>
-			<option value="CI"'.($selected=='CI'?' selected="selected"':'').'>Côte d\'Ivoire</option>
+			<option value="CI"'.($selected=='CI'?' selected="selected"':'').'>CÃ´te d\'Ivoire</option>
 			<option value="HR"'.($selected=='HR'?' selected="selected"':'').'>Croatia</option>
 			<option value="CU"'.($selected=='CU'?' selected="selected"':'').'>Cuba</option>
 			<option value="CY"'.($selected=='CY'?' selected="selected"':'').'>Cyprus</option>
