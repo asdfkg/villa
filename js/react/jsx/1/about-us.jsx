@@ -293,28 +293,29 @@ var SpecialOfferDescritionContent = React.createClass({
                             <div className="medium-6 columns property-details" data-equalizer-watch>
                                 <div className="row text-left">
                                     <div className="small-12 columns">
-                                        <Heading6 value='Mix it up! Last Minute WMC offer in Miami!' /><br />
+                                        <Heading6 value='JetSet to Europe this summer in style!  Enjoy a 10 % discount on your first WiJet flight' /><br />
                                     </div>
                                 </div>
                                 <div className="row text-left">
                                     <div className="small-12 columns so-content2" >
-                                        <p>Miami's Winter Music Conference is only 3 weeks away, but there is still time to book your escape! Winter Music Conference, in its 32nd consecutive year, is a pivotal platform for music enthusiasts, artists, DJs and industry delegates from over 70 countries that converge on Miami Beach for more than 400 events, parties, seminars and workshops. 
-                                            <br /><br />
-                                            Before you head out to the conference, kick off the night with Villazzo and enjoy a Complimentary Custom Cocktail with a Mixologist!
-                                            <br /><br />
-                                            <strong>Custom Concoctions:</strong>Enjoy a memorable and delicious experience with customized craft cocktails tailored to your tastes. Tell us about your preferred spirits, favorite memories, smells and tastes, and our mixologist will concoct three sample cocktails along with a recipe for you to take home.<br /><br />
-                                            Offer includes:
+                                        <p> Villazzo has partnered with WiJet to provide a special offer so you can travel to our villa destinations in Ibiza and St Tropez in your own private on-demand jet.
+ <br /><br />
+As a Villazzo guest, you can enjoy a 10 % discount on your first WiJet flight and  5 % on subsequent flights between May 2017 – October 2017.
+<br /><br />
+Hop on board the latest generation of jet, the four seater Cessna Citation Mustang.<br /><br />
+Wijet is a certified airline with hubs in Cannes and Nice and is one of only 3 private jets airlines certified to operate in Saint Tropez La Môle. Wijet’s philosophy is to offer maximum flexibility and they can take last minute bookings. They serve more than 1200 airports in Europe with a fleet that consists of 15 Cessna Citation Mustangs and they are the exclusive partner of Air France La Première flight.  The experience begins on board where you  can kick back, relax and enjoy exclusive snacks created for Wijet by French Chef Patissier Christophe Michalak and Ruinart champagne.<br /><br />
+Book your minimum 7 night stay in St Tropez or Ibiza during the months of May 2017 – October 2017 to take advantage of this exclusive offer.
                                         </p>
-                                        <ul>
+                                        {/* <ul>
                                             <li className="stars">4 hours Mixologist and Private Chef</li>
                                             <li className="stars">Cocktail selection complete with appetizer pairings</li>
                                             <li className="stars">Complimentary Value of $1500</li>
-                                        </ul>
+                                        </ul> */}
                                     </div>
                                 </div>
                                 <div className="row text-left">
                                     <div className="small-12 columns so-content3">
-                                        <Anchor classes="button tiny" href="mailto:villas@villazzo.com?subject=Mix%20it%20up!%20Last%20Minute%20WMC%20offer%20in%20Miami!" value="BOOK NOW"  />
+                                        <Anchor classes="button tiny" href="mailto:villas@villazzo.com?subject=JetSet%20to%20Europe%20this%20summer%20in%20style!%20Enjoy%20a%2010% discount%20on%20your%20first%20WiJet%20flight" value="BOOK NOW"  />
                                     </div>
                                 </div>
                             </div>

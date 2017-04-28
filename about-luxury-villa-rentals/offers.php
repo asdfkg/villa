@@ -42,7 +42,7 @@
         <script type="text/jsx">
             /** @jsx React.DOM */
             var specialOfferBannerImage = "<?php echo SITE_ID == 1 ? "/img/about/banner-offers.png" : "/img/inner-bg1.png" ?>";
-            var specialOfferContentImage = "/img/about/offer-thumb.png";
+            var specialOfferContentImage = "/img/about/offer-thumb1.png";
             ReactDOM.render(
                 <AboutUsBannerImage aboutUsBannerImage={specialOfferBannerImage}/>,
                 document.getElementById('header-section')
