@@ -95,9 +95,9 @@ var HomeDesktopSpecialOffer = React.createClass({
                     <div className="row text-center">
                         <div className="small-12 columns special-offer-lm-zero">
                             <div className="text">
-                                <div className="small-12 columns  special-offer-lm-zero" >
+                                <div className="small-12 columns  special-offer-img " >
                                     <div className="special-offer-text-wrapper">
-                                        <Anchor href="/about-luxury-villa-rentals/offers" className="button tiny" value="SEE ALL OFFERS"/>
+                                        <Anchor href="/about-luxury-villa-rentals/offers" classes="button tiny" value="SEE ALL OFFERS"/>
                                     </div>
                                 </div>
                           </div>

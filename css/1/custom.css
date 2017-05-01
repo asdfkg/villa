@@ -132,6 +132,10 @@ a {
 .special-offer-lm-zero{
     margin-left:0;
 }
+.special-offer-img{
+    margin-left:0;
+    height: 153px;
+}
 .special-offer-text-wrapper{
     float:right; 
     margin-top: 100px;

@@ -289,6 +289,7 @@ var SpecialOfferDescritionContent = React.createClass({
                         <div className="row collapse" data-equalizer>
                             <div className="medium-6 columns property-image" data-equalizer-watch>
                                 <Image1 src={specialOfferContentImage} />
+                                <Image1 src={specialOfferContentImage2} />
                             </div>
                             <div className="medium-6 columns property-details" data-equalizer-watch>
                                 <div className="row text-left">
