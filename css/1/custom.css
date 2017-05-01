@@ -126,6 +126,35 @@ a {
 	cursor: pointer !important;
 }
 
+.special-offer-background{
+    background: url(/img/home/home-special_offer.png) no-repeat bottom center; background-size: 100%;
+}
+.special-offer-lm-zero{
+    margin-left:0;
+}
+.special-offer-img{
+    margin-left:0;
+    height: 153px;
+}
+.special-offer-text-wrapper{
+    float:right; 
+    margin-top: 100px;
+    margin-right: 0; 
+    font-size: 12px;
+}
+.special-offer-text-desc-wrapper{
+    font-size:12px !important; 
+    background-color: #dac172; 
+    color: #666666 !important; 
+    background-size: contain;
+}
+.special-offer-text-wrapper a{
+    font-weight: bold !important;
+    color: #FFFFFF !important;
+    margin: 0px 10px 10px 0px;
+}
+
+
 /*
 #top-bar-navigation {
     margin: 0;
@@ -2227,25 +2256,7 @@ p.flip {
 
 .sliderBannertext{
     font-size:25px; color: #FFFFFF;
-}
-.special-offer-title{
-    font-size:12px !important; 
-    background-color: #dac172; 
-    color: #666666 !important; 
-    background-size: contain;
-}
-.special-offer-all-offer{
-    float:right; 
-    margin-top: 100px; 
-    margin-right: 0; 
-    font-size: 12px;
-}
-.special-offer-margin-left-zero{
-    margin-left:0;
-}
-.special-offer-main{
-    background: url(/img/home/home-special_offer.png) no-repeat bottom center; background-size: 100%;
-}
+} 
 .home-blog{
     padding-bottom: 20px !important;
 }

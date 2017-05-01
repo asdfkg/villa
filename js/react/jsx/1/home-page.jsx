@@ -90,25 +90,28 @@ var HomeDesktopSpecialOffer = React.createClass({
     render: function() {
         return ( 
             <div className="small-4 columns">
-                <Heading3 value="Special Offers" />
-                <div className="small-12 columns special-offer-main" data-equalizer-watch >
+                <h3>Special Offers</h3>
+                <div className="small-12 columns special-offer special-offer-background" data-equalizer-watch >
                     <div className="row text-center">
-                        <div className="small-12 columns special-offer-margin-left-zero">
+                        <div className="small-12 columns special-offer-lm-zero">
                             <div className="text">
-                                <div className="small-12 columns special-offer-margin-left-zero">
-                                    <div className="special-offer-all-offer">
-                                        <Anchor href="/about-luxury-villa-rentals/offers" classes="button tiny" value="SEE ALL OFFERS" />
+                                <div className="small-12 columns  special-offer-img " >
+                                    <div className="special-offer-text-wrapper">
+                                        <Anchor href="/about-luxury-villa-rentals/offers" classes="button tiny" value="SEE ALL OFFERS"/>
                                     </div>
                                 </div>
-                            </div>
+                          </div>
                         </div>
                     </div>
                 </div>
-                <div className="title special-offer-title" >Mix it up!<br />Last Minute WMC offer in Miami!</div>
+                <div className="title special-offer-text-desc-wrapper" >
+                    JetSet to Europe this summer in style!<br />Enjoy a 10% discount on your first WiJet flight
+                </div>
             </div>
+
         );
     }
-})
+});
 
 
 var HomeDesktopTestimonial = React.createClass({

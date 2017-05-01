@@ -37,7 +37,7 @@
                 document.getElementById('header-section')
             );    
             ReactDOM.render(
-                <FaqDescritionContent />,
+                <FaqDescritionContent siteid="<?php echo SITE_ID;?>" />,
                 document.getElementById('about-section')
             );
         </script>
