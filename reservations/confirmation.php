@@ -73,7 +73,7 @@ else $body = 'An error occurred, please try again.';
         var StepUrl2 = '';
 		
         ReactDOM.render(
-        <ServiceStep step="4" stepUrl1={StepUrl1} stepUrl2={StepUrl2} />,
+        <ServiceStep step="3" stepUrl1={StepUrl1} stepUrl2={StepUrl2} siteid="<?php echo SITE_ID; ?>"  />,
         document.getElementById('reservations-title-steps-section')
         );
         var data = <?php echo json_encode(@$row_rs_reservation_property);?>;

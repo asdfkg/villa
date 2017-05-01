@@ -61,6 +61,10 @@ meta.foundation-data-attribute-namespace {
     border-radius: 30px;
 }
 
+.home-blog-font{
+    font-size: 12px !important;
+}
+
 .footer-icon-margin{
     margin-right: 5px;
 }
@@ -847,7 +851,7 @@ Gallery Carousel Styles
 
 #destinations .flex-video {
 	margin: 0 !important;
-	border: solid 1px #dac172;
+	border: 0px none; 
 }
 
 #destinations .special-offer {
@@ -2245,9 +2249,7 @@ p.flip {
 .home-blog{
     padding-bottom: 20px !important;
 }
-.home-blog-font{
-    font-size: 12px;
-}
+    
 .calendar-day .white{color: #FFF !important;text-decoration:underline;}
 .calendar-day .black{color: #000 !important;text-decoration:underline}
 span.header-phone {

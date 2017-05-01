@@ -112,10 +112,10 @@ var HeaderTopBar = React.createClass({
 var DestinationText = React.createClass({
     render: function(){
         return   <div className="small-12 columns">
-                        <h4>LUXURY VACATION VILLA RENTALS IN MIAMI, ASPEN & ST. TROPEZ</h4>
-                        <p>Unlike a traditional villa rental agent, Villazzo functions as a true hotel operator. All Villazzo villas are within 15 minutes driving distance from our local operations offices in the heart of Saint-Tropez, Miami Beach, and Aspen. Out of the dozens of luxury homes we inspect, we only select the "Top 10". Most homes which you would find through other agents would not qualify for Villazzo's strict standards of design, quality, and maintenance.</p>
-                        <p>If you book such a hand-selected vacation rental home as "VillaHotel", this amazing property is then converted into your own "Private Hotel" - with our signature hotel products, staff, and services. The result is a completely new experience in luxury travel.</p>
-                        <p>We invite you to explore our destinations above and choose a luxury villa rental that suits your specific taste and needs. Since we understand that our guests want to customize their service packages, we have created three levels for you to choose from:  5-star VillaHotel, 4-star VillaHotel, and 3-star VillaHotel.</p>
-                    </div>
+            <h4>LUXURY VACATION VILLA RENTALS IN MIAMI, ASPEN, ST. TROPEZ, ST BARTH & IBIZA</h4>
+            <p>Unlike a traditional villa rental agent, Villazzo functions as a true hotel operator. All Villazzo villas are within 15 minutes driving distance from our local operations offices in the heart of Saint-Tropez, Miami Beach, Aspen, St Barth and Ibiza. Out of the dozens of luxury homes we inspect, we only select the "Top 10". Most homes which you would find through other agents would not qualify for Villazzo's strict standards of design, quality, and maintenance.</p>
+            <p>If you book such a hand-selected vacation rental home as "VillaHotel", this amazing property is then converted into your own "Private Hotel" - with our signature hotel products, staff, and services. The result is a completely new experience in luxury travel.</p>
+            <p>We invite you to explore our destinations above and choose a luxury villa rental that suits your specific taste and needs. Since we understand that our guests want to customize their service packages, we have created three levels for you to choose from: 5-star VillaHotel, 4-star VillaHotel, and 3-star VillaHotel.</p>
+        </div>
     }
 });
