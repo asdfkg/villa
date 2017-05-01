@@ -142,7 +142,7 @@ class Reservation
                 
                 $groupBy = '';
                 if($destinationPage){
-                    $sortByLeftJoin .= " Left Join propertyrate on propertyrate.propertyId = property.propertyId ";
+                    $sortByLeftJoin .= " Left Join propertyRate on propertyRate.propertyId = property.propertyId ";
                     $groupBy .= " group by property.propertyId ";
                     $query.= ' ,min((rateOwnerShortRent + rateOwnerShortReserve) / 1/ (1 - rateOwnerShortCom/100)) shortRate,
                                 min((rateOwnerTypicalRent + rateOwnerTypicalReserve) / 7/ (1 - rateOwnerTypicalCom/100)) typicalRate,

@@ -79,9 +79,9 @@ var SearchResult = React.createClass({
                     <div className="row text-center">
                         {_data.map(function (object,i) {
                             {var currency = <span dangerouslySetInnerHTML={unescapeHTML(object.dest_currency)}></span> }
-                            if(destinationPage == "1" && siteId==2){
+                            if(destinationPage == "1" && siteId==2 && object.startingRate>0){
                                var propertyRate = <div>{currency} {numberWithCommas((object.startingRate).toFixed())} <br /><span className="text-grey">per night</span></div>
-                            }else if(destinationPage == "1"){
+                            }else if(destinationPage == "1" && siteId=="1"){
                                var propertyRate = <div> Property Value: <span className="text-grey">{currency}{numberWithCommas((object.property_value).toFixed())}</span></div>
                             }else if(siteId =="1"){
                                 var propertyRate = (
