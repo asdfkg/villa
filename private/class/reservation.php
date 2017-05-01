@@ -56,7 +56,7 @@ class Reservation
             $result = $_SESSION['DB']->queryResult($rs_query);
             return empty($result)?true:false;
         }
-	public function getProperty($destName = '', $checkInDt = '', $checkOutDt = '', $bedMin = 0, $bedMax = 0, $budgetMin = 0, $budgetMax = 0, $propertyId = 0, $keyword = '', $amenities = '', $propertyActive = 0, $servicesTotal = 0)
+	public function getProperty($destName = '', $checkInDt = '', $checkOutDt = '', $bedMin = 0, $bedMax = 0, $budgetMin = 0, $budgetMax = 0, $propertyId = 0, $keyword = '', $amenities = '', $propertyActive = 0, $servicesTotal = 0,$destinationPage=0)
 	{
 		$propertyArray = array();
 		$sortByWhere = NULL;
@@ -139,7 +139,18 @@ class Reservation
 			OR 
 			(reservationStartDt >= STR_TO_DATE(\''.$checkInDt.'\', \'%Y-%m-%d\') AND reservationEndDt <= STR_TO_DATE(\''.$checkOutDt.'\', \'%Y-%m-%d\')) 
 		) AND reservationStatusId != 4 AND propertyId = property.propertyId LIMIT 1) AS reservationEndDt';
-		$query .= ' FROM property LEFT JOIN destination ON destination.destId = property.destId'.$sortByLeftJoin.($sortByWhere?' WHERE'.$sortByWhere:'').' '.($propertyActive?($sortByWhere?'AND':'WHERE').' propertyActive = 1':'').' ORDER BY propertyValue DESC';
+                
+                $groupBy = '';
+                if($destinationPage){
+                    $sortByLeftJoin .= " Left Join propertyrate on propertyrate.propertyId = property.propertyId ";
+                    $groupBy .= " group by property.propertyId ";
+                    $query.= ' ,min((rateOwnerShortRent + rateOwnerShortReserve) / 1/ (1 - rateOwnerShortCom/100)) shortRate,
+                                min((rateOwnerTypicalRent + rateOwnerTypicalReserve) / 7/ (1 - rateOwnerTypicalCom/100)) typicalRate,
+                                min((rateOwnerLongRent + rateOwnerLongReserve) / 30/ (1 - rateOwnerLongCom/100)) longRate ';
+                }
+		
+                
+		$query .= ' FROM property LEFT JOIN destination ON destination.destId = property.destId'.$sortByLeftJoin.($sortByWhere?' WHERE'.$sortByWhere:'').' '.($propertyActive?($sortByWhere?'AND':'WHERE').' propertyActive = 1':'').' '.$groupBy.' ORDER BY propertyValue DESC';
 		$rs_query = $_SESSION['DB']->querySelect($query);
 		$row_rs_query = $_SESSION['DB']->queryResult($rs_query);
 		$totalRows_rs_query = $_SESSION['DB']->queryCount($rs_query);
@@ -592,6 +603,8 @@ class Reservation
 					'dest_currency' => $currency,
 					'min_book_days' => $minBookDays,
 					'bookable' => $bookable,
+					'startingRate' => isset($row_rs_query['shortRate']) && isset($row_rs_query['typicalRate']) && isset($row_rs_query['longRate'])?
+                                            min(round($row_rs_query['shortRate'],-1),round($row_rs_query['typicalRate'],-1),round($row_rs_query['longRate'],-1)):0,
 					'service_levels' => array
 					(
 						'villa_only' => array
@@ -1291,7 +1304,7 @@ class Reservation
 
         function getMenus(){
             
-            if(SITE_ID == 1){
+//            if(SITE_ID == 1){
                 $dest_menu = array('label' => 'VILLAS & DESTINATIONS',
                         'href' => '/luxury-rental-property-vacation-destinations',
                         'child' => array(
@@ -1302,19 +1315,19 @@ class Reservation
                             array('href' => "/rental-villas/st-barth", 'label' => "St-Barth"),
                             array('href' => "/rental-villas/ibiza", 'label' => "Ibiza"),                            
                         ));
-            }
-            if(SITE_ID == 2){
-                $dest_menu = array('label' => 'VILLAS & DESTINATIONS',
-                        'href' => '/luxury-rental-property-vacation-destinations',
-                        'child' => array(
-                            array('href' => "/luxury-rental-property-vacation-destinations", 'label' => "All Destinations"),
-                            array('href' => "/reservations/?dest=aspen&check_in=&check_out=", 'label' => "Aspen"),
-                            array('href' => "/reservations/?dest=miami&check_in=&check_out=", 'label' => "Miami"),
-                            array('href' => "/reservations/?dest=saint-tropez&check_in=&check_out=", 'label' => "Saint-Tropez"),
-                            array('href' => "/reservations/?dest=st-barth&check_in=&check_out=", 'label' => "St-Barth"),
-                            array('href' => "/reservations/?dest=ibiza&check_in=&check_out=", 'label' => "Ibiza"),                            
-                        ));
-            }
+//            }
+//            if(SITE_ID == 2){
+//                $dest_menu = array('label' => 'VILLAS & DESTINATIONS',
+//                        'href' => '/luxury-rental-property-vacation-destinations',
+//                        'child' => array(
+//                            array('href' => "/luxury-rental-property-vacation-destinations", 'label' => "All Destinations"),
+//                            array('href' => "/reservations/?dest=aspen&check_in=&check_out=", 'label' => "Aspen"),
+//                            array('href' => "/reservations/?dest=miami&check_in=&check_out=", 'label' => "Miami"),
+//                            array('href' => "/reservations/?dest=saint-tropez&check_in=&check_out=", 'label' => "Saint-Tropez"),
+//                            array('href' => "/reservations/?dest=st-barth&check_in=&check_out=", 'label' => "St-Barth"),
+//                            array('href' => "/reservations/?dest=ibiza&check_in=&check_out=", 'label' => "Ibiza"),                            
+//                        ));
+//            }
             $menu = array(
                     $dest_menu, 
                     array('label' => 'BOOK YOUR VILLA', 'href' => '/reservations/'),
@@ -1323,8 +1336,10 @@ class Reservation
                 );
              
             if (SITE_ID == 2) {
-                array_splice($menu[0]['child'], 6, 0,array( array('href' => "/reservations/?dest=turks+%26+caicos&check_in=&check_out=", 'label' => "Turks & Caicos")));
-                array_splice($menu[0]['child'], 7, 0,array( array('href' => "/reservations/?dest=palm+beach&check_in=&check_out=", 'label' => "Palm Beach")));
+//                array_splice($menu[0]['child'], 6, 0,array( array('href' => "/reservations/?dest=turks+%26+caicos&check_in=&check_out=", 'label' => "Turks & Caicos")));
+//                array_splice($menu[0]['child'], 7, 0,array( array('href' => "/reservations/?dest=palm+beach&check_in=&check_out=", 'label' => "Palm Beach")));
+                array_splice($menu[0]['child'], 6, 0,array( array('href' => "/rental-villas/turks+%26+caicos", 'label' => "Turks & Caicos")));
+                array_splice($menu[0]['child'], 7, 0,array( array('href' => "/rental-villas/palm+beach", 'label' => "Palm Beach")));
             }
             if (SITE_ID == 1) {
                 
