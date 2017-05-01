@@ -143,7 +143,7 @@ var HomeDesktopBlog = React.createClass({
         return (
             <div className="small-4 columns" >
                 <h3>From The Blog</h3>
-                <a href={this.props.blogdata.blogImgLink}> <img src={this.props.blogdata.blogImgSrc} /> </a>
+                <a href={this.props.blogdata.blogImgLink}> <img src={this.props.blogdata.blogImgSrc} style={{height:'152px'}} /> </a>
                 <h6 className="home-blog-font">{this.props.blogdata.blogDate}:<br/>{this.props.blogdata.blogTitle}</h6>
                 <span className="home-blog-font" ><a href={this.props.blogdata.blogViewUrl}>View&nbsp;<i className="fa fa-angle-right"></i></a></span>
             </div>

@@ -166,7 +166,7 @@ if(SITE_ID==1){
     <link rel="stylesheet" href="/css/<?php echo SITE_ID;?>/custom.css">
     <script src="/js/vendor/modernizr.js"></script>
     <?php include_once '../js/reactLibrary.php'; ?>
-    <script src="/js/react/jsx/checkout.jsx" type="text/jsx"></script>
+    <script src="/js/react/jsx/checkout.jsx?id=1.0.1" type="text/jsx"></script>
 </head>
 
 <body <?php echo SITE_ID==1?'onload="applyServices()"':'';?>>

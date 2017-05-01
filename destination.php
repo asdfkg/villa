@@ -2,6 +2,7 @@
 require_once './private/config.php';
 
 // get the destination information
+$_GET['dest'] = urldecode($_GET['dest']);
 $destination = $_GET['dest'];
 
 $rs_destination = $_SESSION['DB']->querySelect('SELECT * FROM destination WHERE UPPER(destName) = ? LIMIT 1', array(strtoupper($destination)));
@@ -15,7 +16,7 @@ else if ($destination == 'miami') $destinationDesc = 'Out of over 100 rental pro
 else if ($destination == 'saint-tropez') $destinationDesc = 'Out of over 100 vacation villas, Villazzo President Christian Jagodzinski has personally hand-selected only the finest 10 properties between the beaches of Ramatuelle, Gassin, and the St. Tropez peninsula. His strict selection is based on his own demanding criteria for privacy, amenities, décor, ambience, and design. Most properties simply do not qualify - they are either antiquated, poorly maintained or poorly furnished. Below are the most exclusive luxury villas for rent in St Tropez worthy of the Villazzo label.';
 else if ($destination == 'st-barth') $destinationDesc = 'Out of over 100 vacation villas, Villazzo President Christian Jagodzinski has personally hand-selected only the finest 10 properties St Barth. His strict selection is based on his own demanding criteria for privacy, amenities, décor, ambience, and design. Most properties simply do not qualify - they are either antiquated, poorly maintained or poorly furnished. Below are the most exclusive luxury villas for rent in St Barth worthy of the Villazzo label.';
 
-$propertyArray = $_SESSION['RESERVATION']->getProperty($destination=='all'?'':$destination, '', '', 0, 0, 0, 0, 0, '', '', 1);
+$propertyArray = $_SESSION['RESERVATION']->getProperty($destination=='all'?'':$destination, '', '', 0, 0, 0, 0, 0, '', '', 1,0,SITE_ID==2?1:0);
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -94,7 +95,7 @@ $propertyArray = $_SESSION['RESERVATION']->getProperty($destination=='all'?'':$d
                     <div className="row">
                         <div className="small-12 columns">
                             <Heading1 value="<?php echo 'LUXURY '.strtoupper($destination).' VILLA & HOME VACATION RENTALS'; ?>"/>
-                            <p><?php echo $destinationDesc; ?></p>
+                            <p><?php echo @$destinationDesc; ?></p>
                         </div>
                     </div>
                 </div>,
