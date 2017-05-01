@@ -30,9 +30,8 @@ $propertyArray = $_SESSION['RESERVATION']->getProperty($destination=='all'?'':$d
     <link rel="stylesheet" href="/css/<?php echo SITE_ID;?>/custom.css">
     <script src="/js/vendor/modernizr.js"></script>
     <?php include_once 'js/reactLibrary.php'; ?>
-    <script src="/js/react/jsx/<?php echo SITE_ID; ?>/user-profile.jsx" type="text/jsx"></script>
     <script src="/js/react/jsx/search-result.jsx"  type="text/jsx"></script>
-	<script src="/js/moment.min.js" ></script>
+    <script src="/js/moment.min.js" ></script>
 </head>
 
 <body>
