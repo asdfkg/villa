@@ -33,7 +33,7 @@
                 document.getElementById('header-section')
             );    
             ReactDOM.render(
-                <HtbDescritionContent bookComputerImage={bookComputerImage} bookPhoneImage={bookPhoneImage} bookEmailImage={bookEmailImage} />,
+                <HtbDescritionContent bookComputerImage={bookComputerImage} bookPhoneImage={bookPhoneImage} bookEmailImage={bookEmailImage} siteid="<?php echo SITE_ID;?>" />,
                 document.getElementById('about-section')
             );
         </script>
