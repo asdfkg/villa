@@ -82,7 +82,7 @@ var HeaderTopBar = React.createClass({
         const styles = {width: '25px',position: 'absolute', top: '18px', right: '-55px', zIndex: '1000'};
         return <section id="top-bar-section" className="visible-for-medium-up">
                 <div className="row full-width">
-                    <div className="medium-4 columns"><span className="header-phone">+1 877 (VILLAZO)</span><hr /></div>
+                    <div className="medium-4 columns"><span className="header-phone">+1 (877) VILLAZZO</span><hr /></div>
                     <div className="medium-4 columns">
                     
                         <div id="top-bar-logo" className="text-center">
@@ -99,7 +99,7 @@ var HeaderTopBar = React.createClass({
                             </form>
                         </div>
                         <div className="w2">
-                            <span className="header-login-cls"> | <span> <a href="/login">LOGIN</a></span></span>
+                            <span className="header-login-cls"> | <span> <a href="/login">Log In</a></span></span>
                         </div>
                         <hr />
                     </div>
