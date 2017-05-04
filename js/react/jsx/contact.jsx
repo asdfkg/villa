@@ -23,6 +23,7 @@ var TextArea = React.createClass({
 });
 var ContactFormFields = React.createClass({
     onFormDataSubmit: function(){
+        ga('send', 'event', { eventCategory: 'Form', eventAction: 'Submit', eventLabel: 'Contact Form', eventValue: 1});
         query('contactForm', 'contactFormBtn', 'contact');
     },
     onFormDataReset: function(){

@@ -7,6 +7,7 @@
         ReactDOM.render(<DesktopFooter/>,document.getElementById('footer'));            
         ReactDOM.render(<MobileFooter/>,document.getElementById('footer-mobile'));            
     </script> 
+    <script type="text/javascript" src="//cdn.calltrk.com/companies/262822815/888b9dbca54a1ad1930c/12/swap.js"></script>
 <?php } if(SITE_ID == 2){ ?>
     <section id="footer">
         <div id="footerFirst"></div>

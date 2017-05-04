@@ -426,6 +426,7 @@ var CheckoutStep3 = React.createClass({
         query('checkoutForm', 'holdBtn', 'reservationHold');
     },
     onBookNowClick: function(){
+        ga('send', 'event', { eventCategory: 'Sale', eventAction: 'Submit', eventLabel: 'Checkout', eventValue: 1});        
         query('checkoutForm', 'checkoutBtn', 'reservationBook');
     },
     render: function(){
