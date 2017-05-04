@@ -241,9 +241,13 @@ switch ($_POST['action'])
 	break;
 	
 	case 'reservationPropertyRate':
+            if($_POST['propertyId']=='NaN'){
+                $outputArray=array('result'=>0);
+            }else{
 		$property = $_SESSION['RESERVATION']->getProperty('', $_POST['checkInDt'], $_POST['checkOutDt'], 0, 0, 0, 0, $_POST['propertyId'], '', '', 0, $_POST['servicesTotal'])[0];
 		if (!empty($property)) $outputArray = array('result' => 1, 'property' => $property);
 		else $outputArray = array('result' => 0);
+            }
 	break;
 	
 	case 'reservationHold':
