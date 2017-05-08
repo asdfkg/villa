@@ -23,7 +23,9 @@ var TextArea = React.createClass({
 });
 var ContactFormFields = React.createClass({
     onFormDataSubmit: function(){
-        ga('send', 'event', { eventCategory: 'Form', eventAction: 'Submit', eventLabel: 'Contact Form', eventValue: 1});
+        if(this.props.siteid ==1){
+            ga('send', 'event', { eventCategory: 'Form', eventAction: 'Submit', eventLabel: 'Contact Form', eventValue: 1});
+        }
         query('contactForm', 'contactFormBtn', 'contact');
     },
     onFormDataReset: function(){
