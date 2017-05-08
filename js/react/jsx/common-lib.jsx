@@ -224,7 +224,9 @@ var PropertySummaryInterestedPopupForm = React.createClass({
         $('#propertyInterestedModal').foundation('reveal', 'close');
     },
     submitButtonClick:function(){
-        ga('send', 'event', { eventCategory: 'Form', eventAction: 'Submit', eventLabel: 'Property Form', eventValue: 1});
+        if(this.props.siteid ==1){
+            ga('send', 'event', { eventCategory: 'Form', eventAction: 'Submit', eventLabel: 'Property Form', eventValue: 1});
+        }
         query('propertyInterestedModalForm', 'propertyInterestedModalFormBtn', 'propertyInterested');
     },
     render: function() {
