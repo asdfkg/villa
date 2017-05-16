@@ -48,6 +48,9 @@ var SearchResult = React.createClass({
                         <span className="img-property-title">{object.property_name}</span>
                         <a href={"/"+object.dest_name+"-rental-villas/villa-"+object.property_name.toLowerCase().replace(' ','-')+(object.check_in_dt && object.check_out_dt?'?check_in='+getFormattedDate(object.check_in_dt)+'&check_out='+getFormattedDate(object.check_out_dt):'')}>
                             <Image1 src={'https://www.villazzo.com'+object.property_img} />
+                            {object.is_10p_discount == 1 && siteId==2 && 
+                                <div className="saving_ribbon"><Image1 src="/img/discount_tag.png"  /></div>
+                            }
                         </a>
                     </div>);
         };
@@ -80,31 +83,35 @@ var SearchResult = React.createClass({
                         {_data.map(function (object,i) {
                             {var currency = <span dangerouslySetInnerHTML={unescapeHTML(object.dest_currency)}></span> }
                             if(destinationPage == "1" && siteId==2 && object.startingRate>0){
-                               var propertyRate = <div>{currency} {numberWithCommas((object.startingRate).toFixed())} <br /><span className="text-grey">per night</span></div>
+                               var propertyRate = <div>{currency} {numberWithCommas((object.startingRate).toFixed())} { siteId==1 && <br /> }<span className="text-grey">per night</span></div>
                             }else if(destinationPage == "1" && siteId=="1"){
                                var propertyRate = <div> Property Value: <span className="text-grey">{currency}{numberWithCommas((object.property_value).toFixed())}</span></div>
                             }else if(siteId =="1"){
                                 var propertyRate = (
-                                        <div>{currency} {numberWithCommas((object.service_levels.five_star.night).toFixed())} <br /><span className="text-grey">per night</span></div>
+                                        <div>{currency} {numberWithCommas((object.service_levels.five_star.night).toFixed())} { siteId==1 && <br /> } <span className="text-grey">per night</span></div>
                                 )
                             }else{
                                 if (object.service_levels.villa_only.night && object.service_levels.villa_only.night>0) {
                                     var propertyRate = (
-                                        <div>{currency} {numberWithCommas((object.service_levels.villa_only.night).toFixed())} <br /><span className="text-grey">per night</span></div>
+                                        <div>{currency} {numberWithCommas((object.service_levels.villa_only.night).toFixed())} { siteId==1 && <br /> } <span className="text-grey">per night</span></div>
                                         )
                                 }else if (object.service_levels.three_star.night && object.service_levels.three_star.night>0) {
                                         var propertyRate = (
-                                        <div>{currency} {numberWithCommas((object.service_levels.three_star.night).toFixed())} <br /><span className="text-grey">per night</span></div>
+                                        <div>{currency} {numberWithCommas((object.service_levels.three_star.night).toFixed())} { siteId==1 && <br /> } <span className="text-grey">per night</span></div>
                                         )
                                 }else if(object.service_levels.three_star.min > 0 && object.service_levels.three_star.max>0){
                                         var propertyRate = (
-                                        <div>{currency} {numberWithCommas((object.service_levels.three_star.min).toFixed())} - {currency} {numberWithCommas((object.service_levels.three_star.max).toFixed())} <br /><span className="text-grey">per night</span></div>
+                                        <div>{currency} {numberWithCommas((object.service_levels.three_star.min).toFixed())} - {currency} {numberWithCommas((object.service_levels.three_star.max).toFixed())} { siteId==1 && <br /> } <span className="text-grey">per night</span></div>
                                         )
                                 }else{
                                     var propertyRate = '';
                                 }
                             }
-                            var BookNowText = siteId=="1"?"BOOK NOW":"BOOK NOW AND SAVE 10%";
+                            if(siteId==2 && object.is_10p_discount==1){
+                                var BookNowText = "BOOK NOW AND SAVE 10%";
+                            } else{
+                                var BookNowText = "BOOK NOW";
+                            }
                             if(object.check_in_dt) object.check_in_dt = moment(object.check_in_dt,'YYYY-MM-DD').format('MM/DD/YYYY');
                             if(object.check_out_dt) object.check_out_dt = moment(object.check_out_dt,'YYYY-MM-DD').format('MM/DD/YYYY');
                             if (object.booked_till_dt){
@@ -127,39 +134,34 @@ var SearchResult = React.createClass({
                             }
 
                             return <div key={i} className="small-12 columns property-spacer">
-                                    <div className="row collapse" data-equalizer>
-                                        {searchItemLeft(object)}
-                                        <div className="medium-6 columns property-details" data-equalizer-watch>
-                                            <div className="row text-center">
-                                                <div className="small-12 columns">
-                                                    <Heading2 value={object.property_desc_short} classes="text-grey" />
-                                                </div>
-                                            </div>
-                                            <div className="row text-center">
-                                                <div className="small-12 columns">
-                                                    <h2><i className="fa fa-bed"></i> {object.property_bedrooms} bedrooms</h2>
-                                                </div>
-                                            </div>
-                                            <div className="row text-center">
-                                                <div className="small-12 columns">
-                                                    <Heading2 value={location(object)}/>
-                                                </div>
-                                            </div>
-                                            <div className="row text-center">
-                                                    <div className="small-12 columns">
-                                                    <h2>{propertyRate}</h2>
+                                        <div className="row collapse" data-equalizer>
+                                            {searchItemLeft(object)}
+                                            <div className="medium-6 columns property-details" data-equalizer-watch>
+                                                <div className="row text-center">
+                                                    <div className="small-9 columns">
+                                                        <Heading2 value={object.property_desc_short} classes="text-grey" />
+                                                        <h2><i className="fa fa-bed"></i> {object.property_bedrooms} bedrooms</h2>
+                                                        <Heading2 value={location(object)}/>
+                                                        <h2 className="package_rate">{propertyRate}</h2>
                                                     </div>
-                                            </div>
-                                            <div className="row text-center">
-                                                    <div className="small-4 small-offset-2 columns">
-                                                            <Anchor href={"/"+object.dest_name+"-rental-villas/villa-"+object.property_name.toLowerCase().replace(' ','-')+(object.check_in_dt && object.check_out_dt?'?check_in='+getFormattedDate(object.check_in_dt)+'&check_out='+getFormattedDate(object.check_out_dt):'')} classes="button details-button radius tiny expand" value="DETAILS" />
+                                                    <div className="small-3 columns">
+                                                        {object.is_quality_inspected == 1 && siteId==2 &&
+                                                            <Image1 src="/img/inspected-sticker4.png"  />
+                                                        }
                                                     </div>
-                                                    <div className={"small-"+(siteId=="1"?"4":"6")+" columns"}>{propertyBook}</div>
-                                                    <div className="small-4 columns"></div>
-                                            </div>
-                                        </div>  	
+                                                </div>
+
+                                                <div className="row text-center">
+                                                    <div className="small-5 columns">
+                                                        <Anchor href={"/"+object.dest_name+"-rental-villas/villa-"+object.property_name.toLowerCase().replace(' ','-')+(object.check_in_dt && object.check_out_dt?'?check_in='+getFormattedDate(object.check_in_dt)+'&check_out='+getFormattedDate(object.check_out_dt):'')} classes="button details-button radius tiny expand" value="DETAILS" />
+                                                    </div>
+                                                    <div className="small-7 columns">
+                                                       {propertyBook}
+                                                    </div>
+                                                </div>
+                                            </div>  	
+                                        </div>
                                     </div>
-                            </div>
                         })}
                         <PropertySummaryInterestedPopupForm siteid={siteId} data={{ propertyId: '',propertyName: ''}} />
                     </div>
