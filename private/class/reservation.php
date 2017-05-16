@@ -157,7 +157,7 @@ class Reservation
 		
 		if ($totalRows_rs_query)
 		{
-			do
+                    do
 			{
 				$status = 1;
 				$destId = $row_rs_query['destId'];
@@ -187,7 +187,9 @@ class Reservation
 				$propertyLocation = $row_rs_query['propertyLocationName'];
                                 $bookable = $row_rs_query['bookable'];
 				$minBookDays = $row_rs_query['minBookDays'];
-				/*
+                                $is10PDiscount = $row_rs_query['is10PDiscount'];
+                                $isQualityInspected = $row_rs_query['isQualityInspected'];
+                                /*
                                  * TODO - CS Remove
                                  * We have updated field for calculating taxes
                                  * $destTax = $row_rs_query['destTaxVillaHotel'];
@@ -602,6 +604,9 @@ class Reservation
                                         'additional_per_stay' => $additionalPerStay,
 					'dest_currency' => $currency,
 					'min_book_days' => $minBookDays,
+                                        'is_quality_inspected' => $isQualityInspected,
+                                        'is_10p_discount' => $is10PDiscount,
+                                    
 					'bookable' => $bookable,
 					'startingRate' => isset($row_rs_query['shortRate']) && isset($row_rs_query['typicalRate']) && isset($row_rs_query['longRate'])?
                                             min(round($row_rs_query['shortRate'],-1),round($row_rs_query['typicalRate'],-1),round($row_rs_query['longRate'],-1)):0,

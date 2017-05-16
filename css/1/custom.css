@@ -153,7 +153,35 @@ a {
     color: #FFFFFF !important;
     margin: 0px 10px 10px 0px;
 }
+/*  */
 
+#destination-results.villa_list .medium-6.columns.property-details .small-9.columns{
+width:100%;
+}
+
+#destination-results.villa_list .medium-6.columns.property-details .small-5.columns,
+#destination-results.villa_list .medium-6.columns.property-details .small-7.columns{
+width:50%;
+}
+
+#destination-results.villa_list .medium-6.columns.property-details .small-5.columns .button.details-button{
+float:right;
+}
+
+#destination-results.villa_list .medium-6.columns.property-details .small-7.columns .button.book-btn.radius.tiny.expand{
+float:left !important;
+}
+
+#destination-results .property-details .button{
+width:135px;}
+
+#destination-results .property-details h2 {
+    line-height: 1.4;
+margin-bottom: 0.5rem;
+margin-top: 0.2rem;
+}
+
+/* */
 
 /*
 #top-bar-navigation {

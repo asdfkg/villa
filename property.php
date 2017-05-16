@@ -83,12 +83,12 @@ $path = 'img/property/'.$propertyGallery.'/';
 $propertySlideshowFull = NULL;
 $propertySlideshowThumb = NULL;
 $propertySlideshowArr=[];
-if (file_exists('../'.$path))
+if (file_exists($path))
 {
-	$directory = opendir('../'.$path);
+	$directory = opendir($path);
 	while (FALSE !== ($filename = readdir($directory)))
 	{
-		if (is_dir('../'.$path.$filename) || $filename[0] == '.' || $filename[1] == 'jpg' || strpos($filename, '@2x') !== FALSE || strpos($filename, '@3x') !== FALSE) continue; // skip sub directories, hidden files, & non-pngs
+		if (is_dir($path.$filename) || $filename[0] == '.' || $filename[1] == 'jpg' || strpos($filename, '@2x') !== FALSE || strpos($filename, '@3x') !== FALSE) continue; // skip sub directories, hidden files, & non-pngs
 		$propertyGalleryArray[] = $filename;
 	}
 	sort($propertyGalleryArray);

@@ -99,10 +99,13 @@ CheckoutStep2ServiceContent = React.createClass({
         var property = this.props.property;
         var nightRate = this.props.serviceInfo.night;
         var siteId = this.props.siteid;
-        var newNightRate = siteId=="1"?(nightRate):(nightRate - (nightRate*10/100));
+        var newNightRate = nightRate;
+        if(property.is_10p_discount ==1 && siteId =="2"){
+            newNightRate = (nightRate - (nightRate*10/100));
+        }
         var rateNightBase = nightRate/(1+this.props.serviceInfo.management/100);
         var thead = siteId=="1"?<span>As {this.props.serviceInfo.level} Star VillaHotel<br /></span>:"";
-        
+        // property.is_10p_discount
         return (
             <div>
                 <div className="services">
@@ -111,7 +114,7 @@ CheckoutStep2ServiceContent = React.createClass({
                     })}
                     {this.props.siteid=="2" &&
                         <BookingRow desc="LENGTH OF STAY" value={property.night_total+' Nights'}/>  }
-                    {this.props.siteid=="2" &&
+                    {this.props.siteid=="2" && property.is_10p_discount == 1 &&
                         <BookingRow desc={("10% off your rate for online booking").toUpperCase()} value={'-'+property.dest_currency+''+numberWithCommas((this.props.serviceInfo.night*10/100).toFixed())}/> 
                     }
                  </div>

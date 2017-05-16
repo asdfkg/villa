@@ -105,7 +105,7 @@ $villaCtr = count($propertyArray);
         <section id="reservations-title-steps-section"></section>
         <!-- Reservations Title and Steps Section End -->
         <!-- Start Destination Results Start-->
-        <section id="destination-results">
+        <section id="destination-results" class="villa_list">
         </section>
 <!--        React-->
         <script type="text/jsx" charset="utf-8">

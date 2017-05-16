@@ -150,6 +150,27 @@ nav.class a.link ul {display: none;}
 nav.class a.link:hover ul {display: block;}
 
 */
+/* Discount Tag */
+#destination-results.villa_list h2 {
+    text-align: left;
+}
+
+#destination-results.villa_list .saving_ribbon {
+    position: absolute;
+    z-index: 99999;
+    right: 0;
+    top: 0;
+}
+
+#destination-results.villa_list .property-details{
+    padding: 12px 40px 0 40px !important;
+}
+
+#destination-results.villa_list h2.package_rate {
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+} 
+/* End - Discount Tag */
 
 form input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
      color:#828282 !important;
@@ -733,6 +754,10 @@ Gallery Carousel Styles
 
 #destinations h2, h3, h4, h5 {
     color: #e87722;
+}
+
+.villa_list .property-image{
+    height: auto !important; 
 }
 
 #destinations h6 {
