@@ -57,7 +57,7 @@ $villaCtr = count($propertyArray);
             <!-- Start Destination Results Start-->
            
             
-            <section id="destination-results">
+            <section id="destination-results" class="villa_list">
             </section>
             <script type="text/jsx" charset="utf-8">
             /** @jsx React.DOM */

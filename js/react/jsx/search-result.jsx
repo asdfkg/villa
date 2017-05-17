@@ -87,9 +87,10 @@ var SearchResult = React.createClass({
                             }else if(destinationPage == "1" && siteId=="1"){
                                var propertyRate = <div> Property Value: <span className="text-grey">{currency}{numberWithCommas((object.property_value).toFixed())}</span></div>
                             }else if(siteId =="1"){
-                                var propertyRate = (
+                                {/* var propertyRate = (
                                         <div>{currency} {numberWithCommas((object.service_levels.five_star.night).toFixed())} { siteId==1 && <br /> } <span className="text-grey">per night</span></div>
-                                )
+                                ) */}
+                                var propertyRate = '';
                             }else{
                                 if (object.service_levels.villa_only.night && object.service_levels.villa_only.night>0) {
                                     var propertyRate = (

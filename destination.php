@@ -39,7 +39,7 @@ $propertyArray = $_SESSION['RESERVATION']->getProperty($destination=='all'?'':$d
     <!-- Destination Start -->
     <section id="destination-header-image"></section>
     <!-- Start Destination Results Start-->
-    <section id="destination-results">
+    <section id="destination-results" class="villa_list">
         <div class="row text-center"><?php //echo $villas; ?></div>
     </section>
     <!-- Start Destination Results End-->

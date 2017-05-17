@@ -58,7 +58,7 @@ class Reservation
         }
 	public function getProperty($destName = '', $checkInDt = '', $checkOutDt = '', $bedMin = 0, $bedMax = 0, $budgetMin = 0, $budgetMax = 0, $propertyId = 0, $keyword = '', $amenities = '', $propertyActive = 0, $servicesTotal = 0,$destinationPage=0)
 	{
-		$propertyArray = array();
+            	$propertyArray = array();
 		$sortByWhere = NULL;
 		$sortByLeftJoin = NULL;
 		
@@ -150,7 +150,7 @@ class Reservation
                 }
 		
                 
-		$query .= ' FROM property LEFT JOIN destination ON destination.destId = property.destId'.$sortByLeftJoin.($sortByWhere?' WHERE'.$sortByWhere:'').' '.($propertyActive?($sortByWhere?'AND':'WHERE').' propertyActive = 1':'').' '.$groupBy.' ORDER BY propertyValue DESC';
+		$query .= ' FROM property LEFT JOIN destination ON destination.destId = property.destId'.$sortByLeftJoin.($sortByWhere?' WHERE'.$sortByWhere:'').' '.($propertyActive?($sortByWhere?'AND':'WHERE').' propertyActive = 1':'').' '.$groupBy.' ORDER BY '.($destinationPage?'longRate ASC':'propertyValue DESC'); 
 		$rs_query = $_SESSION['DB']->querySelect($query);
 		$row_rs_query = $_SESSION['DB']->queryResult($rs_query);
 		$totalRows_rs_query = $_SESSION['DB']->queryCount($rs_query);
