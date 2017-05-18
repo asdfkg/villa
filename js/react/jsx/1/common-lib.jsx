@@ -5,6 +5,9 @@ var DesktopFooter = React.createClass({
     mapOver:function(containerId){
         $('#'+containerId).css('display','block');
     },
+    componentDidMount: function(){
+        CallTrk.swap();
+    },
     render:function(){
         var curYear = new Date();
         var self = this;
@@ -42,6 +45,9 @@ var DesktopFooter = React.createClass({
 
 
 var MobileFooter = React.createClass({
+    componentDidMount: function(){
+        CallTrk.swap();
+    },
     render:function(){
         return <div>
             <div className="row text-center">
@@ -77,6 +83,9 @@ var MobileFooter = React.createClass({
 var HeaderTopBar = React.createClass({
     handleSearchClick: function(){
         $("#mainSearchForm").submit();
+    },
+    componentDidMount: function(){
+        CallTrk.swap();
     },
     render: function(){
         const styles = {width: '25px',position: 'absolute', top: '18px', right: '-55px', zIndex: '1000'};
