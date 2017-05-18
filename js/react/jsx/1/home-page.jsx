@@ -14,6 +14,12 @@ var HomeMobileDestination = React.createClass({
                 <div className="small-12 columns">
                     <h3><Anchor href="/rental-villas/aspen" value="Aspen" /></h3>
                 </div>
+                <div className="small-12 columns">
+                    <h3><Anchor href="/rental-villas/st-barth" value="St-Barth" /></h3>
+                </div>
+                <div className="small-12 columns">
+                    <h3><Anchor href="/rental-villas/ibiza" value="Ibiza" /></h3>
+                </div>
             </div>
         );
     }
