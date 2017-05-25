@@ -7,36 +7,151 @@ var MedCol  = React.createClass({
             </div>
         );
     }  
-})
+});
 var BookingRow  = React.createClass({
   render:function(){
-      return (
+      return ( 
+                <div className="row service">
+                    <div className={"small-"+(this.props.siteid=="1"?'10':6)+" columns"}>
+                       <p className="text-left" dangerouslySetInnerHTML={{__html:this.props.desc}}></p>
+                    </div>
+                    <div className={"small-"+(this.props.siteid=="1"?'2':6)+" columns"}>
+                       <p className="text-right" dangerouslySetInnerHTML={{__html: this.props.value}}></p>
+                    </div>
+                </div>   
+        );
+    }  
+});
+
+var VillazzoBookingRow  = React.createClass({
+     componentDidMount: function(){
+        $('.additional-accordian').on('click',function(){
+            if($('.additional-accordian img').attr('class') == "minus"){
+                $('.additional-accordian img').attr('src', '../img/plus-icon.png'); 
+                $('.additional-accordian img').attr('class', 'plus'); 
+            }else{
+                $('.additional-accordian img').attr('src', '../img/minus-icon.png'); 
+                $('.additional-accordian img').attr('class', 'minus');                 
+            }
+            $('#additional-accordian-content').toggle();
+        });
+    },
+    render:function(){
+      return ( 
+        <div>
             <div className="row service">
                 <div className={"small-"+(this.props.siteid=="1"?'10':6)+" columns"}>
                    <p className="text-left" dangerouslySetInnerHTML={{__html:this.props.desc}}></p>
                 </div>
                 <div className={"small-"+(this.props.siteid=="1"?'2':6)+" columns"}>
-                   <p className="text-right" dangerouslySetInnerHTML={{__html: this.props.value}}></p>
+                   <p className="text-right" >{this.props.value} / NIGHT </p>
+                </div>
+            </div>
+            <div className="services">
+                <div className="row service additional_service">
+                    <div className="small-10 columns">
+                        <h4 className="text-left ">
+                            <a href="javascript:void(0);">
+                                <span className="additional-accordian">
+                                    <Image1 src="../img/minus-icon.png"  classes="minus"/>
+                                </span> 
+                                Additonal Services
+                            </a>
+                        </h4>
+                    </div>
+                    <div className={"small-"+(this.props.siteid=="1"?'2':6)+" columns"}>
+                        <p className="text-right" id="additional-service-cost"></p>
+                    </div>
                 </div>
             </div>   
+        </div>
         );
     }  
 })
+
+
 var ReservationServiceSection  = React.createClass({
+    componentDidMount: function(){
+        $(".prop-min-booking").on('click',function(){
+            $("#propertyAvailabilityModal").foundation('reveal', 'open');
+        });
+    },
     render: function() {
+        var getFormattedDate = function(dt){
+            var numberOfDaysToAdd = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+            if(dt!= Object)
+                var dt = moment(dt,'MM/DD/YYYY');
+            else
+                var dt = moment();
+            if(numberOfDaysToAdd != 0){
+                dt.add(numberOfDaysToAdd,'day');
+            }
+            return dt.format('MM/DD/YYYY');
+            
+        };
+        var siteId = this.props.siteid;
+
+         var checkInDt = moment(this.props.data.check_in_dt,'YYYY-MM-DD').format('MM/DD/YYYY');
+         var checkOutDt = moment(this.props.data.check_out_dt,'YYYY-MM-DD').format('MM/DD/YYYY'); 
+        // var checkInDt = this.props.data.check_in_dt;
+        // var checkOutDt = this.props.data.check_out_dt;
+        var dateDetail = { 
+            checkInDt: checkInDt,
+            checkOutDt: checkOutDt,
+            propertyName: this.props.data.property_name,
+            propertyId: this.props.data.property_id,
+            minBookDays: this.props.data.min_book_days
+        }; 
         return (
             <div>
+                <PropertySummaryDatePopupForm data={dateDetail} />
                 <div className="large-2 columns left-side show-for-large-up text-center" data-equalizer-watch>
                     <Heading6 value="Your<br />Selection" />
                 </div>
-                <div className="medium-10 columns right-side text-center" data-equalizer-watch>
+                <div className="medium-10 columns right-side text-center edit-parent" data-equalizer-watch>
                     <div className="row">
-                        <MedCol desc="Destination" value={this.props.data.property_name.toUpperCase()} />
-                        <MedCol desc="Check-In Date" value={this.props.checkIn} />
-                        <MedCol desc="Check-Out Date" value={this.props.checkOut} />
-                        <MedCol desc="Length Of Stay" value={this.props.data.night_total+" Nights"} />
+                        {siteId=="1" &&
+                            <div>
+                                <div className="medium-3 columns">
+                                    Destination
+                                    <br/><span>
+                                        <Anchor href={"/"+this.props.data.dest_name+"-rental-villas/villa-"+this.props.data.property_name.toLowerCase().replace(' ','-')+(this.props.checkIn && this.props.checkOut?'?check_in='+getFormattedDate(this.props.checkIn)+'&check_out='+getFormattedDate(this.props.checkOut):'')} classes="black-anchor" value={this.props.data.property_name.toUpperCase()} />
+                                    </span>
+                                </div> 
+                                <div className="medium-6 columns nopadding">
+                                    <div className="medium-5 columns border-left"> Check-In Date
+                                    <br/><span>{this.props.checkIn}</span></div>
+                                    <div className="medium-2 columns"> 
+                                        <div className="icon">
+                                            <i className="fa fa-calendar prop-min-booking" aria-hidden="true" data-propertyname={this.props.data.property_name} data-propertyid={this.props.data.property_id} data-minbookdays={this.props.data.min_book_days}></i>
+                                        </div>
+                                    </div>
+                                   <div className="medium-5 columns border-right">Check-Out Date<br/><span>{this.props.checkOut}</span></div>
+                                </div>
+                                <div className="medium-3 columns">
+                                    Length Of Stay
+                                    <br/><span>{this.props.data.night_total+" Nights"}</span>
+                                </div>
+                            </div>
+                        }
+                        {siteId=="2" &&
+                            <span>
+                                <MedCol desc="Destination" value={this.props.data.property_name.toUpperCase()} />   
+                                <MedCol desc="Check-In Date" value={this.props.checkIn} />
+                                <MedCol desc="Check-Out Date" value={this.props.checkOut} />
+                                <MedCol desc="Length Of Stay" value={this.props.data.night_total+" Nights"} />
+                            </span>
+                        }
                     </div>
                 </div>
+                {siteId=="1" &&
+                    <div>
+                        <img src={this.props.data.property_checkout_img} />
+                        <div className="checkout-stwo-image">
+                            <span>Your Trip</span>
+                        </div>
+                    </div>
+                }
             </div>
         );
     }
@@ -54,7 +169,7 @@ var CheckoutStep2ServiceLevels = React.createClass({
                                 {[...Array(this.props.data.level)].map((x, i) =>
                                     <i className="fa fa-star hide-for-small" key={i + 1}></i>
                                 )}
-                                {this.props.data.name}
+                                {this.props.data.name} 
                                 </a>
                             </li>
                         </ul>
@@ -68,7 +183,7 @@ var CheckoutStep2AdditionalServiceLevels = React.createClass({
         $('.checkoutAdditionalService').on('change',function(){applyServices()});
     },
     render: function(){
-        return <div> {this.props.data.map(function(srv,i){
+        return <div id="additional-accordian-content"> {this.props.data.map(function(srv,i){
                 return <div key={i} className="row option">
                     <div className="columns">
                         <div className="row collapse">
@@ -82,7 +197,12 @@ style={{marginTop:'-10px'}} min={srv.min} max={srv.max} onChange={this.reactAppl
                                             <input type="hidden" name={srv.name+"Rate"} id={srv.name+"Rate"} value={srv.rate} />
                                         </div>
                                         <div className="small-6 medium-1 columns">{srv.frequency}</div>
-                                        <div className="small-12 medium-9 columns">{srv.desc}</div>
+                                        <div className="small-12 medium-9 columns">
+                                            <span className="checkout-image-margin">
+                                                <Image1 src={srv.serviceImage} />
+                                            </span>
+                                            {srv.desc}
+                                        </div>
                                     </label>
                                 </div>
                             </div>
@@ -91,6 +211,70 @@ style={{marginTop:'-10px'}} min={srv.min} max={srv.max} onChange={this.reactAppl
                 </div>
                 })}</div>
 }});
+
+
+var CheckoutStep2AdditionalMoreServiceLevels = React.createClass({
+    componentDidMount: function(){
+        $('.checkoutAdditionalService').on('change',function(){applyServices()});
+
+        $('.more-additional-accordian').on('click',function(){
+            if($('.more-additional-accordian a span').attr('class') == "down"){
+                $('.more-additional-accordian a span i').removeClass('fa-caret-down');
+                $('.more-additional-accordian a span i').addClass('fa-caret-up'); 
+                $('.more-additional-accordian a span').attr('class', 'up'); 
+            }else{
+                $('.more-additional-accordian a span i').removeClass('fa-caret-up');
+                $('.more-additional-accordian a span i').addClass('fa-caret-down'); 
+                $('.more-additional-accordian a span').attr('class', 'down'); 
+            }
+            $('#more-additional-accordian-content').toggle();
+        });
+    },
+    render: function(){
+        return <span>
+                <div className="services">
+                    <div className="row service additional_service">
+                        <div className="small-12 columns">
+                            <h4 className="text-left more-additional-accordian">
+                                <a href="javascript:void(0);"><span className="down"><i className="fa fa-caret-down" aria-hidden="true"></i></span> 
+                                    Even More Services
+                                </a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <div id="more-additional-accordian-content"> {this.props.data.map(function(srv,i){
+                    return <div key={i} className="row option">
+                        <div className="columns">
+                            <div className="row collapse">
+                                <div className="medium-12 columns">
+                                    <div className="row">
+                                        <label>
+                                            <div className="small-3 medium-1 columns" style={{marginRight:'10px'}}>
+                                                <input type="number" className="checkoutAdditionalService" name={srv.name} id={srv.name} placeholder={srv.placeholder} value={srv.value} 
+    style={{marginTop:'-10px'}} min={srv.min} max={srv.max} onChange={this.reactApplyServices} />
+                                                <input type="hidden" name={srv.name+"Desc"} id={srv.desc+"Desc"} value={srv.desc} />
+                                                <input type="hidden" name={srv.name+"Rate"} id={srv.name+"Rate"} value={srv.rate} />
+                                            </div>
+                                            <div className="small-6 medium-1 columns">{srv.frequency}</div>
+                                            <div className="small-12 medium-9 columns">
+                                                <span className="checkout-image-margin">
+                                                    <Image1 src={srv.serviceImage} />
+                                                </span>
+                                                {srv.desc}
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    })}
+                </div>
+        </span>
+}});
+
+
 CheckoutStep2ServiceContent = React.createClass({
     reactSubmitServiceLevelForm: function(){
         submitServiceLevelForm();
@@ -109,8 +293,12 @@ CheckoutStep2ServiceContent = React.createClass({
         return (
             <div>
                 <div className="services">
-                    {this.props.serviceInfo.services.map(function(service,i){
+                    {siteId==2 && this.props.serviceInfo.services.map(function(service,i){
                        return <BookingRow key={i} siteid={siteId} desc={service.desc_long.toUpperCase()} value={(property.dest_currency+''+numberWithCommas((service.rate).toFixed()))}/> 
+                    })}
+
+                    {siteId==1 && this.props.serviceInfo.services.map(function(service,i){
+                       return <VillazzoBookingRow key={i} siteid={siteId} desc={service.desc_long.toUpperCase()} value={(property.dest_currency+''+numberWithCommas((service.rate).toFixed()))}/> 
                     })}
                     {this.props.siteid=="2" &&
                         <BookingRow desc="LENGTH OF STAY" value={property.night_total+' Nights'}/>  }
@@ -138,7 +326,10 @@ CheckoutStep2ServiceContent = React.createClass({
                         <input type="hidden" name="rateNightBase" id="rateNightBase" value={rateNightBase} />
                         <input type="hidden" name="checkoutCleaning" id="checkoutCleaning" value={this.props.serviceInfo.checkout_cleaning} />
                         {this.props.siteid=="1" &&
-                            <CheckoutStep2AdditionalServiceLevels data={this.props.additionalServicesInfo}/>
+                            <span>
+                                <CheckoutStep2AdditionalServiceLevels data={this.props.additionalServicesInfo} />
+                                <CheckoutStep2AdditionalMoreServiceLevels data={this.props.moreServices} />
+                            </span>
                         }
                        <div className="row total">
                           <div className="columns">
@@ -167,7 +358,7 @@ var CheckoutStep2 = React.createClass({
                         {this.props.siteid=="1" && 
                             <div className='tabs-content'>
                                 <div className='content active' id='service-level-5'>
-                                    <CheckoutStep2ServiceContent additionalServicesInfo={this.props.additionalServicesInfo} property={this.props.property} siteid={this.props.siteid} serviceInfo={this.props.serviceInfo} selectedServiceLevel={this.props.selectedServiceLevel} totalNights={this.props.totalNights}/>
+                                    <CheckoutStep2ServiceContent additionalServicesInfo={this.props.additionalServicesInfo} moreServices={this.props.moreServices} property={this.props.property} siteid={this.props.siteid} serviceInfo={this.props.serviceInfo} selectedServiceLevel={this.props.selectedServiceLevel} totalNights={this.props.totalNights}/>
                                </div>
                            </div>
                         }

@@ -1,14 +1,14 @@
 var DesktopFooter = React.createClass({
-    mapOut:function(containerId){
+    mapOut: function(containerId){
         $('#'+containerId).css('display','none');
     },
-    mapOver:function(containerId){
+    mapOver: function(containerId){
         $('#'+containerId).css('display','block');
     },
     componentDidMount: function(){
         CallTrk.swap();
     },
-    render:function(){
+    render: function(){
         var curYear = new Date();
         var self = this;
         return <div>
@@ -24,7 +24,7 @@ var DesktopFooter = React.createClass({
 
                     <p className="footer-copyright">&copy; {curYear.getFullYear()} <VillLink /></p>
                     <p className="text-grey">PRIVATE LUXURY VILLA RENTALS WITH 5-STAR HOTEL SERVICE. MIAMI-ASPEN-ST. TROPEZ</p>
-                    <p><i className="fa fa-mobile"></i>&nbsp;<a href="tel:+1-877-845-5299">+1 (877) VILLAZZO</a></p>
+                    <p><i className="fa fa-mobile"></i>&nbsp;<a href="tel:+1-877-845-5299">+1 (877) 845 5299</a></p>
                     <p><i className="fa fa-globe"></i>&nbsp;<a href="mailto:villas@villazzo.com">villas@villazzo.com</a></p>
                 </div>
                 <div className="medium-4 columns" data-equalizer-watch>
@@ -45,9 +45,7 @@ var DesktopFooter = React.createClass({
 
 
 var MobileFooter = React.createClass({
-    componentDidMount: function(){
-        CallTrk.swap();
-    },
+    
     render:function(){
         return <div>
             <div className="row text-center">
@@ -69,8 +67,8 @@ var MobileFooter = React.createClass({
                 <div className="columns footer-contact" data-equalizer-watch>
                     <i className="fa fa-mobile"></i>&nbsp;
                     <span className="footerContactSpan">
-                        <a href="tel:1-877-845-5299">
-                            +1 (877) VILLAZZO
+                        <a href="tel://+1-877-845-5299">
+                            +1 (877) 845 5299
                         </a>
                     </span>
                 </div>
@@ -91,7 +89,7 @@ var HeaderTopBar = React.createClass({
         const styles = {width: '25px',position: 'absolute', top: '18px', right: '-55px', zIndex: '1000'};
         return <section id="top-bar-section" className="visible-for-medium-up">
                 <div className="row full-width">
-                    <div className="medium-4 columns"><span className="header-phone">+1 (877) VILLAZZO</span><hr /></div>
+                    <div className="medium-4 columns"><span className="header-phone"><a href="tel://+1-877-845-5299">+1 (877) 845 5299</a></span><hr /></div>
                     <div className="medium-4 columns">
                     
                         <div id="top-bar-logo" className="text-center">

@@ -23,13 +23,14 @@ if ($totalRows_rs_reservation_feedback) {
     } while ($row_rs_reservation_feedback = $_SESSION['DB']->queryResult($rs_reservation_feedback));
 }
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js" lang="en">
 
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta name="description" content="Our exclusive villa properties are spectacular private homes in Miami, Aspen and St Tropez that are converted into 5-star hotels with the finest attention to detail.">
+        <meta name="format-detection" content="telephone=no"/>
         <title><?php echo SITE_ID == 1 ? 'VILLAZZO' : 'GREATVILLADEALS'; ?> | Luxury Vacation & Villa Rentals in Miami, St Tropez and Aspen</title>
         <link rel="stylesheet" href="/css/<?php echo SITE_ID; ?>/custom.css">
         <script src="/js/vendor/modernizr.js"></script>
@@ -200,6 +201,6 @@ if ($totalRows_rs_reservation_feedback) {
       
     </script>
     <!-- End React Script -->        
-        
+
     </body>
 </html>
