@@ -12,7 +12,7 @@ class Setting
 	// get company phone
 	public function getCompanyPhone()
 	{ 
-		return '1 (877) VILLAZZO';
+		return '1 (877) 845 5299';
 	}
 	
 	// get company email

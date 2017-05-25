@@ -328,7 +328,7 @@ var PropertySummaryDatePopupForm = React.createClass({
                 <div className="reveal-modal medium" id="propertyAvailabilityModal" data-reveal>
                     <form id="propertyAvailabilityModalForm" onsubmit="return false;">
                         <input type="hidden" id="propertyAvailabilityModalPropertyId" name="propertyAvailabilityModalPropertyId" value={this.props.data.propertyId} />
-                        <input type="hidden" name="redirect" value={"/reservations/services?property="+this.props.data.propertyName} />
+                        <input type="hidden" id="cstRedirect" name="redirect" value={"/reservations/services?property="+this.props.data.propertyName} />
                         <fieldset>
                                 <legend dangerouslySetInnerHTML={unescapeHTML(legendText)}></legend>
                                 <span className='minDayTxt'>{minDayTxt}</span>

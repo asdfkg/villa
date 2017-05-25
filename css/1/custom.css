@@ -181,6 +181,57 @@ margin-bottom: 0.5rem;
 margin-top: 0.2rem;
 }
 
+
+.black-anchor{
+    color: #666666 !important; 
+}
+.checkout-stwo-image{
+    background-color: #dac172 !important;
+    padding: 0.50rem 1rem; 
+}
+.checkout-stwo-image span{
+    color: #fff;
+    font-size: 25px;
+}
+
+#rate-details .services .row.service.additional_service {
+    border-bottom: none !important;
+    margin-top: 15px;
+    padding:0;
+}
+
+#rate-details .services .row.service.additional_service h4 {
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+#rate-details .options .option .row{
+    border-bottom:none !important;
+}
+
+#rate-details .options .option .row.collapse {
+    border-bottom: 1px solid #EFEFED !important;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px !important;
+}
+.checkout-image-margin{
+    margin-right: 25px;
+}
+#additional-accordian-content{
+    display: block; 
+}
+#more-additional-accordian-content{
+    display: none; 
+}
+.edit-parent {padding: 0 !important;}
+.edit-parent .medium-3 {padding: 12px 0 13px 0;}
+.edit-parent .border-left{border-left: 1px solid;  padding: 12px 0 13px 0;}
+.edit-parent .icon{margin: 24px 0;}
+.edit-parent .icon i{font-size: 21px;}
+.edit-parent .nopadding{padding: 0;}
+.border-right{ border-right: 1px solid;    padding: 12px 0 13px 0;}
+
 /* */
 
 /*
@@ -434,14 +485,28 @@ span.header-phone {
     right: 0;
 }
 
+
 @media(max-width:991px)
 {.w1{width:70%;} 
  .w2{width:30%;}	
 }
+@media(max-width:832px){
+.edit-parent{width: 100%; height:auto !important;}
+}
 @media(max-width:767px)
 {.w1{width:64%;} 
- .w2{width:36%;}	
+ .w2{width:36%;}
+.edit-parent .medium-3,.edit-parent .medium-5{font-size:15px;}
 }
+@media(max-width:652px){
+.edit-parent .border-left{    padding: 12px 0 57px 0;}
+}
+@media(max-width:640px)
+{
+   .border-right, .edit-parent .border-left{padding: 0;} 
+   .edit-parent .icon { margin: 4px 0;}
+}
+
 
 .img-property-title {
 	position: absolute;
@@ -1859,7 +1924,9 @@ p.flip {
 }
 
 #reservations-services-section #rate-details .options .option img {
-	padding: 0 10px 0 10px;
+    padding: 0 10px 0 10px;
+    vertical-align: top;
+    margin-top: -13px;
 }
 
 #reservations-services-section #rate-details .options .option .right-side .row {

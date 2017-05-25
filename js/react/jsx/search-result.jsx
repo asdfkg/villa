@@ -17,7 +17,7 @@ var SearchResult = React.createClass({
             $("#propertyInterestedModal .feedback").html('');
         });
         $(".prop-min-booking").on('click',function(){
-            var propName = $(this).data('propertyname').toUpperCase();
+            var propName = $(this).data('property_name').toUpperCase();
             $("#propertyAvailabilityModal").foundation('reveal', 'open');
             $("#propertyAvailabilityModal #propertyInterestedModalPropertyName").val(propName );
             $("#propertyAvailabilityModal legend").html("Check Villa "+propName+"\'s Availability" );
@@ -28,7 +28,7 @@ var SearchResult = React.createClass({
     },
     render: function() {
 	var unescapeHTML= function(data){
-		return {__html: data};
+            return {__html: data};
 	};
   	var _data= this.props.property;
         var getFormattedDate = function(dt){
