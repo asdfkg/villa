@@ -37,6 +37,7 @@ var VillazzoBookingRow  = React.createClass({
         });
     },
     render:function(){
+        var propValue = this.props.value+" / NIGHT";
       return ( 
         <div>
             <div className="row service">
@@ -44,7 +45,7 @@ var VillazzoBookingRow  = React.createClass({
                    <p className="text-left" dangerouslySetInnerHTML={{__html:this.props.desc}}></p>
                 </div>
                 <div className={"small-"+(this.props.siteid=="1"?'2':6)+" columns"}>
-                   <p className="text-right" >{this.props.value} / NIGHT </p>
+                   <p className="text-right" dangerouslySetInnerHTML={{__html:propValue}}></p>
                 </div>
             </div>
             <div className="services">
