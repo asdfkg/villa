@@ -150,7 +150,7 @@ class Reservation
                 }
 		
                 
-		$query .= ' FROM property LEFT JOIN destination ON destination.destId = property.destId'.$sortByLeftJoin.($sortByWhere?' WHERE'.$sortByWhere:'').' '.($propertyActive?($sortByWhere?'AND':'WHERE').' propertyActive = 1':'').' '.$groupBy.' ORDER BY '.($destinationPage?'longRate ASC':'propertyValue DESC'); 
+		$query .= ' FROM property LEFT JOIN destination ON destination.destId = property.destId'.$sortByLeftJoin.($sortByWhere?' WHERE'.$sortByWhere:'').' '.($propertyActive?($sortByWhere?'AND':'WHERE').' propertyActive = 1':'').' '.$groupBy.' ORDER BY '.($destinationPage?'property.bookable DESC,  longRate ASC':'propertyValue DESC'); 
 		$rs_query = $_SESSION['DB']->querySelect($query);
 		$row_rs_query = $_SESSION['DB']->queryResult($rs_query);
 		$totalRows_rs_query = $_SESSION['DB']->queryCount($rs_query);
