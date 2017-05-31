@@ -26,13 +26,13 @@ var BookingRow  = React.createClass({
 var VillazzoBookingRow  = React.createClass({
      componentDidMount: function(){
         $('.additional-accordian').on('click',function(){
-            // if($('.additional-accordian img').attr('class') == "minus"){
-                // $('.additional-accordian img').attr('src', '../img/plus-icon.png'); 
-                // $('.additional-accordian img').attr('class', 'plus'); 
-            // }else{
-                // $('.additional-accordian img').attr('src', '../img/minus-icon.png'); 
-                // $('.additional-accordian img').attr('class', 'minus');                 
-            // }
+            /* if($('.additional-accordian img').attr('class') == "minus"){
+                 $('.additional-accordian img').attr('src', '../img/plus-icon.png'); 
+                 $('.additional-accordian img').attr('class', 'plus'); 
+             }else{
+                 $('.additional-accordian img').attr('src', '../img/minus-icon.png'); 
+                 $('.additional-accordian img').attr('class', 'minus');                 
+             } */
             $('#additional-accordian-content').toggle();
         });
     },
