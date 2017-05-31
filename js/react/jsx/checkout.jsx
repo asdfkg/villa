@@ -26,13 +26,13 @@ var BookingRow  = React.createClass({
 var VillazzoBookingRow  = React.createClass({
      componentDidMount: function(){
         $('.additional-accordian').on('click',function(){
-            if($('.additional-accordian img').attr('class') == "minus"){
-                $('.additional-accordian img').attr('src', '../img/plus-icon.png'); 
-                $('.additional-accordian img').attr('class', 'plus'); 
-            }else{
-                $('.additional-accordian img').attr('src', '../img/minus-icon.png'); 
-                $('.additional-accordian img').attr('class', 'minus');                 
-            }
+            // if($('.additional-accordian img').attr('class') == "minus"){
+                // $('.additional-accordian img').attr('src', '../img/plus-icon.png'); 
+                // $('.additional-accordian img').attr('class', 'plus'); 
+            // }else{
+                // $('.additional-accordian img').attr('src', '../img/minus-icon.png'); 
+                // $('.additional-accordian img').attr('class', 'minus');                 
+            // }
             $('#additional-accordian-content').toggle();
         });
     },
@@ -53,9 +53,7 @@ var VillazzoBookingRow  = React.createClass({
                     <div className="small-10 columns">
                         <h4 className="text-left ">
                             <a href="javascript:void(0);">
-                                <span className="additional-accordian">
-                                    <Image1 src="../img/minus-icon.png"  classes="minus"/>
-                                </span> 
+                                <span className="additional-accordian"><Image1 src="../img/plus-icon.png"  classes="plus"/> {/* <Image1 src="../img/minus-icon.png"  classes="minus"/> */}</span> 
                                 Additonal Services
                             </a>
                         </h4>
@@ -219,7 +217,7 @@ var CheckoutStep2AdditionalMoreServiceLevels = React.createClass({
         $('.checkoutAdditionalService').on('change',function(){applyServices()});
 
         $('.more-additional-accordian').on('click',function(){
-            if($('.more-additional-accordian a span').attr('class') == "down"){
+            /* if($('.more-additional-accordian a span').attr('class') == "down"){
                 $('.more-additional-accordian a span i').removeClass('fa-caret-down');
                 $('.more-additional-accordian a span i').addClass('fa-caret-up'); 
                 $('.more-additional-accordian a span').attr('class', 'up'); 
@@ -227,7 +225,7 @@ var CheckoutStep2AdditionalMoreServiceLevels = React.createClass({
                 $('.more-additional-accordian a span i').removeClass('fa-caret-up');
                 $('.more-additional-accordian a span i').addClass('fa-caret-down'); 
                 $('.more-additional-accordian a span').attr('class', 'down'); 
-            }
+            } */
             $('#more-additional-accordian-content').toggle();
         });
     },

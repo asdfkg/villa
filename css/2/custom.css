@@ -289,6 +289,23 @@ table {
   color: #ffffff !important;
 }
 
+.dropdown-submenu,.dropdown-submenu1{
+    position: relative;
+}
+ul.dropdown-menu,ul.dropdown-menu1 {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 250px;
+	display:none;
+}
+.dropdown-submenu:hover ul.dropdown-menu,.dropdown-submenu1:hover ul.dropdown-menu1{display:block;}
+.dropdown-submenu>a:after,.dropdown-submenu1>a:after {    
+	content: "\BB";
+    margin-left: .5rem;
+    display: inline;float: right;
+}
+
 /* Off Canvas Menu Styles */
 
 .left-off-canvas-menu {
