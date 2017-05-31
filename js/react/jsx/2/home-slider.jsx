@@ -1,7 +1,8 @@
 var HomeSliderImage = React.createClass({
     render: function(){
         return <div className="item">
-                    <Image1 src={this.props.sliderImage1} classes="img-responsive" />
+                    <Image1 src={this.props.sliderImage1} classes="visible-for-small-only" />
+                    <Image1 src={this.props.sliderImage2} classes="visible-for-medium-up" />
                 </div>
     }
 });
