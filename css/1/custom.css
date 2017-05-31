@@ -181,6 +181,9 @@ margin-bottom: 0.5rem;
 margin-top: 0.2rem;
 }
 
+.down{
+    margin-right: 8px !important;
+}
 
 .black-anchor{
     color: #666666 !important; 
@@ -2144,7 +2147,7 @@ p.flip {
     #owl-carousel-section .owl-prev,
     .owl-next {
         position: absolute;
-        top: 28%;
+        top: 0%;
     }
     #owl-carousel-section .owl-prev {
         left: 0;

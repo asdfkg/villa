@@ -167,9 +167,9 @@ if ($totalRows_rs_reservation_feedback) {
             );
        <?php } if(SITE_ID == 2){ ?>
             var sliders = [
-                {sliderImage1:"img/home/bnr1.png",sliderImage2:"img/home/bnr1.png",sliderHeading:"VILLAHOTEL JANE",sliderText:"ASPEN"},
-                {sliderImage1:"img/home/bnr2.png",sliderImage2:"img/home/bnr2.png",sliderHeading:"VILLAHOTEL JANE",sliderText:"ASPEN"},
-                {sliderImage1:"img/home/bnr3.png",sliderImage2:"img/home/bnr3.png",sliderHeading:"VILLAHOTEL JANE",sliderText:"ASPEN"}];
+                {sliderImage1:"img/home/mobile_bnr1.png",sliderImage2:"img/home/bnr1.png",sliderHeading:"VILLAHOTEL JANE",sliderText:"ASPEN"},
+                {sliderImage1:"img/home/mobile_bnr2.png",sliderImage2:"img/home/bnr2.png",sliderHeading:"VILLAHOTEL JANE",sliderText:"ASPEN"},
+                {sliderImage1:"img/home/mobile_bnr3.png",sliderImage2:"img/home/bnr3.png",sliderHeading:"VILLAHOTEL JANE",sliderText:"ASPEN"}];
             ReactDOM.render(
                 <HomeSlider sliders={sliders}/>,
                 document.getElementById('homeSlider')
