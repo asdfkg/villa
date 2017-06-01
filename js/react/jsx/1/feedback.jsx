@@ -28,18 +28,25 @@ var FeedbackContent = React.createClass({
             ]
         });},2000);
     },
+    submitClick: function(){
+        return false;
+    },
+    sendFeedbackButtonClick: function(){
+        $('#messageText').val(tinymce.get('messageHtml').getContent());
+        query('feedbackRequestForm', 'feedbackRequestBtn', 'feedbackRequest');
+        return false;
+    },
     render: function(){
         return (
             <div className="row">
                 <div className="columns">
-                    <form id="feedbackRequestForm" onsubmit="return false;">
-                        <input type="hidden" name="reservationId" id="reservationId" value={this.props.reservationId} />
-                        <input type="hidden" name="reservationName" id="reservationName" value={this.props.reservationName} />
-                        <input type="hidden" name="reservationEmail" id="reservationEmail" value={this.props.reservationEmail} />
+                    <form id="feedbackRequestForm" onSubmit={this.submitClick} >
+                        <input type="hidden" name="reservationId" id="reservationId" value={this.props.feedbackData[0].reservationId} />
+                        <input type="hidden" name="reservationName" id="reservationName" value={this.props.feedbackData[0].reservationName} />
+                        <input type="hidden" name="reservationEmail" id="reservationEmail" value={this.props.feedbackData[0].reservationEmail} />
                         <input type="hidden" name="messageText" id="messageText" />
                        <textarea name="messageHtml" id="messageHtml" className="feedback-textarea" defaultValue={this.props.feedbackData[0].body}></textarea>
-                        <button className="button" id="feedbackRequestBtn" onclick="$('#messageText').val(tinymce.get('messageHtml').getContent());
-                                                                                            query(form.id, id, 'feedbackRequest');"><span id="feedbackRequestBtnHtml">Send</span></button>
+                        <button className="button" type="button" id="feedbackRequestBtn" onClick={this.sendFeedbackButtonClick}><span id="feedbackRequestBtnHtml">Send</span></button>
                         <div className="feedback"></div>
                     </form>
                 </div>
