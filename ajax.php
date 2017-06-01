@@ -463,7 +463,7 @@ switch ($_POST['action'])
 	break;
 	
 	case 'feedbackRequest':
-		if ($_SESSION['DB']->queryUpdate('UPDATE reservationProperty SET reservationFeedback = 1 WHERE reservationId = ? LIMIT 1', array($_POST['reservationId'])))
+                if ($_SESSION['DB']->queryUpdate('UPDATE reservationProperty SET reservationFeedback = 1 WHERE reservationId = ? LIMIT 1', array($_POST['reservationId'])))
 		{			
 			// email confirmation
 			$from = array('christian.jagodzinski@villazzo.com', 'Christian Jagodzinski (Villazzo)');

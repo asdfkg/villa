@@ -37,7 +37,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'feedback')
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Reservations - VILLAZZO</title>
-    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="/css/1/custom.css">
     <script src="/js/vendor/modernizr.js"></script>
 <script type="text/javascript">
 <!--
