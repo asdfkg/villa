@@ -235,6 +235,13 @@ margin-top: 0.2rem;
 .edit-parent .nopadding{padding: 0;}
 .border-right{ border-right: 1px solid;    padding: 12px 0 13px 0;}
 
+
+.plusmin{ border: 1px solid #dac172; display: inline-flex; float: left; margin-top: -2px;}
+.minus{border-left: 1px solid #dac172;}
+.plusmin i {font-size: 10px; padding: 6px 6px;}
+.countinput{display: inline-block; width: 12px;}
+.countinput input{margin-left: 10px; width: 38px; margin-top: 0; box-shadow: none; border: 0; height: auto; padding: 0;}
+
 /* */
 
 /*
@@ -491,13 +498,17 @@ span.header-phone {
 
 @media(max-width:991px)
 {.w1{width:70%;} 
- .w2{width:30%;}	
+ .w2{width:30%;}
+ .countinput input {margin-left: 5px; width: 29px; font-size: 11px;}
+ .plusmin i {font-size: 9px; padding: 8px 6px;}
 }
 @media(max-width:832px){
 .edit-parent{width: 100%; height:auto !important;}
 }
 @media(max-width:767px)
-{.w1{width:64%;} 
+{
+ #reservations-services-section #rate-details .options .option img { margin-top: 0px !important;}
+ .w1{width:64%;} 
  .w2{width:36%;}
 .edit-parent .medium-3,.edit-parent .medium-5{font-size:15px;}
 }

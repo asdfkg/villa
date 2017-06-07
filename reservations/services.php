@@ -30,7 +30,7 @@ if ($_SESSION['RESERVATION']->get('additionalServicesTags')) $additionalServiceT
 $additionalServices = array(
 	array(
 		'name'			=> 'optionHouseKeeping',
-		'frequency'		=> 'H/Day',
+		'frequency'		=> 'Hours/Day',
 		'placeholder'	=> '0-12',
 		//'desc'			=> 'Housekeeping ('.$propertyArray['dest_currency'].'29/H)',
                 'desc'			=> 'Extra Housekeeping',
@@ -42,7 +42,7 @@ $additionalServices = array(
 	),
         array(
 		'name'			=> 'optionButler',
-		'frequency'		=> 'H/Day',
+		'frequency'		=> 'Hours/Day',
 		'placeholder'	=> '4-24',
 		//'desc'			=> 'Lifestyle Butler ('.$propertyArray['dest_currency'].'49/H)',
                 'desc'			=> 'Lifestyle Butler',
@@ -54,7 +54,7 @@ $additionalServices = array(
 	),
         array(
 		'name'			=> 'optionChef',
-		'frequency'		=> 'H/Day',
+		'frequency'		=> 'Hours/Day',
 		'placeholder'	=> '4-24',
 		 // 'desc'			=> 'Chef ('.$propertyArray['dest_currency'].'79/H)',
                 'desc'			=> 'Gourmet Chef',
@@ -92,7 +92,7 @@ $additionalServices = array(
  $moreServices =    array(
 	array(
 		'name'			=> 'optionSecurity',
-		'frequency'		=> 'H/Day',
+		'frequency'		=> 'Hours/Day',
 		'placeholder'	=> '0-24',
 		//'desc'			=> 'Personal Armed Security ('.$propertyArray['dest_currency'].'99/H)',
                 'desc'			=> 'Personal Armed Security',
@@ -104,7 +104,7 @@ $additionalServices = array(
 	),
 	array(
 		'name'			=> 'optionDriver',
-		'frequency'		=> 'H/Day',
+		'frequency'		=> 'Hours/Day',
 		'placeholder'	=> '0-24',
 		//'desc'			=> 'Private Driver with Cadillac Escalade / Mercedes S-Class ('.$propertyArray['dest_currency'].'99/H)',
                 'desc'			=> 'Private Driver',
@@ -116,7 +116,7 @@ $additionalServices = array(
 	),
 	array(
 		'name'			=> 'optionBabySitting',
-		'frequency'		=> 'H/Day',
+		'frequency'		=> 'Hours/Day',
 		'placeholder'	=> '0-24',
 		//'desc'			=> 'Babysitting ('.$propertyArray['dest_currency'].'39/H)',
                 'desc'			=> 'Babysitting',
@@ -128,7 +128,7 @@ $additionalServices = array(
 	),
 	array(
 		'name'			=> 'optionTraining',
-		'frequency'		=> 'H/Day',
+		'frequency'		=> 'Hours/Day',
 		'placeholder'	=> '0-24',
 		//'desc'			=> 'Personal Training ('.$propertyArray['dest_currency'].'99/H)',
                 'desc'			=> 'Personal Training',
@@ -155,7 +155,7 @@ $additionalServices = array(
 		'frequency'		=> '',
 		'placeholder'           => 'ANY',
 		// 'desc'			=> 'Relaxing Swedish Massage ('.$propertyArray['dest_currency'].'179)',
-                'desc'			=> 'Relaxing Swedish Massage',
+                'desc'			=> 'RElaxing Swedish Massage',
 		'rate'			=> 179,
 		'value'			=> (isset($additionalServiceTags['optionMassage']) ? $additionalServiceTags['optionMassage'] : null),
 		'min'			=> 0,
@@ -168,7 +168,8 @@ $services=[];
 if(SITE_ID==1){
     $serviceLevels = $propertyArray['service_levels']['five_star'];
     $propertyServiceLevelsTab = ['level'=>5,'name'=>$serviceLevels['name']];
-    $services[]=array('desc_long'=>$serviceLevels['services']['villa_only']['desc_long'].' + '.$serviceLevels['services']['management']['desc_long'].' + Villa Hotel Transformation','rate'=>$serviceLevels['base_night']);
+    //$services[]=array('desc_long'=>$serviceLevels['services']['villa_only']['desc_long'].' + '.$serviceLevels['services']['management']['desc_long'].' + Villa Hotel Transformation','rate'=>$serviceLevels['base_night']);
+    $services[]=array('desc_long'=>'Villa with management (including Housekeeping & Setup)','rate'=>$serviceLevels['base_night']);
     $serviceLevels['checkout_cleaning']=$serviceLevels['services']['checkout_cleaning']['rate'];
     $serviceLevels['management']=$serviceLevels['services']['management']['percentage'];
     $serviceLevels['services']=$services;
@@ -210,6 +211,16 @@ if(SITE_ID==1){
     <?php include_once '../js/reactLibrary.php'; ?>
     <script src="/js/react/jsx/checkout.jsx?id=1.0.1" type="text/jsx"></script>
     <script src="/js/moment.min.js" ></script>
+    <style>
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+          -webkit-appearance: none; 
+          margin: 0; 
+        }
+        input[type=number] {
+            -moz-appearance:textfield;
+        }
+    </style>
 </head>
 
 <body <?php echo SITE_ID==1?'onload="applyServices()"':'';?>>
@@ -226,7 +237,7 @@ if(SITE_ID==1){
         <div class="row" id="your-selection" data-equalizer></div>
         
         <!-- Show Rate Details Start -->
-        <div id="service-levels"></div>
+<!--        <div id="service-levels"></div>-->
         <div id="rate-details"></div>
         <!-- Show Rate Details End -->
     </section>
@@ -292,14 +303,14 @@ if(SITE_ID==1){
 		
 		$('.option input[type="number"]').each(function () {
 			if ($(this).val()) {
-				if (Number($(this).val()) < Number($(this).attr('min')) || Number($(this).val()) > Number($(this).attr('max'))) $(this).val('');
+                            if (Number($(this).val()) < Number($(this).attr('min')) || Number($(this).val()) > Number($(this).attr('max'))) $(this).val('');
 				
-				if ($(this).attr('id') == 'optionLinenAndTowel') servicesTotal += (139 + Number($('#' + $(this).attr('id') + 'Rate').val())) * Number($(this).val()) / 7;
-				else if ($(this).attr('id') == 'optionProductAndService') servicesTotal += (149 + Number($('#' + $(this).attr('id') + 'Rate').val())) * Number($(this).val()) / 7;
-				else servicesTotal += Number($(this).val()) * Number($('#' + $(this).attr('id') + 'Rate').val());
+                            if ($(this).attr('id') == 'optionLinenAndTowel') servicesTotal += (139 + Number($('#' + $(this).attr('id') + 'Rate').val())) * Number($(this).val()) / 7;
+                            else if ($(this).attr('id') == 'optionProductAndService') servicesTotal += (149 + Number($('#' + $(this).attr('id') + 'Rate').val())) * Number($(this).val()) / 7;
+                            else servicesTotal += Number($(this).val()) * Number($('#' + $(this).attr('id') + 'Rate').val());
 			}
 		});
-		
+                
 		$('#checkoutBtn').attr('disabled', 'disabled');
 		
 		$.ajax(

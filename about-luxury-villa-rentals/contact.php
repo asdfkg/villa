@@ -42,8 +42,9 @@
             <section id="about-section"></section>
             <div id="footerSecond"></div>
             <script type="text/jsx">
-                var contactBannerImage = "/img/about/banner-contact.png"  ;
+                var mobileContactBannerImage = "/img/mobile-inner-bg1.png"  ;
                 var contactBannerImage = "/img/inner-bg1.png";
+                
                 ReactDOM.render(<FooterFirst/>,document.getElementById('footerFirst'));
                 ReactDOM.render(<FooterSecond/>,document.getElementById('footerSecond'));
             </script> 
@@ -54,7 +55,16 @@
                 document.getElementById('about-section')
             );
             ReactDOM.render(
-                <ContactFormImage contactBannerImage={contactBannerImage}/>,
+                <?php 
+                /* <ContactFormImage contactBannerImage={contactBannerImage}/>, */
+                if(SITE_ID == 1){ ?>
+                    <Image1 src={contactBannerImage}/>,
+                <?php  } if(SITE_ID == 2){ ?>
+                    <span>
+                        <Image1 src={mobileContactBannerImage} classes='visible-for-small-only' />
+                        <Image1 src={contactBannerImage} classes='visible-for-medium-up' />
+                    </span>,
+                <?php }  ?>
                 document.getElementById('header-section')
             );
         </script>

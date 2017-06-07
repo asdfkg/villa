@@ -2679,6 +2679,7 @@ div#top-header-section header {
     top: 32%;
     width: 25px !important;
     height: 25px !important;
+    display: none !important;
 }
 #sync1 .owl-next {
     top: 26%;

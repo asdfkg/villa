@@ -1,7 +1,7 @@
 var ContactFormImage = React.createClass({
     render: function(){
         return (
-            <Image1 src={this.props.contactBannerImage} alt="" className="" />
+                <Image1 src={this.props.contactBannerImage} alt="" className="" />
         );
     }
 });
