@@ -30,8 +30,17 @@
         /** @jsx React.DOM */
         var founderVisionBannerImage = "<?php echo SITE_ID==1?"/img/about/banner-founders_vision.png": "/img/inner-bg1.png"?>";
         var founderVisionSignatureImage = "/img/about/signature-christian.jpg";
+        var mobileBannerImage = "/img/mobile-inner-bg1.png";
         ReactDOM.render(
-            <AboutUsBannerImage aboutUsBannerImage={founderVisionBannerImage}/>,
+            <?php  /* <AboutUsBannerImage aboutUsBannerImage={founderVisionBannerImage}/>, */
+            if(SITE_ID == 1){ ?>
+                <Image1 src={founderVisionBannerImage}/>,
+            <?php  } if(SITE_ID == 2){ ?>
+                <span>
+                    <Image1 src={mobileBannerImage} classes='visible-for-small-only' />
+                    <Image1 src={founderVisionBannerImage} classes='visible-for-medium-up' />
+                </span>,
+            <?php }  ?>
             document.getElementById('header-section')
         );  
         ReactDOM.render(

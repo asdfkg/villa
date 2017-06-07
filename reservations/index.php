@@ -118,9 +118,18 @@ $villaCtr = count($propertyArray);
               document.getElementById('destination-results')
             );
             var headerImg = "<?php echo SITE_ID ==1?"/img/destination-header_".str_replace('-', '_', $_GET['dest']).".png":"/img/inner-bg1.png";?>";
+            var mobileBannerImage = "/img/mobile-inner-bg1.png";
             ReactDOM.render(
-              /*<Image1 src="/img/destination-header_<?php echo str_replace('-', '_', $_GET['dest']); ?>.png"/>,*/
-              <Image1 src={headerImg}/>,
+                <?php  /*<Image1 src="/img/destination-header_<?php echo str_replace('-', '_', $_GET['dest']); ?>.png"/>,*/
+                if(SITE_ID == 1){ ?>
+                    <Image1 src={headerImg}/>,
+                <?php  } if(SITE_ID == 2){ ?>
+                    <span>
+                        <Image1 src={mobileBannerImage} classes='visible-for-small-only' />
+                        <Image1 src={headerImg} classes='visible-for-medium-up' />
+                    </span>,
+                <?php }  ?>
+              
               document.getElementById('header-section')
             );
     

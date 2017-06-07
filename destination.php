@@ -87,10 +87,18 @@ $propertyArray = $_SESSION['RESERVATION']->getProperty($destination=='all'?'':$d
         <script type="text/jsx">
             /** @jsx React.DOM */
             var bannerImage = "<?php echo SITE_ID==1?"/img/destination-header_".str_replace('-', '_', $destination).".png": "/img/inner-bg1.png"?>";
-            
+            var mobileBannerImage = "/img/mobile-inner-bg1.png";
             ReactDOM.render(
                 <div>
-                    <Image1 alt="Villa Rentals" src={bannerImage} />
+                    <?php  /*<Image1 alt="Villa Rentals" src={bannerImage} />,*/
+                        if(SITE_ID == 1){ ?>
+                            <Image1 src={bannerImage}/>,
+                    <?php  } if(SITE_ID == 2){ ?>
+                        <span>
+                            <Image1 src={mobileBannerImage} classes='visible-for-small-only' />
+                            <Image1 src={bannerImage} classes='visible-for-medium-up' />
+                        </span>,
+                    <?php }  ?>
                     <div className="row">
                         <div className="small-12 columns">
                             <Heading1 value="<?php echo 'LUXURY '.strtoupper($destination).' VILLA & HOME VACATION RENTALS'; ?>"/>
