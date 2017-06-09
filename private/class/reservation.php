@@ -378,7 +378,7 @@ class Reservation
 						
 						$villaFiveStarRateBaseNight = $villaFiveStarRateArray['rate_base'];
 						$villaFiveStarRateNight = $villaFiveStarRateArray['rate'];
-						//echo "<pre>";                                                print_r($villaFiveStarRateArray);                                                exit;
+						
 						$villaOnlyRateTotal = $villaOnlyRateNight * $totalNights;
 						$villaThreeStarRateTotal = $villaThreeStarRateNight * $totalNights;
 						$villaFourStarRateTotal = $villaFourStarRateNight * $totalNights;
@@ -797,10 +797,11 @@ class Reservation
 */
 			$commissionServices = $_SESSION['USER']->getCommissionServices() / 100;
 			$baseRate = ($ownerRent + $ownerReserve) / (1 - $ownerCom);
-			$brim = ($baseRate + $villaPreparationTotal) / (1 - $fiveStarVillaHotelManagement) + ($servicesTotal * $totalNights) / (1 - $commissionServices) - ($servicesTotal * $totalNights);
+                        // $brim = ($baseRate + $villaPreparationTotal) / (1 - $fiveStarVillaHotelManagement) + ($servicesTotal * $totalNights) / (1 - $commissionServices) - ($servicesTotal * $totalNights);
+                        $brim = ($baseRate + $villaPreparationTotal + ($totalBedrooms * 29 * $totalNights)) / (1 - $fiveStarVillaHotelManagement) + ($servicesTotal * $totalNights) / (1 - $commissionServices) - ($servicesTotal * $totalNights);                                              
 			//$brim  = $this->formatRate($brim,$precision);
                         $totalRate = $brim + $servicesTotal * $totalNights+$houseKeepingTotal*$totalNights;
-                        //$brim  = $this->formatRate($brim/$totalNights,$precision);                        echo $brim;
+                        //$brim  = $this->formatRate($brim/$totalNights,$precision);
 		}
                 
                 return array
@@ -1352,6 +1353,7 @@ class Reservation
 				array_splice($menu[0]['child'], 8, 0,array( array('href' => "/rental-villas/marbella", 'label' => "Marbella")));
 				array_splice($menu[0]['child'], 9, 0,array( array('href' => "/rental-villas/canada", 'label' => "Canada")));
 				array_splice($menu[0]['child'], 10, 0,array( array('href' => "/rental-villas/french+riviera", 'label' => "French Riviera")));
+				array_splice($menu[0]['child'], 11, 0,array( array('href' => "/rental-villas/french+alps", 'label' => "French Alps")));
             }
             if (SITE_ID == 1) {
                 

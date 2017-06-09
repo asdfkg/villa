@@ -31,6 +31,7 @@ var SearchOptions = [{description: 'All',code: 'all'},
 			   {description: 'Marbella',code: 'marbella'},
 			   {description: 'Canada',code: 'canada'},
 			   {description: 'French Riviera',code: 'french+riviera'},
+			   {description: 'French Alps',code: 'french+alps'},
                ";} ?>];
 var featuresList = <?php echo json_encode($featuresList); ?>;
 var amenitiesList = 

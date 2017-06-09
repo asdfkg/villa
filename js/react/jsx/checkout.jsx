@@ -190,7 +190,8 @@ var CheckoutStep2AdditionalServiceLevels = React.createClass({
             }
             boxValue--;
             if(boxValue < minValue){  
-                boxValue = minValue;
+                // boxValue = minValue;
+                boxValue = 0;
             }
             $(this).parents('.reactPriceWrapper').find('.checkoutAdditionalService').val(boxValue);
             applyServices();
@@ -201,11 +202,14 @@ var CheckoutStep2AdditionalServiceLevels = React.createClass({
             var minValue = Number(d.data('xmin'));
             var boxValue = Number(d.val());
             
-            if(isNaN(boxValue) || boxValue < minValue){
-                boxValue = minValue;
+            if(isNaN(boxValue)){
+                    boxValue = 0;
             }
             boxValue++;
-            
+            if(boxValue < minValue){ 
+                boxValue = minValue;
+            }
+                
             if(boxValue>maxValue){  
                 boxValue = maxValue;
             }
@@ -317,8 +321,7 @@ var CheckoutStep2AdditionalMoreServiceLevels = React.createClass({
                                                 </span>
                                             </div>
 
-
-                                            <div className="small-6 medium-2 columns">{srv.frequency} ({srv.min}-{srv.max})</div>
+                                            <div className="small-6 medium-2 columns checkout-min-height">{srv.frequency} {(srv.name == 'optionMassage' || srv.name == 'optionPreArrival')?"":(srv.min - srv.max)} </div>
                                             <div className="small-12 medium-9 ">
                                                 <span className="checkout-image-margin">
                                                     <Image1 src={srv.serviceImage} />
