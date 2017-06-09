@@ -23,6 +23,7 @@ $propertyArray = $property[0];
 if ($propertyArray['night_total'] < 3) header('Location: /reservations');
 
 $serviceLevelsArray = $propertyArray['service_levels'];
+//echo "<pre>";print_r($serviceLevelsArray);exit;
 
 $additionalServiceTags = array();
 if ($_SESSION['RESERVATION']->get('additionalServicesTags')) $additionalServiceTags = $_SESSION['RESERVATION']->get('additionalServicesTags');
@@ -31,11 +32,11 @@ $additionalServices = array(
 	array(
 		'name'			=> 'optionHouseKeeping',
 		'frequency'		=> 'Hours/Day',
-		'placeholder'	=> '0-12',
+		'placeholder'           => '0-12',
 		//'desc'			=> 'Housekeeping ('.$propertyArray['dest_currency'].'29/H)',
                 'desc'			=> 'Extra Housekeeping',
 		'rate'			=> 29,
-		'value'			=> (isset($additionalServiceTags['optionHouseKeeping']) ? $additionalServiceTags['optionHouseKeeping'] : null),
+		'value'			=> (isset($additionalServiceTags['optionHouseKeeping']) ? $additionalServiceTags['optionHouseKeeping'] : 0),
 		'min'			=> 0,
 		'max'			=> 12,
                 'serviceImage'          => '../img/extra-housekeeping.png'
@@ -47,7 +48,7 @@ $additionalServices = array(
 		//'desc'			=> 'Lifestyle Butler ('.$propertyArray['dest_currency'].'49/H)',
                 'desc'			=> 'Lifestyle Butler',
 		'rate'			=> 49,
-		'value'			=> (isset($additionalServiceTags['optionButler']) ? $additionalServiceTags['optionButler'] : null),
+		'value'			=> (isset($additionalServiceTags['optionButler']) ? $additionalServiceTags['optionButler'] : 0),
 		'min'			=> 4,
 		'max'			=> 24,
                 'serviceImage'          => '../img/lifestyle-butler.png'
@@ -59,7 +60,7 @@ $additionalServices = array(
 		 // 'desc'			=> 'Chef ('.$propertyArray['dest_currency'].'79/H)',
                 'desc'			=> 'Gourmet Chef',
 		'rate'			=> 79,
-		'value'			=> (isset($additionalServiceTags['optionChef']) ? $additionalServiceTags['optionChef'] : null),
+		'value'			=> (isset($additionalServiceTags['optionChef']) ? $additionalServiceTags['optionChef'] : 0),
 		'min'			=> 4,
 		'max'			=> 24,
                 'serviceImage'          => '../img/gourmet-chef.png'
@@ -71,7 +72,7 @@ $additionalServices = array(
 		//'desc'			=> 'Linen & Towel Service, Off-Site Professional Laundry ('.$propertyArray['dest_currency'].'139 + '.$propertyArray['dest_currency'].'39/BR)',
                 'desc'			=> 'Linen & Towel Change',
 		'rate'			=> $propertyArray['property_bedrooms'] * 39,
-		'value'			=> (isset($additionalServiceTags['optionLinenAndTowel']) ? $additionalServiceTags['optionLinenAndTowel'] : null),
+		'value'			=> (isset($additionalServiceTags['optionLinenAndTowel']) ? $additionalServiceTags['optionLinenAndTowel'] : 0),
 		'min'			=> 0,
 		'max'			=> 7,
                 'serviceImage'          => '../img/linen-towel-change.png'
@@ -83,7 +84,7 @@ $additionalServices = array(
 		//'desc'			=> 'VillaHotel Product Replenishment & Service ('.$propertyArray['dest_currency'].'149 + '.$propertyArray['dest_currency'].'49/BR)',
                 'desc'			=> 'Product Replenishment',
 		'rate'			=> $propertyArray['property_bedrooms'] * 49,
-		'value'			=> (isset($additionalServiceTags['optionProductAndService']) ? $additionalServiceTags['optionProductAndService'] : null),
+		'value'			=> (isset($additionalServiceTags['optionProductAndService']) ? $additionalServiceTags['optionProductAndService'] : 0),
 		'min'			=> 0,
 		'max'			=> 7,
                 'serviceImage'          => '../img/product-replenishment.png'
@@ -97,7 +98,7 @@ $additionalServices = array(
 		//'desc'			=> 'Personal Armed Security ('.$propertyArray['dest_currency'].'99/H)',
                 'desc'			=> 'Personal Armed Security',
 		'rate'			=> 99,
-		'value'			=> (isset($additionalServiceTags['optionSecurity']) ? $additionalServiceTags['optionSecurity'] : null),
+		'value'			=> (isset($additionalServiceTags['optionSecurity']) ? $additionalServiceTags['optionSecurity'] : 0),
 		'min'			=> 0,
 		'max'			=> 24,
                 'serviceImage'          => '../img/personal-armed-security.png'
@@ -109,7 +110,7 @@ $additionalServices = array(
 		//'desc'			=> 'Private Driver with Cadillac Escalade / Mercedes S-Class ('.$propertyArray['dest_currency'].'99/H)',
                 'desc'			=> 'Private Driver',
 		'rate'			=> 99,
-		'value'			=> (isset($additionalServiceTags['optionDriver']) ? $additionalServiceTags['optionDriver'] : null),
+		'value'			=> (isset($additionalServiceTags['optionDriver']) ? $additionalServiceTags['optionDriver'] : 0),
 		'min'			=> 0,
 		'max'			=> 24,
                 'serviceImage'          => '../img/private-driver.png'
@@ -121,7 +122,7 @@ $additionalServices = array(
 		//'desc'			=> 'Babysitting ('.$propertyArray['dest_currency'].'39/H)',
                 'desc'			=> 'Babysitting',
 		'rate'			=> 39,
-		'value'			=> (isset($additionalServiceTags['optionBabySitting']) ? $additionalServiceTags['optionBabySitting'] : null),
+		'value'			=> (isset($additionalServiceTags['optionBabySitting']) ? $additionalServiceTags['optionBabySitting'] : 0),
 		'min'			=> 0,
 		'max'			=> 24,
                 'serviceImage'          => '../img/babysitting.png'
@@ -133,7 +134,7 @@ $additionalServices = array(
 		//'desc'			=> 'Personal Training ('.$propertyArray['dest_currency'].'99/H)',
                 'desc'			=> 'Personal Training',
 		'rate'			=> 99,
-		'value'			=> (isset($additionalServiceTags['optionTraining']) ? $additionalServiceTags['optionTraining'] : null),
+		'value'			=> (isset($additionalServiceTags['optionTraining']) ? $additionalServiceTags['optionTraining'] : 0),
 		'min'			=> 0,
 		'max'			=> 24,
                 'serviceImage'          => '../img/personal-training.png'
@@ -144,8 +145,8 @@ $additionalServices = array(
 		'placeholder'           => '0 or 1',
 		//'desc'			=> 'Pre-arrival Groceries & Fridge Setup ('.$propertyArray['dest_currency'].'299)',
                 'desc'			=> 'Pre-arrival Groceries & Fridge Setup',
-		'rate'			=> 299,
-		'value'			=> (isset($additionalServiceTags['optionPreArrival']) ? $additionalServiceTags['optionPreArrival'] : null),
+		'rate'			=> 500,
+		'value'			=> (isset($additionalServiceTags['optionPreArrival']) ? $additionalServiceTags['optionPreArrival'] : 0),
 		'min'			=> 0,
 		'max'			=> 1,
                 'serviceImage'          => '../img/prearrival-groceries-fridge-setup.png'
@@ -157,7 +158,7 @@ $additionalServices = array(
 		// 'desc'			=> 'Relaxing Swedish Massage ('.$propertyArray['dest_currency'].'179)',
                 'desc'			=> 'RElaxing Swedish Massage',
 		'rate'			=> 179,
-		'value'			=> (isset($additionalServiceTags['optionMassage']) ? $additionalServiceTags['optionMassage'] : null),
+		'value'			=> (isset($additionalServiceTags['optionMassage']) ? $additionalServiceTags['optionMassage'] : 0),
 		'min'			=> 0,
 		'max'			=> 1000,
                 'serviceImage'          => '../img/relaxing-swedish-massage.png'
@@ -303,8 +304,7 @@ if(SITE_ID==1){
 		
 		$('.option input[type="number"]').each(function () {
 			if ($(this).val()) {
-                            if (Number($(this).val()) < Number($(this).attr('min')) || Number($(this).val()) > Number($(this).attr('max'))) $(this).val('');
-				
+                            if (Number($(this).val()) < Number($(this).data('xmin')) || Number($(this).val()) > Number($(this).attr('max'))) $(this).val(0);
                             if ($(this).attr('id') == 'optionLinenAndTowel') servicesTotal += (139 + Number($('#' + $(this).attr('id') + 'Rate').val())) * Number($(this).val()) / 7;
                             else if ($(this).attr('id') == 'optionProductAndService') servicesTotal += (149 + Number($('#' + $(this).attr('id') + 'Rate').val())) * Number($(this).val()) / 7;
                             else servicesTotal += Number($(this).val()) * Number($('#' + $(this).attr('id') + 'Rate').val());

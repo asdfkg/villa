@@ -183,7 +183,7 @@ var CheckoutStep2AdditionalServiceLevels = React.createClass({
         $('.reactMinus').on('click',function(){
             var d = $(this).parents('.reactPriceWrapper').find('.checkoutAdditionalService');
             var maxValue = Number(d.attr('max'));
-            var minValue = Number(d.attr('min'));
+            var minValue = Number(d.data('xmin'));
             var boxValue = Number(d.val());
             if(isNaN(boxValue)){
                 boxValue = minValue;
@@ -198,7 +198,7 @@ var CheckoutStep2AdditionalServiceLevels = React.createClass({
         $('.reactPlus').on('click',function(){
             var d = $(this).parents('.reactPriceWrapper').find('.checkoutAdditionalService');
             var maxValue = Number(d.attr('max'));
-            var minValue = Number(d.attr('min'));
+            var minValue = Number(d.data('xmin'));
             var boxValue = Number(d.val());
             
             if(isNaN(boxValue) || boxValue < minValue){
@@ -236,16 +236,14 @@ var CheckoutStep2AdditionalServiceLevels = React.createClass({
                                                 </span>
                                             </span>
                                             <span className="countinput">
-                                                <input type="number" className="checkoutAdditionalService" name={srv.name} id={srv.name} placeholder={srv.placeholder} value={srv.value} min={srv.min} max={srv.max} onChange={this.reactApplyServices} />
+                                                <input type="number" className="checkoutAdditionalService" name={srv.name} id={srv.name} placeholder={srv.placeholder} value={srv.value} data-xmin={srv.min} max={srv.max} onChange={this.reactApplyServices} />
                                                 <input type="hidden" name={srv.name+"Desc"} id={srv.desc+"Desc"} value={srv.desc} />
                                                 <input type="hidden" name={srv.name+"Rate"} id={srv.name+"Rate"} value={srv.rate} />
                                             </span>
                                         </div>
 
-
-
-                                        <div className="small-6 medium-1 columns">{srv.frequency}</div>
-                                        <div className="small-12 medium-9 columns">
+                                        <div className="small-6 medium-2 columns">{srv.frequency} ({srv.min}-{srv.max})</div>
+                                        <div className="small-12 medium-9">
                                             <span className="checkout-image-margin">
                                                 <Image1 src={srv.serviceImage} />
                                             </span>
@@ -313,15 +311,15 @@ var CheckoutStep2AdditionalMoreServiceLevels = React.createClass({
                                                     </span>
                                                 </span>
                                                 <span className="countinput">
-                                                    <input type="number" className="checkoutAdditionalService" name={srv.name} id={srv.name} placeholder={srv.placeholder} value={srv.value} min={srv.min} max={srv.max} onChange={this.reactApplyServices} />
+                                                    <input type="number" className="checkoutAdditionalService" name={srv.name} id={srv.name} placeholder={srv.placeholder} value={srv.value} data-xmin={srv.min} max={srv.max} onChange={this.reactApplyServices} />
                                                     <input type="hidden" name={srv.name+"Desc"} id={srv.desc+"Desc"} value={srv.desc} />
                                                     <input type="hidden" name={srv.name+"Rate"} id={srv.name+"Rate"} value={srv.rate} />
                                                 </span>
                                             </div>
 
 
-                                            <div className="small-6 medium-1 columns">{srv.frequency}</div>
-                                            <div className="small-12 medium-9 columns">
+                                            <div className="small-6 medium-2 columns">{srv.frequency} ({srv.min}-{srv.max})</div>
+                                            <div className="small-12 medium-9 ">
                                                 <span className="checkout-image-margin">
                                                     <Image1 src={srv.serviceImage} />
                                                 </span>
@@ -399,12 +397,12 @@ CheckoutStep2ServiceContent = React.createClass({
                           <div className="columns">
                                     {/* <p className="text-right" dangerouslySetInnerHTML={{__html: ('Nightly Rate: ' +property.dest_currency+''+numberWithCommas((newNightRate).toFixed()))}}></p>*/}
                             <p className="text-right">
-                                {thead}
+                                {/* {thead} */}
                                 <span dangerouslySetInnerHTML={{__html: ('Rate: ' +property.dest_currency )}}/>
                                 <span id="rateNightDisp2">{numberWithCommas((newNightRate).toFixed())} </span> / night
                                 <br />
                                 <br />
-                                <button className="book-btn tiny radius" onClick={this.reactSubmitServiceLevelForm}>{siteId==1?"CHECKOUT":"BOOK NOW"}</button>
+                                <button className="book-btn tiny radius" onClick={this.reactSubmitServiceLevelForm}>{siteId==1?"CONTINUE":"BOOK NOW"}</button>
                             </p>
                           </div>
                        </div>

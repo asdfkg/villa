@@ -371,14 +371,14 @@ class Reservation
 						$villaThreeStarRateArray = $this->serviceRate(3, $ownerRent, $ownerCom, $ownerReserve, $totalBedrooms, $multiplierField, $totalNights, $servicesTotal);
 						$villaFourStarRateArray = $this->serviceRate(4, $ownerRent, $ownerCom, $ownerReserve, $totalBedrooms, $multiplierField, $totalNights, $servicesTotal);
 						$villaFiveStarRateArray = $this->serviceRate(5, $ownerRent, $ownerCom, $ownerReserve, $totalBedrooms, $multiplierField, $totalNights, $servicesTotal);
-						
+
 						$villaOnlyRateNight = $villaOnlyRateArray['rate'];
 						$villaThreeStarRateNight = $villaThreeStarRateArray['rate'];
 						$villaFourStarRateNight = $villaFourStarRateArray['rate'];
 						
 						$villaFiveStarRateBaseNight = $villaFiveStarRateArray['rate_base'];
 						$villaFiveStarRateNight = $villaFiveStarRateArray['rate'];
-						
+						//echo "<pre>";                                                print_r($villaFiveStarRateArray);                                                exit;
 						$villaOnlyRateTotal = $villaOnlyRateNight * $totalNights;
 						$villaThreeStarRateTotal = $villaThreeStarRateNight * $totalNights;
 						$villaFourStarRateTotal = $villaFourStarRateNight * $totalNights;
@@ -790,7 +790,7 @@ class Reservation
 */
 
 /*
-			1.       Base Villa Rate w/o Hotel Service or Management = Net to Owner / (1 – Total Commission of 20%)
+			1.       Base Villa Rate w/o Hotel Service or Management = Net to Owner / (1 â€“ Total Commission of 20%)
 			2.       Calculate per day services and total stay services -> this should be clear
 			3.       BRIM = (Base Villa Rate w/o Hotel Service or Management + VillaHotel Transformation of $749) / (1 - Villazzo VillaHotel Management of 18%) + Total Hotel Services / (1 - Outside Agent Commission on Services) - Total Hotel Services
 			4.       Total rate = BRIM + Total Hotel Services
@@ -798,12 +798,16 @@ class Reservation
 			$commissionServices = $_SESSION['USER']->getCommissionServices() / 100;
 			$baseRate = ($ownerRent + $ownerReserve) / (1 - $ownerCom);
 			$brim = ($baseRate + $villaPreparationTotal) / (1 - $fiveStarVillaHotelManagement) + ($servicesTotal * $totalNights) / (1 - $commissionServices) - ($servicesTotal * $totalNights);
-			$totalRate = $brim + $servicesTotal * $totalNights;
+			//$brim  = $this->formatRate($brim,$precision);
+                        $totalRate = $brim + $servicesTotal * $totalNights+$houseKeepingTotal*$totalNights;
+                        //$brim  = $this->formatRate($brim/$totalNights,$precision);                        echo $brim;
 		}
-		
-		return array
+                
+                return array
 		(
-			'rate' => SITE_ID==2?$totalRate:$this->formatRate($totalRate / $totalNights,$precision),
+			//'rate' => SITE_ID==2?$totalRate:$this->formatRate($totalRate / $totalNights,$precision),
+			//'rate' => SITE_ID==2?$totalRate:round($totalRate / $totalNights),
+			'rate' => SITE_ID==2?$totalRate:round($this->formatRate($brim/$totalNights,$precision)+$servicesTotal),
 			'rate_base' => $this->formatRate($brim / $totalNights,$precision),
 			'management' => $this->formatRate($managementRate,$precision),
 			
@@ -1343,8 +1347,11 @@ class Reservation
             if (SITE_ID == 2) {
 //                array_splice($menu[0]['child'], 6, 0,array( array('href' => "/reservations/?dest=turks+%26+caicos&check_in=&check_out=", 'label' => "Turks & Caicos")));
 //                array_splice($menu[0]['child'], 7, 0,array( array('href' => "/reservations/?dest=palm+beach&check_in=&check_out=", 'label' => "Palm Beach")));
-                array_splice($menu[0]['child'], 6, 0,array( array('href' => "/rental-villas/turks+%26+caicos", 'label' => "Turks & Caicos")));
+                array_splice($menu[0]['child'], 6, 0,array( array('href' => "/rental-villas/turks+and+caicos", 'label' => "Turks and Caicos")));
                 array_splice($menu[0]['child'], 7, 0,array( array('href' => "/rental-villas/palm+beach", 'label' => "Palm Beach")));
+				array_splice($menu[0]['child'], 8, 0,array( array('href' => "/rental-villas/marbella", 'label' => "Marbella")));
+				array_splice($menu[0]['child'], 9, 0,array( array('href' => "/rental-villas/canada", 'label' => "Canada")));
+				array_splice($menu[0]['child'], 10, 0,array( array('href' => "/rental-villas/french+riviera", 'label' => "French Riviera")));
             }
             if (SITE_ID == 1) {
                 

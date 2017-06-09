@@ -26,8 +26,11 @@ var SearchOptions = [{description: 'All',code: 'all'},
                {description: 'Ibiza',code: 'ibiza'}
                <?php if(SITE_ID==2){
                    echo ",
-               {description: 'Turks & Caicos',code: 'turks+%26+caicos'},
+               {description: 'Turks and Caicos',code: 'turks+and+caicos'},
                {description: 'Palm Beach',code: 'palm+beach'},
+			   {description: 'Marbella',code: 'marbella'},
+			   {description: 'Canada',code: 'canada'},
+			   {description: 'French Riviera',code: 'french+riviera'},
                ";} ?>];
 var featuresList = <?php echo json_encode($featuresList); ?>;
 var amenitiesList = 
