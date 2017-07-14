@@ -180,7 +180,7 @@ foreach ($serviceLevelsArray as $serviceLevels)
     
     <!-- Load React Library -->
     <?php include_once 'js/reactLibrary.php'; ?>
-    <?php if(SITE_ID == 1){ include_once 'js/chatScript.php'; } ?>
+    <?php include_once 'js/chatScript.php'; ?>
     <script src="/js/react/jsx/property-summary.jsx" type="text/jsx"></script>
     <script src="/js/react/jsx/property-summary-popup.jsx" type="text/jsx"></script>
     <!-- End Load React Library -->

@@ -88,7 +88,7 @@ $villBooking = prepareVilla($calendarStartDt,$destId,$propertyQuery);
     <link rel="stylesheet" href="/css/<?php echo SITE_ID;?>/calendar.css">
     <script src="/js/vendor/modernizr.js"></script>
     <?php include_once '../js/reactLibrary.php'; ?>
-    <?php if(SITE_ID == 1){ include_once '../js/chatScript.php'; } ?>
+    <?php include_once '../js/chatScript.php'; ?>
     <script src="/js/react/jsx/calendar.jsx" type="text/jsx"></script>
 
 </head>

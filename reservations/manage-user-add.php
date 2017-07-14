@@ -43,7 +43,7 @@ $propertyList = $_SESSION['DB']->queryAllResult($rs_property);
     <link rel="stylesheet" href="/css/<?php echo SITE_ID;?>/custom.css">
     <script src="/js/vendor/modernizr.js"></script>
     <?php include_once '../js/reactLibrary.php'; ?>
-    <?php if(SITE_ID == 1){ include_once '../js/chatScript.php'; } ?>
+    <?php include_once '../js/chatScript.php'; ?>
     <script src="/js/react/jsx/manager-user.jsx" type="text/jsx"></script>
 </head>
 <body>

@@ -44,7 +44,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete') {
         <link rel="stylesheet" href="/css/<?php echo SITE_ID; ?>/custom.css">
         <script src="/js/vendor/modernizr.js"></script>
         <?php include_once '../js/reactLibrary.php'; ?>
-        <?php if(SITE_ID == 1){ include_once '../js/chatScript.php'; } ?>
+        <?php include_once '../js/chatScript.php'; ?>
         <script src="/js/react/jsx/<?php echo SITE_ID; ?>/overview.jsx" type="text/jsx"></script>
     </head>
 

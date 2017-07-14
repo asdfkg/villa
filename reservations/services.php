@@ -209,7 +209,7 @@ if(SITE_ID==1){
     <link rel="stylesheet" href="/css/<?php echo SITE_ID;?>/custom.css">
     <script src="/js/vendor/modernizr.js"></script>
     <?php include_once '../js/reactLibrary.php'; ?>
-    <?php if(SITE_ID == 1){ include_once '../js/chatScript.php'; } ?>
+    <?php include_once '../js/chatScript.php'; ?>
     <script src="/js/react/jsx/checkout.jsx?id=1.0.1" type="text/jsx"></script>
     <script src="/js/moment.min.js" ></script>
     <style>

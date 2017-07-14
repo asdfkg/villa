@@ -101,7 +101,7 @@ if (!$_SESSION['RESERVATION']->get('propertyId'))
     <script src="/js/vendor/modernizr.js"></script>
         <!-- Load React Library -->
     <?php include_once '../js/reactLibrary.php'; ?>
-    <?php if(SITE_ID == 1){ include_once '../js/chatScript.php'; } ?>
+    <?php include_once '../js/chatScript.php'; ?>
     <script src="/js/react/jsx/checkout.jsx" type="text/jsx"></script>
         <!-- End Load React Library -->
 </head>

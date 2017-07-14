@@ -87,7 +87,7 @@ $villaCtr = count($propertyArray);
     <script src="/js/vendor/modernizr.js"></script>
     <!-- React -->
     <?php include_once '../js/reactLibrary.php'; ?>
-    <?php if(SITE_ID == 1){ include_once '../js/chatScript.php'; } ?>
+    <?php include_once '../js/chatScript.php'; ?>
     <script src="/js/react/jsx/search-result.jsx"  type="text/jsx"></script>
     <script src="/js/react/jsx/villazzo-search.jsx"  type="text/jsx"></script>
     <script src="/js/moment.min.js" ></script>

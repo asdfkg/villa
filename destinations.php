@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/css/map.css">
     <script src="/js/vendor/modernizr.js"></script>
     <?php require_once './js/reactLibrary.php'; ?>
-    <?php if(SITE_ID == 1){ include_once './js/chatScript.php'; } ?>
+    <?php include_once './js/chatScript.php'; ?>
     <script src="/js/react/jsx/contact.jsx" type="text/jsx"></script>
 </head>
 
