@@ -244,7 +244,7 @@ class Reservation
 				{
 					for ($i = 0; $i < $totalNights; $i ++)
 					{				
-						$query = "SELECT ".$propertyRateDbField."Rent AS ownerRent, ".$propertyRateDbField."Com AS ownerCom, ".$propertyRateDbField."Reserve AS ownerReserve, rateCurrency FROM property left join 
+						$query = "SELECT ".$propertyRateDbField."Rent AS ownerRent, ".$propertyRateDbField."Com AS ownerCom, ".$propertyRateDbField."Reserve AS ownerReserve, rateCurrency, minBookingDays FROM property left join 
 						(
 							SELECT * FROM propertyRate WHERE STR_TO_DATE(ADDDATE( '".$checkInDt."', INTERVAL ".$i." DAY), '%Y-%m-%d' ) 
 							BETWEEN 
@@ -280,8 +280,8 @@ class Reservation
 						
 						$rs_property_rate = $_SESSION['DB']->querySelect($query);
 						$row_rs_property_rate = $_SESSION['DB']->queryResult($rs_property_rate);
-						
 						$propertyRateNightArray[] = array('owner_rent' => $row_rs_property_rate['ownerRent'], 'owner_com' => $row_rs_property_rate['ownerCom'], 'owner_reserve' => $row_rs_property_rate['ownerReserve'], 'currency' => $row_rs_property_rate['rateCurrency']);
+                                                $minmumBookingDays = $row_rs_property_rate['minBookingDays'];
 					}
 				}
 							
