@@ -76,6 +76,22 @@ if ($totalRows_rs_property_driving)
 	$propertydriving .= '</ul>';
 }
 
+
+
+// STAFF AND SERVICES
+$propertystaffnservices = '<ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-2 full-li">'
+        . '<li><span>Cleaning service 5 days per week</span></li>'
+        . '<li><span>Pool heating during mid high & high season</span></li>'
+        . '<li class="extra-cost-large"><span>Extra Cost (advance notice may be required):</span></li>'
+        . '<li><span>Departure Cleaning</span></li>'
+        . '<li><span>Gas, electricity & water consumption for statys longer then 2 weeks</span></li>'
+        . '<li><span>Pool heating during low and mid-low season</span></li>'
+        . '<li><span>Villa pre-stocking</span></li>'
+        . '<li><span>Airport Transfer</span></li>'
+        . '<li><span>Activities and excursion</span></li>'
+        . '</ul>';
+
+
 // property gallery
 $propertyGalleryArray = array();
 //$path = 'media/destination/'.$destFolder.'/'.$propertyGallery.'/';
@@ -164,6 +180,7 @@ foreach ($serviceLevelsArray as $serviceLevels)
     
     <!-- Load React Library -->
     <?php include_once 'js/reactLibrary.php'; ?>
+    <?php if(SITE_ID == 1){ include_once 'js/chatScript.php'; } ?>
     <script src="/js/react/jsx/property-summary.jsx" type="text/jsx"></script>
     <script src="/js/react/jsx/property-summary-popup.jsx" type="text/jsx"></script>
     <!-- End Load React Library -->
@@ -194,6 +211,11 @@ foreach ($serviceLevelsArray as $serviceLevels)
 
 <body onload="initialize()" onunload="GUnload()">
 	<?php require_once 'inc-header.php'; ?>
+    <script>
+fbq('track', 'CompleteRegistration');
+fbq('track', 'Lead');
+fbq('track', 'AddToWishlist');
+</script>
         <section id="header-section" class="inner-bg"></section>
         <!-- React Owl Carousel Desktop Start -->
         <span id="property-slider-section-rc"></span>
@@ -243,6 +265,7 @@ foreach ($serviceLevelsArray as $serviceLevels)
                 propertyDescription: <?php echo str_replace('\n','<br />',json_encode($propertyDescLong)); ?>,
                 propertyDriving:    '<?php echo $propertydriving; ?>',
                 propertyAmenities: '<?php echo $propertyAmenities; ?>',
+                propertystaffnservices: '<?php echo $propertystaffnservices; ?>',
             };
             var details = [
                 {name: 'Location',value:'<?php echo $propertyLocationName ?>'},

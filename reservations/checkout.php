@@ -101,12 +101,19 @@ if (!$_SESSION['RESERVATION']->get('propertyId'))
     <script src="/js/vendor/modernizr.js"></script>
         <!-- Load React Library -->
     <?php include_once '../js/reactLibrary.php'; ?>
+    <?php if(SITE_ID == 1){ include_once '../js/chatScript.php'; } ?>
     <script src="/js/react/jsx/checkout.jsx" type="text/jsx"></script>
         <!-- End Load React Library -->
 </head>
 
 <body>
 	<?php require_once '../inc-header.php'; ?>
+                        <!-- Facebook Pixel Code -->
+<script>
+fbq('track', 'Purchase', {value: 0.00, currency: 'USD'});
+</script>
+<!-- DO NOT MODIFY -->
+<!-- End Facebook Pixel Code -->
             <!-- Reservations Services Header Image Section Start -->
         <section id="header-section" class="inner-bg"></section>
             <!-- Reservations Title and Steps Section Start -->

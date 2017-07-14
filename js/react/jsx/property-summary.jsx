@@ -52,6 +52,32 @@ var IfPropertyDriving = React.createClass({
     }
 });
 
+var StaffAndServices = React.createClass({
+    render: function(){
+        var unescapeHTML= function(data){
+            return {__html:data}
+        };
+    
+        if (this.props.propertyStaffnServicesData) {
+            return <span>
+                <div className="row full-width text-center" id="property-amenities-separator"></div>
+                <div className="row" id="property-details">
+                    <div className="columns text-left show-for-small-only">
+                        <span>STAFF & SERVICES</span>
+                    </div>
+                    <div className="medium-2 columns text-right show-for-medium-up">
+                        <span>STAFF & SERVICES</span>
+                    </div>
+                    <div className="medium-10 columns" dangerouslySetInnerHTML={unescapeHTML(this.props.propertyStaffnServicesData)}></div>
+                </div>
+            </span>
+        }
+        else {
+            return false;
+        }
+    }
+});
+
 var IfPropertyAmenities = React.createClass({
     render: function(){
         var unescapeHTML= function(data){
@@ -137,13 +163,14 @@ var PropertySummary = React.createClass({
                     <p className="flip">
                         <span id="clickMe" onClick={this.handleReadMoreClick}>{this.state.readMore?'Click to show less':'click to show more'}</span> 
                         <i className={this.state.readMore?"fa fa-angle-double-down":"fa fa-angle-double-up"}></i>
-                    </p>
+                    </p> 
                 </div> 
                 
                 <div id="property-specifications">
                     <PropertyDetailsSection PropertyDetailsData={this.props.propertyDetails} />
-                    <IfPropertyDriving propertyDrivingData={this.props.data.propertyDriving}/>
                     <IfPropertyAmenities propertyAmenitiesData={this.props.data.propertyAmenities}/>
+                    <IfPropertyDriving propertyDrivingData={this.props.data.propertyDriving}/>
+                    <StaffAndServices propertyStaffnServicesData={this.props.data.propertystaffnservices}/>
                 </div>
                 
             </section>

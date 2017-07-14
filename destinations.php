@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/map.css">
     <script src="/js/vendor/modernizr.js"></script>
     <?php require_once './js/reactLibrary.php'; ?>
+    <?php if(SITE_ID == 1){ include_once './js/chatScript.php'; } ?>
     <script src="/js/react/jsx/contact.jsx" type="text/jsx"></script>
 </head>
 
@@ -65,6 +66,7 @@
             /** @jsx React.DOM */
            var destinationImage = "/img/about/banner-contact.png"  ;
            var destinationImage = "/img/inner-bg1.png";
+           var mobileBannerImage = "/img/mobile-inner-bg1.png";
            <?php if(SITE_ID==1):?>
                ReactDOM.render(<section id="choose-your-destination">
                         <div className="row text-center hide-for-medium-up">
@@ -89,7 +91,11 @@
             );
            <?php else: ?>
                 ReactDOM.render(
-                    <ContactFormImage contactBannerImage={destinationImage}/>,
+                        <?php /* <ContactFormImage contactBannerImage={destinationImage}/>, */ ?>
+                        <span>
+                            <Image1 src={mobileBannerImage} classes='visible-for-small-only' />
+                            <Image1 src={destinationImage} classes='visible-for-medium-up' />
+                        </span>,
                     document.getElementById('header-section')
                 );
             <?php endif; ?>

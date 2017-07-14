@@ -87,6 +87,7 @@ $villaCtr = count($propertyArray);
     <script src="/js/vendor/modernizr.js"></script>
     <!-- React -->
     <?php include_once '../js/reactLibrary.php'; ?>
+    <?php if(SITE_ID == 1){ include_once '../js/chatScript.php'; } ?>
     <script src="/js/react/jsx/search-result.jsx"  type="text/jsx"></script>
     <script src="/js/react/jsx/villazzo-search.jsx"  type="text/jsx"></script>
     <script src="/js/moment.min.js" ></script>
@@ -108,6 +109,7 @@ $villaCtr = count($propertyArray);
         <section id="destination-results" class="villa_list">
         </section>
 <!--        React-->
+
         <script type="text/jsx" charset="utf-8">
             /** @jsx React.DOM */
 
@@ -118,9 +120,18 @@ $villaCtr = count($propertyArray);
               document.getElementById('destination-results')
             );
             var headerImg = "<?php echo SITE_ID ==1?"/img/destination-header_".str_replace('-', '_', $_GET['dest']).".png":"/img/inner-bg1.png";?>";
+            var mobileBannerImage = "/img/mobile-inner-bg1.png";
             ReactDOM.render(
-              /*<Image1 src="/img/destination-header_<?php echo str_replace('-', '_', $_GET['dest']); ?>.png"/>,*/
+                <?php  /*<Image1 src="/img/destination-header_<?php echo str_replace('-', '_', $_GET['dest']); ?>.png"/>,*/
+                if(SITE_ID == 1){ ?>
               <Image1 src={headerImg}/>,
+                <?php  } if(SITE_ID == 2){ ?>
+                    <span>
+                        <Image1 src={mobileBannerImage} classes='visible-for-small-only' />
+                        <Image1 src={headerImg} classes='visible-for-medium-up' />
+                    </span>,
+                <?php }  ?>
+              
               document.getElementById('header-section')
             );
     

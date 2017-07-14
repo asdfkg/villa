@@ -125,11 +125,11 @@ var PropertyFeedbackRow = React.createClass({
                     </span>
         }else{
             if(this.props.reservationFeedback){
-                var feedbackData = <a href={"/reservations/overview/feedback/"+this.props.reservationId}>
-                            <i className="fa fa-comment" title="Request Feedback"></i>
-                        </a>
+               var feedbackData = <i className="fa fa-check color-green" title="Feedback Requested"></i>
             }else{
-                var feedbackData = <i className="fa fa-check color-green" title="Feedback Requested"></i>
+                var feedbackData = <a href={"/reservations/overview/feedback/"+this.props.reservationId}>
+                    <i className="fa fa-comment" title="Request Feedback"></i>
+                </a>               
             }
         }
         return (

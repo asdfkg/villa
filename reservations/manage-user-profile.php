@@ -2,39 +2,38 @@
 require_once '../private/config.php';
 
 // restrict user access
-$_SESSION['USER']->restrict('1,2,3,4');
+$_SESSION['USER']->restrict('1,2,4');
 
-if (isset($_POST['action']) && $_POST['action'] == 'update' && $_POST['firstName'] != '' && $_POST['lastName'] != '' && $_POST['userEmail'] != '' && $_POST['userPassword'] != '')
-{
-    	if (strpos($_POST['userPassword'], '*') === false)
-	{
+if (isset($_POST['action']) && $_POST['action'] == 'update' && $_POST['userGroup'] != '' && $_POST['firstName'] != '' && $_POST['lastName'] != '' && $_POST['userEmail'] != '' && $_POST['userPassword'] != '') {
+    if (strpos($_POST['userPassword'], '*') === false) {
 		$_SESSION['DB']->queryUpdate('UPDATE USER SET USER_PASSWORD = AES_ENCRYPT(?, \''.$_SESSION['DB']->getEncryptKey().'\') WHERE USER_ID = ? LIMIT 1', array($_POST['userPassword'], $_POST['userId']));
 	}
 	
-	$_SESSION['DB']->queryUpdate('UPDATE USER SET USER_FIRSTNAME = ?, USER_LASTNAME = ?, USER_EMAIL = ?, USER_COMPANY = ? WHERE USER_ID = ? LIMIT 1',
-	array(
+    $_SESSION['DB']->queryUpdate('UPDATE USER SET USERGROUP_ID = ?, USER_FIRSTNAME = ?, USER_LASTNAME = ?, USER_EMAIL = ?, USER_COMPANY = ?, USER_COMMISSION_VH = ?, USER_COMMISSION_BL = ? WHERE USER_ID = ? LIMIT 1', array(
+        $_POST['userGroup'],
 		$_POST['firstName'],
 		$_POST['lastName'],
 		$_POST['userEmail'],
 		$_POST['userCompany'],
+        $_POST['userCommissionVillaHotel'],
+        $_POST['userCommissionBasicLinen'],
 		$_POST['userId']
 	));
-	header('Location: /reservations/');
+    header('Location: /reservations/user');
 }
 
 $colname_rs_user = "-1";
 if(isset($_GET['id'])) {
   $colname_rs_user = $_GET['id'];
 }
-$rs_user = $_SESSION['DB']->querySelect('SELECT USER_ID, USERGROUP_ID, USER_EMAIL, USER_FIRSTNAME, USER_LASTNAME, AES_DECRYPT(USER_PASSWORD, \''.$_SESSION['DB']->getEncryptKey().'\') AS unencrypted, USER_COMPANY, USER_COMMISSION_VH, USER_COMMISSION_BL FROM USER WHERE USER_ID = ? LIMIT 1', array($_SESSION['USER']->getUserId()));
+$rs_user = $_SESSION['DB']->querySelect('SELECT USER_ID, USERGROUP_ID, USER_EMAIL, USER_FIRSTNAME, USER_LASTNAME, AES_DECRYPT(USER_PASSWORD, \'' . $_SESSION['DB']->getEncryptKey() . '\') AS unencrypted, USER_COMPANY, USER_COMMISSION_VH, USER_COMMISSION_BL FROM USER WHERE USER_ID = ? LIMIT 1', array($colname_rs_user));
 $row_rs_user = $_SESSION['DB']->queryResult($rs_user);
 $totalRows_rs_user = $_SESSION['DB']->queryCount($rs_user);
 
 $rs_usergroup = $_SESSION['DB']->querySelect('SELECT * FROM USERGROUP');
-$row_rs_usergroup = $_SESSION['DB']->queryResult($rs_usergroup);
-$totalRows_rs_usergroup = $_SESSION['DB']->queryCount($rs_usergroup);
+$usergroups = $_SESSION['DB']->queryAllResult($rs_usergroup);
 
-$rs_property = $_SESSION['DB']->querySelect('SELECT propertyOwner.propertyId, propertyName FROM propertyOwner LEFT JOIN property ON property.propertyId = propertyOwner.propertyId WHERE userId = ? ORDER BY propertyName ASC', array($colname_rs_user));
+$rs_property = $_SESSION['DB']->querySelect('SELECT propertyOwner.propertyId, propertyName FROM propertyOwner LEFT JOIN property ON property.propertyId = propertyOwner.propertyId WHERE userId = ? AND property.site in ("3","' . SITE_ID . '") ORDER BY propertyName ASC', array($colname_rs_user));
 $row_rs_property = $_SESSION['DB']->queryResult($rs_property);
 $totalRows_rs_property = $_SESSION['DB']->queryCount($rs_property);
 ?>
@@ -48,49 +47,60 @@ $totalRows_rs_property = $_SESSION['DB']->queryCount($rs_property);
     <link rel="stylesheet" href="/css/<?php echo SITE_ID; ?>/custom.css">
     <script src="/js/vendor/modernizr.js"></script>
     <?php include_once '../js/reactLibrary.php'; ?>
-    <script src="/js/react/jsx/<?php echo SITE_ID; ?>/user-profile.jsx" type="text/jsx"></script>    
+    <?php if(SITE_ID == 1){ include_once '../js/chatScript.php'; } ?>
+        <script src="/js/react/jsx/manager-user.jsx" type="text/jsx"></script>
 </head>
 
 <body>
     <?php require_once '../inc-header.php'; ?>
     <section id="header-section"></section>
     <section id="reservations-title-steps-section"></section>
-    <?php /* 
-     * First Row of below form 
-     * if($row_rs_user['USERGROUP_ID'] == 3) { ?>
-    <tr>
-        <td valign="top">Property</td>
-        <td valign="top"><?php do { echo $row_rs_property['propertyName']." | "; } while ($row_rs_property = $_SESSION['DB']->queryResult($rs_property)); ?></td>
-    </tr>
-    <?php } */?> 
-    
-    <section id="user-profile-form"></section>
     <?php 
-        $profileData = [];
-        $profileData[] = array('firstName'=>$row_rs_user['USER_FIRSTNAME'], 'lastName'=>$row_rs_user['USER_LASTNAME'], 
-            'userCompany'=>$row_rs_user['USER_COMPANY'],'userEmail'=>$row_rs_user['USER_EMAIL'], 'userPassword' => $row_rs_user['unencrypted'], 
-            'userCommissionVillaHotel' => $row_rs_user['USER_COMMISSION_VH'] , 'userCommissionBasicLinen' => $row_rs_user['USER_COMMISSION_BL'], 
-            'userId' => $row_rs_user['USER_ID']
+        $userData = [];
+        $userData = array('firstName'=>$row_rs_user['USER_FIRSTNAME'], 'lastName'=>$row_rs_user['USER_LASTNAME'],
+                    'userCompany'=>$row_rs_user['USER_COMPANY'],'userEmail'=>$row_rs_user['USER_EMAIL'],
+                    'userPassword'=>$row_rs_user['unencrypted'],
+                    'userCommissionVillaHotel'=>$row_rs_user['USER_COMMISSION_VH'],
+                    'userCommissionBasicLinen'=>$row_rs_user['USER_COMMISSION_BL'],
+                    'userUserGroupId'=>$row_rs_user['USERGROUP_ID'],
+                    'userId'=>$row_rs_user['USER_ID'],
         );
+        $userGroup = [];
+        if ($row_rs_user['USERGROUP_ID'] == 3) {
+            $propertyName = [];
+            do {
+              $propertyName[] = $row_rs_property['propertyName'];
+            } while ($row_rs_property = $_SESSION['DB']->queryResult($rs_property));
+            $userData['propertyName'] = implode(" | ",$propertyName);
+        }
     ?>
+        
+        <section id="edit-user-form"></section>
     <?php require_once '../inc-footer.php'; ?>
+
     <?php require_once '../inc-js.php'; ?>   
     <script type="text/jsx">
         /** @jsx React.DOM */
-        var profileBannerImage = "<?php echo SITE_ID==1?"/img/destination-header_all.png": "/img/inner-bg1.png"?>";
-        var profileData = <?php echo json_encode($profileData); ?>;
+            var bannerImage = "<?php echo SITE_ID == 1 ? "/img/destination-header_all.png" : "/img/inner-bg1.png" ?>";
+            var UserData = <?php echo json_encode($userData); ?>;
+            var UserGroup = <?php echo json_encode($usergroups); ?>;
         ReactDOM.render(
-            <Image1 src={profileBannerImage} />,
+                <Image1 src={bannerImage}/>,
             document.getElementById('header-section')
         );  
         ReactDOM.render(
-            <ProfileHeading />,
+                <div className="row">
+                    <div className="columns">
+                        <Heading1 value="USER EDIT"></Heading1>
+                    </div>
+                </div>,
             document.getElementById('reservations-title-steps-section')
         );
         ReactDOM.render(
-            <ProfileForm ProfileData={profileData} />,
-            document.getElementById('user-profile-form')
+                <EditUser UserData={UserData} UserGroup={UserGroup} />,
+                document.getElementById('edit-user-form')
         );
     </script>
 </body>
+
 </html>

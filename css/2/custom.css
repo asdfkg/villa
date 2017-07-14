@@ -2899,3 +2899,23 @@ p.footer-copyright a:hover {
 }div#footer-home-img img {
     width: 100%;
 }
+ul.full-li li {
+    width: 100% !important;
+}
+li.extra-cost-large {
+    margin-left: -148px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 16px !important;
+    color: #666;
+}
+@media screen and (max-width:991px) {
+li.extra-cost-large {
+    margin-left: -89px;
+}
+}
+@media screen and (max-width:767px) {
+li.extra-cost-large {
+    margin-left: -4px;
+}
+}
