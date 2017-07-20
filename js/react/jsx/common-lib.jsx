@@ -225,6 +225,7 @@ var PropertySummaryInterestedPopupForm = React.createClass({
     },
     submitButtonClick:function(){
         if(this.props.siteid ==1){
+            fbq('track', 'CompleteRegistration');
             ga('send', 'event', { eventCategory: 'Form', eventAction: 'Submit', eventLabel: 'Property Form', eventValue: 1});
         }
         query('propertyInterestedModalForm', 'propertyInterestedModalFormBtn', 'propertyInterested');

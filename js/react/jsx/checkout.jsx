@@ -620,6 +620,7 @@ var CheckoutStep3 = React.createClass({
     },
     onBookNowClick: function(){
         if(this.props.siteid==1){
+            fbq('track', 'Purchase');
             ga('send', 'event', { eventCategory: 'Sale', eventAction: 'Submit', eventLabel: 'Checkout', eventValue: 1});        
         }
         query('checkoutForm', 'checkoutBtn', 'reservationBook');

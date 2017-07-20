@@ -314,7 +314,7 @@ fbq('track', 'AddToWishlist');
                 document.getElementById('property-interested-popup-form')
             );
             ReactDOM.render(
-                <PropertySummarySharePopupForm data={dateDetail} />,
+                <PropertySummarySharePopupForm data={dateDetail} siteid="<?php echo SITE_ID;?>" />,
                 document.getElementById('change-share-popup-form')
             );
             ReactDOM.render(

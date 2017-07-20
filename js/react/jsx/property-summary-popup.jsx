@@ -5,6 +5,10 @@ var PropertySummarySharePopupForm = React.createClass({
         $('#propertyShareModal').foundation('reveal', 'close');
     },
     shareButtonClick: function(){
+        if(this.props.siteid==1){
+            fbq('track', 'AddToWishlist');
+            fbq('track', 'Lead');
+        }
         query('propertyShareModalForm', 'propertyShareModalFormBtn', 'propertyShare');
     },
     getInitialState: function () {
